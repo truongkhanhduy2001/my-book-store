@@ -1,0 +1,40 @@
+/* Main container */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-container .main {
+  max-width: var(--width-home);
+  width: 100%;
+}
+
+.main-container .main div:first-child {
+  display: flex;
+}
+.main-container .main .main_tag {
+  flex-direction: column;
+  flex: 50%;
+  font-weight: bold;
+  margin-right: 20px;
+}
+.main-container .main .main_tag h1 {
+  font-size: 55px;
+  color: var(--black);
+  font-family: sans-serif;
+  margin-top: 50px;
+}
+
+.main-container .main .main_tag h1 span {
+  color: var(--blue);
+}
+
+.main-container .main .main_tag p {
+  width: 650px;
+  text-align: justify;
+  line-height: 22px;
+  color: var(--black);
+  font-family: sans-serif;
+}

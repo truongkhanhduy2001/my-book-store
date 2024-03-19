@@ -1,0 +1,231 @@
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: 10px;
+}
+:root {
+  --width-home: 1400px;
+  --margin-top: 80px;
+  --margin-top-font: 15px;
+  --white: #fff;
+  --black: #444;
+  --light-color: #666;
+  --blue: #089da1;
+  --light-blue: #80bfff;
+  --orange: #ff8e67;
+  --card: #f4f4fe;
+}
+/* Navbar */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  /* box-shadow: 0 0px 10px var(--blue); */
+  position: sticky;
+  z-index: 6;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.header .navbar {
+  max-width: var(--width-home);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--black);
+  justify-content: space-between;
+}
+.header .navbar .logo {
+  cursor: pointer;
+  width: 60px !important;
+  height: 60px !important;
+  position: relative !important;
+  margin: auto 0;
+}
+.header .navbar .search {
+  padding: 0.6rem 1rem;
+  margin: 0px 150px;
+  position: relative;
+}
+.header .navbar .search label {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+}
+
+.header .navbar .search input[type="search"] {
+  width: 30vw;
+  padding: 10px 10px 10px 36px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e3e6f3;
+  color: var(--black);
+  font-family: Arial, sans-serif;
+  outline: none;
+}
+.header .navbar .search input[type="search"]:hover {
+  border-color: hsl(252, 30%, 95%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .navbar ul {
+  list-style: none;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 15px;
+}
+
+.header .navbar ul li {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding: 7px 10px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+}
+.header .navbar ul li:hover {
+  background-color: #e3e6f3;
+  box-shadow: 0 0 10px var(--black);
+}
+/* Home Accounts */
+.header .navbar .book-accounts-name {
+  position: relative;
+}
+.header .navbar .book-accounts-name h3 {
+  font-size: 14px;
+  color: var(--black);
+}
+.header .navbar .book-accounts-name:hover .book-user-container {
+  visibility: visible;
+  transition: 0.3s;
+  transform: scale(1);
+  opacity: 1;
+}
+.header .navbar .book-accounts-name .book-user-container {
+  position: absolute;
+  background-color: var(--white);
+  top: 120%;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  width: 145px;
+  height: auto;
+  box-shadow: var(--black) 0px 6px 12px;
+  visibility: hidden;
+  transition: 0.3s;
+  transform: scale(0);
+  transform-origin: 90% top;
+  opacity: 0;
+  border-radius: 5px;
+}
+.header .navbar .book-accounts-name .book-user-container::before {
+  position: absolute;
+  content: "";
+  bottom: 100%;
+  right: 6px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 16px solid var(--white);
+}
+.header .navbar .book-accounts-name .book-user-container .user-details {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: rgb(128, 128, 137);
+}
+.header .navbar .book-accounts-name .book-user-container .user-details p {
+  cursor: pointer;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin: 0px;
+  padding: 8px 16px;
+  color: var(--black);
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+.header .navbar .book-accounts-name .book-user-container .user-details p:hover {
+  color: var(--blue);
+  opacity: 0.7;
+}
+/* Home Cart */
+.header .navbar .book-cart {
+  position: relative;
+}
+.header .navbar .book-cart:hover .book-cart-container {
+  visibility: visible;
+  transition: 0.3s;
+  transform: scale(1);
+  opacity: 1;
+}
+.header .navbar .book-cart .book-cart-container {
+  position: absolute;
+  background-color: var(--white);
+  top: 120%;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  min-width: 400px;
+  box-shadow: var(--black) 0px 6px 12px;
+  visibility: hidden;
+  transition: 0.3s;
+  transform: scale(0);
+  transform-origin: 90% top;
+  opacity: 0;
+  border-radius: 5px;
+}
+.header .navbar .book-cart .book-cart-container::before {
+  position: absolute;
+  content: "";
+  bottom: 100%;
+  right: 6px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 16px solid var(--white);
+}
+.header .navbar .book-cart .book-cart-container .book-cart-title {
+  padding: 8px 16px;
+}
+.header .navbar .book-cart .book-cart-container .book-cart-title h2 {
+  color: var(--black);
+  font-size: 15px;
+  margin-bottom: 100px;
+}
+.header .navbar .book-cart .book-cart-container .book-cart-title h3 {
+  margin-left: 5px;
+  font-size: 14px;
+}
+.header .navbar .book-cart .book-cart-container .btn-cart {
+  padding: 8px 16px;
+  display: flex;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  background-color: var(--blue);
+  border-radius: 5px;
+}

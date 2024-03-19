@@ -1,0 +1,141 @@
+/* Footer */
+.footer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: var(--margin-top);
+  padding: 20px;
+  box-shadow: 0 5px 15px var(--light-color);
+  padding: 20px;
+}
+.footer .footer-main {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.footer .footer-main .tag {
+  flex: 1 1 20%;
+  margin: 0px 30px;
+}
+.footer .footer-main .tag .logo-footer {
+  cursor: pointer;
+  width: 100px !important;
+  height: 100px !important;
+  position: relative;
+  margin: auto 0;
+}
+.footer .footer-main .tag .logo-footer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.footer .footer-main .tag p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--black);
+}
+.footer .footer-main .tag h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--black);
+  font-weight: bold;
+}
+
+.footer .footer-main .tag a {
+  display: block;
+  display: flex;
+  margin-bottom: 5px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.footer .footer-main .tag a:hover i {
+  padding-right: 1.5rem;
+}
+.footer .footer-main .tag a i {
+  color: var(--blue);
+  padding-right: 0.5rem;
+  margin-top: 5px;
+}
+
+.footer .footer_main .tag .searchBar {
+  width: 230px;
+  height: 30px;
+  background: var(--white);
+  border-radius: 25px;
+}
+.footer .footer-main .tag .searchBar input {
+  padding: 8px;
+  border: 1px solid var(--blue);
+  border-radius: 10px;
+  color: var(--black);
+}
+.footer .footer-main .tag .searchBar button {
+  padding: 7px 15px;
+  background: var(--blue);
+  border: none;
+  margin-top: 15px;
+  border-radius: 10px;
+  color: var(--white);
+  cursor: pointer;
+}
+.footer .footer-main .tag .searchBar input:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 5px var(--blue);
+}
+
+.footer .footer-main .tag .searchBar button {
+  padding: 7px 15px;
+  background: var(--blue);
+  border: none;
+  margin-top: 15px;
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+}
+.footer .footer-main .tag .searchBar button:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 5px var(--blue);
+}
+.footer .icons-social {
+  max-width: var(--width-home);
+  margin: auto;
+  justify-content: space-around;
+  display: flex;
+  font-size: 2rem;
+  margin-top: 50px;
+}
+.footer .icons-social a {
+  padding: 0.5rem;
+  height: 3rem;
+  width: 3rem;
+  line-height: 3rem;
+  color: var(--white);
+  background: var(--blue);
+  margin: 0 0.3rem;
+  border-radius: 50%;
+}
+.footer .icons-social a:hover {
+  background: var(--black);
+  box-shadow: 0 0 5px var(--blue);
+}
+
+.footer .end {
+  max-width: var(--width-home);
+  margin: auto;
+  margin-top: 40px;
+  font-size: 14px;
+  color: var(--black);
+  justify-content: space-around;
+  border-top: 1px solid;
+}
+.footer .end span {
+  margin-left: 10px;
+  color: var(--blue);
+  font-weight: bold;
+  margin-right: 10px;
+}
+/* End Footer */

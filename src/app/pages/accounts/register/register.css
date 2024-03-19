@@ -1,0 +1,257 @@
+.form-container-register {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-color: #f0f8ff;
+}
+
+.form-container-register .overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container-register .overlay-container .overlay {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-left {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f8ff;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register {
+  max-width: 500px;
+  padding: 40px;
+  width: 100%;
+  background-color: #f0f8ff;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  div:first-child {
+  display: flex;
+}
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  div
+  .logo-register {
+  margin: auto auto 20px auto;
+  width: 140px !important;
+  height: 140px !important;
+  position: relative !important;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  h1 {
+  color: #25244c;
+  opacity: 0.7;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .infield {
+  margin-bottom: 20px;
+}
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .infield
+  .name,
+.email,
+.password-field,
+.confirm-password-field {
+  margin-bottom: 10px;
+  color: black;
+  display: block;
+  font-weight: bold;
+}
+
+.form-checkbox {
+  margin-bottom: 120px;
+  display: flex;
+  align-items: center;
+}
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+  border-color: #999;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .checkbox {
+  margin-right: 10px;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .RM {
+  color: #9a8de5;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .btn-register {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .btn-login {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .btn-register
+  button {
+  padding: 12px 10px;
+  border: none;
+  background-color: #f06b4a;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+}
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .btn-login
+  button {
+  padding: 12px 10px;
+  border: none;
+  background-color: whitesmoke;
+  color: #6653d3;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  outline: 1px solid #6653d3;
+}
+
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .btn-register
+  button:hover {
+  background-color: white;
+  color: #f06b4a;
+  outline: 1px solid #f06b4a;
+}
+.form-container-register
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-right
+  .form-register
+  .btn-login
+  button:hover {
+  background-color: #6653d3;
+  outline-color: white;
+  color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+}
+
+.modal.show-modal {
+  display: flex;
+}
+
+.modalContainer {
+  animation: showModal 0.4s ease;
+  border-radius: 5px;
+  background: white;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+}
+
+@keyframes showModal {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

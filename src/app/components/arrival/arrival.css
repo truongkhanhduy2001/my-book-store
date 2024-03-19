@@ -1,0 +1,227 @@
+/* New Arrivals */
+.section-p2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--margin-top);
+}
+.section-p2 .section-p2-container {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.section-p2 .section-p2-container h2 {
+  font-size: 25px;
+  color: var(--black);
+  font-weight: bold;
+}
+.section-p2 .section-p2-container h3 {
+  margin-top: 10px;
+  color: var(--orange);
+}
+.section-p2 .section-p2-container h3:hover {
+  color: var(--blue);
+}
+.arrivals-container {
+  display: flex;
+  justify-content: center;
+  /* height: 100vh; */
+  margin-top: var(--margin-top-font);
+}
+
+.arrivals-container .arrivals {
+  max-width: var(--width-home);
+  width: 100%;
+}
+
+.arrivals-container .arrivals .arrivals-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.arrivals-container .arrivals .arrivals-box .arrivals-card {
+  position: relative;
+  height: 450px;
+  text-align: center;
+  padding: 10px;
+  margin-top: 16px;
+  background-color: var(--white);
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.arrivals-container .arrivals .arrivals-box .arrivals-card:hover .ArrivalIcon {
+  display: inline-flex !important;
+}
+
+.arrivals-container .arrivals .arrivals-box .arrivals-card:hover {
+  transition: 0.1s ease;
+  box-shadow: 0 0 10px var(--blue);
+}
+
+.arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-image {
+  width: 150px;
+  height: 220px;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--black);
+  overflow: hidden;
+}
+
+.arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: 0.3s;
+}
+
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card:hover
+  .arrivals-image
+  img {
+  transform: scale(1.1);
+}
+
+.arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-tag h2 {
+  margin: 12px;
+  color: var(--black);
+  font-weight: bold;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalwriter {
+  color: var(--light-color);
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcategories {
+  color: var(--light-blue);
+  margin-top: 8px;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalbook-price {
+  margin-top: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--black);
+  font-weight: bold;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalbook-price
+  sub {
+  font-weight: 100;
+  padding: 0 5px;
+  color: var(--black);
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn {
+  font-size: 12px;
+  letter-spacing: 2px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px 10px;
+  border: 3px solid var(--blue);
+  border-radius: 5px;
+  position: relative;
+  color: var(--blue);
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn::before {
+  transition: 0.5s all ease;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  content: "";
+  background-color: var(--blue);
+  z-index: -1;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn:hover,
+.Arrivalcart-btn:focus {
+  color: var(--white);
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn:hover::before,
+.Arrivalcart-btn:focus::before {
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn:active {
+  transform: scale(0.9);
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .ArrivalIcon {
+  color: var(--black);
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .ArrivalIcon
+  i {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+/* End Arrival */
