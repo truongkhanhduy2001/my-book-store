@@ -60,9 +60,9 @@
   transition: 0.3s;
 }
 .section-p3 .section1-p3-container .p3-container .p3-list li h3 {
-  color: var(--light-color);
+  color: var(--black);
   cursor: pointer;
-  font-size: 18px;
+  font-size: var(--h3);
   font-weight: bold;
 }
 
