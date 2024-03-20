@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { PiHeartStraight } from "react-icons/pi";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 export default function BookList() {
   const data = [
@@ -102,7 +103,10 @@ export default function BookList() {
                       </sub>
                     </p>
                     <div className="Listcart-btn">
-                      <p> Add to cart</p>
+                      <i>
+                        <FaShoppingCart />
+                      </i>
+                      <p> Add cart</p>
                     </div>
                     <div className="ListIcon">
                       <i>

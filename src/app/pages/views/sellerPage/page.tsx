@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import "./seller.css";
+import "./sellerView.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuEye } from "react-icons/lu";
 import { PiHeartStraight } from "react-icons/pi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import LayOut from "@/app/pages/layout/page";
 export default function Seller() {
@@ -56,7 +57,10 @@ export default function Seller() {
                     </sub>
                   </p>
                   <div className="Sellercart-btn-view">
-                    <p>Add to cart</p>
+                    <i>
+                      <FaShoppingCart />
+                    </i>
+                    <p>Add cart</p>
                   </div>
                   <div className="SellerIcon-view">
                     <i>

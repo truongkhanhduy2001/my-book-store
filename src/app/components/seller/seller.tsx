@@ -10,6 +10,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { LuEye } from "react-icons/lu";
 import { PiHeartStraight } from "react-icons/pi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
 export default function Seller() {
   const data = [
     {
@@ -87,7 +88,10 @@ export default function Seller() {
                           </sub>
                         </p>
                         <div className="Sellercart-btn">
-                          <p>Add to cart</p>
+                          <i>
+                            <FaShoppingCart />
+                          </i>
+                          <p>Add cart</p>
                         </div>
                         <div className="SellerIcon">
                           <i>
@@ -135,7 +139,10 @@ export default function Seller() {
                           </sub>
                         </p>
                         <div className="Sellercart-btn">
-                          <p>Add to cart</p>
+                          <i>
+                            <FaShoppingCart />
+                          </i>
+                          <p>Add cart</p>
                         </div>
                         <div className="SellerIcon">
                           <i>

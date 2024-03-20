@@ -14,7 +14,7 @@ export default function Navigate() {
 
     window.addEventListener("scroll", () => {
       if (navigation.offsetTop > 5) {
-        navigation.style.boxShadow = "0 2px 4px #089da1";
+        navigation.style.boxShadow = "0 2px 4px #007aff";
       } else {
         navigation.style.boxShadow = "unset";
       }
@@ -44,7 +44,9 @@ export default function Navigate() {
           {!check ? (
             <li className="book-accounts">
               <Link href="/pages/accounts/login">
-                <VscAccount />
+                <i>
+                  <VscAccount />
+                </i>
               </Link>
             </li>
           ) : (
@@ -61,10 +63,14 @@ export default function Navigate() {
             </li>
           )}
           <li className="book-heart">
-            <PiHeartStraight />
+            <i>
+              <PiHeartStraight />
+            </i>
           </li>
           <li className="book-cart">
-            <PiHandbag />
+            <i>
+              <PiHandbag />
+            </i>
             <div className="book-cart-container">
               <div className="book-cart-title">
                 <h2>Add Book</h2>

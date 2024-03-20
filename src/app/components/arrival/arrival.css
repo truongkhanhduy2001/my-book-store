@@ -12,11 +12,12 @@
   justify-content: space-between;
 }
 .section-p2 .section-p2-container h2 {
-  font-size: 25px;
+  font-size: var(--h2);
   color: var(--black);
   font-weight: bold;
 }
 .section-p2 .section-p2-container h3 {
+  font-size: var(--h3);
   margin-top: 10px;
   color: var(--orange);
 }
@@ -26,7 +27,6 @@
 .arrivals-container {
   display: flex;
   justify-content: center;
-  /* height: 100vh; */
   margin-top: var(--margin-top-font);
 }
 
@@ -37,18 +37,17 @@
 
 .arrivals-container .arrivals .arrivals-box {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
 }
 
 .arrivals-container .arrivals .arrivals-box .arrivals-card {
+  display: flex;
   position: relative;
-  height: 450px;
-  text-align: center;
   padding: 10px;
   margin-top: 16px;
   background-color: var(--white);
-  border: 1px solid var(--blue);
+  border: 1px solid var(--light-color);
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
@@ -60,7 +59,7 @@
 
 .arrivals-container .arrivals .arrivals-box .arrivals-card:hover {
   transition: 0.1s ease;
-  box-shadow: 0 0 10px var(--blue);
+  border-color: var(--black);
 }
 
 .arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-image {
@@ -90,7 +89,7 @@
 }
 
 .arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-tag h2 {
-  margin: 12px;
+  margin: 20px 0px 12px 0px;
   color: var(--black);
   font-weight: bold;
 }
@@ -159,25 +158,44 @@
   .arrivals-box
   .arrivals-card
   .arrivals-tag
-  .Arrivalcart-btn::before {
-  transition: 0.5s all ease;
+  .Arrivalcart-btn
+  i {
+  font-size: 12px;
   position: absolute;
-  top: 0;
-  left: 50%;
-  right: 50%;
-  bottom: 0;
-  opacity: 0;
-  content: "";
-  background-color: var(--blue);
-  z-index: -1;
+  top: 48.5%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  transition: 0.25s;
 }
 .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
   .arrivals-tag
-  .Arrivalcart-btn:hover,
-.Arrivalcart-btn:focus {
+  .Arrivalcart-btn
+  p {
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 30px;
+  transition: 0.25s;
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn:hover {
+  cursor: pointer;
+  background: var(--blue);
+}
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalcart-btn:hover
+  i {
+  left: 50%;
   color: var(--white);
 }
 .arrivals-container
@@ -185,20 +203,9 @@
   .arrivals-box
   .arrivals-card
   .arrivals-tag
-  .Arrivalcart-btn:hover::before,
-.Arrivalcart-btn:focus::before {
-  transition: 0.5s all ease;
-  left: 0;
-  right: 0;
-  opacity: 1;
-}
-.arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card
-  .arrivals-tag
-  .Arrivalcart-btn:active {
-  transform: scale(0.9);
+  .Arrivalcart-btn:hover
+  p {
+  clip-path: circle(0px at 125px 27.5px);
 }
 .arrivals-container
   .arrivals

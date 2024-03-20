@@ -21,7 +21,7 @@
   margin-right: 20px;
 }
 .main-container .main .main_tag h1 {
-  font-size: 55px;
+  font-size: var(--h1);
   color: var(--black);
   font-family: sans-serif;
   margin-top: 50px;
@@ -32,6 +32,7 @@
 }
 
 .main-container .main .main_tag p {
+  font-size: var(--p);
   width: 650px;
   text-align: justify;
   line-height: 22px;

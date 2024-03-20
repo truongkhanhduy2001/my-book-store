@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { PiHeartStraight } from "react-icons/pi";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 export default function Arrival() {
   const data = [
@@ -25,18 +26,6 @@ export default function Arrival() {
     },
     {
       title: "Bee",
-    },
-    {
-      title: "Queen",
-    },
-    {
-      title: "Fly",
-    },
-    {
-      title: "Bird",
-    },
-    {
-      title: "Silent Hill",
     },
   ];
   useEffect(() => {
@@ -62,7 +51,7 @@ export default function Arrival() {
       <div className="arrivals-container">
         <div className="arrivals">
           <div className="arrivals-box">
-            {data.slice(-10).map((item, index) => {
+            {data.slice(-6).map((item, index) => {
               return (
                 <Link key={index} href="#" className="arrivals-card">
                   <div className="arrivals-image">
@@ -87,7 +76,10 @@ export default function Arrival() {
                       </sub>
                     </p>
                     <div className="Arrivalcart-btn">
-                      <p> Add to cart</p>
+                      <i>
+                        <FaShoppingCart />
+                      </i>
+                      <p> Add cart</p>
                     </div>
                     <div className="ArrivalIcon">
                       <i>

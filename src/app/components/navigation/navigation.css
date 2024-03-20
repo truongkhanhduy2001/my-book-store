@@ -8,20 +8,28 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--blue);
+  background: var(--light-color);
   border-radius: 10px;
 }
 :root {
-  --width-home: 1400px;
-  --margin-top: 80px;
-  --margin-top-font: 15px;
+  /* Color */
   --white: #fff;
-  --black: #444;
-  --light-color: #666;
-  --blue: #089da1;
+  --black: hsl(230, 70%, 16%);
+  --light-color: #b9c0cb;
+  --blue: #007aff;
   --light-blue: #80bfff;
   --orange: #ff8e67;
   --card: #f4f4fe;
+  /* Size */
+  --width-home: 1400px;
+  --margin-top: 80px;
+  --margin-top-font: 15px;
+  --margin-top-view: 100px;
+  /* Font Size */
+  --h1: 55px;
+  --h2: 25px;
+  --h3: 18px;
+  --p: 18px;
 }
 /* Navbar */
 .header {
@@ -29,7 +37,6 @@
   justify-content: center;
   align-items: center;
   background: var(--white);
-  /* box-shadow: 0 0px 10px var(--blue); */
   position: sticky;
   z-index: 6;
   top: 0;
@@ -69,13 +76,14 @@
   padding: 10px 10px 10px 36px;
   border: none;
   border-radius: 10px;
-  background-color: #e3e6f3;
+  background-color: var(--white);
   color: var(--black);
   font-family: Arial, sans-serif;
   outline: none;
+  border: 1px solid var(--light-color);
 }
 .header .navbar .search input[type="search"]:hover {
-  border-color: hsl(252, 30%, 95%);
+  border-color: var(--blue);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -98,9 +106,8 @@
   position: relative;
   border-radius: 8px;
 }
-.header .navbar ul li:hover {
-  background-color: #e3e6f3;
-  box-shadow: 0 0 10px var(--black);
+.header .navbar ul li i:hover {
+  color: var(--blue);
 }
 /* Home Accounts */
 .header .navbar .book-accounts-name {

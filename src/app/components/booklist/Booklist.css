@@ -12,11 +12,12 @@
   justify-content: space-between;
 }
 .section-p3 .section-p3-container h2 {
-  font-size: 25px;
+  font-size: var(--h2);
   color: var(--black);
   font-weight: bold;
 }
 .section-p3 .section-p3-container h3 {
+  font-size: var(--h3);
   margin-top: 10px;
   color: var(--orange);
 }
@@ -88,12 +89,11 @@
 
 .books-container .books .books-box .books-card {
   position: relative;
-  height: 450px;
   text-align: center;
   padding: 10px;
   margin-top: 16px;
   background-color: var(--white);
-  border: 1px solid var(--blue);
+  border: 1px solid var(--light-color);
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
@@ -104,7 +104,7 @@
 /*  */
 .books-container .books .books-box .books-card:hover {
   transition: 0.1s ease;
-  box-shadow: 0 0 10px var(--blue);
+  border-color: var(--black);
 }
 .books-container .books .books-box .books-card .books-img {
   width: 150px;
@@ -125,7 +125,7 @@
   transform: scale(1.1);
 }
 .books-container .books .books-box .books-card .books-tag h2 {
-  margin: 12px;
+  margin: 12px 0px 12px 0px;
   color: var(--black);
   font-weight: bold;
 }
@@ -163,25 +163,33 @@
   transition: 0.3s ease all;
   z-index: 1;
 }
+.books-container .books .books-box .books-card .books-tag .Listcart-btn i {
+  font-size: 12px;
+  position: absolute;
+  top: 48.5%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  transition: 0.25s;
+}
+.books-container .books .books-box .books-card .books-tag .Listcart-btn p,
+.cart-btn:focus {
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 30px;
+  transition: 0.25s;
+}
+.books-container .books .books-box .books-card .books-tag .Listcart-btn:hover {
+  cursor: pointer;
+  background: var(--blue);
+}
 .books-container
   .books
   .books-box
   .books-card
   .books-tag
-  .Listcart-btn::before {
-  transition: 0.5s all ease;
-  position: absolute;
-  top: 0;
+  .Listcart-btn:hover
+  i {
   left: 50%;
-  right: 50%;
-  bottom: 0;
-  opacity: 0;
-  content: "";
-  background-color: var(--blue);
-  z-index: -1;
-}
-.books-container .books .books-box .books-card .books-tag .Listcart-btn:hover,
-.cart-btn:focus {
   color: var(--white);
 }
 .books-container
@@ -189,15 +197,9 @@
   .books-box
   .books-card
   .books-tag
-  .Listcart-btn:hover::before,
-.Listcart-btn:focus::before {
-  transition: 0.5s all ease;
-  left: 0;
-  right: 0;
-  opacity: 1;
-}
-.books-container .books .books-box .books-card .books-tag .Listcart-btn:active {
-  transform: scale(0.9);
+  .Listcart-btn:hover
+  p {
+  clip-path: circle(0px at 125px 27.5px);
 }
 .books-container .books .books-box .books-card .books-tag .ListIcon {
   color: var(--black);
