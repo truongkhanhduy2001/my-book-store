@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import "./footer.css";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";

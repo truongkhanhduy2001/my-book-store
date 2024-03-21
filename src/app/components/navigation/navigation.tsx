@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
 import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";

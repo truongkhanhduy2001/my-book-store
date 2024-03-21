@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import "./login.css";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import InputLogin from "@/app/components/inputLogin/Login";
 

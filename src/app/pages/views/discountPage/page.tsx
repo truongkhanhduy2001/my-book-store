@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import "./discountView.css";
 import { PiHandbag } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";

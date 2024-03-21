@@ -1,7 +1,7 @@
 "use client";
 import "./dicount.css";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
