@@ -4,7 +4,7 @@ import Image from "next/image";
 import "./sellerView.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuEye } from "react-icons/lu";
-import { PiHeartStraight } from "react-icons/pi";
+import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { useState, useEffect } from "react";
@@ -19,6 +19,10 @@ export default function Seller() {
       });
     });
   }, []);
+  const handleHeart = (e: any) => {
+    e.target.closest(".HeartIcon").classList.toggle("active");
+    e.preventDefault();
+  };
   return (
     <LayOut>
       {/* Best Seller */}
@@ -70,7 +74,7 @@ export default function Seller() {
                       <FaArrowRightArrowLeft />
                     </i>
                     <i>
-                      <PiHeartStraight />
+                      <FiHeart className="HeartIcon" onClick={handleHeart} />
                     </i>
                   </div>
                 </div>

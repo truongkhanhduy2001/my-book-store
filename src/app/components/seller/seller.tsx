@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { LuEye } from "react-icons/lu";
-import { PiHeartStraight } from "react-icons/pi";
+import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 export default function Seller() {
@@ -38,8 +38,12 @@ export default function Seller() {
       });
     });
   }, []);
+  const handleHeart = (e: any) => {
+    e.target.closest(".HeartIcon").classList.toggle("active");
+    e.preventDefault();
+  };
   return (
-    <section className="section-p1">
+    <section className="section-p1 section" id="bestseller">
       <div className="section-p1-container">
         <h2>Best Seller</h2>
         <Link
@@ -101,7 +105,10 @@ export default function Seller() {
                             <FaArrowRightArrowLeft />
                           </i>
                           <i>
-                            <PiHeartStraight />
+                            <FiHeart
+                              className="HeartIcon"
+                              onClick={handleHeart}
+                            />
                           </i>
                         </div>
                       </div>
@@ -152,7 +159,10 @@ export default function Seller() {
                             <FaArrowRightArrowLeft />
                           </i>
                           <i>
-                            <PiHeartStraight />
+                            <FiHeart
+                              className="HeartIcon"
+                              onClick={handleHeart}
+                            />
                           </i>
                         </div>
                       </div>

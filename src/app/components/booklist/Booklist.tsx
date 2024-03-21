@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
-import { PiHeartStraight } from "react-icons/pi";
+import { FiHeart } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 export default function BookList() {
@@ -49,8 +49,12 @@ export default function BookList() {
       });
     });
   }, []);
+  const handleHeart = (e: any) => {
+    e.target.closest(".HeartIcon").classList.toggle("active");
+    e.preventDefault();
+  };
   return (
-    <section className="section-p3">
+    <section className="section-p3 section" id="booklist">
       <div className="section-p3-container">
         <h2>Book List</h2>
         <Link
@@ -116,7 +120,7 @@ export default function BookList() {
                         <FaArrowRightArrowLeft />
                       </i>
                       <i>
-                        <PiHeartStraight />
+                        <FiHeart className="HeartIcon" onClick={handleHeart} />
                       </i>
                     </div>
                   </div>

@@ -232,3 +232,6 @@
   margin-bottom: 8px;
 }
 /* End Arrival */
+.HeartIcon.active {
+  fill: red;
+}

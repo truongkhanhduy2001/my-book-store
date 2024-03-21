@@ -75,9 +75,9 @@
   .p3-list-view
   li
   h3 {
-  color: var(--light-color);
+  color: var(--black);
   cursor: pointer;
-  font-size: 18px;
+  font-size: var(--h3);
   font-weight: bold;
 }
 
@@ -309,4 +309,8 @@
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px;
+}
+/* End books view*/
+.HeartIcon.active {
+  fill: red;
 }

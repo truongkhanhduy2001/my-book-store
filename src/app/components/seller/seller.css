@@ -266,3 +266,6 @@
   margin-bottom: 8px;
 }
 /* End Best Seller */
+.HeartIcon.active {
+  fill: red;
+}

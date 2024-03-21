@@ -7,6 +7,7 @@ import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";
 
 export default function Navigate() {
+  // Scroll active link
   const [check, setCheck] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function Navigate() {
   }, []);
 
   return (
-    <div className="header">
+    <header className="header">
       <nav className="navbar">
         <div className="logo">
           <Link href="/">
@@ -34,11 +35,35 @@ export default function Navigate() {
             ></Image>
           </Link>
         </div>
-        <div className="search">
-          <label className="fa-search">
-            <PiMagnifyingGlass />
-          </label>
-          <input type="search" placeholder="Search" />
+        <div className="nav-menu">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link href="#" className="nav-link">
+                <span>Home</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link href="#" className="nav-link">
+                <span>Best Seller</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link href="#" className="nav-link">
+                <span>New Arrivals</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link href="#" className="nav-link">
+                <span>Book List</span>
+              </Link>
+            </li>
+          </ul>
         </div>
         <ul>
           {!check ? (
@@ -62,6 +87,16 @@ export default function Navigate() {
               </div>
             </li>
           )}
+          <li className="book-search">
+            <i>
+              <PiMagnifyingGlass />
+            </i>
+            <div className="search-container">
+              <form action="#" className="search-form">
+                <input type="search" placeholder="Search" />
+              </form>
+            </div>
+          </li>
           <li className="book-heart">
             <i>
               <PiHeartStraight />
@@ -85,6 +120,6 @@ export default function Navigate() {
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
   );
 }

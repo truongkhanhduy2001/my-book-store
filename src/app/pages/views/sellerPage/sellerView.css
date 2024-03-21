@@ -251,4 +251,7 @@
   font-weight: bold;
   margin-bottom: 8px;
 }
-/* End Best Seller */
+/* End Best Seller View */
+.HeartIcon.active {
+  fill: red;
+}

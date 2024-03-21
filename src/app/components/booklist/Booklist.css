@@ -215,3 +215,6 @@
   margin-bottom: 8px;
 }
 /* End Book List */
+.HeartIcon.active {
+  fill: red;
+}

@@ -4,7 +4,7 @@ import "./arrival.css";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
-import { PiHeartStraight } from "react-icons/pi";
+import { FiHeart } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 export default function Arrival() {
@@ -34,11 +34,16 @@ export default function Arrival() {
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
         e.preventDefault();
+        console.log(btntocart);
       });
     });
   }, []);
+  const handleHeart = (e: any) => {
+    e.target.closest(".HeartIcon").classList.toggle("active");
+    e.preventDefault();
+  };
   return (
-    <section className="section-p2">
+    <section className="section-p2 section" id="newarrival">
       <div className="section-p2-container">
         <h2>New Arrivals</h2>
         <Link
@@ -89,7 +94,7 @@ export default function Arrival() {
                         <FaArrowRightArrowLeft />
                       </i>
                       <i>
-                        <PiHeartStraight />
+                        <FiHeart className="HeartIcon" onClick={handleHeart} />
                       </i>
                     </div>
                   </div>
