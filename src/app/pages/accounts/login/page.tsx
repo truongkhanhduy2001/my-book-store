@@ -31,8 +31,8 @@ export default function Login() {
               src="/images/picture1.png"
               alt="image"
               priority={true}
-              width={100}
-              height={100}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             ></Image>
           </div>
           <div className="overlay-panel-overlay-right">
@@ -42,8 +42,8 @@ export default function Login() {
                   className="logo"
                   src="/images/logo.png"
                   alt="image"
-                  fill
-                  sizes="100vw"
+                  width={100}
+                  height={100}
                 ></Image>
               </div>
               <h1>Welcome back!</h1>

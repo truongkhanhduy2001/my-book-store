@@ -244,6 +244,35 @@ input[type="password"]:hover {
   height: 500px;
   margin: auto;
 }
+.modal-close i {
+  display: flex;
+  text-align: right;
+  justify-content: right;
+  cursor: pointer;
+  color: black;
+  font-size: 35px;
+  padding: 10px 10px;
+}
+.modalContainer h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.modalContainer h2 i {
+  font-size: 30px;
+  padding-right: 10px;
+}
+.modalContainer h1 {
+  color: black;
+  padding: 10px;
+}
+.modalContainer p {
+  color: black;
+  padding: 10px;
+}
 
 @keyframes showModal {
   from {
@@ -254,4 +283,18 @@ input[type="password"]:hover {
     transform: scale(1);
     opacity: 1;
   }
+}
+* {
+  scrollbar-width: 0;
+}
+
+*::-webkit-scrollbar {
+  background-color: transparent;
+  width: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background-color: #ddd;
+  border: 4px solid #fff;
 }

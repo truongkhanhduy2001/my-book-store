@@ -5,10 +5,13 @@ import "./footer.css";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
-import { LuFacebook, LuTwitter } from "react-icons/lu";
-import { CiLinkedin } from "react-icons/ci";
-import { PiInstagramLogo } from "react-icons/pi";
-import { AiOutlineYoutube } from "react-icons/ai";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaYoutube,
+  FaGithub,
+  FaInstagram,
+} from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="footer">
@@ -32,42 +35,42 @@ export default function Footer() {
         </div>
         <div className="tag">
           <h1>Our Locations</h1>
-          <a href="">
+          <Link href="">
             <i className="fa-location">
               <FaLocationDot />
             </i>
             VietNam
-          </a>
-          <a href="">
+          </Link>
+          <Link href="">
             <i className="fa-location">
               <FaLocationDot />
             </i>
             USA
-          </a>
-          <a href="">
+          </Link>
+          <Link href="">
             <i className="fa-location">
               <FaLocationDot />
             </i>
             UK
-          </a>
-          <a href="">
+          </Link>
+          <Link href="">
             <i className="fa-location">
               <FaLocationDot />
             </i>
             China
-          </a>
-          <a href="">
+          </Link>
+          <Link href="">
             <i className="fa-location">
               <FaLocationDot />
             </i>
             France
-          </a>
-          <a href="">
+          </Link>
+          <Link href="">
             <i className="fa-location">
               <FaLocationDot />
             </i>
             India
-          </a>
+          </Link>
         </div>
 
         <div className="tag">
@@ -102,27 +105,56 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="icons-social">
-        <Link href="" className="fa-facebook">
-          <LuFacebook />
-        </Link>
-        <Link href="" className="fa-twitter">
-          <LuTwitter />
-        </Link>
-        <Link href="" className="fa-linkedin">
-          <CiLinkedin />
-        </Link>
-        <Link href="" className="fa-instagram">
-          <PiInstagramLogo />
-        </Link>
-        <Link href="" className="fa-youtube">
-          <AiOutlineYoutube />
-        </Link>
+      {/* Icon social */}
+      <div className="wrapper-container">
+        <div className="wrapper">
+          <div className="icon facebook">
+            <div className="tooltip">Facebook</div>
+            <span>
+              <i>
+                <FaFacebookF />
+              </i>
+            </span>
+          </div>
+          <div className="icon twitter">
+            <div className="tooltip">Twitter</div>
+            <span>
+              <i>
+                <FaTwitter />
+              </i>
+            </span>
+          </div>
+          <div className="icon github">
+            <div className="tooltip">Github</div>
+            <span>
+              <i>
+                <FaGithub />
+              </i>
+            </span>
+          </div>
+          <div className="icon youtube">
+            <div className="tooltip">Youtube</div>
+            <span>
+              <i>
+                <FaYoutube />
+              </i>
+            </span>
+          </div>
+          <div className="icon instagram">
+            <div className="tooltip">Instagarm</div>
+            <span>
+              <i>
+                <FaInstagram />
+              </i>
+            </span>
+          </div>
+        </div>
       </div>
+      {/* End icon social */}
       <div className="end">
         Design By
         <span>
-          <i className="icon-ds"></i>Trương Khánh Duy
+          <i className="icon-ds"></i>Trương Khánh Duy, Nguyễn Văn Điểm
         </span>
         | All rights reservel!
       </div>
