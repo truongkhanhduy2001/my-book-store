@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import "./login.css";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import InputLogin from "@/app/components/inputLogin/Login";
 
@@ -30,8 +30,9 @@ export default function Login() {
             <Image
               src="/images/picture1.png"
               alt="image"
-              layout="fill"
               priority={true}
+              width={100}
+              height={100}
             ></Image>
           </div>
           <div className="overlay-panel-overlay-right">
@@ -41,7 +42,8 @@ export default function Login() {
                   className="logo"
                   src="/images/logo.png"
                   alt="image"
-                  layout="fill"
+                  fill
+                  sizes="100vw"
                 ></Image>
               </div>
               <h1>Welcome back!</h1>

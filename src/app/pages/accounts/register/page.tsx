@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import "./register.css";
 import InputRegister from "@/app/components/inputRegister/register";
@@ -46,7 +46,12 @@ export default function Register() {
       <div className="overlay-container" id="overlayCon">
         <div className="overlay">
           <div className="overlay-panel-overlay-left">
-            <Image src="/images/picture1.png" alt="image" layout="fill"></Image>
+            <Image
+              src="/images/picture1.png"
+              alt="image"
+              fill
+              sizes="100vw"
+            ></Image>
           </div>
           <div className="overlay-panel-overlay-right">
             <form className="form-register">
@@ -55,7 +60,8 @@ export default function Register() {
                   className="logo-register"
                   src="/images/logo.png"
                   alt="image"
-                  layout="fill"
+                  width={100}
+                  height={100}
                 ></Image>
               </div>
               <h1>Create an account</h1>

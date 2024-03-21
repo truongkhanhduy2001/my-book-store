@@ -1,7 +1,7 @@
 "use client";
 import "./dicount.css";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
@@ -62,7 +62,10 @@ export default function Discount() {
                       width={100}
                       height={100}
                       priority={true}
-                    />
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                      }} />
                   </div>
                   <div className="discount-tag">
                     <h2>{item.title}</h2>

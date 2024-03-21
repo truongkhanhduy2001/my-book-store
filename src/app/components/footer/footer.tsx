@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import "./footer.css";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
@@ -18,8 +18,9 @@ export default function Footer() {
             <Image
               src="/images/logo.png"
               alt="Logo"
-              layout="fill"
               priority={true}
+              width={100}
+              height={100}
             ></Image>
           </div>
           <p>

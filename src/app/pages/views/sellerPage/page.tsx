@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import "./sellerView.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuEye } from "react-icons/lu";
@@ -46,7 +46,10 @@ export default function Seller() {
                     width={100}
                     height={100}
                     priority={true}
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                 </div>
                 <div className="best-seller-tag-view">
                   <h2>Dune</h2>

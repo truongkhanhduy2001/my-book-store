@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import "./discountView.css";
 import { PiHandbag } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
@@ -47,7 +47,10 @@ export default function Seller() {
                     width={100}
                     height={100}
                     priority={true}
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                 </div>
                 <div className="discount-tag-view">
                   <h2>Dune</h2>

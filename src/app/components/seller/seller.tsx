@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import "./seller.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -77,7 +77,10 @@ export default function Seller() {
                           width={100}
                           height={100}
                           priority={true}
-                        />
+                          style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                          }} />
                       </div>
                       <div className="best-seller-tag">
                         <h2>{item.title}</h2>
@@ -131,7 +134,10 @@ export default function Seller() {
                           width={100}
                           height={100}
                           priority={true}
-                        />
+                          style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                          }} />
                       </div>
                       <div className="best-seller-tag">
                         <h2>{item.title}</h2>

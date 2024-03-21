@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import "./arrival.css";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
@@ -66,7 +66,10 @@ export default function Arrival() {
                       width={100}
                       height={100}
                       priority={true}
-                    ></Image>
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                      }}></Image>
                   </div>
                   <div className="arrivals-tag">
                     <h2>{item.title}</h2>

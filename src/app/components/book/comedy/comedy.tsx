@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
@@ -45,7 +45,10 @@ export default function Comedy() {
                     width={100}
                     height={100}
                     priority={true}
-                  ></Image>
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }}></Image>
                 </div>
                 <div className="books-tag">
                   <h2>Dune</h2>

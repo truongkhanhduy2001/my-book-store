@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
 import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";
@@ -29,8 +29,9 @@ export default function Navigate() {
             <Image
               src="/images/logo.png"
               alt="Logo"
-              layout="fill"
               priority={true}
+              width={100}
+              height={100}
             ></Image>
           </Link>
         </div>
