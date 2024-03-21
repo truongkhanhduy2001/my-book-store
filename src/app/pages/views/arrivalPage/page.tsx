@@ -55,19 +55,14 @@ export default function Arrivals() {
                   <div className="Arrivalcategories-view">
                     Thriller, Horror, Romance
                   </div>
-                  <p className="Arrivalbook-price-view">
-                    $25.50
-                    <sub>
-                      <del>$28.60</del>
-                    </sub>
-                  </p>
+                  <p className="Arrivalbook-price-view">$25.50</p>
                   <div className="Arrivalcart-btn-view">
                     <i>
                       <FaShoppingCart />
                     </i>
                     <p> Add cart</p>
                   </div>
-                  <div className="ArrivalIcon-view">
+                  <div className="Icon-Container">
                     <i>
                       <LuEye />
                     </i>

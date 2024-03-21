@@ -47,7 +47,7 @@
   padding: 10px;
   margin-top: 16px;
   background-color: var(--white);
-  border: 1px solid var(--blue);
+  border: 1px solid var(--light-color);
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
@@ -56,7 +56,7 @@
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view:hover
-  .ArrivalIcon-view {
+  .Icon-Container {
   display: inline-flex !important;
 }
 
@@ -64,8 +64,8 @@
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view:hover {
+  border-color: var(--black);
   transition: 0.1s ease;
-  box-shadow: 0 0 10px var(--blue);
 }
 
 .arrivals-container-view
@@ -147,17 +147,6 @@
   .arrivals-box-view
   .arrivals-card-view
   .arrivals-tag-view
-  .Arrivalbook-price-view
-  sub {
-  font-weight: 100;
-  padding: 0 5px;
-  color: var(--black);
-}
-.arrivals-container-view
-  .arrivals-view
-  .arrivals-box-view
-  .arrivals-card-view
-  .arrivals-tag-view
   .Arrivalcart-btn-view {
   font-size: 12px;
   letter-spacing: 2px;
@@ -232,7 +221,7 @@
   .arrivals-box-view
   .arrivals-card-view
   .arrivals-tag-view
-  .ArrivalIcon-view {
+  .Icon-Container {
   color: var(--black);
   display: none;
   flex-direction: column;
@@ -245,7 +234,7 @@
   .arrivals-box-view
   .arrivals-card-view
   .arrivals-tag-view
-  .ArrivalIcon-view
+  .Icon-Container
   i {
   font-size: 20px;
   font-weight: bold;

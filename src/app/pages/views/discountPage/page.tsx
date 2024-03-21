@@ -1,17 +1,18 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import "./sellerView.css";
+import "./discountView.css";
+import { PiHandbag } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
+import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
-import { useState, useEffect } from "react";
 import LayOut from "@/app/pages/layout/page";
 export default function Seller() {
   useEffect(() => {
-    const btntocart = document.querySelectorAll(".Sellercart-btn-view");
+    const btntocart = document.querySelectorAll(".Discountcart-btn-view");
     console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
@@ -25,21 +26,21 @@ export default function Seller() {
   };
   return (
     <LayOut>
-      {/* Best Seller */}
-      <section className="section-p1-view">
-        <div className="section-p1-container-view">
+      {/* Discount */}
+      <section className="section-p3-view">
+        <div className="section-p3-container-view">
           <Link href="/" style={{ display: "inline-block" }}>
-            <i className="icon-arrow-view">
+            <i className="icon-arrow3-view">
               <IoIosArrowBack />
-              <h2>Best Seller</h2>
+              <h2>Book Discount</h2>
             </i>
           </Link>
         </div>
-        <div className="best-seller-container-view">
-          <div className="best-seller-view">
-            <div className="best-seller-box-view">
-              <Link href="#" className="best-seller-card-view">
-                <div className="best-seller-img-view">
+        <div className="discount-container-view">
+          <div className="discount-view">
+            <div className="discount-box-view">
+              <Link href="#" className="discount-card-view">
+                <div className="discount-img-view">
                   <Image
                     src="/images/biasach1.png"
                     alt="Main Image"
@@ -48,23 +49,23 @@ export default function Seller() {
                     priority={true}
                   />
                 </div>
-                <div className="best-seller-tag-view">
+                <div className="discount-tag-view">
                   <h2>Dune</h2>
-                  <p className="Sellerwriter-view">John Deo</p>
-                  <div className="Sellercategories-view">
+                  <p className="Discountwriter-view">John Deo</p>
+                  <div className="Discountcategories-view">
                     Thriller, Horror, Romance
                   </div>
-                  <p className="Sellerbook-price-view">
+                  <p className="Discountbook-price-view">
                     $25.50
                     <sub>
                       <del>$28.60</del>
                     </sub>
                   </p>
-                  <div className="Sellercart-btn-view">
+                  <div className="Discountcart-btn-view">
                     <i>
                       <FaShoppingCart />
                     </i>
-                    <p>Add cart</p>
+                    <p> Add cart</p>
                   </div>
                   <div className="Icon-Container">
                     <i>
@@ -83,7 +84,7 @@ export default function Seller() {
           </div>
         </div>
       </section>
-      {/* End Best Seller */}
+      {/* End Books list */}
     </LayOut>
   );
 }

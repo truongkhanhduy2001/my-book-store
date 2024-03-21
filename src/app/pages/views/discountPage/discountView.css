@@ -1,0 +1,259 @@
+/* Book List */
+.section-p3-view {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--margin-top-view);
+}
+.section-p3-view .section-p3-container-view {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+  display: flex;
+}
+.section-p3-view .section-p3-container-view .icon-arrow3-view {
+  display: flex;
+  margin-top: 2px;
+  font-size: 35px;
+  color: var(--black);
+}
+.section-p3-view .section-p3-container-view .icon-arrow3-view h2 {
+  font-size: 25px;
+  color: var(--black);
+  font-weight: bold;
+  font-style: normal;
+}
+.section-p3-view .section1-p3-container-view {
+  display: flex;
+}
+.section-p3-view .section1-p3-container-view .p3-container-view {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+}
+.discount-container-view {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--margin-top-font);
+}
+
+.discount-container-view .discount-view {
+  max-width: var(--width-home);
+  width: 100%;
+}
+
+.discount-container-view .discount-view .discount-box-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.discount-container-view .discount-view .discount-box-view .discount-card-view {
+  position: relative;
+  height: 450px;
+  text-align: center;
+  padding: 10px;
+  margin-top: 16px;
+  background-color: var(--white);
+  border: 1px solid var(--light-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view:hover
+  .Icon-Container {
+  display: inline-flex !important;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view:hover {
+  border-color: var(--black);
+  transition: 0.1s ease;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-img-view {
+  width: 150px;
+  height: 220px;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--black);
+  overflow: hidden;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-img-view
+  img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: 0.3s;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view:hover
+  .discount-img-view
+  img {
+  transform: scale(1.1);
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  h2 {
+  margin: 12px 0px 12px 0px;
+  color: var(--black);
+  font-weight: bold;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountwriter-view {
+  color: var(--light-color);
+}
+
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcategories-view {
+  color: var(--light-blue);
+  margin-top: 8px;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountbook-price-view {
+  margin-top: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--black);
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountbook-price-view
+  sub {
+  font-weight: 100;
+  padding: 0 5px;
+  color: var(--black);
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcart-btn-view {
+  font-size: 12px;
+  letter-spacing: 2px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px 10px;
+  border: 3px solid var(--blue);
+  border-radius: 5px;
+  position: relative;
+  color: var(--blue);
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcart-btn-view
+  i {
+  font-size: 12px;
+  position: absolute;
+  top: 48.5%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  transition: 0.25s;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcart-btn-view
+  p {
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 30px;
+  transition: 0.25s;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcart-btn-view:hover {
+  cursor: pointer;
+  background: var(--blue);
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcart-btn-view:hover
+  i {
+  left: 50%;
+  color: var(--white);
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountcart-btn-view:hover
+  p {
+  clip-path: circle(0px at 125px 27.5px);
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Icon-Container {
+  color: var(--black);
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Icon-Container
+  i {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+/* End discount view*/
+.HeartIcon.active {
+  fill: red;
+}

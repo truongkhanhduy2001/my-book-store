@@ -6,7 +6,7 @@ import Banner from "./components/banner/banner";
 import Services from "./components/serviced/services";
 import Seller from "./components/seller/seller";
 import Arrival from "./components/arrival/arrival";
-import BookList from "./components/booklist/Booklist";
+import Discount from "./components/discount/discount";
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
       <Arrival />
       {/* End Arrivals */}
       {/* Books list */}
-      <BookList />
+      <Discount />
       {/* End Books List */}
     </LayOut>
   );

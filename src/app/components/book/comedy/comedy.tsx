@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import "./listBookView.css";
-import { PiHandbag } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
@@ -10,9 +8,9 @@ import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import LayOut from "@/app/pages/layout/page";
-export default function Seller() {
+export default function Comedy() {
   useEffect(() => {
-    const btntocart = document.querySelectorAll(".Listcart-btn-view");
+    const btntocart = document.querySelectorAll(".books-cart-btn");
     console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
@@ -26,63 +24,48 @@ export default function Seller() {
   };
   return (
     <LayOut>
-      {/* Books list */}
-      <section className="section-p3-view">
-        <div className="section-p3-container-view">
+      {/* Action */}
+      <section className="section-books">
+        <div className="section-books-container">
           <Link href="/" style={{ display: "inline-block" }}>
-            <i className="icon-arrow3-view">
+            <i className="icon-books-arrow">
               <IoIosArrowBack />
-              <h2>Book List</h2>
+              <h2>Action</h2>
             </i>
           </Link>
         </div>
-        <div className="section1-p3-container-view">
-          <div className="p3-container-view">
-            <ul className="p3-list-view">
-              <li>
-                <h3>Classics</h3>
-              </li>
-              <li>
-                <h3>Comic</h3>
-              </li>
-              <li>
-                <h3>Horror</h3>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="books-container-view">
-          <div className="books-view">
-            <div className="books-box-view">
-              <Link href="#" className="books-card-view">
-                <div className="books-img-view">
+        <div className="books-container">
+          <div className="books">
+            <div className="books-box">
+              <Link href="#" className="books-card">
+                <div className="books-image">
                   <Image
                     src="/images/biasach1.png"
                     alt="Main Image"
                     width={100}
                     height={100}
                     priority={true}
-                  />
+                  ></Image>
                 </div>
-                <div className="books-tag-view">
+                <div className="books-tag">
                   <h2>Dune</h2>
-                  <p className="Listwriter-view">John Deo</p>
-                  <div className="Listcategories-view">
+                  <p className="books-writer">John Deo</p>
+                  <div className="books-categories">
                     Thriller, Horror, Romance
                   </div>
-                  <p className="Listbook-price-view">
+                  <p className="books-price">
                     $25.50
                     <sub>
                       <del>$28.60</del>
                     </sub>
                   </p>
-                  <div className="Listcart-btn-view">
+                  <div className="books-cart-btn">
                     <i>
                       <FaShoppingCart />
                     </i>
                     <p> Add cart</p>
                   </div>
-                  <div className="ListIcon-view">
+                  <div className="Icon-Container">
                     <i>
                       <LuEye />
                     </i>
@@ -99,7 +82,7 @@ export default function Seller() {
           </div>
         </div>
       </section>
-      {/* End Books list */}
+      {/* End Action */}
     </LayOut>
   );
 }

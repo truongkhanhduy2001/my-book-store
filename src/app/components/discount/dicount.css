@@ -33,61 +33,24 @@
   margin: auto;
 }
 
-.section-p3 .section1-p3-container .p3-container .p3-list {
-  display: flex;
-  margin-top: var(--margin-top-font);
-}
-.section-p3 .section1-p3-container .p3-container .p3-list li {
-  margin-right: 18px;
-  position: relative;
-  transition: 0.4s;
-}
-.section-p3 .section1-p3-container .p3-container .p3-list li::before {
-  content: "";
-  width: 0;
-  height: 4px;
-  border-radius: 4px;
-  background-color: var(--blue);
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: 0.3s;
-}
-
-.section-p3 .section1-p3-container .p3-container .p3-list li:hover::before {
-  width: 60%;
-  transition: 0.3s;
-}
-.section-p3 .section1-p3-container .p3-container .p3-list li h3 {
-  color: var(--black);
-  cursor: pointer;
-  font-size: var(--h3);
-  font-weight: bold;
-}
-
-.section-p3 .section1-p3-container .p3-container .p3-list li:hover h3 {
-  color: var(--blue);
-}
-
-.books-container {
+.discount-container {
   display: flex;
   justify-content: center;
   margin-top: var(--margin-top-font);
 }
 
-.books-container .books {
+.discount-container .discount {
   max-width: var(--width-home);
   width: 100%;
 }
 
-.books-container .books .books-box {
+.discount-container .discount .discount-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 15px;
 }
 
-.books-container .books .books-box .books-card {
+.discount-container .discount .discount-box .discount-card {
   position: relative;
   text-align: center;
   padding: 10px;
@@ -98,15 +61,19 @@
   cursor: pointer;
   transition: transform 0.1s ease;
 }
-.books-container .books .books-box .books-card:hover .ListIcon {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card:hover
+  .Icon-Container {
   display: inline-flex !important;
 }
 /*  */
-.books-container .books .books-box .books-card:hover {
+.discount-container .discount .discount-box .discount-card:hover {
   transition: 0.1s ease;
   border-color: var(--black);
 }
-.books-container .books .books-box .books-card .books-img {
+.discount-container .discount .discount-box .discount-card .discount-img {
   width: 150px;
   height: 220px;
   margin: 0 auto;
@@ -114,41 +81,72 @@
   box-shadow: 0 0 8px var(--black);
   overflow: hidden;
 }
-.books-container .books .books-box .books-card .books-img img {
+.discount-container .discount .discount-box .discount-card .discount-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   transition: 0.3s;
 }
-.books-container .books .books-box .books-card:hover .books-img img {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card:hover
+  .discount-img
+  img {
   transform: scale(1.1);
 }
-.books-container .books .books-box .books-card .books-tag h2 {
+.discount-container .discount .discount-box .discount-card .discount-tag h2 {
   margin: 12px 0px 12px 0px;
   color: var(--black);
   font-weight: bold;
 }
-.books-container .books .books-box .books-card .books-tag .Listwriter {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountwriter {
   color: var(--light-color);
 }
 
-.books-container .books .books-box .books-card .books-tag .Listcategories {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcategories {
   color: var(--light-blue);
   margin-top: 8px;
 }
-.books-container .books .books-box .books-card .books-tag .Listbook-price {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountbook-price {
   margin-top: 8px;
   font-weight: bold;
   margin-bottom: 15px;
   color: var(--black);
 }
-.books-container .books .books-box .books-card .books-tag .Listbook-price sub {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountbook-price
+  sub {
   font-weight: 100;
   padding: 0 5px;
   color: var(--black);
 }
-.books-container .books .books-box .books-card .books-tag .Listcart-btn {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcart-btn {
   font-size: 12px;
   letter-spacing: 2px;
   display: inline-block;
@@ -163,7 +161,13 @@
   transition: 0.3s ease all;
   z-index: 1;
 }
-.books-container .books .books-box .books-card .books-tag .Listcart-btn i {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcart-btn
+  i {
   font-size: 12px;
   position: absolute;
   top: 48.5%;
@@ -171,37 +175,53 @@
   transform: translate(-50%, -50%);
   transition: 0.25s;
 }
-.books-container .books .books-box .books-card .books-tag .Listcart-btn p,
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcart-btn
+  p,
 .cart-btn:focus {
   font-weight: bold;
   font-size: 12px;
   margin-left: 30px;
   transition: 0.25s;
 }
-.books-container .books .books-box .books-card .books-tag .Listcart-btn:hover {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcart-btn:hover {
   cursor: pointer;
   background: var(--blue);
 }
-.books-container
-  .books
-  .books-box
-  .books-card
-  .books-tag
-  .Listcart-btn:hover
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcart-btn:hover
   i {
   left: 50%;
   color: var(--white);
 }
-.books-container
-  .books
-  .books-box
-  .books-card
-  .books-tag
-  .Listcart-btn:hover
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountcart-btn:hover
   p {
   clip-path: circle(0px at 125px 27.5px);
 }
-.books-container .books .books-box .books-card .books-tag .ListIcon {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Icon-Container {
   color: var(--black);
   display: none;
   flex-direction: column;
@@ -209,7 +229,13 @@
   top: 20px;
   right: 20px;
 }
-.books-container .books .books-box .books-card .books-tag .ListIcon i {
+.discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Icon-Container
+  i {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 8px;

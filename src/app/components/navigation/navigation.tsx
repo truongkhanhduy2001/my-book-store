@@ -7,7 +7,6 @@ import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";
 
 export default function Navigate() {
-  // Scroll active link
   const [check, setCheck] = useState(false);
 
   useEffect(() => {
@@ -46,21 +45,28 @@ export default function Navigate() {
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="#" className="nav-link">
-                <span>Best Seller</span>
+                <span>Comedy</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="#" className="nav-link">
-                <span>New Arrivals</span>
+                <span>Horror</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="#" className="nav-link">
-                <span>Book List</span>
+                <span>Comic</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link href="#" className="nav-link">
+                <span>Novel</span>
               </Link>
             </li>
           </ul>

@@ -58,7 +58,7 @@ export default function Seller() {
           navigation={true}
           loop={true}
           autoplay={{
-            delay: 2500,
+            delay: 6500,
             disableOnInteraction: false,
           }}
           modules={[Navigation, Autoplay]}
@@ -97,7 +97,7 @@ export default function Seller() {
                           </i>
                           <p>Add cart</p>
                         </div>
-                        <div className="SellerIcon">
+                        <div className="Icon-Container">
                           <i>
                             <LuEye />
                           </i>
@@ -151,7 +151,7 @@ export default function Seller() {
                           </i>
                           <p>Add cart</p>
                         </div>
-                        <div className="SellerIcon">
+                        <div className="Icon-Container">
                           <i>
                             <LuEye />
                           </i>

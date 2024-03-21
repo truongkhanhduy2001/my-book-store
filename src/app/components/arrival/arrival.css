@@ -53,7 +53,11 @@
   transition: transform 0.1s ease;
 }
 
-.arrivals-container .arrivals .arrivals-box .arrivals-card:hover .ArrivalIcon {
+.arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card:hover
+  .Icon-Container {
   display: inline-flex !important;
 }
 
@@ -121,17 +125,6 @@
   margin-bottom: 15px;
   color: var(--black);
   font-weight: bold;
-}
-.arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card
-  .arrivals-tag
-  .Arrivalbook-price
-  sub {
-  font-weight: 100;
-  padding: 0 5px;
-  color: var(--black);
 }
 .arrivals-container
   .arrivals
@@ -212,7 +205,7 @@
   .arrivals-box
   .arrivals-card
   .arrivals-tag
-  .ArrivalIcon {
+  .Icon-Container {
   color: var(--black);
   display: none;
   flex-direction: column;
@@ -225,7 +218,7 @@
   .arrivals-box
   .arrivals-card
   .arrivals-tag
-  .ArrivalIcon
+  .Icon-Container
   i {
   font-size: 20px;
   font-weight: bold;
