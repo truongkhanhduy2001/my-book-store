@@ -49,6 +49,24 @@ export default function Discount() {
           <h3>View all</h3>
         </Link>
       </div>
+      <div className="section1-p3-container">
+        <div className="p3-container">
+          <ul className="p3-list">
+            <li>
+              <h3>Comedy</h3>
+            </li>
+            <li>
+              <h3>Horror</h3>
+            </li>
+            <li>
+              <h3>Comic</h3>
+            </li>
+            <li>
+              <h3>Novel</h3>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div className="discount-container">
         <div className="discount">
           <div className="discount-box">
@@ -64,8 +82,9 @@ export default function Discount() {
                       priority={true}
                       style={{
                         maxWidth: "100%",
-                        height: "auto"
-                      }} />
+                        height: "auto",
+                      }}
+                    />
                   </div>
                   <div className="discount-tag">
                     <h2>{item.title}</h2>

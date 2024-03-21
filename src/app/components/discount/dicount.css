@@ -24,6 +24,7 @@
 .section-p3 .section-p3-container h3:hover {
   color: var(--blue);
 }
+
 .section-p3 .section1-p3-container {
   display: flex;
 }
@@ -31,6 +32,40 @@
   max-width: var(--width-home);
   width: 100%;
   margin: auto;
+}
+.section-p3 .section1-p3-container .p3-container .p3-list {
+  display: flex;
+  margin-top: var(--margin-top-font);
+}
+.section-p3 .section1-p3-container .p3-container .p3-list li {
+  margin-right: 18px;
+  position: relative;
+  transition: 0.4s;
+}
+.section-p3 .section1-p3-container .p3-container .p3-list li::before {
+  content: "";
+  width: 0;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--blue);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+.section-p3 .section1-p3-container .p3-container .p3-list li:hover::before {
+  width: 60%;
+  transition: 0.3s;
+}
+.section-p3 .section1-p3-container .p3-container .p3-list li h3 {
+  color: var(--light-color);
+  cursor: pointer;
+  font-size: var(--h3);
+  font-weight: bold;
+}
+.section-p3 .section1-p3-container .p3-container .p3-list li:hover h3 {
+  color: var(--blue);
 }
 
 .discount-container {
