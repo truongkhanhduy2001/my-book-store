@@ -71,7 +71,7 @@ export default function Navigate() {
             </li>
           </ul>
         </div>
-        <ul>
+        <ul className="icons-list">
           {!check ? (
             <li className="book-accounts">
               <Link href="/pages/accounts/login">

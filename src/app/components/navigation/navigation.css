@@ -68,7 +68,6 @@
 }
 .header .navbar .nav-menu .nav-list .nav-item {
   display: inline-block;
-  padding: 0 5px;
 }
 .header .navbar .nav-menu .nav-list .nav-item .nav-link {
   text-decoration: none;
@@ -80,6 +79,19 @@
 .header .navbar .nav-menu .nav-list .nav-item .nav-link:hover {
   color: var(--blue);
 }
+.header .navbar .nav-menu .nav-list .nav-item .nav-link::before {
+  content: "";
+  position: absolute;
+  background: var(--blue);
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s ease;
+}
+.header .navbar .nav-menu .nav-list .nav-item .nav-link:hover::before {
+  width: 100%;
+}
 .header .navbar ul {
   list-style: none;
   font-size: 25px;
@@ -89,6 +101,16 @@
 }
 
 .header .navbar ul li {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+}
+.header .navbar .icons-list li {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -119,7 +141,7 @@
 .header .navbar .book-accounts-name .book-user-container {
   position: absolute;
   background-color: var(--white);
-  top: 120%;
+  top: 175%;
   display: flex;
   flex-direction: column;
   right: 0;
@@ -184,7 +206,7 @@
 .header .navbar .book-search .search-container {
   position: absolute;
   background-color: var(--white);
-  top: 120%;
+  top: 175%;
   display: flex;
   flex-direction: column;
   right: 0;
@@ -228,7 +250,7 @@
 .header .navbar .book-cart .book-cart-container {
   position: absolute;
   background-color: var(--white);
-  top: 120%;
+  top: 175%;
   display: flex;
   flex-direction: column;
   right: 0;
