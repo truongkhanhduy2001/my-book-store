@@ -1,5 +1,6 @@
 "use client";
 import "./banner.css";
+import Link from "next/link";
 import React, { useRef, useState } from "react";
 import Slider from "../slider/slider";
 export default function Banner() {
@@ -8,7 +9,7 @@ export default function Banner() {
     <section className="main-container" id="home">
       <div className="main">
         <div>
-          <div className="main_tag">
+          <div className="main-tag">
             <h1>
               WELCOME TO
               <br />

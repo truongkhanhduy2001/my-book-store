@@ -141,7 +141,7 @@
 .header .navbar .book-accounts-name .book-user-container {
   position: absolute;
   background-color: var(--white);
-  top: 175%;
+  top: 140%;
   display: flex;
   flex-direction: column;
   right: 0;
@@ -206,7 +206,7 @@
 .header .navbar .book-search .search-container {
   position: absolute;
   background-color: var(--white);
-  top: 175%;
+  top: 140%;
   display: flex;
   flex-direction: column;
   right: 0;
@@ -250,7 +250,7 @@
 .header .navbar .book-cart .book-cart-container {
   position: absolute;
   background-color: var(--white);
-  top: 175%;
+  top: 140%;
   display: flex;
   flex-direction: column;
   right: 0;
