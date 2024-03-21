@@ -11,20 +11,65 @@ export default function Discount() {
   const data = [
     {
       title: "Dune",
+      type: ["Horror"],
+    },
+    {
+      title: "Dune",
+      type: ["Horror", "Comedy"],
     },
     {
       title: "Anime",
+      type: "Comedy",
+    },
+    {
+      title: "Anime",
+      type: "Comedy",
     },
     {
       title: "Naruto",
+      type: "Comic",
+    },
+    {
+      title: "Naruto",
+      type: "Comic",
     },
     {
       title: "Drama",
+      type: "Novel",
     },
     {
-      title: "Dragon",
+      title: "Drama",
+      type: "Novel",
     },
   ];
+
+  const [dataList, setDataList] = useState(data);
+
+  const handleTypeComedy = () => {
+    const item = data.filter((item, index) => {
+      return item.type.includes("Comedy");
+    });
+    setDataList(item);
+  };
+  const handleTypeHorror = () => {
+    const item = data.filter((item, index) => {
+      console.log(item);
+      return item.type.includes("Horror");
+    });
+    setDataList(item);
+  };
+  const handleTypeComic = () => {
+    const item = data.filter((item, index) => {
+      return item.type.includes("Comic");
+    });
+    setDataList(item);
+  };
+  const handleTypeNovel = () => {
+    const item = data.filter((item, index) => {
+      return item.type.includes("Novel");
+    });
+    setDataList(item);
+  };
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Discountcart-btn");
     console.log(btntocart);
@@ -53,16 +98,16 @@ export default function Discount() {
         <div className="p3-container">
           <ul className="p3-list">
             <li>
-              <h3>Comedy</h3>
+              <h3 onClick={handleTypeComedy}>Comedy</h3>
             </li>
             <li>
-              <h3>Horror</h3>
+              <h3 onClick={handleTypeHorror}>Horror</h3>
             </li>
             <li>
-              <h3>Comic</h3>
+              <h3 onClick={handleTypeComic}>Comic</h3>
             </li>
             <li>
-              <h3>Novel</h3>
+              <h3 onClick={handleTypeNovel}>Novel</h3>
             </li>
           </ul>
         </div>
@@ -70,7 +115,7 @@ export default function Discount() {
       <div className="discount-container">
         <div className="discount">
           <div className="discount-box">
-            {data.slice(-10).map((item, index) => {
+            {dataList.slice(-10).map((item, index) => {
               return (
                 <Link key={index} href="#" className="discount-card">
                   <div className="discount-img">
@@ -89,9 +134,7 @@ export default function Discount() {
                   <div className="discount-tag">
                     <h2>{item.title}</h2>
                     <p className="Discountwriter">John Deo</p>
-                    <div className="Discountcategories">
-                      Thriller, Horror, Romance
-                    </div>
+                    <div className="Discountcategories">{item.type}</div>
                     <p className="Discountbook-price">
                       $25.50
                       <sub>
