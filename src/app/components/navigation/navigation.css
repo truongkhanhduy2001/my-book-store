@@ -8,20 +8,21 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--light-color);
+  background: var(--text-color);
   border-radius: 10px;
 }
 :root {
   /* Color */
-  --white: #fff;
-  --black: hsl(230, 70%, 16%);
-  --light-color: #b9c0cb;
-  --blue: #007aff;
-  --light-blue: #80bfff;
-  --orange: #ff8e67;
-  --card: #f4f4fe;
+  --white-color: hsl(0, 0%, 100%);
+  --title-color: hsl(230, 70%, 16%);
+  --text-color: hsl(230, 16%, 45%);
+  --first-color: hsl(230, 62%, 56%);
+  --second-color: #80bfff;
+  --border-color: hsl(230, 50%, 90%);
+  --card-color: hsl(230, 100%, 97%);
+  --BG: hsl(230, 100%, 96%);
   /* Size */
-  --width-home: 1400px;
+  --width-home: 1200px;
   --margin-top: 80px;
   --margin-top-font: 15px;
   --margin-top-view: 100px;
@@ -37,20 +38,20 @@
   justify-content: center;
   align-items: center;
   justify-content: space-around;
-  background: var(--white);
+  background: var(--BG);
   position: sticky;
   z-index: 6;
   top: 0;
   left: 0;
   right: 0;
 }
-
+/* Navbar */
 .header .navbar {
   max-width: var(--width-home);
   width: 100%;
   display: flex;
   align-items: center;
-  color: var(--black);
+  color: var(--title-color);
   justify-content: space-between;
 }
 .header .navbar .logo {
@@ -60,47 +61,18 @@
   position: relative !important;
   margin: auto 0;
 }
+/* Menu */
 .header .navbar .nav-menu {
   display: flex;
 }
 .header .navbar .nav-menu .nav-list {
-  list-style: none;
-}
-.header .navbar .nav-menu .nav-list .nav-item {
-  display: inline-block;
-}
-.header .navbar .nav-menu .nav-list .nav-item .nav-link {
-  text-decoration: none;
-  color: var(--black);
-}
-.header .navbar .nav-menu .nav-list .nav-item .nav-link span {
-  font-size: var(--h3);
-}
-.header .navbar .nav-menu .nav-list .nav-item .nav-link:hover {
-  color: var(--blue);
-}
-.header .navbar .nav-menu .nav-list .nav-item .nav-link::before {
-  content: "";
-  position: absolute;
-  background: var(--blue);
-  width: 0;
-  height: 3px;
-  bottom: 0;
-  left: 0;
-  transition: 0.3s ease;
-}
-.header .navbar .nav-menu .nav-list .nav-item .nav-link:hover::before {
-  width: 100%;
-}
-.header .navbar ul {
   list-style: none;
   font-size: 25px;
   display: grid;
   grid-template-columns: auto auto auto auto;
   gap: 15px;
 }
-
-.header .navbar ul li {
+.header .navbar .nav-menu .nav-list .nav-item {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -110,6 +82,40 @@
   position: relative;
   border-radius: 8px;
 }
+.header .navbar .nav-menu .nav-list .nav-item .nav-link {
+  text-decoration: none;
+  color: var(--title-color);
+}
+.header .navbar .nav-menu .nav-list .nav-item .nav-link span {
+  font-size: var(--h3);
+}
+.header .navbar .nav-menu .nav-list .nav-item .nav-link:hover {
+  color: var(--first-color);
+}
+.header .navbar .nav-menu .nav-list .nav-item .nav-link::before {
+  content: "";
+  width: 0;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--first-color);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+.header .navbar .nav-menu .nav-list .nav-item .nav-link:hover::before {
+  width: 100%;
+  transition: 0.3s;
+}
+.header .navbar .icons-list {
+  list-style: none;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 15px;
+}
+
 .header .navbar .icons-list li {
   display: flex;
   -webkit-box-align: center;
@@ -121,33 +127,33 @@
   position: relative;
   border-radius: 8px;
 }
-.header .navbar ul li i:hover {
-  color: var(--blue);
+.header .navbar .icons-list li i:hover {
+  color: var(--first-color);
 }
 /* Home Accounts */
-.header .navbar .book-accounts-name {
+.header .navbar .icons-list .book-accounts-name {
   position: relative;
 }
-.header .navbar .book-accounts-name h3 {
+.header .navbar .icons-list .book-accounts-name h3 {
   font-size: 14px;
-  color: var(--black);
+  color: var(--text-color);
 }
-.header .navbar .book-accounts-name:hover .book-user-container {
+.header .navbar .icons-list .book-accounts-name:hover .book-user-container {
   visibility: visible;
   transition: 0.3s;
   transform: scale(1);
   opacity: 1;
 }
-.header .navbar .book-accounts-name .book-user-container {
+.header .navbar .icons-list .book-accounts-name .book-user-container {
   position: absolute;
-  background-color: var(--white);
+  background-color: var(--white-color);
   top: 140%;
   display: flex;
   flex-direction: column;
   right: 0;
   width: 145px;
   height: auto;
-  box-shadow: var(--black) 0px 6px 12px;
+  box-shadow: var(--text-color) 0px 6px 12px;
   visibility: hidden;
   transition: 0.3s;
   transform: scale(0);
@@ -155,7 +161,7 @@
   opacity: 0;
   border-radius: 5px;
 }
-.header .navbar .book-accounts-name .book-user-container::before {
+.header .navbar .icons-list .book-accounts-name .book-user-container::before {
   position: absolute;
   content: "";
   bottom: 100%;
@@ -164,22 +170,33 @@
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-bottom: 16px solid var(--white);
+  border-bottom: 16px solid var(--white-color);
 }
-.header .navbar .book-accounts-name .book-user-container .user-details {
+.header
+  .navbar
+  .icons-list
+  .book-accounts-name
+  .book-user-container
+  .user-details {
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: rgb(128, 128, 137);
+  color: var(--text-color);
 }
-.header .navbar .book-accounts-name .book-user-container .user-details p {
+.header
+  .navbar
+  .icons-list
+  .book-accounts-name
+  .book-user-container
+  .user-details
+  p {
   cursor: pointer;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
   margin: 0px;
   padding: 8px 16px;
-  color: var(--black);
+  color: var(--text-color);
   font-size: 14px;
   line-height: 150%;
   font-weight: 400;
@@ -187,31 +204,37 @@
   opacity: 1;
   transition: opacity 0.1s ease;
 }
-.header .navbar .book-accounts-name .book-user-container .user-details p:hover {
-  color: var(--blue);
+.header
+  .navbar
+  .icons-list
+  .book-accounts-name
+  .book-user-container
+  .user-details
+  p:hover {
+  color: var(--first-color);
   opacity: 0.7;
 }
 /* Search */
-.header .navbar .book-search {
+.header .navbar .icons-list .book-search {
   /* padding: 0.6rem 1rem;
   margin: 0px 150px; */
   position: relative;
 }
-.header .navbar .book-search:hover .search-container {
+.header .navbar .icons-list .book-search:hover .search-container {
   visibility: visible;
   transition: 0.3s;
   transform: scale(1);
   opacity: 1;
 }
-.header .navbar .book-search .search-container {
+.header .navbar .icons-list .book-search .search-container {
   position: absolute;
-  background-color: var(--white);
+  background-color: var(--card-color);
   top: 140%;
   display: flex;
   flex-direction: column;
   right: 0;
   min-width: 400px;
-  box-shadow: var(--black) 0px 6px 12px;
+  box-shadow: var(--text-color) 0px 6px 12px;
   visibility: hidden;
   transition: 0.3s;
   transform: scale(0);
@@ -221,6 +244,7 @@
 }
 .header
   .navbar
+  .icons-list
   .book-search
   .search-container
   .search-form
@@ -229,33 +253,33 @@
   padding: 10px 10px 10px 36px;
   border: none;
   border-radius: 5px;
-  background-color: var(--white);
-  color: var(--black);
+  background-color: var(--card-color);
+  color: var(--text-color);
   font-family: Arial, sans-serif;
   font-size: var(--h3);
   outline: none;
-  border: 1px solid var(--light-color);
+  border: 1px solid var(--border-color);
 }
 
 /* Home Cart */
-.header .navbar .book-cart {
+.header .navbar .icons-list .book-cart {
   position: relative;
 }
-.header .navbar .book-cart:hover .book-cart-container {
+.header .navbar .icons-list .book-cart:hover .book-cart-container {
   visibility: visible;
   transition: 0.3s;
   transform: scale(1);
   opacity: 1;
 }
-.header .navbar .book-cart .book-cart-container {
+.header .navbar .icons-list .book-cart .book-cart-container {
   position: absolute;
-  background-color: var(--white);
+  background-color: var(--card-color);
   top: 140%;
   display: flex;
   flex-direction: column;
   right: 0;
   min-width: 400px;
-  box-shadow: var(--black) 0px 6px 12px;
+  box-shadow: var(--text-color) 0px 6px 12px;
   visibility: hidden;
   transition: 0.3s;
   transform: scale(0);
@@ -263,7 +287,7 @@
   opacity: 0;
   border-radius: 5px;
 }
-.header .navbar .book-cart .book-cart-container::before {
+.header .navbar .icons-list .book-cart .book-cart-container::before {
   position: absolute;
   content: "";
   bottom: 100%;
@@ -272,28 +296,76 @@
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-bottom: 16px solid var(--white);
+  border-bottom: 16px solid var(--card-color);
 }
-.header .navbar .book-cart .book-cart-container .book-cart-title {
+.header .navbar .icons-list .book-cart .book-cart-container .book-cart-title {
   padding: 8px 16px;
 }
-.header .navbar .book-cart .book-cart-container .book-cart-title h2 {
-  color: var(--black);
+.header
+  .navbar
+  .icons-list
+  .book-cart
+  .book-cart-container
+  .book-cart-title
+  h2 {
+  color: var(--text-color);
   font-size: 15px;
   margin-bottom: 100px;
 }
-.header .navbar .book-cart .book-cart-container .book-cart-title h3 {
+.header
+  .navbar
+  .icons-list
+  .book-cart
+  .book-cart-container
+  .book-cart-title
+  h3 {
   margin-left: 5px;
   font-size: 14px;
 }
-.header .navbar .book-cart .book-cart-container .btn-cart {
-  padding: 8px 16px;
+.header .navbar .icons-list .book-cart .book-cart-container .btn-cart {
+  padding: 8px 10px;
   display: flex;
-  color: var(--white);
+  color: var(--white-color);
   font-size: 14px;
   font-weight: bold;
   text-align: center;
   justify-content: center;
-  background-color: var(--blue);
+  align-items: center;
+  margin: 10px auto;
+  background-color: var(--first-color);
   border-radius: 5px;
+}
+/* Responsive */
+@media only screen and (max-width: 1024px) {
+  .header .navbar .nav-menu .nav-list {
+    grid-template-columns: auto auto;
+    gap: 50px;
+  }
+
+  .header .navbar .nav-menu .nav-list .nav-item {
+    font-size: 20px;
+  }
+  .header .navbar .icons-list .book-accounts-name .book-user-container,
+  .header .navbar .icons-list .book-search .search-container,
+  .header .navbar .icons-list .book-cart .book-cart-container,
+  .header
+    .navbar
+    .icons-list
+    .book-search
+    .search-container
+    .search-form
+    input[type="search"],
+  .header
+    .navbar
+    .icons-list
+    .book-cart
+    .book-cart-container
+    .book-cart-title
+    h2,
+  .header .navbar .icons-list .book-cart .book-cart-container .btn-cart {
+    min-width: 300px;
+  }
+  .header .navbar .book-cart .book-cart-container .book-cart-title h3 {
+    margin-bottom: 20px;
+  }
 }

@@ -38,35 +38,35 @@ export default function Navigate() {
         <div className="nav-menu">
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link href="/" className="nav-link">
                 <span>Home</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link href="/pages/books/comedy/" className="nav-link">
                 <span>Comedy</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link href="/pages/books/horror/" className="nav-link">
                 <span>Horror</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link href="/pages/books/comic/" className="nav-link">
                 <span>Comic</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link href="/pages/books/novel/" className="nav-link">
                 <span>Novel</span>
               </Link>
             </li>

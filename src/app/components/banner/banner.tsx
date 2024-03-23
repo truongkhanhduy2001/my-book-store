@@ -2,11 +2,11 @@
 import "./banner.css";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import Slider from "../slider/slider";
+import BannerSlider from "../slider/banner/slider";
 export default function Banner() {
   return (
     /* Main */
-    <section className="main-container" id="home">
+    <section className="main-container">
       <div className="main">
         <div>
           <div className="main-tag">
@@ -21,8 +21,11 @@ export default function Banner() {
               accompany Book Store on the journey to discover knowledge and
               creativity!<br></br> Order your book today!
             </p>
+            <div className="main-btn">
+              <Link href="#">Explore now</Link>
+            </div>
           </div>
-          <Slider />
+          <BannerSlider />
         </div>
       </div>
     </section>

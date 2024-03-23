@@ -125,7 +125,7 @@ export default function Footer() {
             </span>
           </div>
           <div className="icon github">
-            <div className="tooltip">Github</div>
+            <div className="tooltip">GitHub</div>
             <span>
               <i>
                 <FaGithub />
@@ -141,7 +141,7 @@ export default function Footer() {
             </span>
           </div>
           <div className="icon instagram">
-            <div className="tooltip">Instagarm</div>
+            <div className="tooltip">Instagram</div>
             <span>
               <i>
                 <FaInstagram />

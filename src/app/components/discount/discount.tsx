@@ -19,57 +19,60 @@ export default function Discount() {
     },
     {
       title: "Anime",
-      type: "Comedy",
+      type: "Novel",
     },
     {
       title: "Anime",
-      type: "Comedy",
-    },
-    {
-      title: "Naruto",
       type: "Comic",
     },
     {
       title: "Naruto",
       type: "Comic",
-    },
-    {
-      title: "Drama",
-      type: "Novel",
-    },
-    {
-      title: "Drama",
-      type: "Novel",
     },
   ];
-
+  // Type
   const [dataList, setDataList] = useState(data);
 
-  const handleTypeComedy = () => {
+  function changePositionNav(e: any) {
+    document.querySelector(".nav-discount.active")?.classList.remove("active");
+    e.classList.add("active");
+  }
+
+  const handleAllBooks = (e: any) => {
+    setDataList(data);
+    changePositionNav(e.target.closest(".nav-discount"));
+  };
+
+  const handleTypeComedy = (e: any) => {
     const item = data.filter((item, index) => {
       return item.type.includes("Comedy");
     });
     setDataList(item);
+    changePositionNav(e.target.closest(".nav-discount"));
   };
-  const handleTypeHorror = () => {
+  const handleTypeHorror = (e: any) => {
     const item = data.filter((item, index) => {
       console.log(item);
       return item.type.includes("Horror");
     });
     setDataList(item);
+    changePositionNav(e.target.closest(".nav-discount"));
   };
-  const handleTypeComic = () => {
+  const handleTypeComic = (e: any) => {
     const item = data.filter((item, index) => {
       return item.type.includes("Comic");
     });
     setDataList(item);
+    changePositionNav(e.target.closest(".nav-discount"));
   };
-  const handleTypeNovel = () => {
+  const handleTypeNovel = (e: any) => {
     const item = data.filter((item, index) => {
       return item.type.includes("Novel");
     });
     setDataList(item);
+    changePositionNav(e.target.closest(".nav-discount"));
   };
+  // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Discountcart-btn");
     console.log(btntocart);
@@ -79,12 +82,13 @@ export default function Discount() {
       });
     });
   }, []);
+  // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
   return (
-    <section className="section-p3 section" id="booklist">
+    <section className="section-p3 ">
       <div className="section-p3-container">
         <h2>Book Discount</h2>
         <Link
@@ -97,16 +101,19 @@ export default function Discount() {
       <div className="section1-p3-container">
         <div className="p3-container">
           <ul className="p3-list">
-            <li>
+            <li className="nav-discount active">
+              <h3 onClick={handleAllBooks}>All books</h3>
+            </li>
+            <li className="nav-discount">
               <h3 onClick={handleTypeComedy}>Comedy</h3>
             </li>
-            <li>
+            <li className="nav-discount">
               <h3 onClick={handleTypeHorror}>Horror</h3>
             </li>
-            <li>
+            <li className="nav-discount">
               <h3 onClick={handleTypeComic}>Comic</h3>
             </li>
-            <li>
+            <li className="nav-discount">
               <h3 onClick={handleTypeNovel}>Novel</h3>
             </li>
           </ul>
@@ -115,7 +122,7 @@ export default function Discount() {
       <div className="discount-container">
         <div className="discount">
           <div className="discount-box">
-            {dataList.slice(-10).map((item, index) => {
+            {dataList.slice(-4).map((item, index) => {
               return (
                 <Link key={index} href="#" className="discount-card">
                   <div className="discount-img">

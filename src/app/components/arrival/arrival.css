@@ -1,4 +1,5 @@
 /* New Arrivals */
+/* Header */
 .section-p2 {
   display: flex;
   flex-direction: column;
@@ -12,70 +13,88 @@
   justify-content: space-between;
 }
 .section-p2 .section-p2-container h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: var(--h2);
-  color: var(--black);
+  color: var(--title-color);
   font-weight: bold;
 }
 .section-p2 .section-p2-container h3 {
+  display: flex;
   font-size: var(--h3);
   margin-top: 10px;
-  color: var(--orange);
+  color: var(--text-color);
 }
 .section-p2 .section-p2-container h3:hover {
-  color: var(--blue);
+  color: var(--first-color);
 }
+/* Body */
 .arrivals-container {
   display: flex;
   justify-content: center;
   margin-top: var(--margin-top-font);
 }
 
-.arrivals-container .arrivals {
+.section-p2 .arrivals-container .arrivals {
   max-width: var(--width-home);
   width: 100%;
 }
 
-.arrivals-container .arrivals .arrivals-box {
+.section-p2 .arrivals-container .arrivals .arrivals-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
 }
-
-.arrivals-container .arrivals .arrivals-box .arrivals-card {
+/* Card */
+.section-p2 .arrivals-container .arrivals .arrivals-box .arrivals-card {
   display: flex;
   position: relative;
   padding: 10px;
   margin-top: 16px;
-  background-color: var(--white);
-  border: 1px solid var(--light-color);
+  background-color: var(--card-color);
+  border: 2px solid var(--border-color);
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
 }
 
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card:hover
+  .arrivals-tag
   .Icon-Container {
   display: inline-flex !important;
 }
 
-.arrivals-container .arrivals .arrivals-box .arrivals-card:hover {
+.section-p2 .arrivals-container .arrivals .arrivals-box .arrivals-card:hover {
   transition: 0.1s ease;
-  border-color: var(--black);
+  border-color: var(--first-color);
 }
-
-.arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-image {
+/* Image */
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-image {
   width: 150px;
   height: 220px;
   margin: 0 auto;
   cursor: pointer;
-  box-shadow: 0 0 8px var(--black);
+  box-shadow: 0 0 8px var(--title-color);
   overflow: hidden;
 }
 
-.arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-image img {
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-image
+  img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -83,7 +102,8 @@
   transition: 0.3s;
 }
 
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card:hover
@@ -91,30 +111,39 @@
   img {
   transform: scale(1.1);
 }
-
-.arrivals-container .arrivals .arrivals-box .arrivals-card .arrivals-tag h2 {
+/* Tag */
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  h2 {
   margin: 20px 0px 12px 0px;
-  color: var(--black);
+  color: var(--title-color);
   font-weight: bold;
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
   .arrivals-tag
   .Arrivalwriter {
-  color: var(--light-color);
+  color: var(--text-color);
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
   .arrivals-tag
   .Arrivalcategories {
-  color: var(--light-blue);
+  color: var(--second-color);
   margin-top: 8px;
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -123,10 +152,12 @@
   margin-top: 8px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: var(--black);
+  color: var(--title-color);
   font-weight: bold;
 }
-.arrivals-container
+/* Button Cart */
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -137,16 +168,17 @@
   display: inline-block;
   text-align: center;
   font-weight: bold;
-  padding: 4px 10px;
-  border: 3px solid var(--blue);
+  padding: 5px 5px;
+  border: 3px solid var(--first-color);
   border-radius: 5px;
   position: relative;
-  color: var(--blue);
+  color: var(--first-color);
   text-decoration: none;
   transition: 0.3s ease all;
   z-index: 1;
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -156,11 +188,12 @@
   font-size: 12px;
   position: absolute;
   top: 48.5%;
-  left: 20%;
+  left: 15%;
   transform: translate(-50%, -50%);
   transition: 0.25s;
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -172,16 +205,18 @@
   margin-left: 30px;
   transition: 0.25s;
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
   .arrivals-tag
   .Arrivalcart-btn:hover {
   cursor: pointer;
-  background: var(--blue);
+  background: var(--first-color);
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -189,9 +224,10 @@
   .Arrivalcart-btn:hover
   i {
   left: 50%;
-  color: var(--white);
+  color: var(--white-color);
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -200,20 +236,22 @@
   p {
   clip-path: circle(0px at 125px 27.5px);
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
   .arrivals-tag
   .Icon-Container {
-  color: var(--black);
+  color: var(--first-color);
   display: none;
   flex-direction: column;
   position: absolute;
   top: 20px;
   right: 20px;
 }
-.arrivals-container
+.section-p2
+  .arrivals-container
   .arrivals
   .arrivals-box
   .arrivals-card
@@ -224,7 +262,15 @@
   font-weight: bold;
   margin-bottom: 8px;
 }
-/* End Arrival */
-.HeartIcon.active {
+/* Icon heart */
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Icon-Container
+  .HeartIcon.active {
   fill: red;
 }
+/* Responsive Styles */

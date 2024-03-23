@@ -5,9 +5,8 @@
   flex-direction: column;
   margin-top: var(--margin-top);
   padding: 20px;
-  box-shadow: 0 5px 15px var(--light-color);
   padding: 20px;
-  background: #eaeaea;
+  background: var(--BG);
 }
 .footer .footer-main {
   max-width: var(--width-home);
@@ -19,7 +18,7 @@
 }
 .footer .footer-main .tag {
   flex: 1 1 20%;
-  margin: 0px 30px;
+  margin: 0px 25px;
 }
 .footer .footer-main .tag .logo-footer {
   cursor: pointer;
@@ -36,12 +35,12 @@
 .footer .footer-main .tag p {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--black);
+  color: var(--text-color);
 }
 .footer .footer-main .tag h1 {
   font-size: 18px;
   margin-bottom: 10px;
-  color: var(--black);
+  color: var(--title-color);
   font-weight: bold;
 }
 
@@ -49,15 +48,16 @@
   display: block;
   display: flex;
   margin-bottom: 5px;
-  color: var(--black);
+  color: var(--text-color);
   text-decoration: none;
 }
 
 .footer .footer-main .tag a:hover i {
   padding-right: 1.5rem;
+  transition: 0.4s;
 }
 .footer .footer-main .tag a i {
-  color: var(--blue);
+  color: var(--first-color);
   padding-right: 0.5rem;
   margin-top: 5px;
 }
@@ -65,41 +65,41 @@
 .footer .footer_main .tag .searchBar {
   width: 230px;
   height: 30px;
-  background: var(--white);
+  background: var(--card-color);
   border-radius: 25px;
 }
 .footer .footer-main .tag .searchBar input {
   padding: 8px;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--first-color);
   border-radius: 10px;
-  color: var(--black);
+  color: var(--text-color);
 }
 .footer .footer-main .tag .searchBar button {
   padding: 7px 15px;
-  background: var(--blue);
+  background: var(--first-color);
   border: none;
   margin-top: 15px;
   border-radius: 10px;
-  color: var(--white);
+  color: var(--white-color);
   cursor: pointer;
 }
 .footer .footer-main .tag .searchBar input:hover {
-  border-color: var(--blue);
-  box-shadow: 0 0 5px var(--blue);
+  border-color: var(--first-color);
+  box-shadow: 0 0 5px var(--first-color);
 }
 
 .footer .footer-main .tag .searchBar button {
   padding: 7px 15px;
-  background: var(--blue);
+  background: var(--first-color);
   border: none;
   margin-top: 15px;
   border-radius: 25px;
-  color: #fff;
+  color: var(--white-color);
   cursor: pointer;
 }
 .footer .footer-main .tag .searchBar button:hover {
-  border-color: var(--blue);
-  box-shadow: 0 0 5px var(--blue);
+  border-color: var(--first-color);
+  box-shadow: 0 0 5px var(--first-color);
 }
 /* Start icon social */
 .footer .wrapper-container {
@@ -128,7 +128,7 @@
   height: 3rem;
   display: block;
   text-align: center;
-  background-color: var(--white);
+  background-color: var(--white-color);
   border-radius: 50%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
@@ -136,18 +136,18 @@
   display: flex;
   justify-content: center;
   padding-top: 12px;
-  color: var(--black);
+  color: var(--title-color);
   font-size: 25px;
   line-height: 60px;
 }
 .footer .wrapper-container .wrapper .icon:hover span i {
-  color: var(--white);
+  color: var(--white-color);
 }
 .footer .wrapper-container .wrapper .icon .tooltip {
   position: absolute;
   top: 0;
-  background: var(--white);
-  color: var(--white);
+  background: var(--white-color);
+  color: var(--white-color);
   font-size: 18px;
   padding: 6px 10px;
   border-radius: 25px;
@@ -166,7 +166,7 @@
   content: "";
   height: 15px;
   width: 15px;
-  background: var(--white);
+  background: var(--white-color);
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
@@ -189,7 +189,7 @@
 .footer .wrapper-container .wrapper .github:hover span,
 .footer .wrapper-container .wrapper .github:hover .tooltip,
 .footer .wrapper-container .wrapper .github:hover .tooltip::before {
-  background: var(--black);
+  background: var(--text-color);
 }
 .footer .wrapper-container .wrapper .youtube:hover span,
 .footer .wrapper-container .wrapper .youtube:hover .tooltip,
@@ -207,13 +207,13 @@
   margin: auto;
   margin-top: 40px;
   font-size: 14px;
-  color: var(--black);
+  color: var(--title-color);
   justify-content: space-around;
   border-top: 1px solid;
 }
 .footer .end span {
   margin-left: 10px;
-  color: var(--blue);
+  color: var(--first-color);
   font-weight: bold;
   margin-right: 10px;
 }

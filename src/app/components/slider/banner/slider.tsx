@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import "./slider.css";
 
-export default function Slider() {
+export default function BannerSlider() {
   return (
     <>
       <Swiper

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import "./horror.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
@@ -24,15 +25,10 @@ export default function Comedy() {
   };
   return (
     <LayOut>
-      {/* Action */}
+      {/* Horror */}
       <section className="section-books">
         <div className="section-books-container">
-          <Link href="/" style={{ display: "inline-block" }}>
-            <i className="icon-books-arrow">
-              <IoIosArrowBack />
-              <h2>Action</h2>
-            </i>
-          </Link>
+          <h2>Horror</h2>
         </div>
         <div className="books-container">
           <div className="books">
@@ -47,8 +43,9 @@ export default function Comedy() {
                     priority={true}
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
-                    }}></Image>
+                      height: "auto",
+                    }}
+                  ></Image>
                 </div>
                 <div className="books-tag">
                   <h2>Dune</h2>
@@ -56,12 +53,7 @@ export default function Comedy() {
                   <div className="books-categories">
                     Thriller, Horror, Romance
                   </div>
-                  <p className="books-price">
-                    $25.50
-                    <sub>
-                      <del>$28.60</del>
-                    </sub>
-                  </p>
+                  <p className="books-price">$25.50</p>
                   <div className="books-cart-btn">
                     <i>
                       <FaShoppingCart />
@@ -85,7 +77,7 @@ export default function Comedy() {
           </div>
         </div>
       </section>
-      {/* End Action */}
+      {/* End horror */}
     </LayOut>
   );
 }

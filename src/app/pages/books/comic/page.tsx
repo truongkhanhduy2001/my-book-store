@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import "./discountView.css";
-import { PiHandbag } from "react-icons/pi";
+import "./comic.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
@@ -10,9 +9,9 @@ import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import LayOut from "@/app/pages/layout/page";
-export default function Discount() {
+export default function Comedy() {
   useEffect(() => {
-    const btntocart = document.querySelectorAll(".Discountcart-btn-view");
+    const btntocart = document.querySelectorAll(".books-cart-btn");
     console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
@@ -26,21 +25,16 @@ export default function Discount() {
   };
   return (
     <LayOut>
-      {/* Discount */}
-      <section className="section-p3-view">
-        <div className="section-p3-container-view">
-          <Link href="/" style={{ display: "inline-block" }}>
-            <i className="icon-arrow3-view">
-              <IoIosArrowBack />
-              <h2>Book Discount</h2>
-            </i>
-          </Link>
+      {/* Comic */}
+      <section className="section-books">
+        <div className="section-books-container">
+          <h2>Comic</h2>
         </div>
-        <div className="discount-container-view">
-          <div className="discount-view">
-            <div className="discount-box-view">
-              <Link href="#" className="discount-card-view">
-                <div className="discount-img-view">
+        <div className="books-container">
+          <div className="books">
+            <div className="books-box">
+              <Link href="#" className="books-card">
+                <div className="books-image">
                   <Image
                     src="/images/biasach1.png"
                     alt="Main Image"
@@ -51,21 +45,16 @@ export default function Discount() {
                       maxWidth: "100%",
                       height: "auto",
                     }}
-                  />
+                  ></Image>
                 </div>
-                <div className="discount-tag-view">
+                <div className="books-tag">
                   <h2>Dune</h2>
-                  <p className="Discountwriter-view">John Deo</p>
-                  <div className="Discountcategories-view">
+                  <p className="books-writer">John Deo</p>
+                  <div className="books-categories">
                     Thriller, Horror, Romance
                   </div>
-                  <p className="Discountbook-price-view">
-                    $25.50
-                    <sub>
-                      <del>$28.60</del>
-                    </sub>
-                  </p>
-                  <div className="Discountcart-btn-view">
+                  <p className="books-price">$25.50</p>
+                  <div className="books-cart-btn">
                     <i>
                       <FaShoppingCart />
                     </i>
@@ -88,7 +77,7 @@ export default function Discount() {
           </div>
         </div>
       </section>
-      {/* End Books list */}
+      {/* End Comic */}
     </LayOut>
   );
 }

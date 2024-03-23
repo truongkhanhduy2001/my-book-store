@@ -14,11 +14,11 @@
   display: flex;
   margin-top: 2px;
   font-size: 35px;
-  color: var(--black);
+  color: var(--title-color);
 }
 .section-p3-view .section-p3-container-view .icon-arrow3-view h2 {
   font-size: 25px;
-  color: var(--black);
+  color: var(--title-color);
   font-weight: bold;
   font-style: normal;
 }
@@ -43,18 +43,17 @@
 
 .discount-container-view .discount-view .discount-box-view {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 15px;
 }
 
 .discount-container-view .discount-view .discount-box-view .discount-card-view {
   position: relative;
-  height: 450px;
   text-align: center;
   padding: 10px;
   margin-top: 16px;
-  background-color: var(--white);
-  border: 1px solid var(--light-color);
+  background-color: var(--card-color);
+  border: 2px solid var(--border-color);
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
@@ -70,7 +69,7 @@
   .discount-view
   .discount-box-view
   .discount-card-view:hover {
-  border-color: var(--black);
+  border-color: var(--first-color);
   transition: 0.1s ease;
 }
 .discount-container-view
@@ -82,7 +81,7 @@
   height: 220px;
   margin: 0 auto;
   cursor: pointer;
-  box-shadow: 0 0 8px var(--black);
+  box-shadow: 0 0 8px var(--title-color);
   overflow: hidden;
 }
 .discount-container-view
@@ -112,7 +111,7 @@
   .discount-tag-view
   h2 {
   margin: 12px 0px 12px 0px;
-  color: var(--black);
+  color: var(--title-color);
   font-weight: bold;
 }
 .discount-container-view
@@ -121,7 +120,7 @@
   .discount-card-view
   .discount-tag-view
   .Discountwriter-view {
-  color: var(--light-color);
+  color: var(--text-color);
 }
 
 .discount-container-view
@@ -130,7 +129,7 @@
   .discount-card-view
   .discount-tag-view
   .Discountcategories-view {
-  color: var(--light-blue);
+  color: var(--second-color);
   margin-top: 8px;
 }
 .discount-container-view
@@ -142,7 +141,7 @@
   margin-top: 8px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: var(--black);
+  color: var(--title-color);
 }
 .discount-container-view
   .discount-view
@@ -153,7 +152,7 @@
   sub {
   font-weight: 100;
   padding: 0 5px;
-  color: var(--black);
+  color: var(--text-color);
 }
 .discount-container-view
   .discount-view
@@ -166,11 +165,11 @@
   display: inline-block;
   text-align: center;
   font-weight: bold;
-  padding: 4px 10px;
-  border: 3px solid var(--blue);
+  padding: 5px 5px;
+  border: 3px solid var(--first-color);
   border-radius: 5px;
   position: relative;
-  color: var(--blue);
+  color: var(--first-color);
   text-decoration: none;
   transition: 0.3s ease all;
   z-index: 1;
@@ -185,7 +184,7 @@
   font-size: 12px;
   position: absolute;
   top: 48.5%;
-  left: 20%;
+  left: 15%;
   transform: translate(-50%, -50%);
   transition: 0.25s;
 }
@@ -208,7 +207,7 @@
   .discount-tag-view
   .Discountcart-btn-view:hover {
   cursor: pointer;
-  background: var(--blue);
+  background: var(--first-color);
 }
 .discount-container-view
   .discount-view
@@ -218,7 +217,7 @@
   .Discountcart-btn-view:hover
   i {
   left: 50%;
-  color: var(--white);
+  color: var(--white-color);
 }
 .discount-container-view
   .discount-view
@@ -235,7 +234,7 @@
   .discount-card-view
   .discount-tag-view
   .Icon-Container {
-  color: var(--black);
+  color: var(--first-color);
   display: none;
   flex-direction: column;
   position: absolute;

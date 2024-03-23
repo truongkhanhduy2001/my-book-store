@@ -8,6 +8,9 @@
 
 .main-container .main {
   max-width: var(--width-home);
+  grid-template-columns: 435px 745px;
+  align-items: center;
+  padding-block: 7rem 2rem;
 }
 
 .main-container .main div:first-child {
@@ -15,18 +18,18 @@
 }
 .main-container .main .main-tag {
   flex-direction: column;
-  flex: 50%;
   font-weight: bold;
   margin-right: 20px;
 }
 .main-container .main .main-tag h1 {
   font-size: var(--h1);
-  color: var(--black);
+  color: var(--title-color);
   font-family: sans-serif;
 }
 
 .main-container .main .main-tag h1 span {
-  color: var(--blue);
+  color: var(--first-color);
+  flex-direction: none;
 }
 
 .main-container .main .main-tag p {
@@ -34,6 +37,18 @@
   width: 650px;
   text-align: justify;
   line-height: 22px;
-  color: var(--black);
+  color: var(--text-color);
   font-family: sans-serif;
+}
+.main-container .main .main-tag .main-btn {
+  margin-top: 40px;
+  color: var(--white-color);
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: var(--first-color);
+  width: 140px;
+  transition: box-shadow 0.4s;
+}
+.main-container .main .main-tag .main-btn:hover {
+  box-shadow: 0 4px 32px var(--first-color);
 }

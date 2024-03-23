@@ -25,9 +25,10 @@ export default function Arrival() {
       title: "Dragon",
     },
     {
-      title: "Bee",
+      title: "Dragon",
     },
   ];
+  // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Arrivalcart-btn");
     console.log(btntocart);
@@ -38,12 +39,13 @@ export default function Arrival() {
       });
     });
   }, []);
+  // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
   return (
-    <section className="section-p2 section" id="newarrival">
+    <section className="section-p2">
       <div className="section-p2-container">
         <h2>New Arrivals</h2>
         <Link
@@ -68,8 +70,9 @@ export default function Arrival() {
                       priority={true}
                       style={{
                         maxWidth: "100%",
-                        height: "auto"
-                      }}></Image>
+                        height: "auto",
+                      }}
+                    ></Image>
                   </div>
                   <div className="arrivals-tag">
                     <h2>{item.title}</h2>
