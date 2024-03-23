@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./login.css";
 import Image from "next/image";
 import Link from "next/link";
+import { FaBookOpen } from "react-icons/fa";
 import InputLogin from "@/app/components/inputLogin/Login";
 
 export default function Login() {
@@ -38,13 +39,9 @@ export default function Login() {
           <div className="overlay-panel-overlay-right">
             <form className="from-login">
               <div>
-                <Image
-                  className="logo"
-                  src="/images/logo.png"
-                  alt="image"
-                  width={100}
-                  height={100}
-                ></Image>
+                <i>
+                  <FaBookOpen />
+                </i>
               </div>
               <h1>Welcome back!</h1>
               <p>Login to your account</p>

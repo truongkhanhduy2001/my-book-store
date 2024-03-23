@@ -11,6 +11,7 @@ import {
   FaYoutube,
   FaGithub,
   FaInstagram,
+  FaBookOpen,
 } from "react-icons/fa";
 export default function Footer() {
   return (
@@ -18,13 +19,9 @@ export default function Footer() {
       <div className="footer-main">
         <div className="tag">
           <div className="logo-footer">
-            <Image
-              src="/images/logo.png"
-              alt="Logo"
-              priority={true}
-              width={100}
-              height={100}
-            ></Image>
+            <i>
+              <FaBookOpen />
+            </i>
           </div>
           <p>
             Visit our website to explore and choose the right books for you.

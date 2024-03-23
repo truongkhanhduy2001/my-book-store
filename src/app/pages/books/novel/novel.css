@@ -2,7 +2,7 @@
 .section-books {
   display: flex;
   flex-direction: column;
-  margin-top: var(--margin-top-view);
+  margin-top: var(--margin-top);
 }
 .section-books .section-books-container {
   max-width: var(--width-home);

@@ -346,3 +346,29 @@
   .HeartIcon.active {
   fill: red;
 }
+/* Responsive */
+@media only screen and (max-width: 1024px) {
+  /* Phần tùy chỉnh kích thước và bố cục cho các phần tử trong footer */
+  .section-p3 .discount-container .discount .discount-box {
+    grid-template-columns: 1fr 1fr;
+  }
+  .section-p3
+    .discount-container
+    .discount
+    .discount-box
+    .discount-card
+    .discount-tag
+    .Discountcart-btn {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+  .section-p3
+    .discount-container
+    .discount
+    .discount-box
+    .discount-card
+    .discount-tag
+    i {
+    left: 50%;
+  }
+}

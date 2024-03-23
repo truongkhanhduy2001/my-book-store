@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "./register.css";
 import { IoDocumentTextOutline, IoClose } from "react-icons/io5";
+import { FaBookOpen } from "react-icons/fa";
 import InputRegister from "@/app/components/inputRegister/register";
 
 export default function Register() {
@@ -58,13 +59,9 @@ export default function Register() {
           <div className="overlay-panel-overlay-right">
             <form className="form-register">
               <div>
-                <Image
-                  className="logo-register"
-                  src="/images/logo.png"
-                  alt="image"
-                  width={100}
-                  height={100}
-                ></Image>
+                <i>
+                  <FaBookOpen />
+                </i>
               </div>
               <h1>Create an account</h1>
               <div className="infield">

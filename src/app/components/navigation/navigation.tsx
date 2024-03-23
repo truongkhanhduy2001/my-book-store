@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
+import { FaBookOpen } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";
 
@@ -25,20 +26,14 @@ export default function Navigate() {
     <header className="header">
       <nav className="navbar">
         <div className="logo">
-          <Link href="/">
-            <Image
-              src="/images/logo.png"
-              alt="Logo"
-              priority={true}
-              width={100}
-              height={100}
-            ></Image>
-          </Link>
+          <i>
+            <FaBookOpen />
+          </i>
         </div>
         <div className="nav-menu">
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/" className="nav-link">
+              <Link href="/" className="nav-link active">
                 <span>Home</span>
               </Link>
             </li>

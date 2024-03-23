@@ -1,3 +1,13 @@
+:root {
+  /* Color */
+  --white-color: hsl(0, 0%, 100%);
+  --title-color: hsl(230, 70%, 16%);
+  --text-color: hsl(230, 16%, 45%);
+  --first-color: hsl(230, 62%, 56%);
+  --second-color: #80bfff;
+  --border-color: hsl(230, 50%, 90%);
+  --card-color: hsl(230, 100%, 97%);
+}
 .form-container-login {
   position: relative;
   overflow: hidden;
@@ -37,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f8ff;
+  background-color: var(--card-color);
 }
 
 .form-container-login
@@ -48,7 +58,7 @@
   max-width: 500px;
   padding: 40px;
   width: 100%;
-  background-color: #f0f8ff;
+  background-color: var(--card-color);
 }
 .form-container-login
   .overlay-container
@@ -63,11 +73,12 @@
   .overlay
   .overlay-panel-overlay-right
   .from-login
-  .logo {
-  margin: auto auto 20px auto;
-  width: 140px !important;
-  height: 140px !important;
-  position: relative !important;
+  i {
+  display: flex;
+  padding-bottom: 20px;
+  margin: auto;
+  font-size: 100px;
+  color: var(--first-color);
 }
 .form-container-login
   .overlay-container
@@ -76,7 +87,7 @@
   .from-login
   h1,
 p {
-  color: #25244c;
+  color: var(--title-color);
 }
 .form-container-login
   .overlay-container
@@ -105,14 +116,14 @@ p {
 .email,
 .password-field {
   margin-bottom: 10px;
-  color: black;
+  color: var(--title-color);
   display: block;
   font-weight: bold;
 }
 
 input[type="email"]:hover,
 input[type="password"]:hover {
-  border-color: #999;
+  border-color: var(--border-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -126,7 +137,7 @@ input[type="password"]:hover {
   margin-right: 10px;
 }
 .RM {
-  color: #9a8de5;
+  color: var(--first-color);
   font-size: 14px;
   font-weight: bold;
 }
@@ -144,8 +155,8 @@ input[type="password"]:hover {
 .btn-login button {
   padding: 12px 10px;
   border: none;
-  background-color: #f06b4a;
-  color: #fff;
+  background-color: var(--first-color);
+  color: var(--white-color);
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
@@ -154,21 +165,21 @@ input[type="password"]:hover {
 .btn-register button {
   padding: 12px 10px;
   border: none;
-  background-color: whitesmoke;
-  color: #6653d3;
+  background-color: var(--white-color);
+  color: var(--second-color);
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  outline: 1px solid #6653d3;
+  outline: 1px solid var(--second-color);
 }
 
 .btn-login button:hover {
-  background-color: white;
-  color: #f06b4a;
-  outline: 1px solid #f06b4a;
+  background-color: var(--white-color);
+  color: var(--first-color);
+  outline: 1px solid var(--first-color);
 }
 .btn-register button:hover {
-  background-color: #6653d3;
-  outline-color: white;
-  color: white;
+  background-color: var(--second-color);
+  outline-color: var(--white-color);
+  color: var(--white-color);
 }

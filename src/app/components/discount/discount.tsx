@@ -25,10 +25,6 @@ export default function Discount() {
       title: "Anime",
       type: "Comic",
     },
-    {
-      title: "Naruto",
-      type: "Comic",
-    },
   ];
   // Type
   const [dataList, setDataList] = useState(data);
