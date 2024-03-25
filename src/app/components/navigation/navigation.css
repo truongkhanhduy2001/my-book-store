@@ -22,7 +22,7 @@
   --card-color: hsl(230, 100%, 97%);
   --BG: hsl(230, 100%, 96%);
   /* Size */
-  --width-home: 1200px;
+  --width-home: 1350px;
   --margin-top: 80px;
   --margin-top-font: 15px;
   --margin-top-view: 100px;
@@ -60,6 +60,7 @@
   font-size: 45px;
   margin: auto 0;
   color: var(--first-color);
+  padding-left: 10px;
 }
 /* Menu */
 .header .navbar .nav-menu {
@@ -68,9 +69,8 @@
 .header .navbar .nav-menu .nav-list {
   list-style: none;
   font-size: 25px;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 15px;
+  display: inline-block;
+  padding: 10px 20px;
 }
 .header .navbar .nav-menu .nav-list .nav-item {
   display: flex;
@@ -265,76 +265,6 @@
 /* Home Cart */
 .header .navbar .icons-list .book-cart {
   position: relative;
-}
-.header .navbar .icons-list .book-cart:hover .book-cart-container {
-  visibility: visible;
-  transition: 0.3s;
-  transform: scale(1);
-  opacity: 1;
-}
-.header .navbar .icons-list .book-cart .book-cart-container {
-  position: absolute;
-  background-color: var(--card-color);
-  top: 140%;
-  display: flex;
-  flex-direction: column;
-  right: 0;
-  min-width: 400px;
-  box-shadow: var(--text-color) 0px 6px 12px;
-  visibility: hidden;
-  transition: 0.3s;
-  transform: scale(0);
-  transform-origin: 90% top;
-  opacity: 0;
-  border-radius: 5px;
-}
-.header .navbar .icons-list .book-cart .book-cart-container::before {
-  position: absolute;
-  content: "";
-  bottom: 100%;
-  right: 6px;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 16px solid var(--card-color);
-}
-.header .navbar .icons-list .book-cart .book-cart-container .book-cart-title {
-  padding: 8px 16px;
-}
-.header
-  .navbar
-  .icons-list
-  .book-cart
-  .book-cart-container
-  .book-cart-title
-  h2 {
-  color: var(--text-color);
-  font-size: 15px;
-  margin-bottom: 100px;
-}
-.header
-  .navbar
-  .icons-list
-  .book-cart
-  .book-cart-container
-  .book-cart-title
-  h3 {
-  margin-left: 5px;
-  font-size: 14px;
-}
-.header .navbar .icons-list .book-cart .book-cart-container .btn-cart {
-  padding: 8px 10px;
-  display: flex;
-  color: var(--white-color);
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
-  background-color: var(--first-color);
-  border-radius: 5px;
 }
 /* Responsive */
 @media only screen and (max-width: 1024px) {

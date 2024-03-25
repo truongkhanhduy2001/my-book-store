@@ -10,6 +10,21 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import LayOut from "@/app/pages/layout/page";
 export default function Seller() {
+  const data = [
+    {
+      title: "Dune",
+    },
+    {
+      title: "Anime",
+    },
+    {
+      title: "Naruto",
+    },
+    {
+      title: "Drama",
+    },
+  ];
+
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Sellercart-btn-view");
     console.log(btntocart);
@@ -38,50 +53,58 @@ export default function Seller() {
         <div className="best-seller-container-view">
           <div className="best-seller-view">
             <div className="best-seller-box-view">
-              <Link href="#" className="best-seller-card-view">
-                <div className="best-seller-img-view">
-                  <Image
-                    src="/images/biasach1.png"
-                    alt="Main Image"
-                    width={100}
-                    height={100}
-                    priority={true}
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto"
-                    }} />
-                </div>
-                <div className="best-seller-tag-view">
-                  <h2>Dune</h2>
-                  <p className="Sellerwriter-view">John Deo</p>
-                  <div className="Sellercategories-view">
-                    Thriller, Horror, Romance
-                  </div>
-                  <p className="Sellerbook-price-view">
-                    $25.50
-                    <sub>
-                      <del>$28.60</del>
-                    </sub>
-                  </p>
-                  <div className="Sellercart-btn-view">
-                    <i>
-                      <FaShoppingCart />
-                    </i>
-                    <p>Add cart</p>
-                  </div>
-                  <div className="Icon-Container">
-                    <i>
-                      <LuEye />
-                    </i>
-                    <i>
-                      <FaArrowRightArrowLeft />
-                    </i>
-                    <i>
-                      <FiHeart className="HeartIcon" onClick={handleHeart} />
-                    </i>
-                  </div>
-                </div>
-              </Link>
+              {data.slice(-4).map((item, index) => {
+                return (
+                  <Link key={index} href="#" className="best-seller-card-view">
+                    <div className="best-seller-img-view">
+                      <Image
+                        src="/images/biasach1.png"
+                        alt="Main Image"
+                        width={100}
+                        height={100}
+                        priority={true}
+                        style={{
+                          maxWidth: "100%",
+                          height: "auto",
+                        }}
+                      />
+                    </div>
+                    <div className="best-seller-tag-view">
+                      <h2>Dune</h2>
+                      <p className="Sellerwriter-view">John Deo</p>
+                      <div className="Sellercategories-view">
+                        Thriller, Horror, Romance
+                      </div>
+                      <p className="Sellerbook-price-view">
+                        $25.50
+                        <sub>
+                          <del>$28.60</del>
+                        </sub>
+                      </p>
+                      <div className="Sellercart-btn-view">
+                        <i>
+                          <FaShoppingCart />
+                        </i>
+                        <p>Add cart</p>
+                      </div>
+                      <div className="Icon-Container">
+                        <i>
+                          <LuEye />
+                        </i>
+                        <i>
+                          <FaArrowRightArrowLeft />
+                        </i>
+                        <i>
+                          <FiHeart
+                            className="HeartIcon"
+                            onClick={handleHeart}
+                          />
+                        </i>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

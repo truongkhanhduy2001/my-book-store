@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { animateScroll as scroll } from "react-scroll";
 import "./footer.css";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot, FaArrowUp } from "react-icons/fa6";
 import {
   FaFacebookF,
   FaTwitter,
@@ -13,7 +14,33 @@ import {
   FaInstagram,
   FaBookOpen,
 } from "react-icons/fa";
+
 export default function Footer() {
+  // Scroll up
+  const [showScrollUp, setShowScrollUp] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 1000) {
+        setShowScrollUp(true);
+      } else {
+        setShowScrollUp(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    scroll.scrollToTop({
+      duration: 1000,
+      smooth: "easeInOutQuint",
+    });
+  };
+
   return (
     <footer className="footer">
       <div className="footer-main">
@@ -154,6 +181,11 @@ export default function Footer() {
           <i className="icon-ds"></i>Trương Khánh Duy, Nguyễn Văn Điểm
         </span>
         | All rights reservel!
+      </div>
+      <div onClick={scrollToTop} className="scroll-up">
+        <span>
+          <FaArrowUp />
+        </span>
       </div>
     </footer>
   );

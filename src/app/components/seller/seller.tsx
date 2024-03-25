@@ -3,10 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import "./seller.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation, Autoplay } from "swiper/modules";
+import Slider from "react-slick";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -40,6 +37,41 @@ export default function Seller() {
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
+  };
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <section className="section-p1 ">
@@ -106,23 +138,6 @@ export default function Seller() {
             })}
           </div>
         </div>
-        {/* <Swiper
-          freeMode={true}
-          grabCursor={true}
-          navigation={true}
-          grid={{
-            rows: 1,
-          }}
-          // loop={true}
-          // autoplay={{
-          //   delay: 6500,
-          //   disableOnInteraction: false,
-          // }}
-          modules={[Navigation, Autoplay]}
-          className="mySwiper"
-        >
-          <SwiperSlide></SwiperSlide>
-        </Swiper> */}
       </div>
     </section>
   );

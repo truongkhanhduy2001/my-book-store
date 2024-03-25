@@ -105,20 +105,11 @@ export default function Navigate() {
             </i>
           </li>
           <li className="book-cart">
-            <i>
-              <PiHandbag />
-            </i>
-            <div className="book-cart-container">
-              <div className="book-cart-title">
-                <h2>Add Book</h2>
-                <h3>Add cart</h3>
-              </div>
-              <div className="btn-cart">
-                <Link href="#">
-                  <p>Check out</p>
-                </Link>
-              </div>
-            </div>
+            <Link href="#">
+              <i>
+                <PiHandbag />
+              </i>
+            </Link>
           </li>
         </ul>
       </nav>
