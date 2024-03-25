@@ -1,5 +1,5 @@
 "use client";
-import "./dicount.css";
+import "./discount.css";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
