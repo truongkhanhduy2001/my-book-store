@@ -19,6 +19,7 @@
     "react-scroll": "^1.9.0",
     "react-slick": "^0.30.2",
     "sass": "^1.71.1",
+    "slick-carousel": "^1.8.1",
     "swiper": "^11.0.7",
     "urix": "^0.1.0"
   },

@@ -3,6 +3,9 @@ import "./discount.css";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
@@ -83,6 +86,43 @@ export default function Discount() {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
+  // Slider
+  var settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   return (
     <section className="section-p3 ">
       <div className="section-p3-container">
@@ -117,54 +157,59 @@ export default function Discount() {
       </div>
       <div className="discount-container">
         <div className="discount">
-          <div className="discount-box">
-            {dataList.slice(-4).map((item, index) => {
-              return (
-                <Link key={index} href="#" className="discount-card">
-                  <div className="discount-img">
-                    <Image
-                      src="/images/biasach1.png"
-                      alt="Main Image"
-                      width={100}
-                      height={100}
-                      priority={true}
-                      style={{
-                        maxWidth: "100%",
-                        height: "auto",
-                      }}
-                    />
-                  </div>
-                  <div className="discount-tag">
-                    <h2>{item.title}</h2>
-                    <p className="Discountwriter">John Deo</p>
-                    <div className="Discountcategories">{item.type}</div>
-                    <p className="Discountbook-price">
-                      $25.50
-                      <sub>
-                        <del>$28.60</del>
-                      </sub>
-                    </p>
-                    <div className="Discountcart-btn">
-                      <i>
-                        <FaShoppingCart />
-                      </i>
-                      <p> Add cart</p>
+          <div className="discount-box slider-container">
+            <Slider {...settings}>
+              {dataList.slice(-4).map((item, index) => {
+                return (
+                  <Link key={index} href="#" className="discount-card">
+                    <div className="discount-img">
+                      <Image
+                        src="/images/biasach1.png"
+                        alt="Main Image"
+                        width={100}
+                        height={100}
+                        priority={true}
+                        style={{
+                          maxWidth: "100%",
+                          height: "auto",
+                        }}
+                      />
                     </div>
-                    <div className="Icon-Container">
-                      <i>
-                        <LuEye />
-                      </i>
-                      <i>
-                        <FaArrowRightArrowLeft />
-                      </i>
-                      <i>
-                        <FiHeart className="HeartIcon" onClick={handleHeart} />
-                      </i>
+                    <div className="discount-tag">
+                      <h2>{item.title}</h2>
+                      <p className="Discountwriter">John Deo</p>
+                      <div className="Discountcategories">{item.type}</div>
+                      <p className="Discountbook-price">
+                        $25.50
+                        <sub>
+                          <del>$28.60</del>
+                        </sub>
+                      </p>
+                      <div className="Discountcart-btn">
+                        <i>
+                          <FaShoppingCart />
+                        </i>
+                        <p> Add cart</p>
+                      </div>
+                      <div className="Icon-Container">
+                        <i>
+                          <LuEye />
+                        </i>
+                        <i>
+                          <FaArrowRightArrowLeft />
+                        </i>
+                        <i>
+                          <FiHeart
+                            className="HeartIcon"
+                            onClick={handleHeart}
+                          />
+                        </i>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
+            </Slider>
           </div>
         </div>
       </div>

@@ -15,12 +15,12 @@ export default function BannerSlider() {
         loop={true}
         slidesPerView={"auto"}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         spaceBetween={10}
         coverflowEffect={{
-          rotate: 3,
+          rotate: 1,
           stretch: 0,
           depth: 100,
           modifier: 7,

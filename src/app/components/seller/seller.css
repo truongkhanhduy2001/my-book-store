@@ -1,3 +1,10 @@
+/* Slider */
+.slick-slide > div {
+  margin: 0 15px !important;
+}
+.slick-list {
+  margin: 0 -15px !important;
+}
 /* Best seller */
 /* Header */
 .section-p1 {
@@ -38,11 +45,6 @@
 .section-p1 .best-seller-container .best-seller {
   max-width: var(--width-home);
   width: 100%;
-}
-.section-p1 .best-seller-container .best-seller .best-seller-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15px;
 }
 /* Card */
 .section-p1

@@ -1,3 +1,10 @@
+/* Slider */
+.slick-slide > div {
+  margin: 0 15px !important;
+}
+.slick-list {
+  margin: 0 -15px !important;
+}
 /* New Arrivals */
 /* Header */
 .section-p2 {
@@ -41,14 +48,9 @@
   width: 100%;
 }
 
-.section-p2 .arrivals-container .arrivals .arrivals-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 15px;
-}
 /* Card */
 .section-p2 .arrivals-container .arrivals .arrivals-box .arrivals-card {
-  display: flex;
+  text-align: center;
   position: relative;
   padding: 10px;
   margin-top: 16px;

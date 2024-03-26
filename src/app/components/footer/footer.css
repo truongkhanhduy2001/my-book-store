@@ -213,53 +213,19 @@
 }
 /* Scroll up */
 .footer .scroll-up {
-  background-color: var(--first-color);
   position: fixed;
-  bottom: 10px;
-  right: 10px;
-  height: 50px;
-  width: 50px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-.footer .scroll-up span {
-  display: block;
-  height: calc(100% - 15px);
-  width: calc(100% - 15px);
+  bottom: 50px;
+  right: 20px;
   background-color: var(--white-color);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 20px;
-  color: var(--title-color);
+  color: var(--first-color);
+  display: inline-flex;
+  padding: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: bottom 0.4s, transform 0.4s, background-color 0.4s;
 }
+/* .footer .scroll-up:hover {
+  transform: translateY(-10px);
+} */
 /* End Footer */
 /* Responsive */
-@media only screen and (max-width: 1024px) {
-  /* Phần tùy chỉnh kích thước và bố cục cho các phần tử trong footer */
-  .footer .footer-main {
-    max-width: 90%; /* Thay đổi maxWidth của footer-main */
-  }
-  .footer .footer-main .tag {
-    flex: 1 1 30%; /* Thay đổi tỷ lệ flex của tag */
-    margin: 0px 15px; /* Thay đổi margin */
-    padding: 10px; /* Thêm padding */
-  }
-  .footer .footer-main .tag .logo-footer {
-    width: 80px !important; /* Thay đổi kích thước logo */
-    height: 80px !important;
-  }
-  .footer .footer-main .tag .tag-title {
-    font-size: 16px; /* Thay đổi kích thước font cho tag-title */
-  }
-  .footer .end {
-    max-width: 90%; /* Thay đổi maxWidth của end */
-  }
-  .footer .footer-main .tag .searchBar input {
-    margin-bottom: 10px;
-    margin-right: 10px;
-  }
-}

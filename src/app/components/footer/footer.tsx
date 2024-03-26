@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { animateScroll as scroll } from "react-scroll";
 import "./footer.css";
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
@@ -17,30 +16,17 @@ import {
 
 export default function Footer() {
   // Scroll up
-  const [showScrollUp, setShowScrollUp] = useState(false);
-
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 1000) {
-        setShowScrollUp(true);
+    window.addEventListener("scroll", (e: any) => {
+      const scrollUp: any = document.querySelector(".scroll-up");
+      const scroll = window.scrollY;
+      if (scroll < 350) {
+        scrollUp.style.display = "none";
       } else {
-        setShowScrollUp(false);
+        scrollUp.style.display = "block";
       }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const scrollToTop = () => {
-    scroll.scrollToTop({
-      duration: 1000,
-      smooth: "easeInOutQuint",
     });
-  };
-
+  }, []);
   return (
     <footer className="footer">
       <div className="footer-main">
@@ -182,7 +168,7 @@ export default function Footer() {
         </span>
         | All rights reservel!
       </div>
-      <div onClick={scrollToTop} className="scroll-up">
+      <div className="scroll-up">
         <span>
           <FaArrowUp />
         </span>
