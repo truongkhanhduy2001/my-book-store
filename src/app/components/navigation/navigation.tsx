@@ -21,7 +21,6 @@ export default function Navigate() {
       }
     });
   }, []);
-
   return (
     <header className="header">
       <nav className="navbar">
@@ -32,7 +31,7 @@ export default function Navigate() {
         </div>
         <div className="nav-menu">
           <ul className="nav-list">
-            <li className="nav-item">
+            <li className="nav-item active">
               <Link href="/" className="nav-link active">
                 <span>Home</span>
               </Link>

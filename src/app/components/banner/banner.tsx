@@ -2,7 +2,7 @@
 import "./banner.css";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import BannerSlider from "../slider/banner/slider";
+import BannerSlider from "../slider/banner/Bannerslider";
 export default function Banner() {
   return (
     /* Main */

@@ -5,6 +5,13 @@
 .slick-list {
   margin: 0 -15px !important;
 }
+.section-p1 .best-seller-container .best-seller .slick-prev:before {
+  color: var(--first-color);
+}
+
+.section-p1 .best-seller-container .best-seller .slick-next:before {
+  color: var(--first-color);
+}
 /* Best seller */
 /* Header */
 .section-p1 {

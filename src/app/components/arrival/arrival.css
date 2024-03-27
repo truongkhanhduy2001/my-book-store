@@ -5,6 +5,16 @@
 .slick-list {
   margin: 0 -15px !important;
 }
+
+.section-p2 .arrivals-container .arrivals .slick-arrow.slick-prev {
+  left: 0;
+}
+.section-p2 .arrivals-container .arrivals .slick-arrow.slick-next {
+  right: 0;
+}
+.section-p2 .arrivals-container .arrivals .slick-arrow:before {
+  display: none;
+}
 /* New Arrivals */
 /* Header */
 .section-p2 {
@@ -50,7 +60,8 @@
 
 /* Card */
 .section-p2 .arrivals-container .arrivals .arrivals-box .arrivals-card {
-  text-align: center;
+  height: 100%;
+  display: flex !important;
   position: relative;
   padding: 10px;
   margin-top: 16px;

@@ -224,8 +224,8 @@
   cursor: pointer;
   transition: bottom 0.4s, transform 0.4s, background-color 0.4s;
 }
-/* .footer .scroll-up:hover {
+.footer .scroll-up:hover {
   transform: translateY(-10px);
-} */
+}
 /* End Footer */
 /* Responsive */

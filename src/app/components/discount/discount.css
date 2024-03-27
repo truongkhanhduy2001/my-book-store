@@ -5,6 +5,13 @@
 .slick-list {
   margin: 0 -15px !important;
 }
+.section-p3 .discount-container .discount .slick-prev:before {
+  color: var(--first-color);
+}
+
+.section-p3 .discount-container .discount .slick-next:before {
+  color: var(--first-color);
+}
 /* Book List */
 /* Header */
 .section-p3 {

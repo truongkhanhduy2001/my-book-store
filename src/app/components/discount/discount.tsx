@@ -94,8 +94,9 @@ export default function Discount() {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     cssEase: "linear",
+    pauseOnHover: true,
     responsive: [
       {
         breakpoint: 1024,
