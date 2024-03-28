@@ -47,7 +47,7 @@
   color: var(--first-color);
 }
 /* Body */
-.arrivals-container {
+.section-p2 .arrivals-container {
   display: flex;
   justify-content: center;
   margin-top: var(--margin-top-font);

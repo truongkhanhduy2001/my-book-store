@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 export default function Discount() {
@@ -87,6 +88,22 @@ export default function Discount() {
     e.preventDefault();
   };
   // Slider
+  function NextArrow(props: any) {
+    const { className, onClick } = props;
+    return (
+      <i onClick={onClick} className={className}>
+        <IoIosArrowForward />
+      </i>
+    );
+  }
+  function PrevArrow(props: any) {
+    const { className, onClick } = props;
+    return (
+      <i onClick={onClick} className={className}>
+        <IoIosArrowBack />
+      </i>
+    );
+  }
   var settings = {
     infinite: true,
     speed: 500,
@@ -94,9 +111,11 @@ export default function Discount() {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     cssEase: "linear",
     pauseOnHover: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,

@@ -37,92 +37,104 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <div className="footer-main">
-        <div className="tag">
-          <div className="logo-footer">
-            <i>
-              <FaBookOpen />
-            </i>
-          </div>
-          <p>
+      <div className="footer-container container grid">
+        <div>
+          <i className="footer-logo">
+            <FaBookOpen />
+          </i>
+          <p className="footer-des">
             Visit our website to explore and choose the right books for you.
             From novels to textbooks, we have it all!<br></br> Please accompany
             Book Store on the journey to discover knowledge and creativity!
             <br></br> Order your book today!
           </p>
         </div>
-        <div className="tag">
-          <h1>Our Locations</h1>
-          <Link href="">
-            <i className="fa-location">
-              <FaLocationDot />
-            </i>
-            VietNam
-          </Link>
-          <Link href="">
-            <i className="fa-location">
-              <FaLocationDot />
-            </i>
-            USA
-          </Link>
-          <Link href="">
-            <i className="fa-location">
-              <FaLocationDot />
-            </i>
-            UK
-          </Link>
-          <Link href="">
-            <i className="fa-location">
-              <FaLocationDot />
-            </i>
-            China
-          </Link>
-          <Link href="">
-            <i className="fa-location">
-              <FaLocationDot />
-            </i>
-            France
-          </Link>
-          <Link href="">
-            <i className="fa-location">
-              <FaLocationDot />
-            </i>
-            India
-          </Link>
-        </div>
 
-        <div className="tag">
-          <h1>Newsletter</h1>
-          <div className="searchBar">
-            <input type="text" placeholder="Your email here" />
-            <button type="submit">Subscribe</button>
+        <div className="footer-data grid">
+          <div>
+            <h1 className="footer-title">Our location</h1>
+            <ul className="footer-sub">
+              <li>
+                <i className="footer-subs">
+                  <FaLocationDot />
+                </i>
+                Viet Nam
+              </li>
+              <li>
+                <i className="footer-subs">
+                  <FaLocationDot />
+                </i>
+                UK
+              </li>
+              <li>
+                <i className="footer-subs">
+                  <FaLocationDot />
+                </i>
+                USA
+              </li>
+              <li>
+                <i className="footer-subs">
+                  <FaLocationDot />
+                </i>
+                China
+              </li>
+              <li>
+                <i className="footer-subs">
+                  <FaLocationDot />
+                </i>
+                India
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="tag">
+        <div className="footer-data grid">
           <div>
-            <h1>Contact Info</h1>
-            <a href="#">
-              <i className="fa-solid fa-phone">
-                <IoCall />
-              </i>
-              +84 12 345 6789
-            </a>
-            <a href="#">
-              <i className="fa-solid fa-phone">
-                <IoCall />
-              </i>
-              +84 32 444 699
-            </a>
-            <a href="#">
-              <i className="fa-solid fa-envelope">
-                <MdEmail />
-              </i>
-              bookstore123@gmail.com
-            </a>
+            <h1 className="footer-title">About</h1>
+            <ul className="footer-sub">
+              <li>
+                <span className="footer-about">Awards</span>
+              </li>
+              <li>
+                <span className="footer-about">FAQs</span>
+              </li>
+              <li>
+                <span className="footer-about">Privacy policy</span>
+              </li>
+              <li>
+                <span className="footer-about">Term of services</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-data grid">
+          <div>
+            <h1 className="footer-title">Contact</h1>
+            <ul className="footer-sub">
+              <li>
+                <i className="footer-subs">
+                  <IoCall />
+                </i>
+                +84 12 345 6789
+              </li>
+              <li>
+                <i className="footer-subs">
+                  <IoCall />
+                </i>
+                +84 32 444 699
+              </li>
+              <li>
+                <i className="footer-subs">
+                  <MdEmail />
+                </i>
+                bookstore@gmail.com
+              </li>
+            </ul>
           </div>
         </div>
       </div>
+
       {/* Icon social */}
       <div className="wrapper-container">
         <div className="wrapper">

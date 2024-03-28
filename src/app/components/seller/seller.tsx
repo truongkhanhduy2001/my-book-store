@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 export default function Seller() {
@@ -41,6 +42,22 @@ export default function Seller() {
     e.preventDefault();
   };
   // Slider
+  function NextArrow(props: any) {
+    const { className, onClick } = props;
+    return (
+      <i onClick={onClick} className={className}>
+        <IoIosArrowForward />
+      </i>
+    );
+  }
+  function PrevArrow(props: any) {
+    const { className, onClick } = props;
+    return (
+      <i onClick={onClick} className={className}>
+        <IoIosArrowBack />
+      </i>
+    );
+  }
   var settings = {
     infinite: true,
     speed: 500,
@@ -48,9 +65,11 @@ export default function Seller() {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     cssEase: "linear",
     pauseOnHover: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -78,6 +97,7 @@ export default function Seller() {
       },
     ],
   };
+
   return (
     <section className="section-p1 ">
       <div className="section-p1-container">

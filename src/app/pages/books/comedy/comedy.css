@@ -1,4 +1,5 @@
-/* New Arrivals */
+/* New Comedy */
+/* Header */
 .section-books {
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@
   font-weight: bold;
   font-style: normal;
 }
-
+/* Body */
 .section-books .books-container {
   display: flex;
   justify-content: center;
@@ -29,7 +30,7 @@
   max-width: var(--width-home);
   width: 100%;
 }
-
+/* Card */
 .section-books .books-container .books .books-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -61,7 +62,7 @@
   border-color: var(--first-color);
   transition: 0.1s ease;
 }
-
+/* Image */
 .section-books .books-container .books .books-box .books-card .books-image {
   width: 150px;
   height: 220px;
@@ -83,13 +84,12 @@
   .books-container
   .books
   .books-box
-  .books-card
-  :hover
+  .books-card:hover
   .books-image
   img {
   transform: scale(1.1);
 }
-
+/* Tag */
 .section-books .books-container .books .books-box .books-card h2 {
   margin: 12px 0px 12px 0px;
   color: var(--title-color);
@@ -127,6 +127,7 @@
   color: var(--title-color);
   font-weight: bold;
 }
+/* Button Cart */
 .section-books
   .books-container
   .books
@@ -233,7 +234,7 @@
   font-weight: bold;
   margin-bottom: 8px;
 }
-/* End Arrival */
+/* Icon heart */
 .section-books
   .books-container
   .books
@@ -244,3 +245,4 @@
   .HeartIcon.active {
   fill: red;
 }
+/* End Comedy */

@@ -4,96 +4,68 @@
   width: 100%;
   flex-direction: column;
   margin-top: var(--margin-top);
-  padding: 20px;
-  padding: 20px;
-  background: var(--BG);
+  padding-top: 50px;
 }
-.footer .footer-main {
+.footer .footer-container {
   max-width: var(--width-home);
   width: 100%;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  row-gap: 48px;
 }
-.footer .footer-main .tag {
-  flex: 1 1 20%;
-  margin: 0px 25px;
-}
-.footer .footer-main .tag .logo-footer {
+.footer .footer-container .footer-logo {
   cursor: pointer;
   font-size: 45px;
   color: var(--first-color);
   margin-bottom: 10px;
 }
-.footer .footer-main .tag p {
+.footer .footer-container {
+  grid-template-columns: repeat(4, max-content);
+  column-gap: 70px;
+}
+.footer .footer-container .footer-des {
   font-size: 14px;
   line-height: 1.5;
   color: var(--text-color);
 }
-.footer .footer-main .tag h1 {
+
+.footer .footer-container .footer-data .footer-title {
   font-size: 18px;
   margin-bottom: 10px;
   color: var(--title-color);
   font-weight: bold;
+  position: relative;
+}
+.footer .footer-container .footer-data .footer-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  background-color: var(--first-color);
+  height: 2px;
+  width: 50px;
 }
 
-.footer .footer-main .tag a {
-  display: block;
+.footer .footer-container .footer-data .footer-sub li {
   display: flex;
   margin-bottom: 5px;
+  padding-top: 5px;
   color: var(--text-color);
   text-decoration: none;
+  cursor: pointer;
 }
 
-.footer .footer-main .tag a:hover i {
-  padding-right: 1.5rem;
+.footer .footer-container .footer-data .footer-sub li:hover .footer-subs {
+  padding-right: 20px;
   transition: 0.4s;
 }
-.footer .footer-main .tag a i {
+.footer .footer-container .footer-data .footer-sub li .footer-about:hover {
+  transform: translateX(10px);
+  transition: 0.4s;
+}
+.footer .footer-container .footer-data .footer-sub li .footer-subs {
   color: var(--first-color);
-  padding-right: 0.5rem;
+  padding-right: 10px;
   margin-top: 5px;
-}
-
-.footer .footer_main .tag .searchBar {
-  width: 230px;
-  height: 30px;
-  background: var(--card-color);
-  border-radius: 25px;
-}
-.footer .footer-main .tag .searchBar input {
-  padding: 8px;
-  border: 1px solid var(--first-color);
-  border-radius: 10px;
-  color: var(--text-color);
-}
-.footer .footer-main .tag .searchBar button {
-  padding: 7px 15px;
-  background: var(--first-color);
-  border: none;
-  margin-top: 15px;
-  border-radius: 10px;
-  color: var(--white-color);
-  cursor: pointer;
-}
-.footer .footer-main .tag .searchBar input:hover {
-  border-color: var(--first-color);
-  box-shadow: 0 0 5px var(--first-color);
-}
-
-.footer .footer-main .tag .searchBar button {
-  padding: 7px 15px;
-  background: var(--first-color);
-  border: none;
-  margin-top: 15px;
-  border-radius: 25px;
-  color: var(--white-color);
-  cursor: pointer;
-}
-.footer .footer-main .tag .searchBar button:hover {
-  border-color: var(--first-color);
-  box-shadow: 0 0 5px var(--first-color);
 }
 /* Start icon social */
 .footer .wrapper-container {

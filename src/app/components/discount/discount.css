@@ -5,12 +5,26 @@
 .slick-list {
   margin: 0 -15px !important;
 }
-.section-p3 .discount-container .discount .slick-prev:before {
-  color: var(--first-color);
+.section-p3 .discount-container .discount .slick-arrow:before {
+  display: none;
 }
-
-.section-p3 .discount-container .discount .slick-next:before {
-  color: var(--first-color);
+.section-p3 .discount-container .discount .slick-arrow {
+  width: 50px;
+  height: 50px;
+  font-size: 50px !important;
+  color: var(--first-color) !important;
+  position: absolute;
+}
+.section-p3 .discount-container .discount .slick-next {
+  right: 5px;
+}
+.section-p3 .discount-container .discount .slick-prev {
+  left: 5px;
+  z-index: 99;
+}
+.section-p1 .best-seller-container .best-seller .slick-next:before,
+.section-p1 .best-seller-container .best-seller .slick-prev:before {
+  content: "" !important;
 }
 /* Book List */
 /* Header */

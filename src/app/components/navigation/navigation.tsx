@@ -8,19 +8,44 @@ import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";
 
 export default function Navigate() {
+  // First space
   const [check, setCheck] = useState(false);
-
+  // Box shadow navbar
   useEffect(() => {
-    const navigation = document.querySelector(".header");
-
-    window.addEventListener("scroll", () => {
-      if (navigation.offsetTop > 5) {
-        navigation.style.boxShadow = "0 2px 4px #007aff";
-      } else {
-        navigation.style.boxShadow = "unset";
+    const handleScroll = () => {
+      const navigation = document.querySelector(".header") as HTMLElement;
+      if (navigation) {
+        if (window.scrollY > 5) {
+          navigation.style.boxShadow = "0 2px 4px rgba(0, 122, 255, 0.5)";
+        } else {
+          navigation.style.boxShadow = "none";
+        }
       }
-    });
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  // Active Page
+  // useEffect(() => {
+  //   const navLinks = document.querySelectorAll(".nav-link");
+  //   const windowPathname = window.location.pathname;
+
+  //   navLinks.forEach((navLink: any) => {
+  //     const navLinkPathname = new URL(navLink.href).pathname;
+  //     if (windowPathname === navLinkPathname || windowPathname === "/") {
+  //       navLink.classList.add("active");
+  //     }
+  //   });
+  //   return () => {
+  //     navLinks.forEach((navLink: any) => {
+  //       navLink.classList.remove("active");
+  //     });
+  //   };
+  // }, []);
+
   return (
     <header className="header">
       <nav className="navbar">
@@ -31,7 +56,7 @@ export default function Navigate() {
         </div>
         <div className="nav-menu">
           <ul className="nav-list">
-            <li className="nav-item active">
+            <li className="nav-item">
               <Link href="/" className="nav-link active">
                 <span>Home</span>
               </Link>

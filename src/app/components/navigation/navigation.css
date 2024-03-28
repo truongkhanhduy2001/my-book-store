@@ -86,10 +86,13 @@
   text-decoration: none;
   color: var(--title-color);
 }
+/* active */
+.header .navbar .nav-menu .nav-list .nav-item .nav-link.active {
+  color: var(--first-color);
+}
 .header .navbar .nav-menu .nav-list .nav-item .nav-link span {
   font-size: var(--h3);
 }
-
 .header .navbar .nav-menu .nav-list .nav-item .nav-link:hover {
   color: var(--first-color);
 }
@@ -109,6 +112,7 @@
   width: 100%;
   transition: 0.3s;
 }
+/* Icon */
 .header .navbar .icons-list {
   list-style: none;
   font-size: 25px;

@@ -1,4 +1,5 @@
 /* New Arrivals */
+/* Header */
 .section-p2-view {
   display: flex;
   flex-direction: column;
@@ -22,25 +23,29 @@
   font-weight: bold;
   font-style: normal;
 }
-
-.arrivals-container-view {
+/* Body */
+.section-p2-view .arrivals-container-view {
   display: flex;
   justify-content: center;
   margin-top: var(--margin-top-font);
 }
 
-.arrivals-container-view .arrivals-view {
+.section-p2-view .arrivals-container-view .arrivals-view {
   max-width: var(--width-home);
   width: 100%;
 }
-
-.arrivals-container-view .arrivals-view .arrivals-box-view {
+/* Card */
+.section-p2-view .arrivals-container-view .arrivals-view .arrivals-box-view {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 15px;
 }
 
-.arrivals-container-view .arrivals-view .arrivals-box-view .arrivals-card-view {
+.section-p2-view
+  .arrivals-container-view
+  .arrivals-view
+  .arrivals-box-view
+  .arrivals-card-view {
   position: relative;
   text-align: center;
   padding: 10px;
@@ -51,15 +56,18 @@
   cursor: pointer;
   transition: transform 0.1s ease;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view:hover
+  .arrivals-tag-view
   .Icon-Container {
   display: inline-flex !important;
 }
 
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view:hover {
@@ -67,7 +75,9 @@
   transition: 0.1s ease;
 }
 
-.arrivals-container-view
+/* Image */
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -80,7 +90,8 @@
   overflow: hidden;
 }
 
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -93,7 +104,8 @@
   transition: 0.3s;
 }
 
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view:hover
@@ -101,8 +113,9 @@
   img {
   transform: scale(1.1);
 }
-
-.arrivals-container-view
+/* Tag */
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -112,7 +125,8 @@
   color: var(--title-color);
   font-weight: bold;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -120,7 +134,8 @@
   .Arrivalwriter-view {
   color: var(--text-color);
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -129,7 +144,8 @@
   color: var(--second-color);
   margin-top: 8px;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -141,7 +157,9 @@
   color: var(--title-color);
   font-weight: bold;
 }
-.arrivals-container-view
+/* Button cart */
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -161,7 +179,8 @@
   transition: 0.3s ease all;
   z-index: 1;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -175,7 +194,8 @@
   transform: translate(-50%, -50%);
   transition: 0.25s;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -187,7 +207,8 @@
   margin-left: 30px;
   transition: 0.25s;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -196,7 +217,8 @@
   cursor: pointer;
   background: var(--first-color);
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -206,7 +228,8 @@
   left: 50%;
   color: var(--white-color);
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -215,7 +238,8 @@
   p {
   clip-path: circle(0px at 125px 27.5px);
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -228,7 +252,8 @@
   top: 20px;
   right: 20px;
 }
-.arrivals-container-view
+.section-p2-view
+  .arrivals-container-view
   .arrivals-view
   .arrivals-box-view
   .arrivals-card-view
@@ -239,7 +264,15 @@
   font-weight: bold;
   margin-bottom: 8px;
 }
-/* End Arrival */
-.HeartIcon.active {
+/* Icon heart */
+.section-p2-view
+  .arrivals-container-view
+  .arrivals-view
+  .arrivals-box-view
+  .arrivals-card-view
+  .arrivals-tag-view
+  .Icon-Container
+  .HeartIcon.active {
   fill: red;
 }
+/* End Arrival */
