@@ -29,22 +29,27 @@ export default function Navigate() {
   }, []);
 
   // Active Page
-  // useEffect(() => {
-  //   const navLinks = document.querySelectorAll(".nav-link");
-  //   const windowPathname = window.location.pathname;
-
-  //   navLinks.forEach((navLink: any) => {
-  //     const navLinkPathname = new URL(navLink.href).pathname;
-  //     if (windowPathname === navLinkPathname || windowPathname === "/") {
-  //       navLink.classList.add("active");
-  //     }
-  //   });
-  //   return () => {
-  //     navLinks.forEach((navLink: any) => {
-  //       navLink.classList.remove("active");
-  //     });
-  //   };
-  // }, []);
+  useEffect(() => {
+    const windowPathname = window.location.pathname;
+    const navLinks = document.querySelectorAll(".nav-link");
+    // Loại bỏ lớp 'active' từ tất cả các phần tử .nav-link
+    navLinks.forEach((navLink) => {
+      navLink.classList.remove("active");
+    });
+    // Chọn phần tử hiện tại và thêm lớp 'active'
+    const currentNavLink = document.querySelector(
+      `.nav-link[href='${windowPathname}']`
+    );
+    if (currentNavLink) {
+      currentNavLink.classList.add("active");
+    }
+    return () => {
+      // Loại bỏ lớp 'active' từ phần tử hiện tại (nếu có)
+      if (currentNavLink) {
+        currentNavLink.classList.remove("active");
+      }
+    };
+  }, []);
 
   return (
     <header className="header">
