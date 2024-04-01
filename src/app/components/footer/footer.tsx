@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import "./footer.css";
@@ -13,6 +14,7 @@ import {
   FaGithub,
   FaInstagram,
   FaBookOpen,
+  FaArrowRight,
 } from "react-icons/fa";
 
 export default function Footer() {
@@ -36,13 +38,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer">
-      <div className="footer-container container grid">
-        <div>
-          <i className="footer-logo">
-            <FaBookOpen />
-          </i>
-          <p className="footer-des">
+    <section className="footer">
+      <div className="box-container">
+        <div className="box">
+          <div className="logo-footer">
+            <i>
+              <FaBookOpen />
+            </i>
+          </div>
+          <p>
             Visit our website to explore and choose the right books for you.
             From novels to textbooks, we have it all!<br></br> Please accompany
             Book Store on the journey to discover knowledge and creativity!
@@ -50,88 +54,102 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="footer-data grid">
-          <div>
-            <h1 className="footer-title">Our location</h1>
-            <ul className="footer-sub">
-              <li>
-                <i className="footer-subs">
-                  <FaLocationDot />
-                </i>
-                Viet Nam
-              </li>
-              <li>
-                <i className="footer-subs">
-                  <FaLocationDot />
-                </i>
-                UK
-              </li>
-              <li>
-                <i className="footer-subs">
-                  <FaLocationDot />
-                </i>
-                USA
-              </li>
-              <li>
-                <i className="footer-subs">
-                  <FaLocationDot />
-                </i>
-                China
-              </li>
-              <li>
-                <i className="footer-subs">
-                  <FaLocationDot />
-                </i>
-                India
-              </li>
-            </ul>
-          </div>
+        <div className="box">
+          <h1 className="box-tilte">Our Locations</h1>
+          <Link href="">
+            <i className="fa-location">
+              <FaLocationDot />
+            </i>
+            Viet Nam
+          </Link>
+          <Link href="">
+            <i className="fa-location">
+              <FaLocationDot />
+            </i>
+            USA
+          </Link>
+          <Link href="">
+            <i className="fa-location">
+              <FaLocationDot />
+            </i>
+            UK
+          </Link>
+          <Link href="">
+            <i className="fa-location">
+              <FaLocationDot />
+            </i>
+            China
+          </Link>
+          <Link href="">
+            <i className="fa-location">
+              <FaLocationDot />
+            </i>
+            France
+          </Link>
+          <Link href="">
+            <i className="fa-location">
+              <FaLocationDot />
+            </i>
+            India
+          </Link>
         </div>
 
-        <div className="footer-data grid">
-          <div>
-            <h1 className="footer-title">About</h1>
-            <ul className="footer-sub">
-              <li>
-                <span className="footer-about">Awards</span>
-              </li>
-              <li>
-                <span className="footer-about">FAQs</span>
-              </li>
-              <li>
-                <span className="footer-about">Privacy policy</span>
-              </li>
-              <li>
-                <span className="footer-about">Term of services</span>
-              </li>
-            </ul>
-          </div>
+        <div className="box">
+          <h1 className="box-tilte">Company</h1>
+          <Link href="">
+            <i className="fa-arrow">
+              <FaArrowRight />
+            </i>
+            About Us
+          </Link>
+          <Link href="">
+            <i className="fa-arrow">
+              <FaArrowRight />
+            </i>
+            Our Services
+          </Link>
+          <Link href="">
+            <i className="fa-arrow">
+              <FaArrowRight />
+            </i>
+            Privacy Policy
+          </Link>
+          <Link href="">
+            <i className="fa-arrow">
+              <FaArrowRight />
+            </i>
+            Affiliate Program
+          </Link>
         </div>
 
-        <div className="footer-data grid">
-          <div>
-            <h1 className="footer-title">Contact</h1>
-            <ul className="footer-sub">
-              <li>
-                <i className="footer-subs">
-                  <IoCall />
-                </i>
-                +84 12 345 6789
-              </li>
-              <li>
-                <i className="footer-subs">
-                  <IoCall />
-                </i>
-                +84 32 444 699
-              </li>
-              <li>
-                <i className="footer-subs">
-                  <MdEmail />
-                </i>
-                bookstore@gmail.com
-              </li>
-            </ul>
-          </div>
+        <div className="box">
+          <h1 className="box-tilte">Contact Info</h1>
+          <Link href="#">
+            <i className="fa-phone">
+              <IoCall />
+            </i>
+            +84 12 345 6789
+          </Link>
+          <Link href="#">
+            <i className="fa-phone">
+              <IoCall />
+            </i>
+            +84 32 444 699
+          </Link>
+          <Link href="#">
+            <i className="fa-envelope">
+              <MdEmail />
+            </i>
+            bookstore@gmail.com
+          </Link>
+          <Image
+            src="/images/worldmap.png"
+            alt="map"
+            priority={true}
+            width={100}
+            height={100}
+            className="map"
+          ></Image>
         </div>
       </div>
 
@@ -193,6 +211,6 @@ export default function Footer() {
           <FaArrowUp />
         </span>
       </div>
-    </footer>
+    </section>
   );
 }

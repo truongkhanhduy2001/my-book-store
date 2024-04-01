@@ -96,6 +96,7 @@ export default function Navigate() {
             </li>
           </ul>
         </div>
+        {/* Icon */}
         <ul className="icons-list">
           {!check ? (
             <li className="book-accounts">
@@ -118,6 +119,7 @@ export default function Navigate() {
               </div>
             </li>
           )}
+
           <li className="book-search">
             <i>
               <PiMagnifyingGlass />
@@ -128,16 +130,19 @@ export default function Navigate() {
               </form>
             </div>
           </li>
+
           <li className="book-heart">
             <i>
               <PiHeartStraight />
             </i>
           </li>
+
           <li className="book-cart">
             <Link href="#">
               <i>
                 <PiHandbag />
               </i>
+              <span className="count-cart">1</span>
             </Link>
           </li>
         </ul>

@@ -10,7 +10,6 @@
   max-width: var(--width-home);
   grid-template-columns: 435px 745px;
   align-items: center;
-  padding-block: 7rem 2rem;
 }
 
 .main-container .main div:first-child {

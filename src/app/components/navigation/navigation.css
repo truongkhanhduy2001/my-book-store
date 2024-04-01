@@ -265,9 +265,26 @@
   outline: none;
   border: 1px solid var(--border-color);
 }
+/* Wish list */
+.header .navbar .icons-list .book-heart {
+  position: relative;
+}
 
 /* Home Cart */
 .header .navbar .icons-list .book-cart {
   position: relative;
+}
+.header .navbar .icons-list .book-cart .count-cart {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 10px;
 }
 /* Responsive */
