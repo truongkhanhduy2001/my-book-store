@@ -1,37 +1,45 @@
-import { FaTruck, FaLock, FaHeadset } from "react-icons/fa";
+import { FaTruck, FaHeadset, FaGift } from "react-icons/fa";
 import { FaArrowRotateRight } from "react-icons/fa6";
 import "./services.css";
 export default function Services() {
   return (
     <section className="services">
-      <div className="services_box">
-        <div className="services_card">
-          <i className="fas fa-paper-plane">
+      <div className="services-box">
+        <div className="services-card">
+          <i className="fa-paper-plane">
             <FaTruck />
           </i>
-          <h3>Free shipping</h3>
-          <p>Order over $100</p>
+          <h3>FREE SHIPPING</h3>
+          <p>
+            Free worldwide<br></br> shipping on all <br></br> orders
+          </p>
         </div>
-        <div className="services_card">
-          <i className="fas fa-lock">
-            <FaLock />
+        <div className="services-card">
+          <i className="fa-lock">
+            <FaGift />
           </i>
-          <h3>Secure payment</h3>
-          <p>100 secure payment</p>
+          <h3>GIFT CARDS</h3>
+          <p>
+            Buy gift cards and <br></br> use coupon code <br></br> easily
+          </p>
         </div>
-        <div className="services_card">
-          <i className="fas fa-redo-alt">
+        <div className="services-card">
+          <i className="fa-redo-alt">
             <FaArrowRotateRight />
           </i>
-          <h3>Easy returns</h3>
-          <p>10 day returns</p>
+          <h3>30 DAYS RETURN</h3>
+          <p>
+            No question return <br></br> and easy refund in <br></br> 14 days
+          </p>
         </div>
-        <div className="services_card">
+        <div className="services-card">
           <i className="fas fa-headset">
             <FaHeadset />
           </i>
-          <h3>24/7 support</h3>
-          <p>Call us anytime</p>
+          <h3>CONTACT US!</h3>
+          <p>
+            Keep in touch via <br></br> email and support <br></br> system
+          </p>
         </div>
       </div>
     </section>

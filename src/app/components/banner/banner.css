@@ -47,6 +47,7 @@
   background-color: var(--first-color);
   width: 140px;
   transition: box-shadow 0.4s;
+  font-size: 16px;
 }
 .main-container .main .main-tag .main-btn:hover {
   box-shadow: 0 4px 32px var(--first-color);

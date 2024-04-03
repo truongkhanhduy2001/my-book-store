@@ -96,10 +96,10 @@ export default function Arrival() {
         <div className="arrivals">
           <div className="arrivals-box slider-container">
             <Slider {...settings}>
-              {data.slice(-4).map((item, index) => {
+              {data.slice(-3).map((item, index) => {
                 return (
                   <Link key={index} href="#" className="arrivals-card">
-                    <div className="arrivals-image">
+                    <div className="arrivals-img">
                       <Image
                         src="/images/biasach1.png"
                         alt="Main Image"
@@ -145,10 +145,10 @@ export default function Arrival() {
               })}
             </Slider>
             <Slider {...settings}>
-              {data.slice(-4).map((item, index) => {
+              {data.slice(-3).map((item, index) => {
                 return (
                   <Link key={index} href="#" className="arrivals-card">
-                    <div className="arrivals-image">
+                    <div className="arrivals-img">
                       <Image
                         src="/images/biasach1.png"
                         alt="Main Image"

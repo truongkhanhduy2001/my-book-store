@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./discountView.css";
-import { PiHandbag } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";

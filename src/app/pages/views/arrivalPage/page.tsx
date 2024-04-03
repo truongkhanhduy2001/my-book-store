@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./arrivalView.css";
-import { PiHandbag } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
@@ -57,7 +56,7 @@ export default function Arrivals() {
               {data.slice(-4).map((item, index) => {
                 return (
                   <Link key={index} href="#" className="arrivals-card-view">
-                    <div className="arrivals-image-view">
+                    <div className="arrivals-img-view">
                       <Image
                         src="/images/biasach1.png"
                         alt="Main Image"

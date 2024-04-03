@@ -6,27 +6,32 @@
   margin-top: var(--margin-top);
   padding-top: 50px;
 }
+
 .footer .box-container {
   max-width: var(--width-home);
   width: 100%;
   margin: auto;
   display: flex;
 }
+
 .footer .box-container .box {
   flex: 1 1 20%;
   margin: 0px 25px;
 }
+
 .footer .box-container .box .logo-footer {
   cursor: pointer;
   font-size: 45px;
   color: var(--first-color);
   margin-bottom: 10px;
 }
+
 .footer .box-container .box p {
   font-size: 14px;
   line-height: 1.5;
   color: var(--text-color);
 }
+
 .footer .box-container .box h1 {
   font-size: 18px;
   margin-bottom: 10px;
@@ -34,6 +39,7 @@
   font-weight: bold;
   position: relative;
 }
+
 .footer .box-container .box h1::before {
   content: "";
   position: absolute;
@@ -43,6 +49,7 @@
   height: 2px;
   width: 50px;
 }
+
 .footer .box-container .box a {
   display: block;
   display: flex;
@@ -55,6 +62,7 @@
   padding-right: 1.5rem;
   transition: 0.4s;
 }
+
 .footer .box-container .box a i {
   color: var(--first-color);
   padding-right: 0.5rem;
@@ -73,9 +81,11 @@
   height: 100%;
   place-items: center;
 }
+
 .footer .wrapper-container .wrapper {
   display: inline-flex;
 }
+
 .footer .wrapper-container .wrapper .icon {
   display: flex;
   align-items: center;
@@ -87,6 +97,7 @@
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
 .footer .wrapper-container .wrapper .icon span {
   width: 3rem;
   height: 3rem;
@@ -96,6 +107,7 @@
   border-radius: 50%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
+
 .footer .wrapper-container .wrapper .icon span i {
   display: flex;
   justify-content: center;
@@ -104,9 +116,11 @@
   font-size: 25px;
   line-height: 60px;
 }
+
 .footer .wrapper-container .wrapper .icon:hover span i {
   color: var(--white-color);
 }
+
 .footer .wrapper-container .wrapper .icon .tooltip {
   position: absolute;
   top: 0;
@@ -120,11 +134,13 @@
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
 .footer .wrapper-container .wrapper .icon:hover .tooltip {
   top: -70px;
   opacity: 1;
   pointer-events: auto;
 }
+
 .footer .wrapper-container .wrapper .icon .tooltip::before {
   position: absolute;
   content: "";
@@ -136,35 +152,42 @@
   transform: translateX(-50%) rotate(45deg);
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
 .footer .wrapper-container .wrapper .icon:hover span,
 .footer .wrapper-container .wrapper .icon:hover .tooltip {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4);
 }
+
 .footer .wrapper-container .wrapper .facebook:hover span,
 .footer .wrapper-container .wrapper .facebook:hover .tooltip,
 .footer .wrapper-container .wrapper .facebook:hover .tooltip::before {
   background: #3b5999;
 }
+
 .footer .wrapper-container .wrapper .twitter:hover span,
 .footer .wrapper-container .wrapper .twitter:hover .tooltip,
 .footer .wrapper-container .wrapper .twitter:hover .tooltip::before {
   background: #46c1f6;
 }
+
 .footer .wrapper-container .wrapper .github:hover span,
 .footer .wrapper-container .wrapper .github:hover .tooltip,
 .footer .wrapper-container .wrapper .github:hover .tooltip::before {
   background: var(--text-color);
 }
+
 .footer .wrapper-container .wrapper .youtube:hover span,
 .footer .wrapper-container .wrapper .youtube:hover .tooltip,
 .footer .wrapper-container .wrapper .youtube:hover .tooltip::before {
   background: #de463b;
 }
+
 .footer .wrapper-container .wrapper .instagram:hover span,
 .footer .wrapper-container .wrapper .instagram:hover .tooltip,
 .footer .wrapper-container .wrapper .instagram:hover .tooltip::before {
   background: #e1306c;
 }
+
 /* End icon social */
 .footer .end {
   max-width: var(--width-home);
@@ -175,12 +198,14 @@
   justify-content: space-around;
   border-top: 1px solid;
 }
+
 .footer .end span {
   margin-left: 10px;
   color: var(--first-color);
   font-weight: bold;
   margin-right: 10px;
 }
+
 /* Scroll up */
 .footer .scroll-up {
   position: fixed;
@@ -194,6 +219,7 @@
   cursor: pointer;
   transition: bottom 0.4s, transform 0.4s, background-color 0.4s;
 }
+
 .footer .scroll-up:hover {
   transform: translateY(-10px);
 }

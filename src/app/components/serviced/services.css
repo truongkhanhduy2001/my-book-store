@@ -4,7 +4,8 @@
   flex-direction: column;
   margin-top: var(--margin-top);
 }
-.services .services_box {
+
+.services .services-box {
   max-width: var(--width-home);
   width: 100%;
   margin: auto;
@@ -13,10 +14,12 @@
   grid-template-columns: repeat(4, max-content);
   column-gap: 5rem;
 }
-.services .services_box .services_card {
+
+.services .services-box .services-card {
   text-align: center;
 }
-.services .services_box .services_card i {
+
+.services .services-box .services-card i {
   display: flex;
   justify-content: center;
   color: var(--first-color);
@@ -24,14 +27,16 @@
   margin-bottom: 15px;
   cursor: pointer;
 }
-.services .services_box .services_card h3 {
+
+.services .services-box .services-card h3 {
   font-size: var(--h3);
   color: var(--title-color);
   font-weight: bold;
   margin-bottom: 10px;
 }
-.services .services_box .services_card p {
-  font-size: var(--p);
+
+.services .services-box .services-card p {
+  font-size: var(--sub);
   color: var(--text-color);
   margin-bottom: 10px;
 }

@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import "./novel.css";
-import { IoIosArrowBack } from "react-icons/io";
+import "../books.css";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";

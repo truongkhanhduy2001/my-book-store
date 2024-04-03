@@ -3,9 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Color */
+  --white-color: hsl(0, 0%, 100%);
+  --title-color: hsl(230, 70%, 16%);
+  --text-color: hsl(230, 16%, 45%);
+  --first-color: hsl(230, 62%, 56%);
+  --second-color: #80bfff;
+  --border-color: hsl(230, 50%, 90%);
+  --card-color: hsl(230, 100%, 97%);
+  --BG: hsl(230, 100%, 96%);
+  /* Size */
+  --width-home: 1350px;
+  --margin-top: 80px;
+  --margin-top-font: 15px;
+  --margin-top-view: 100px;
+  /* Font Size */
+  --h1: 55px;
+  --h2: 25px;
+  --h3: 18px;
+  --p: 18px;
+  --sub: 15px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +31,19 @@
     --background-start-rgb: 235, 238, 255;
     --background-end-rgb: 235, 238, 255;
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+  border-radius: 10px;
 }
 
 body {
