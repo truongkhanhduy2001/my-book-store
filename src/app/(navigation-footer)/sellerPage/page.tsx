@@ -23,7 +23,7 @@ export default function Seller() {
       title: "Drama",
     },
   ];
-
+  // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Sellercart-btn-view");
     btntocart.forEach((item, index) => {
@@ -32,6 +32,8 @@ export default function Seller() {
       });
     });
   }, []);
+
+  // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();

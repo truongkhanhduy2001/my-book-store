@@ -30,6 +30,7 @@ export default function Discount() {
       type: "Comic",
     },
   ];
+
   // Save scroll
   useEffect(() => {
     // Get scroll position from localStorage
@@ -47,6 +48,7 @@ export default function Discount() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   // Type
   const [dataList, setDataList] = useState(data);
 
@@ -88,6 +90,7 @@ export default function Discount() {
     setDataList(item);
     changePositionNav(e.target.closest(".nav-discount"));
   };
+
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Discountcart-btn");
@@ -97,11 +100,13 @@ export default function Discount() {
       });
     });
   }, []);
+
   // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
+
   // Slider
   function NextArrow(props: any) {
     const { className, onClick } = props;

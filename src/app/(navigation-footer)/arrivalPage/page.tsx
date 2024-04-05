@@ -24,6 +24,7 @@ export default function Arrivals() {
     },
   ];
 
+  // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Arrivalcart-btn-view");
     btntocart.forEach((item, index) => {
@@ -32,6 +33,8 @@ export default function Arrivals() {
       });
     });
   }, []);
+
+  // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();

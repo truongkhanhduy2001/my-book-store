@@ -24,6 +24,7 @@ export default function Discount() {
     },
   ];
 
+  // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Discountcart-btn-view");
     btntocart.forEach((item, index) => {
@@ -32,6 +33,8 @@ export default function Discount() {
       });
     });
   }, []);
+
+  // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();

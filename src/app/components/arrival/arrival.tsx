@@ -31,6 +31,7 @@ export default function Arrival() {
       title: "Dragon",
     },
   ];
+
   // Save scroll
   useEffect(() => {
     // Get scroll position from localStorage
@@ -48,6 +49,7 @@ export default function Arrival() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Arrivalcart-btn");
@@ -57,11 +59,13 @@ export default function Arrival() {
       });
     });
   }, []);
+
   // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
+
   // Slider
   var settings = {
     infinite: true,

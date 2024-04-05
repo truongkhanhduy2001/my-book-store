@@ -26,6 +26,7 @@ export default function Seller() {
       title: "Drama",
     },
   ];
+
   // Save scroll
   useEffect(() => {
     // Get scroll position from localStorage
@@ -43,6 +44,7 @@ export default function Seller() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Sellercart-btn");
@@ -52,11 +54,13 @@ export default function Seller() {
       });
     });
   }, []);
+
   // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
+
   // Slider
   function NextArrow(props: any) {
     const { className, onClick } = props;

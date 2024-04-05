@@ -15,12 +15,14 @@ interface BookItem {
   categories: string;
   price: string;
 }
+
 // Định nghĩa kiểu Props cho component Book
 interface BookProps {
   data: BookItem[]; // data sẽ là một mảng các BookItem
 }
 
 export default function Book({ data }: BookProps) {
+  // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".books-cart-btn");
     console.log(btntocart);
@@ -30,6 +32,8 @@ export default function Book({ data }: BookProps) {
       });
     });
   }, []);
+
+  // Icon heart
   const handleHeart = (e: any) => {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
