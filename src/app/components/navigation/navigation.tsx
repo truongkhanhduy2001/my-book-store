@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
 import { FaList, FaBookOpen } from "react-icons/fa";
-import { VscAccount } from "react-icons/vsc";
+import { VscChromeClose, VscAccount } from "react-icons/vsc";
 import "./navigation.css";
-import { Navigation } from "swiper/modules";
 import { usePathname } from "next/navigation";
 export default function Navigate() {
   // First space
@@ -58,11 +57,16 @@ export default function Navigate() {
     <header className="header">
       <nav className="navbar">
         <div className="logo">
-          <i>
-            <FaBookOpen />
-          </i>
+          <Link href="/">
+            <i>
+              <FaBookOpen />
+            </i>
+          </Link>
         </div>
         <div className="nav-menu">
+          <span className="nav-list-icon">
+            <FaList />
+          </span>
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="/" className="nav-link active">
@@ -122,9 +126,9 @@ export default function Navigate() {
               </div>
             </li>
           )}
-
+          {/* Search */}
           <li className="book-search">
-            <i>
+            <i className="search">
               <PiMagnifyingGlass />
             </i>
             <div className="search-container">
@@ -133,7 +137,7 @@ export default function Navigate() {
               </form>
             </div>
           </li>
-
+          {/* Heart */}
           <li className="book-heart">
             <i>
               <PiHeartStraight />
