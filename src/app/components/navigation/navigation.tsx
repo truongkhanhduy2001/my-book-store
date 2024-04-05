@@ -2,13 +2,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
-import { FaBookOpen } from "react-icons/fa";
+import { FaList, FaBookOpen } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import "./navigation.css";
-
+import { Navigation } from "swiper/modules";
+import { usePathname } from "next/navigation";
 export default function Navigate() {
   // First space
   const [check, setCheck] = useState(false);
+
   // Box shadow navbar
   useEffect(() => {
     const handleScroll = () => {
@@ -28,16 +30,18 @@ export default function Navigate() {
   }, []);
 
   // Active Page
+  const pathname = usePathname();
+  const url: any = ["/", "/horror", "/comedy", "/comic", "/novel"];
+
   useEffect(() => {
-    const windowPathname = window.location.pathname;
     const navLinks = document.querySelectorAll(".nav-link");
     // Loại bỏ lớp 'active' từ tất cả các phần tử .nav-link
     navLinks.forEach((navLink) => {
       navLink.classList.remove("active");
     });
     // Chọn phần tử hiện tại và thêm lớp 'active'
-    const currentNavLink = document.querySelector(
-      `.nav-link[href='${windowPathname}']`
+    const currentNavLink: any = document.querySelector(
+      `.nav-link[href='${pathname}']`
     );
     if (currentNavLink) {
       currentNavLink.classList.add("active");
@@ -48,7 +52,7 @@ export default function Navigate() {
         currentNavLink.classList.remove("active");
       }
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <header className="header">
@@ -68,28 +72,28 @@ export default function Navigate() {
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/pages/books/comedy/" className="nav-link">
+              <Link href="/comedy" className="nav-link">
                 <span>Comedy</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/pages/books/horror/" className="nav-link">
+              <Link href="/horror" className="nav-link">
                 <span>Horror</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/pages/books/comic/" className="nav-link">
+              <Link href="/comic" className="nav-link">
                 <span>Comic</span>
               </Link>
             </li>
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/pages/books/novel/" className="nav-link">
+              <Link href="/novel" className="nav-link">
                 <span>Novel</span>
               </Link>
             </li>
@@ -99,7 +103,7 @@ export default function Navigate() {
         <ul className="icons-list">
           {!check ? (
             <li className="book-accounts">
-              <Link href="/pages/accounts/login">
+              <Link href="/login">
                 <i>
                   <VscAccount />
                 </i>

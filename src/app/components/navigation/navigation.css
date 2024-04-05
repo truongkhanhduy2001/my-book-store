@@ -83,6 +83,7 @@
 /* active */
 .header .navbar .nav-menu .nav-list .nav-item .nav-link.active {
   color: var(--first-color);
+  font-weight: bold;
 }
 
 .header .navbar .nav-menu .nav-list .nav-item .nav-link:hover::before {

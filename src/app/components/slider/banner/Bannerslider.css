@@ -17,3 +17,22 @@
   height: 100%;
   object-fit: cover;
 }
+
+.mySwiper {
+  position: relative;
+}
+
+.stand {
+  position: absolute;
+  bottom: -75px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 100%; /* Đặt chiều rộng của thẻ stand bằng với swiper */
+}
+
+.stand img {
+  display: block;
+  width: 100%; /* Đặt chiều rộng của hình ảnh trong thẻ stand bằng với thẻ stand */
+  height: auto;
+}

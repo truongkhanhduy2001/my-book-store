@@ -30,6 +30,23 @@ export default function Discount() {
       type: "Comic",
     },
   ];
+  // Save scroll
+  useEffect(() => {
+    // Get scroll position from localStorage
+    const scrollPosition = localStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+    }
+    // Scroll event listener to save scroll position
+    const handleScroll = () => {
+      localStorage.setItem("scrollPosition", window.scrollY.toString());
+    };
+    window.addEventListener("scroll", handleScroll);
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   // Type
   const [dataList, setDataList] = useState(data);
 
@@ -52,7 +69,6 @@ export default function Discount() {
   };
   const handleTypeHorror = (e: any) => {
     const item = data.filter((item, index) => {
-      console.log(item);
       return item.type.includes("Horror");
     });
     setDataList(item);
@@ -75,7 +91,6 @@ export default function Discount() {
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Discountcart-btn");
-    console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
         e.preventDefault();
@@ -123,7 +138,6 @@ export default function Discount() {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
         },
       },
       {
@@ -144,13 +158,10 @@ export default function Discount() {
     ],
   };
   return (
-    <section className="section-p3 ">
+    <section className="section-p3">
       <div className="section-p3-container">
         <h2>Book Discount</h2>
-        <Link
-          href="/pages/views/discountPage"
-          style={{ display: "inline-block" }}
-        >
+        <Link href="/discountPage" style={{ display: "inline-block" }}>
           <h3>View all</h3>
         </Link>
       </div>

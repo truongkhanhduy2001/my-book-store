@@ -1,5 +1,10 @@
-import { FaTruck, FaHeadset, FaGift } from "react-icons/fa";
-import { FaArrowRotateRight } from "react-icons/fa6";
+import {
+  TbTruckDelivery,
+  TbGiftCard,
+  TbArrowBack,
+  TbBrandTelegram,
+} from "react-icons/tb";
+
 import "./services.css";
 export default function Services() {
   return (
@@ -7,7 +12,7 @@ export default function Services() {
       <div className="services-box">
         <div className="services-card">
           <i className="fa-paper-plane">
-            <FaTruck />
+            <TbTruckDelivery />
           </i>
           <h3>FREE SHIPPING</h3>
           <p>
@@ -16,7 +21,7 @@ export default function Services() {
         </div>
         <div className="services-card">
           <i className="fa-lock">
-            <FaGift />
+            <TbGiftCard />
           </i>
           <h3>GIFT CARDS</h3>
           <p>
@@ -25,7 +30,7 @@ export default function Services() {
         </div>
         <div className="services-card">
           <i className="fa-redo-alt">
-            <FaArrowRotateRight />
+            <TbArrowBack />
           </i>
           <h3>30 DAYS RETURN</h3>
           <p>
@@ -34,7 +39,7 @@ export default function Services() {
         </div>
         <div className="services-card">
           <i className="fas fa-headset">
-            <FaHeadset />
+            <TbBrandTelegram />
           </i>
           <h3>CONTACT US!</h3>
           <p>

@@ -31,14 +31,29 @@ export default function Arrival() {
       title: "Dragon",
     },
   ];
+  // Save scroll
+  useEffect(() => {
+    // Get scroll position from localStorage
+    const scrollPosition = localStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+    }
+    // Scroll event listener to save scroll position
+    const handleScroll = () => {
+      localStorage.setItem("scrollPosition", window.scrollY.toString());
+    };
+    window.addEventListener("scroll", handleScroll);
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Arrivalcart-btn");
-    console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log(btntocart);
       });
     });
   }, []);
@@ -61,7 +76,6 @@ export default function Arrival() {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
         },
       },
       {
@@ -85,10 +99,7 @@ export default function Arrival() {
     <section className="section-p2">
       <div className="section-p2-container">
         <h2>New Arrivals</h2>
-        <Link
-          href="/pages/views/arrivalPage"
-          style={{ display: "inline-block" }}
-        >
+        <Link href="/arrivalPage" style={{ display: "inline-block" }}>
           <h3>View all</h3>
         </Link>
       </div>

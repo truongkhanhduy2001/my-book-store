@@ -26,10 +26,26 @@ export default function Seller() {
       title: "Drama",
     },
   ];
+  // Save scroll
+  useEffect(() => {
+    // Get scroll position from localStorage
+    const scrollPosition = localStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+    }
+    // Scroll event listener to save scroll position
+    const handleScroll = () => {
+      localStorage.setItem("scrollPosition", window.scrollY.toString());
+    };
+    window.addEventListener("scroll", handleScroll);
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Sellercart-btn");
-    console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
         e.preventDefault();
@@ -77,7 +93,6 @@ export default function Seller() {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
         },
       },
       {
@@ -99,13 +114,10 @@ export default function Seller() {
   };
 
   return (
-    <section className="section-p1 ">
+    <section className="section-p1">
       <div className="section-p1-container">
         <h2>Best Seller</h2>
-        <Link
-          href="/pages/views/sellerPage"
-          style={{ display: "inline-block" }}
-        >
+        <Link href="/sellerPage" style={{ display: "inline-block" }}>
           <h3>View all</h3>
         </Link>
       </div>
