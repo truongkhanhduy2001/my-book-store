@@ -81,6 +81,7 @@ export default function Seller() {
                         <sub>
                           <del>$28.60</del>
                         </sub>
+                        <span className="sale">-30%</span>
                       </p>
                       <div className="Sellercart-btn-view">
                         <i>

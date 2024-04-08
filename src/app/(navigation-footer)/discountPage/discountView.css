@@ -194,6 +194,23 @@
   font-size: 12px;
 }
 
+/* Label New */
+.section-p3-view
+  .discount-container-view
+  .discount-view
+  .discount-box-view
+  .discount-card-view
+  .discount-tag-view
+  .Discountbook-price-view
+  span {
+  font-size: 14px;
+  border: 1px solid;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
 /* Button cart */
 .section-p3-view
   .discount-container-view

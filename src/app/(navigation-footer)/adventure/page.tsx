@@ -2,8 +2,8 @@
 import "../books.css";
 import TitlePage from "@/app/components/titlePage/titlePage";
 import Book from "@/app/components/typeBook/book";
-export default function Novel() {
-  const dataNovel = [
+export default function Adventure() {
+  const dataAdventure = [
     {
       title: "English",
       writer: "Author 1",
@@ -31,14 +31,14 @@ export default function Novel() {
   ];
   return (
     <>
-      {/* Novel */}
+      {/* Adventure */}
       <section className="section-books">
         <div className="section-books-container">
-          <TitlePage title="Novel" />
+          <TitlePage title="Adventure" />
         </div>
-        <Book data={dataNovel} />
+        <Book data={dataAdventure} />
       </section>
-      {/* End novel */}
+      {/* End Adventure */}
     </>
   );
 }

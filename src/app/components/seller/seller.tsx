@@ -118,7 +118,7 @@ export default function Seller() {
   };
 
   return (
-    <section className="section-p1">
+    <section className="section-p1" id="bestseller">
       <div className="section-p1-container">
         <h2>Best Seller</h2>
         <Link href="/sellerPage" style={{ display: "inline-block" }}>
@@ -156,6 +156,7 @@ export default function Seller() {
                         <sub>
                           <del>$28.60</del>
                         </sub>
+                        <span className="sale">-30%</span>
                       </p>
                       <div className="Sellercart-btn">
                         <i>

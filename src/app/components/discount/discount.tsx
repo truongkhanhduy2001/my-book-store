@@ -23,11 +23,11 @@ export default function Discount() {
     },
     {
       title: "Anime",
-      type: "Novel",
+      type: "Science",
     },
     {
       title: "Anime",
-      type: "Comic",
+      type: "Adventure",
     },
   ];
 
@@ -76,16 +76,16 @@ export default function Discount() {
     setDataList(item);
     changePositionNav(e.target.closest(".nav-discount"));
   };
-  const handleTypeComic = (e: any) => {
+  const handleTypeScience = (e: any) => {
     const item = data.filter((item, index) => {
-      return item.type.includes("Comic");
+      return item.type.includes("Science");
     });
     setDataList(item);
     changePositionNav(e.target.closest(".nav-discount"));
   };
-  const handleTypeNovel = (e: any) => {
+  const handleTypeAdventure = (e: any) => {
     const item = data.filter((item, index) => {
-      return item.type.includes("Novel");
+      return item.type.includes("Adventure");
     });
     setDataList(item);
     changePositionNav(e.target.closest(".nav-discount"));
@@ -163,7 +163,7 @@ export default function Discount() {
     ],
   };
   return (
-    <section className="section-p3">
+    <section className="section-p3" id="discounts">
       <div className="section-p3-container">
         <h2>Book Discount</h2>
         <Link href="/discountPage" style={{ display: "inline-block" }}>
@@ -177,16 +177,16 @@ export default function Discount() {
               <h3 onClick={handleAllBooks}>All books</h3>
             </li>
             <li className="nav-discount">
+              <h3 onClick={handleTypeAdventure}>Adventure</h3>
+            </li>
+            <li className="nav-discount">
               <h3 onClick={handleTypeComedy}>Comedy</h3>
             </li>
             <li className="nav-discount">
+              <h3 onClick={handleTypeScience}>Science</h3>
+            </li>
+            <li className="nav-discount">
               <h3 onClick={handleTypeHorror}>Horror</h3>
-            </li>
-            <li className="nav-discount">
-              <h3 onClick={handleTypeComic}>Comic</h3>
-            </li>
-            <li className="nav-discount">
-              <h3 onClick={handleTypeNovel}>Novel</h3>
             </li>
           </ul>
         </div>
@@ -220,6 +220,7 @@ export default function Discount() {
                         <sub>
                           <del>$28.60</del>
                         </sub>
+                        <span className="sale">-30%</span>
                       </p>
                       <div className="Discountcart-btn">
                         <i>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
 import { FaList, FaBookOpen } from "react-icons/fa";
 import { VscChromeClose, VscAccount } from "react-icons/vsc";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
 export default function Navigate() {
@@ -30,7 +31,7 @@ export default function Navigate() {
 
   // Active Page
   const pathname = usePathname();
-  const url: any = ["/", "/horror", "/comedy", "/comic", "/novel"];
+  const url: any = ["/", "/horror", "/comedy", "/science", "/adventure"];
 
   useEffect(() => {
     const navLinks = document.querySelectorAll(".nav-link");
@@ -76,8 +77,22 @@ export default function Navigate() {
           </ul>
           <ul className="nav-list">
             <li className="nav-item">
+              <Link href="/adventure" className="nav-link">
+                <span>Adventure</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className="nav-list">
+            <li className="nav-item">
               <Link href="/comedy" className="nav-link">
                 <span>Comedy</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link href="/science" className="nav-link">
+                <span>Science</span>
               </Link>
             </li>
           </ul>
@@ -88,20 +103,37 @@ export default function Navigate() {
               </Link>
             </li>
           </ul>
-          <ul className="nav-list">
+          {/* Dropdown */}
+          {/* <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/comic" className="nav-link">
-                <span>Comic</span>
+              <Link href="#" className="nav-link">
+                <span>Catergories</span>
+                <i className="drop-down">
+                  <MdKeyboardArrowDown />
+                </i>
               </Link>
+              <ul className="sub-menu">
+                <li className="sub-item">
+                  <Link href="/adventure">Adventure</Link>
+                </li>
+                <li className="sub-item">
+                  <Link href="/action">Action</Link>
+                </li>
+                <li className="sub-item">
+                  <Link href="/comedy">Comedy</Link>
+                </li>
+                <li className="sub-item">
+                  <Link href="/science">Science</Link>
+                </li>
+                <li className="sub-item">
+                  <Link href="/horror">Horror</Link>
+                </li>
+                <li className="sub-item">
+                  <Link href="/romance">Romance</Link>
+                </li>
+              </ul>
             </li>
-          </ul>
-          <ul className="nav-list">
-            <li className="nav-item">
-              <Link href="/novel" className="nav-link">
-                <span>Novel</span>
-              </Link>
-            </li>
-          </ul>
+          </ul> */}
         </div>
         {/* Icon */}
         <ul className="icons-list">

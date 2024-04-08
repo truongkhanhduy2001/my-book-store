@@ -62,6 +62,7 @@
 .header .navbar .nav-menu .nav-list .nav-item .nav-link {
   text-decoration: none;
   color: var(--title-color);
+  display: flex;
 }
 
 .header .navbar .nav-menu .nav-list .nav-item .nav-link span {
@@ -95,6 +96,8 @@
   width: 100%;
   transition: 0.3s;
 }
+
+/* Dropdown */
 
 /* Icon */
 .header .navbar .icons-list {

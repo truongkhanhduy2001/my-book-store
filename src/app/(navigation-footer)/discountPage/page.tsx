@@ -81,6 +81,7 @@ export default function Discount() {
                         <sub>
                           <del>$28.60</del>
                         </sub>
+                        <span className="sale">-30%</span>
                       </p>
                       <div className="Discountcart-btn-view">
                         <i>

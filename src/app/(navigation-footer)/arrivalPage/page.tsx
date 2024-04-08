@@ -57,6 +57,9 @@ export default function Arrivals() {
               {data.slice(-12).map((item, index) => {
                 return (
                   <Link key={index} href="#" className="arrivals-card-view">
+                    <div className="book-label">
+                      <span className="new">NEW</span>
+                    </div>
                     <div className="arrivals-img-view">
                       <Image
                         src="/images/biasach1.png"

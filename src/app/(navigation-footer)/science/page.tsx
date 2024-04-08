@@ -2,8 +2,8 @@
 import "../books.css";
 import TitlePage from "@/app/components/titlePage/titlePage";
 import Book from "@/app/components/typeBook/book";
-export default function Comic() {
-  const dataComic = [
+export default function Science() {
+  const dataScience = [
     {
       title: "Dune",
       writer: "Author 1",
@@ -31,14 +31,14 @@ export default function Comic() {
   ];
   return (
     <>
-      {/* Comic */}
+      {/* Science */}
       <section className="section-books">
         <div className="section-books-container">
-          <TitlePage title="Comic" />
+          <TitlePage title="Science" />
         </div>
-        <Book data={dataComic} />
+        <Book data={dataScience} />
       </section>
-      {/* End Comic */}
+      {/* End Science */}
     </>
   );
 }

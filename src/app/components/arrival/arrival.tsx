@@ -100,7 +100,7 @@ export default function Arrival() {
     ],
   };
   return (
-    <section className="section-p2">
+    <section className="section-p2" id="newarrival">
       <div className="section-p2-container">
         <h2>New Arrivals</h2>
         <Link href="/arrivalPage" style={{ display: "inline-block" }}>
@@ -114,6 +114,9 @@ export default function Arrival() {
               {data.slice(-3).map((item, index) => {
                 return (
                   <Link key={index} href="#" className="arrivals-card">
+                    <div className="book-label">
+                      <span className="new">NEW</span>
+                    </div>
                     <div className="arrivals-img">
                       <Image
                         src="/images/biasach1.png"
@@ -163,6 +166,9 @@ export default function Arrival() {
               {data.slice(-3).map((item, index) => {
                 return (
                   <Link key={index} href="#" className="arrivals-card">
+                    <div className="book-label">
+                      <span className="new">NEW</span>
+                    </div>
                     <div className="arrivals-img">
                       <Image
                         src="/images/biasach1.png"

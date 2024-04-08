@@ -218,6 +218,23 @@
   font-size: 12px;
 }
 
+/* Label New */
+.section-p1
+  .best-seller-container
+  .best-seller
+  .best-seller-box
+  .best-seller-card
+  .best-seller-tag
+  .Sellerbook-price
+  span {
+  font-size: 14px;
+  border: 1px solid;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
 /* Button cart */
 .section-p1
   .best-seller-container

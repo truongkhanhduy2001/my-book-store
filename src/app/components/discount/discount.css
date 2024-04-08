@@ -285,6 +285,23 @@
   font-size: 12px;
 }
 
+/* Label New */
+.section-p3
+  .discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountbook-price
+  span {
+  font-size: 14px;
+  border: 1px solid;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
 /* Button Cart */
 .section-p3
   .discount-container

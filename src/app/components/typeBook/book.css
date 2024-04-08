@@ -186,3 +186,36 @@
   fill: red;
 }
 /* End */
+
+/* Responsive */
+
+@media screen and (max-width: 1199px) {
+  .books-container .books {
+    max-width: 1024px !important;
+  }
+  .books-container .books .books-box {
+    grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
+    gap: 50px !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .books-container .books {
+    max-width: 768px !important; /* Điều chỉnh max-width cho máy tính bảng và máy tính xách tay */
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .books-container .books {
+    max-width: 480px !important; /* Điều chỉnh max-width cho điện thoại di động */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .books-container .books {
+    max-width: 320px !important; /* Điều chỉnh max-width cho điện thoại di động nhỏ */
+  }
+  .books-container .books .books-box {
+    grid-template-columns: 1fr !important;
+  }
+}

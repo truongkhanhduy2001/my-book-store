@@ -81,6 +81,33 @@
   transition: 0.1s ease;
 }
 
+/* Label New */
+.section-p2-view
+  .arrivals-container-view
+  .arrivals-view
+  .arrivals-box-view
+  .arrivals-card-view
+  .book-label {
+  position: absolute;
+  top: 10%; /* căn theo chiều dọc */
+  left: 27%; /* căn theo chiều ngang */
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  background-color: var(--first-color);
+  border-radius: 5px;
+}
+
+.section-p2-view
+  .arrivals-container-view
+  .arrivals-view
+  .arrivals-box-view
+  .arrivals-card-view
+  .book-label
+  > span {
+  font-size: 12px;
+  padding: 2px 10px;
+}
+
 /* Image */
 .section-p2-view
   .arrivals-container-view

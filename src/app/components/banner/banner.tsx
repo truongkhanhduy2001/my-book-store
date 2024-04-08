@@ -6,7 +6,7 @@ import BannerSlider from "../slider/banner/Bannerslider";
 export default function Banner() {
   return (
     /* Main */
-    <section className="main-container">
+    <section className="main-container" id="banner">
       <div className="main">
         <div>
           <div className="main-tag">
