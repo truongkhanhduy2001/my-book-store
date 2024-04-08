@@ -2,6 +2,7 @@
 import "../books.css";
 import TitlePage from "@/app/components/titlePage/titlePage";
 import Book from "@/app/components/typeBook/book";
+import Paginate from "@/app/components/paginate/paginate";
 export default function Adventure() {
   const dataAdventure = [
     {

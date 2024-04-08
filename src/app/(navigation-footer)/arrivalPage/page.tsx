@@ -2,8 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./arrivalView.css";
-import { IoIosArrowBack } from "react-icons/io";
 import { useState, useEffect } from "react";
+import Paginate from "@/app/components/paginate/paginate";
+import { IoIosArrowBack } from "react-icons/io";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -105,6 +106,7 @@ export default function Arrivals() {
                 );
               })}
             </div>
+            <Paginate />
           </div>
         </div>
       </section>

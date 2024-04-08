@@ -2,12 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./sellerView.css";
+import { useState, useEffect } from "react";
+import Paginate from "@/app/components/paginate/paginate";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
-import { useState, useEffect } from "react";
+
 export default function Seller() {
   const data = [
     {
@@ -108,6 +110,7 @@ export default function Seller() {
                 );
               })}
             </div>
+            <Paginate />
           </div>
         </div>
       </section>

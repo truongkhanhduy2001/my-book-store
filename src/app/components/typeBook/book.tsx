@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "./book.css";
 import { useState, useEffect } from "react";
+import Paginate from "../paginate/paginate";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -38,11 +39,15 @@ export default function Book({ data }: BookProps) {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
+
+  // Page
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <div className="books-container">
       <div className="books">
         <div className="books-box">
-          {data.slice(-12).map((item, index) => {
+          {data.slice(-16).map((item, index) => {
             return (
               <Link key={index} href="#" className="books-card">
                 <div className="books-image">
@@ -85,6 +90,7 @@ export default function Book({ data }: BookProps) {
             );
           })}
         </div>
+        <Paginate />
       </div>
     </div>
   );

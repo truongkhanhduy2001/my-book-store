@@ -15,6 +15,12 @@ import {
   FaInstagram,
   FaBookOpen,
   FaArrowRight,
+  FaCcVisa,
+  FaCcAmex,
+  FaCcMastercard,
+  FaCreditCard,
+  FaCcPaypal,
+  FaCcDiscover,
 } from "react-icons/fa";
 
 export default function Footer() {
@@ -200,12 +206,57 @@ export default function Footer() {
       </div>
       {/* End icon social */}
       <div className="end">
+        <ul className="footer-payments">
+          <li className="payments">
+            <Link href="#" className="link-payments">
+              <i className="visa" aria-hidden="true">
+                <FaCcVisa />
+              </i>
+            </Link>
+          </li>
+          <li className="payments">
+            <Link href="#" className="link-payments">
+              <i className="credit-card" aria-hidden="true">
+                <FaCreditCard />
+              </i>
+            </Link>
+          </li>
+          <li className="payments">
+            <Link href="#" className="link-payments">
+              <i className="paypal" aria-hidden="true">
+                <FaCcPaypal />
+              </i>
+            </Link>
+          </li>
+          <li className="payments">
+            <Link href="#" className="link-payments">
+              <i className="mastercard" aria-hidden="true">
+                <FaCcMastercard />
+              </i>
+            </Link>
+          </li>
+          <li className="payments">
+            <Link href="#" className="link-payments">
+              <i className="discover" aria-hidden="true">
+                <FaCcDiscover />
+              </i>
+            </Link>
+          </li>
+          <li className="payments">
+            <Link href="#" className="link-payments">
+              <i className="amex" aria-hidden="true">
+                <FaCcAmex />
+              </i>
+            </Link>
+          </li>
+        </ul>
         Design By
         <span>
           <i className="icon-ds"></i>Trương Khánh Duy, Nguyễn Văn Điểm
         </span>
         | All rights reservel!
       </div>
+      {/* Scroll up */}
       <div onClick={scrollToTop} className="scroll-up">
         <span>
           <FaArrowUp />

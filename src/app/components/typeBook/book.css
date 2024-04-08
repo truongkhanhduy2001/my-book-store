@@ -185,10 +185,35 @@
   .HeartIcon.active {
   fill: red;
 }
+
+/* Page */
+.books-container .books .pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.books-container .books .pagination span {
+  color: var(--title-color);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.books-container .books .pagination button {
+  background-color: var(--first-color);
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.books-container .books .pagination button:hover {
+  box-shadow: 0 4px 32px var(--first-color);
+}
+
 /* End */
 
 /* Responsive */
-
 @media screen and (max-width: 1199px) {
   .books-container .books {
     max-width: 1024px !important;
