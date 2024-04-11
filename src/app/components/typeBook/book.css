@@ -121,11 +121,18 @@
   transition: 0.25s;
 }
 
-.books-container .books .books-box .books-card .books-tag .books-cart-btn p {
+.books-container
+  .books
+  .books-box
+  .books-card
+  .books-tag
+  .books-cart-btn
+  .add-cart {
   font-weight: bold;
   font-size: 12px;
   margin-left: 30px;
   transition: 0.25s;
+  color: var(--first-color);
 }
 
 .books-container
@@ -214,7 +221,7 @@
 /* End */
 
 /* Responsive */
-@media screen and (max-width: 1199px) {
+@media (max-width: 1199px) {
   .books-container .books {
     max-width: 1024px !important;
   }
@@ -224,19 +231,19 @@
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .books-container .books {
-    max-width: 768px !important; /* Điều chỉnh max-width cho máy tính bảng và máy tính xách tay */
+    max-width: 700px !important; /* Điều chỉnh max-width cho máy tính bảng và máy tính xách tay */
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media (max-width: 790px) {
   .books-container .books {
     max-width: 480px !important; /* Điều chỉnh max-width cho điện thoại di động */
   }
 }
 
-@media only screen and (max-width: 480px) {
+@media (max-width: 480px) {
   .books-container .books {
     max-width: 320px !important; /* Điều chỉnh max-width cho điện thoại di động nhỏ */
   }

@@ -25,15 +25,22 @@ export default function Seller() {
       title: "Drama",
     },
   ];
+
+  // Login condition
+  const [checkLogin, setCheckLogin] = useState(false);
+
   // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Sellercart-btn-view");
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
+        if (!checkLogin) {
+          window.location.href = "/login";
+        }
         e.preventDefault();
       });
     });
-  }, []);
+  }, [checkLogin]);
 
   // Icon heart
   const handleHeart = (e: any) => {
@@ -89,7 +96,7 @@ export default function Seller() {
                         <i>
                           <FaShoppingCart />
                         </i>
-                        <p>Add cart</p>
+                        <p className="add-cart">Add cart</p>
                       </div>
                       <div className="Icon-Container">
                         <i>

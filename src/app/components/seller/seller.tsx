@@ -45,15 +45,21 @@ export default function Seller() {
     };
   }, []);
 
+  // Login condition
+  const [checkLogin, setCheckLogin] = useState(false);
+
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Sellercart-btn");
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
+        if (!checkLogin) {
+          window.location.href = "/login";
+        }
         e.preventDefault();
       });
     });
-  }, []);
+  }, [checkLogin]);
 
   // Icon heart
   const handleHeart = (e: any) => {
@@ -162,7 +168,7 @@ export default function Seller() {
                         <i>
                           <FaShoppingCart />
                         </i>
-                        <p>Add cart</p>
+                        <p className="add-cart">Add cart</p>
                       </div>
                       <div className="Icon-Container">
                         <i>

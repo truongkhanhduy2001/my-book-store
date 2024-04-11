@@ -348,12 +348,12 @@
   .discount-card
   .discount-tag
   .Discountcart-btn
-  p,
-.cart-btn:focus {
+  .add-cart {
   font-weight: bold;
   font-size: 12px;
   margin-left: 30px;
   transition: 0.25s;
+  color: var(--first-color);
 }
 
 .section-p3

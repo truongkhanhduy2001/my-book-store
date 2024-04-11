@@ -23,16 +23,22 @@ interface BookProps {
 }
 
 export default function Book({ data }: BookProps) {
+  // Login condition
+  const [checkLogin, setCheckLogin] = useState(false);
+
   // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".books-cart-btn");
     console.log(btntocart);
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
+        if (!checkLogin) {
+          window.location.href = "/login";
+        }
         e.preventDefault();
       });
     });
-  }, []);
+  }, [checkLogin]);
 
   // Icon heart
   const handleHeart = (e: any) => {
@@ -72,7 +78,7 @@ export default function Book({ data }: BookProps) {
                     <i>
                       <FaShoppingCart />
                     </i>
-                    <p> Add cart</p>
+                    <p className="add-cart"> Add cart</p>
                   </div>
                   <div className="Icon-Container">
                     <i>

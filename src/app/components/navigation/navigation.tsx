@@ -4,17 +4,17 @@ import Link from "next/link";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
 import { FaList, FaBookOpen } from "react-icons/fa";
 import { VscChromeClose, VscAccount } from "react-icons/vsc";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { IoIosClose } from "react-icons/io";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
 export default function Navigate() {
-  // First space
-  const [check, setCheck] = useState(false);
+  // Login Condition
+  const [checkLogin, setCheckLogin] = useState(false);
 
   // Box shadow navbar
   useEffect(() => {
     const handleScroll = () => {
-      const navigation = document.querySelector(".header") as HTMLElement;
+      const navigation = document.querySelector("nav") as HTMLElement;
       if (navigation) {
         if (window.scrollY > 5) {
           navigation.style.boxShadow = "0 2px 4px rgba(0, 122, 255, 0.5)";
@@ -55,89 +55,62 @@ export default function Navigate() {
   }, [pathname]);
 
   return (
-    <header className="header">
-      <nav className="navbar">
+    <nav className="nav-main">
+      <div className="nav-bar">
+        <i className="open-menu">
+          <FaList />
+        </i>
         <div className="logo">
-          <Link href="/">
+          <Link href="/" className="logo-link">
             <i>
               <FaBookOpen />
             </i>
           </Link>
         </div>
         <div className="nav-menu">
-          <span className="nav-list-icon">
-            <FaList />
-          </span>
+          <div className="logo-toggle">
+            <div className="logo">
+              <Link href="/" className="logo-link">
+                <i>
+                  <FaBookOpen />
+                </i>
+              </Link>
+            </div>
+            <i className="close">
+              <IoIosClose />
+            </i>
+          </div>
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="/" className="nav-link active">
-                <span>Home</span>
+                Home
               </Link>
             </li>
-          </ul>
-          <ul className="nav-list">
             <li className="nav-item">
               <Link href="/adventure" className="nav-link">
-                <span>Adventure</span>
+                Adventure
               </Link>
             </li>
-          </ul>
-          <ul className="nav-list">
             <li className="nav-item">
               <Link href="/comedy" className="nav-link">
-                <span>Comedy</span>
+                Comedy
               </Link>
             </li>
-          </ul>
-          <ul className="nav-list">
             <li className="nav-item">
               <Link href="/science" className="nav-link">
-                <span>Science</span>
+                Science
               </Link>
             </li>
-          </ul>
-          <ul className="nav-list">
             <li className="nav-item">
               <Link href="/horror" className="nav-link">
-                <span>Horror</span>
+                Horror
               </Link>
             </li>
           </ul>
-          {/* Dropdown */}
-          {/* <ul className="nav-list">
-            <li className="nav-item">
-              <Link href="#" className="nav-link">
-                <span>Catergories</span>
-                <i className="drop-down">
-                  <MdKeyboardArrowDown />
-                </i>
-              </Link>
-              <ul className="sub-menu">
-                <li className="sub-item">
-                  <Link href="/adventure">Adventure</Link>
-                </li>
-                <li className="sub-item">
-                  <Link href="/action">Action</Link>
-                </li>
-                <li className="sub-item">
-                  <Link href="/comedy">Comedy</Link>
-                </li>
-                <li className="sub-item">
-                  <Link href="/science">Science</Link>
-                </li>
-                <li className="sub-item">
-                  <Link href="/horror">Horror</Link>
-                </li>
-                <li className="sub-item">
-                  <Link href="/romance">Romance</Link>
-                </li>
-              </ul>
-            </li>
-          </ul> */}
         </div>
         {/* Icon */}
         <ul className="icons-list">
-          {!check ? (
+          {!checkLogin ? (
             <li className="book-accounts">
               <Link href="/login">
                 <i>
@@ -152,7 +125,7 @@ export default function Navigate() {
                 <Link href="#" className="user-details">
                   <p>Account Details</p>
                 </Link>
-                <Link href="#" className="user-details">
+                <Link href="/login" className="user-details">
                   <p>Logout</p>
                 </Link>
               </div>
@@ -170,22 +143,47 @@ export default function Navigate() {
             </div>
           </li>
           {/* Heart */}
-          <li className="book-heart">
-            <i>
-              <PiHeartStraight />
-            </i>
-          </li>
-
-          <li className="book-cart">
-            <Link href="#">
-              <i>
-                <PiHandbag />
-              </i>
-              <span className="count-cart">1</span>
-            </Link>
-          </li>
+          {!checkLogin ? (
+            <li className="book-heart">
+              <Link href="/login">
+                <i>
+                  <PiHeartStraight />
+                </i>
+              </Link>
+              <span className="count-wish">0</span>
+            </li>
+          ) : (
+            <li className="book-heart">
+              <Link href="/wish">
+                <i>
+                  <PiHeartStraight />
+                </i>
+              </Link>
+              <span className="count-wish">0</span>
+            </li>
+          )}
+          {/* Cart */}
+          {!checkLogin ? (
+            <li className="book-cart">
+              <Link href="/login">
+                <i>
+                  <PiHandbag />
+                </i>
+                <span className="count-cart">0</span>
+              </Link>
+            </li>
+          ) : (
+            <li className="book-cart">
+              <Link href="/cart">
+                <i>
+                  <PiHandbag />
+                </i>
+                <span className="count-cart">0</span>
+              </Link>
+            </li>
+          )}
         </ul>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 }

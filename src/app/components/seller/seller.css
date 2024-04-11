@@ -281,11 +281,12 @@
   .best-seller-card
   .best-seller-tag
   .Sellercart-btn
-  p {
+  .add-cart {
   font-weight: bold;
   font-size: 12px;
   margin-left: 30px;
   transition: 0.25s;
+  color: var(--first-color);
 }
 
 .section-p1
