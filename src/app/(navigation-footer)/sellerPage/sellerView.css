@@ -168,11 +168,9 @@
   .best-seller-tag-view
   .Sellerbook-price-view {
   margin-top: 8px;
-  font-weight: bold;
   margin-bottom: 15px;
-  color: var(--title-color);
-  font-weight: bold;
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .section-p1-view
@@ -182,11 +180,25 @@
   .best-seller-card-view
   .best-seller-tag-view
   .Sellerbook-price-view
-  sub {
-  font-weight: 100;
-  padding: 0 5px;
-  color: var(--text-color);
-  font-size: 12px;
+  h3 {
+  color: var(--title-color);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.section-p1-view
+  .best-seller-container-view
+  .best-seller-view
+  .best-seller-box-view
+  .best-seller-card-view
+  .best-seller-tag-view
+  .Sellerbook-price-view
+  h4 {
+  text-decoration: line-through;
+  margin-left: 6px;
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--title-color);
 }
 
 /* Label New */
@@ -204,6 +216,7 @@
   color: var(--white-color);
   padding: 2px 5px;
   border-radius: 5px;
+  margin-left: 6px;
 }
 
 /* Button cart */

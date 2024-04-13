@@ -15,15 +15,27 @@ export default function Seller() {
   const data = [
     {
       title: "Dune",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
       title: "Anime",
+      price: "100",
+      discount: "60",
+      time: "old",
     },
     {
       title: "Naruto",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
       title: "Drama",
+      price: "100",
+      discount: "67",
+      time: "old",
     },
   ];
 
@@ -136,8 +148,18 @@ export default function Seller() {
           <div className="best-seller-box slider-container">
             <Slider {...settings}>
               {data.slice(-4).map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
                 return (
                   <Link key={index} href="#" className="best-seller-card">
+                    {time == "new" && (
+                      <div className="best-seller-label">
+                        <span className="new">NEW</span>
+                      </div>
+                    )}
                     <div className="best-seller-img">
                       <Image
                         src="/images/biasach1.png"
@@ -153,17 +175,41 @@ export default function Seller() {
                     </div>
                     <div className="best-seller-tag">
                       <h2>{item.title}</h2>
-                      <p className="Sellerwriter">John Deo</p>
+                      <div className="Sellerwriter">John Deo</div>
                       <div className="Sellercategories">
                         Thriller, Horror, Romance
                       </div>
-                      <p className="Sellerbook-price">
-                        $25.50
-                        <sub>
-                          <del>$28.60</del>
-                        </sub>
-                        <span className="sale">-30%</span>
-                      </p>
+                      <div className="Sellerbook-price">
+                        {item.discount != "" && (
+                          <h4
+                            style={{
+                              textDecoration: "none",
+                              color: "hsl(230, 70%, 16%)",
+                              fontWeight: "bold",
+                              marginRight: "8px",
+                            }}
+                          >
+                            ${item.discount}
+                          </h4>
+                        )}
+                        <h3
+                          style={
+                            item.discount != ""
+                              ? {
+                                  textDecoration: "line-through",
+                                  color: "hsl(230, 16%, 45%)",
+                                  fontWeight: "400",
+                                }
+                              : { textDecoration: "none" }
+                          }
+                        >
+                          ${item.price}
+                        </h3>
+
+                        {item.discount != "" && (
+                          <span className="sale">-{per}%</span>
+                        )}
+                      </div>
                       <div className="Sellercart-btn">
                         <i>
                           <FaShoppingCart />

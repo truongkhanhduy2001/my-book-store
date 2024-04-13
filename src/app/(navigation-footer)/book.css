@@ -1,0 +1,23 @@
+.section-books {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--margin-top-view);
+}
+
+.section-books .books-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--margin-top-font);
+}
+
+.section-books .books-container .books {
+  max-width: var(--width-home);
+  width: 100%;
+}
+
+/* Card */
+.section-books .books-container .books .books-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
+}

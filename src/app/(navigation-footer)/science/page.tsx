@@ -1,32 +1,33 @@
 "use client";
-import "../books.css";
+import "../book.css";
 import TitlePage from "@/app/components/titlePage/titlePage";
-import Book from "@/app/components/typeBook/book";
+import Paginate from "@/app/components/paginate/paginate";
+import CardBook from "@/app/components/cardBook/cardBook";
 export default function Science() {
-  const dataScience = [
+  const data = [
     {
       title: "Dune",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
-      title: "Dragon",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      title: "Anime",
+      price: "100",
+      discount: "45",
+      time: "new",
     },
     {
       title: "Naruto",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      price: "100",
+      discount: "",
+      time: "old",
     },
     {
       title: "Drama",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      price: "100",
+      discount: "",
+      time: "old",
     },
   ];
   return (
@@ -36,7 +37,21 @@ export default function Science() {
         <div className="section-books-container">
           <TitlePage title="Science" />
         </div>
-        <Book data={dataScience} />
+        <div className="books-container">
+          <div className="books">
+            <div className="books-box">
+              {data.slice(-16).map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
+                return <CardBook key={index} item={item} per={per} />;
+              })}
+            </div>
+            <Paginate />
+          </div>
+        </div>
       </section>
       {/* End Science */}
     </>

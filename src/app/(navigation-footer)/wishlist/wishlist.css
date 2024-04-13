@@ -1,48 +1,41 @@
-/* New Arrivals */
+/* Wish List */
 /* Header */
-.section-p2-view {
+.section-wish-list {
   display: flex;
   flex-direction: column;
   margin-top: var(--margin-top-view);
 }
 
-.section-p2-view .section-p2-container-view {
+.section-wish-list .section-wish-list-container {
   max-width: var(--width-home);
   width: 100%;
   margin: auto;
   display: flex;
 }
 
-.section-p2-view .section-p2-container-view .icon-arrow2-view {
-  display: flex;
-  margin-top: 2px;
-  font-size: 35px;
-  color: var(--title-color);
-}
-
-.section-p2-view .section-p2-container-view .icon-arrow2-view h2 {
+.section-wish-list .section-wish-list-container h2 {
   font-size: 25px;
   color: var(--title-color);
   font-weight: bold;
   font-style: normal;
 }
 
-/* Body */
-.section-p2-view .arrivals-container-view {
+.section-wish-list .wish-list-container {
   display: flex;
   justify-content: center;
   margin-top: var(--margin-top-font);
 }
 
-.section-p2-view .arrivals-container-view .arrivals-view {
+.section-wish-list .wish-list-container .wish-list {
   max-width: var(--width-home);
   width: 100%;
 }
 
 /* Card */
-.section-p2-view .arrivals-container-view .arrivals-view .arrivals-box-view {
+.section-wish-list .wish-list-container .wish-list .wish-list-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 15px;
 }
+
 /* End */

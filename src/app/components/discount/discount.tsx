@@ -16,18 +16,30 @@ export default function Discount() {
     {
       title: "Dune",
       type: ["Horror"],
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
       title: "Dune",
       type: ["Horror", "Comedy"],
+      price: "100",
+      discount: "60",
+      time: "old",
     },
     {
       title: "Anime",
       type: "Science",
+      price: "100",
+      discount: "",
+      time: "old",
     },
     {
       title: "Anime",
       type: "Adventure",
+      price: "100",
+      discount: "67",
+      time: "old",
     },
   ];
 
@@ -202,8 +214,18 @@ export default function Discount() {
           <div className="discount-box slider-container">
             <Slider {...settings}>
               {dataList.slice(-4).map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
                 return (
                   <Link key={index} href="#" className="discount-card">
+                    {time == "new" && (
+                      <div className="discount-label">
+                        <span className="new">NEW</span>
+                      </div>
+                    )}
                     <div className="discount-img">
                       <Image
                         src="/images/biasach1.png"
@@ -219,15 +241,39 @@ export default function Discount() {
                     </div>
                     <div className="discount-tag">
                       <h2>{item.title}</h2>
-                      <p className="Discountwriter">John Deo</p>
+                      <div className="Discountwriter">John Deo</div>
                       <div className="Discountcategories">{item.type}</div>
-                      <p className="Discountbook-price">
-                        $25.50
-                        <sub>
-                          <del>$28.60</del>
-                        </sub>
-                        <span className="sale">-30%</span>
-                      </p>
+                      <div className="Discountbook-price">
+                        {item.discount != "" && (
+                          <h4
+                            style={{
+                              textDecoration: "none",
+                              color: "hsl(230, 70%, 16%)",
+                              fontWeight: "bold",
+                              marginRight: "8px",
+                            }}
+                          >
+                            ${item.discount}
+                          </h4>
+                        )}
+                        <h3
+                          style={
+                            item.discount != ""
+                              ? {
+                                  textDecoration: "line-through",
+                                  color: "hsl(230, 16%, 45%)",
+                                  fontWeight: "400",
+                                }
+                              : { textDecoration: "none" }
+                          }
+                        >
+                          ${item.price}
+                        </h3>
+
+                        {item.discount != "" && (
+                          <span className="sale">-{per}%</span>
+                        )}
+                      </div>
                       <div className="Discountcart-btn">
                         <i>
                           <FaShoppingCart />

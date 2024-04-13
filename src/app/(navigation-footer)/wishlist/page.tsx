@@ -1,9 +1,9 @@
 "use client";
-import "../book.css";
-import TitlePage from "@/app/components/titlePage/titlePage";
+import Link from "next/link";
+import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
-export default function Comedy() {
+export default function WishList() {
   const data = [
     {
       title: "Dune",
@@ -30,17 +30,18 @@ export default function Comedy() {
       time: "old",
     },
   ];
+
   return (
     <>
-      {/* Comedy */}
-      <section className="section-books">
-        <div className="section-books-container">
-          <TitlePage title="Comedy" />
+      {/* Arrivals */}
+      <section className="section-wish-list">
+        <div className="section-wish-list-container">
+          <h2>Wish List</h2>
         </div>
-        <div className="books-container">
-          <div className="books">
-            <div className="books-box">
-              {data.slice(-16).map((item, index) => {
+        <div className="wish-list-container">
+          <div className="wish-list">
+            <div className="wish-list-box">
+              {data.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
@@ -53,7 +54,7 @@ export default function Comedy() {
           </div>
         </div>
       </section>
-      {/* End Comedy */}
+      {/* End Arrivals */}
     </>
   );
 }

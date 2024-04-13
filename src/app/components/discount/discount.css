@@ -181,6 +181,33 @@
   border-color: var(--first-color);
 }
 
+/* Label New */
+.section-p3
+  .discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-label {
+  position: absolute;
+  top: 10%; /* căn theo chiều dọc */
+  left: 27%; /* căn theo chiều ngang */
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  background-color: var(--first-color);
+  border-radius: 5px;
+}
+
+.section-p3
+  .discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-label
+  > span {
+  font-size: 12px;
+  padding: 2px 10px;
+}
+
 /* Image */
 .section-p3
   .discount-container
@@ -265,10 +292,9 @@
   .discount-tag
   .Discountbook-price {
   margin-top: 8px;
-  font-weight: bold;
   margin-bottom: 15px;
-  color: var(--title-color);
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .section-p3
@@ -278,11 +304,25 @@
   .discount-card
   .discount-tag
   .Discountbook-price
-  sub {
-  font-weight: 100;
-  padding: 0 5px;
-  color: var(--text-color);
-  font-size: 12px;
+  h3 {
+  color: var(--title-color);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.section-p3
+  .discount-container
+  .discount
+  .discount-box
+  .discount-card
+  .discount-tag
+  .Discountbook-price
+  h4 {
+  text-decoration: line-through;
+  margin-left: 6px;
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--title-color);
 }
 
 /* Label New */
@@ -300,6 +340,7 @@
   color: var(--white-color);
   padding: 2px 5px;
   border-radius: 5px;
+  margin-left: 6px;
 }
 
 /* Button Cart */

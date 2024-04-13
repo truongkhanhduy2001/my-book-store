@@ -1,27 +1,35 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import "./arrivalView.css";
 import { useState, useEffect } from "react";
 import Paginate from "@/app/components/paginate/paginate";
+import CardBook from "@/app/components/cardBook/cardBook";
 import { IoIosArrowBack } from "react-icons/io";
-import { LuEye } from "react-icons/lu";
-import { FiHeart } from "react-icons/fi";
-import { FaArrowRightArrowLeft } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
-export default function Arrivals() {
+export default function ArrivalsView() {
   const data = [
     {
       title: "Dune",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
       title: "Anime",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
       title: "Naruto",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
       title: "Drama",
+      price: "100",
+      discount: "",
+      time: "new",
     },
   ];
 
@@ -62,54 +70,12 @@ export default function Arrivals() {
           <div className="arrivals-view">
             <div className="arrivals-box-view">
               {data.slice(-12).map((item, index) => {
-                return (
-                  <Link key={index} href="#" className="arrivals-card-view">
-                    <div className="book-label">
-                      <span className="new">NEW</span>
-                    </div>
-                    <div className="arrivals-img-view">
-                      <Image
-                        src="/images/biasach1.png"
-                        alt="Main Image"
-                        width={100}
-                        height={100}
-                        priority={true}
-                        style={{
-                          maxWidth: "100%",
-                          height: "auto",
-                        }}
-                      ></Image>
-                    </div>
-                    <div className="arrivals-tag-view">
-                      <h2>Dune</h2>
-                      <p className="Arrivalwriter-view">John Deo</p>
-                      <div className="Arrivalcategories-view">
-                        Thriller, Horror, Romance
-                      </div>
-                      <p className="Arrivalbook-price-view">$25.50</p>
-                      <div className="Arrivalcart-btn-view">
-                        <i>
-                          <FaShoppingCart />
-                        </i>
-                        <p className="add-cart"> Add cart</p>
-                      </div>
-                      <div className="Icon-Container">
-                        <i>
-                          <LuEye />
-                        </i>
-                        <i>
-                          <FaArrowRightArrowLeft />
-                        </i>
-                        <i>
-                          <FiHeart
-                            className="HeartIcon"
-                            onClick={handleHeart}
-                          />
-                        </i>
-                      </div>
-                    </div>
-                  </Link>
-                );
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
+                return <CardBook key={index} item={item} per={per} />;
               })}
             </div>
             <Paginate />

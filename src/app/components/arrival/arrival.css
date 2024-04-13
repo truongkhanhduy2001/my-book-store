@@ -102,7 +102,7 @@
   .arrivals
   .arrivals-box
   .arrivals-card
-  .book-label {
+  .arrivals-label {
   position: absolute;
   top: 15%; /* căn theo chiều dọc */
   left: 10%; /* căn theo chiều ngang */
@@ -117,7 +117,7 @@
   .arrivals
   .arrivals-box
   .arrivals-card
-  .book-label
+  .arrivals-label
   > span {
   font-size: 12px;
   padding: 2px 10px;
@@ -207,11 +207,50 @@
   .arrivals-tag
   .Arrivalbook-price {
   margin-top: 8px;
-  font-weight: bold;
   margin-bottom: 15px;
+}
+
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalbook-price
+  h3 {
   color: var(--title-color);
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
+}
+
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalbook-price
+  h4 {
+  text-decoration: line-through;
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--title-color);
+}
+
+/* Label New */
+.section-p2
+  .arrivals-container
+  .arrivals
+  .arrivals-box
+  .arrivals-card
+  .arrivals-tag
+  .Arrivalbook-price
+  span {
+  font-size: 14px;
+  border: 1px solid;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  border-radius: 5px;
 }
 
 /* Button Cart */

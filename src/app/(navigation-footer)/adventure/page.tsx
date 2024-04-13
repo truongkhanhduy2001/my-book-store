@@ -1,33 +1,33 @@
 "use client";
-import "../books.css";
+import "../book.css";
 import TitlePage from "@/app/components/titlePage/titlePage";
-import Book from "@/app/components/typeBook/book";
 import Paginate from "@/app/components/paginate/paginate";
+import CardBook from "@/app/components/cardBook/cardBook";
 export default function Adventure() {
-  const dataAdventure = [
+  const data = [
     {
-      title: "English",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      title: "Dune",
+      price: "100",
+      discount: "",
+      time: "new",
     },
     {
-      title: "France",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      title: "Anime",
+      price: "100",
+      discount: "45",
+      time: "new",
     },
     {
-      title: "One Piece",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      title: "Naruto",
+      price: "100",
+      discount: "",
+      time: "old",
     },
     {
       title: "Drama",
-      writer: "Author 1",
-      categories: "Category 1, Category 2",
-      price: "$20.00",
+      price: "100",
+      discount: "",
+      time: "old",
     },
   ];
   return (
@@ -37,7 +37,21 @@ export default function Adventure() {
         <div className="section-books-container">
           <TitlePage title="Adventure" />
         </div>
-        <Book data={dataAdventure} />
+        <div className="books-container">
+          <div className="books">
+            <div className="books-box">
+              {data.slice(-16).map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
+                return <CardBook key={index} item={item} per={per} />;
+              })}
+            </div>
+            <Paginate />
+          </div>
+        </div>
       </section>
       {/* End Adventure */}
     </>
