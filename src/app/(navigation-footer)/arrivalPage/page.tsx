@@ -4,7 +4,7 @@ import "./arrivalView.css";
 import { useState, useEffect } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
-import { IoIosArrowBack } from "react-icons/io";
+
 export default function ArrivalsView() {
   const data = [
     {
@@ -33,38 +33,19 @@ export default function ArrivalsView() {
     },
   ];
 
-  // Login condition
-  const [checkLogin, setCheckLogin] = useState(false);
-
-  // Button cart
-  useEffect(() => {
-    const btntocart = document.querySelectorAll(".Arrivalcart-btn-view");
-    btntocart.forEach((item, index) => {
-      item.addEventListener("click", (e) => {
-        if (!checkLogin) {
-          window.location.href = "/login";
-        }
-        e.preventDefault();
-      });
-    });
-  }, [checkLogin]);
-
-  // Icon heart
-  const handleHeart = (e: any) => {
-    e.target.closest(".HeartIcon").classList.toggle("active");
-    e.preventDefault();
-  };
   return (
     <>
       {/* Arrivals */}
       <section className="section-p2-view">
         <div className="section-p2-container-view">
-          <Link href="/" style={{ display: "inline-block" }}>
-            <i className="icon-arrow2-view">
-              <IoIosArrowBack />
-              <h2>New Arrivals</h2>
-            </i>
-          </Link>
+          <ul className="page-link">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/arrivalPage">New arrivals</Link>
+            </li>
+          </ul>
         </div>
         <div className="arrivals-container-view">
           <div className="arrivals-view">

@@ -1,6 +1,7 @@
 "use client";
 import "../book.css";
-import TitlePage from "@/app/components/titlePage/titlePage";
+import Link from "next/link";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 export default function Science() {
@@ -9,38 +10,59 @@ export default function Science() {
       title: "Dune",
       price: "100",
       discount: "",
+      type: "Science",
       time: "new",
     },
     {
       title: "Anime",
       price: "100",
       discount: "45",
+      type: "Science",
       time: "new",
     },
     {
       title: "Naruto",
       price: "100",
       discount: "",
+      type: "Science",
       time: "old",
     },
     {
       title: "Drama",
       price: "100",
       discount: "",
+      type: "Science",
       time: "old",
     },
   ];
+
+  const [dataLists, setDataList] = useState(data);
+
+  useLayoutEffect(() => {
+    const filterData = dataLists.filter((item: any) => {
+      return item.type.includes("Science");
+    });
+    setDataList(filterData);
+  }, []);
+
   return (
     <>
       {/* Science */}
       <section className="section-books">
         <div className="section-books-container">
-          <TitlePage title="Science" />
+          <ul className="page-link">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/science">Science</Link>
+            </li>
+          </ul>
         </div>
         <div className="books-container">
           <div className="books">
             <div className="books-box">
-              {data.slice(-16).map((item, index) => {
+              {dataLists.slice(-16).map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *

@@ -161,6 +161,20 @@
   .nav-bar
   .icons-list
   .book-accounts-name
+  .book-user-container::before {
+  position: absolute;
+  z-index: 0;
+  content: "";
+  width: 100%;
+  height: 40px;
+  top: -30px;
+  background-color: transparent;
+}
+
+.nav-main
+  .nav-bar
+  .icons-list
+  .book-accounts-name
   .book-user-container
   .user-details {
   font-weight: 400;
@@ -180,7 +194,6 @@
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  margin: 0px;
   padding: 8px 16px;
   color: var(--text-color);
   font-size: 14px;
@@ -197,8 +210,34 @@
   .book-accounts-name
   .book-user-container
   .user-details
-  p:hover {
+  p
+  i {
+  margin-right: 10px;
+}
+
+/* My account */
+.nav-main
+  .nav-bar
+  .icons-list
+  .book-accounts-name
+  .book-user-container
+  .user-details
+  .accounts:hover {
+  font-weight: 600;
   color: var(--first-color);
+  opacity: 0.7;
+}
+
+/* Logout */
+.nav-main
+  .nav-bar
+  .icons-list
+  .book-accounts-name
+  .book-user-container
+  .user-details
+  .logouts:hover {
+  font-weight: 600;
+  color: red;
   opacity: 0.7;
 }
 

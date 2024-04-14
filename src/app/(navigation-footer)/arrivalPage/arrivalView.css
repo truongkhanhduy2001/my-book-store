@@ -13,18 +13,34 @@
   display: flex;
 }
 
-.section-p2-view .section-p2-container-view .icon-arrow2-view {
-  display: flex;
-  margin-top: 2px;
-  font-size: 35px;
+.section-p2-view .section-p2-container-view .page-link {
+  display: inline-block;
+}
+
+.section-p2-view .section-p2-container-view .page-link li {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.section-p2-view .section-p2-container-view .page-link li a {
   color: var(--title-color);
 }
 
-.section-p2-view .section-p2-container-view .icon-arrow2-view h2 {
-  font-size: 25px;
+.section-p2-view .section-p2-container-view .page-link li + li {
+  margin-left: 10px;
+}
+
+.section-p2-view .section-p2-container-view .page-link li + li::before {
   color: var(--title-color);
-  font-weight: bold;
-  font-style: normal;
+  content: "/";
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.section-p2-view .section-p2-container-view .page-link li a:hover {
+  color: var(--first-color);
 }
 
 /* Body */

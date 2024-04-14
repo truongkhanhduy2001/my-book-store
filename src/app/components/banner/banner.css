@@ -1,37 +1,38 @@
 /* Main container */
-.main-container {
+.banner-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.main-container .main {
+.banner-container .banner {
   max-width: var(--width-home);
-  grid-template-columns: 435px 745px;
-  align-items: center;
+  width: 100%;
 }
 
-.main-container .main div:first-child {
+.banner-container .banner div:first-child {
   display: flex;
 }
-.main-container .main .main-tag {
+
+.banner-container .banner .banner-tag {
   flex-direction: column;
   font-weight: bold;
   margin-right: 20px;
 }
-.main-container .main .main-tag h1 {
+
+.banner-container .banner .banner-tag h1 {
   font-size: var(--h1);
   color: var(--title-color);
   font-family: sans-serif;
 }
 
-.main-container .main .main-tag h1 span {
+.banner-container .banner .banner-tag h1 span {
   color: var(--first-color);
   flex-direction: none;
 }
 
-.main-container .main .main-tag p {
+.banner-container .banner .banner-tag p {
   font-size: var(--p);
   width: 650px;
   text-align: justify;
@@ -39,7 +40,8 @@
   color: var(--text-color);
   font-family: sans-serif;
 }
-.main-container .main .main-tag .main-btn {
+
+.banner-container .banner .banner-tag .banner-btn {
   margin-top: 40px;
   color: var(--white-color);
   padding: 10px 20px;
@@ -49,6 +51,7 @@
   transition: box-shadow 0.4s;
   font-size: 16px;
 }
-.main-container .main .main-tag .main-btn:hover {
+
+.banner-container .banner .banner-tag .banner-btn:hover {
   box-shadow: 0 4px 32px var(--first-color);
 }

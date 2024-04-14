@@ -47,24 +47,6 @@ export default function Arrival() {
     },
   ];
 
-  // Save scroll
-  useEffect(() => {
-    // Get scroll position from localStorage
-    const scrollPosition = localStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-    }
-    // Scroll event listener to save scroll position
-    const handleScroll = () => {
-      localStorage.setItem("scrollPosition", window.scrollY.toString());
-    };
-    window.addEventListener("scroll", handleScroll);
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   // Login condition
   const [checkLogin, setCheckLogin] = useState(false);
 

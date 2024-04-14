@@ -1,0 +1,23 @@
+.writer-title {
+  color: var(--title-color);
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.writer-label {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: var(--title-color);
+}
+
+.writer-label input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.writer-container {
+  border-bottom: 1px solid var(--title-color);
+}

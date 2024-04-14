@@ -6,10 +6,10 @@ import BannerSlider from "../slider/banner/Bannerslider";
 export default function Banner() {
   return (
     /* Main */
-    <section className="main-container" id="banner">
-      <div className="main">
+    <section className="banner-container" id="banner">
+      <div className="banner">
         <div>
-          <div className="main-tag">
+          <div className="banner-tag">
             <h1>
               WELCOME TO
               <br />
@@ -21,7 +21,7 @@ export default function Banner() {
               accompany Book Store on the journey to discover knowledge and
               creativity!<br></br> Order your book today!
             </p>
-            <div className="main-btn">
+            <div className="banner-btn">
               <Link href="#">Explore now</Link>
             </div>
           </div>

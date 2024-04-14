@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./cardBook.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -30,6 +30,7 @@ export default function CardBook(props: any) {
     e.target.closest(".HeartIcon").classList.toggle("active");
     e.preventDefault();
   };
+
   return (
     <>
       <Link href="#" className="template-card">
@@ -55,7 +56,7 @@ export default function CardBook(props: any) {
         <div className="template-tag">
           <h2>Dune</h2>
           <div className="template-writer">John Deo</div>
-          <div className="template-categories">Thriller, Horror, Romance</div>
+          <div className="template-categories">{item.type}</div>
           <div className="template-price">
             {item.discount != "" && (
               <h4

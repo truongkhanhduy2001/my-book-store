@@ -6,7 +6,7 @@ import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
 import { FaList, FaBookOpen, FaRegTrashAlt } from "react-icons/fa";
 import { VscChromeClose, VscAccount } from "react-icons/vsc";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
-import { IoIosClose } from "react-icons/io";
+import { IoIosClose, IoIosLogOut } from "react-icons/io";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
 export default function Navigate() {
@@ -160,10 +160,20 @@ export default function Navigate() {
               <h3>Trương Khánh Duy</h3>
               <div className="book-user-container">
                 <Link href="#" className="user-details">
-                  <p>Account Details</p>
+                  <p className="accounts">
+                    <i>
+                      <VscAccount />
+                    </i>
+                    My Account
+                  </p>
                 </Link>
                 <Link href="/login" className="user-details">
-                  <p>Logout</p>
+                  <p className="logouts">
+                    <i>
+                      <IoIosLogOut />
+                    </i>
+                    Logout
+                  </p>
                 </Link>
               </div>
             </li>
@@ -226,38 +236,44 @@ export default function Navigate() {
                   </i>
                 </div>
                 <div className="cart-list">
-                  {data.map((item, index) => {
-                    return (
-                      <Link key={index} href="#" className="book-widget">
-                        <div className="book-img">
-                          <Image
-                            src="/images/biasach1.png"
-                            alt="product"
-                            width={100}
-                            height={100}
-                            priority={true}
-                            style={{
-                              maxWidth: "100%",
-                              height: "auto",
-                            }}
-                          ></Image>
-                        </div>
-                        <div className="book-content">
-                          <h3 className="book-name">{item.title}</h3>
-                          <div className="book-price">
-                            <h3>$100</h3>
-                            <h4>$28.60</h4>
-                          </div>
-                          <span className="cart-quanity">x1</span>
-                          <div className="book-delete">
-                            <i>
-                              <FaRegTrashAlt />
-                            </i>
-                          </div>
-                        </div>
-                      </Link>
-                    );
-                  })}
+                  {data.length <= 0 ? (
+                    ""
+                  ) : (
+                    <>
+                      {data.map((item, index) => {
+                        return (
+                          <Link key={index} href="#" className="book-widget">
+                            <div className="book-img">
+                              <Image
+                                src="/images/biasach1.png"
+                                alt="product"
+                                width={100}
+                                height={100}
+                                priority={true}
+                                style={{
+                                  maxWidth: "100%",
+                                  height: "auto",
+                                }}
+                              ></Image>
+                            </div>
+                            <div className="book-content">
+                              <h3 className="book-name">{item.title}</h3>
+                              <div className="book-price">
+                                <h3>$100</h3>
+                                <h4>$28.60</h4>
+                              </div>
+                              <span className="cart-quanity">x1</span>
+                              <div className="book-delete">
+                                <i>
+                                  <FaRegTrashAlt />
+                                </i>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </>
+                  )}
                 </div>
                 <div className="cart-total">
                   <div className="total-title">SubTotal</div>
