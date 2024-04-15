@@ -26,8 +26,8 @@ import {
 export default function Footer() {
   // Scroll up
   useEffect(() => {
+    const scrollUp: any = document.querySelector(".scroll-up");
     window.addEventListener("scroll", (e: any) => {
-      const scrollUp: any = document.querySelector(".scroll-up");
       const scroll = window.scrollY;
       if (scroll < 350) {
         scrollUp.style.display = "none";
@@ -35,6 +35,17 @@ export default function Footer() {
         scrollUp.style.display = "block";
       }
     });
+    return () => {
+      const scrollUp: any = document.querySelector(".scroll-up");
+      window.removeEventListener("scroll", (e: any) => {
+        const scroll = window.scrollY;
+        if (scroll < 350) {
+          scrollUp.style.display = "none";
+        } else {
+          scrollUp.style.display = "block";
+        }
+      });
+    };
   }, []);
   const scrollToTop = () => {
     scroll.scrollToTop({

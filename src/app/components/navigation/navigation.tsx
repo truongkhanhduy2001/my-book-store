@@ -10,26 +10,7 @@ import { IoIosClose, IoIosLogOut } from "react-icons/io";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
 export default function Navigate() {
-  const data = [
-    {
-      title: "Dune",
-    },
-    {
-      title: "Anime",
-    },
-    {
-      title: "Naruto",
-    },
-    {
-      title: "Drama",
-    },
-    {
-      title: "Drama",
-    },
-    {
-      title: "Drama",
-    },
-  ];
+  const data: any = [];
 
   // Login Condition
   const [checkLogin, setCheckLogin] = useState(true);
@@ -46,8 +27,8 @@ export default function Navigate() {
     function handleHideCart(e: any) {
       cartDropdown?.classList.remove("active");
     }
-    bookCart.addEventListener("click", handleShowCart);
-    cartIconClose.addEventListener("click", handleHideCart);
+    checkLogin && bookCart.addEventListener("click", handleShowCart);
+    checkLogin && cartIconClose.addEventListener("click", handleHideCart);
 
     // Scroll
     const handleScroll = () => {
@@ -237,10 +218,10 @@ export default function Navigate() {
                 </div>
                 <div className="cart-list">
                   {data.length <= 0 ? (
-                    ""
+                    <div className="no-product"></div>
                   ) : (
                     <>
-                      {data.map((item, index) => {
+                      {data.map((item: any, index: any) => {
                         return (
                           <Link key={index} href="#" className="book-widget">
                             <div className="book-img">

@@ -2,6 +2,70 @@
   padding: 10px;
 }
 
+/* Writer bar */
+.sidebar .writer-title {
+  color: var(--title-color);
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sidebar .writer-container {
+  border-bottom: 1px solid var(--title-color);
+}
+
+.sidebar .writer-container .writer-label {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: var(--title-color);
+}
+
+.sidebar .writer-container .writer-label input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Categories Bar */
+.sidebar .categories-title {
+  color: var(--title-color);
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sidebar .categories-container {
+  border-bottom: 1px solid var(--title-color);
+}
+
+.sidebar .categories-container .categories-label {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: var(--title-color);
+}
+
+.sidebar .categories-container .categories-label input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/* Price Bar */
+header h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--title-color);
+}
+
+header p {
+  font-size: 16px;
+  margin-top: 5px;
+  color: var(--text-color);
+}
+
+/* Button */
 .sidebar .sidebar-btn {
   margin-top: 10px;
   color: var(--white-color);

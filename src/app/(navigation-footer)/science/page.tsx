@@ -38,6 +38,7 @@ export default function Science() {
 
   const [dataLists, setDataList] = useState(data);
 
+  // Filter page
   useLayoutEffect(() => {
     const filterData = dataLists.filter((item: any) => {
       return item.type.includes("Science");

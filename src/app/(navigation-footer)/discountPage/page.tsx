@@ -11,18 +11,21 @@ export default function DiscountView() {
       title: "Dune",
       price: "100",
       discount: "55",
+      type: "Adventure",
       time: "old",
     },
     {
       title: "Anime",
       price: "100",
       discount: "45",
+      type: "Horror",
       time: "old",
     },
     {
       title: "Naruto",
       price: "100",
       discount: "60",
+      type: "Adventure",
       time: "old",
     },
   ];

@@ -1,35 +1,11 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 export default function WishList() {
-  const data = [
-    {
-      title: "Dune",
-      price: "100",
-      discount: "",
-      time: "new",
-    },
-    {
-      title: "Anime",
-      price: "100",
-      discount: "45",
-      time: "new",
-    },
-    {
-      title: "Naruto",
-      price: "100",
-      discount: "",
-      time: "old",
-    },
-    {
-      title: "Drama",
-      price: "100",
-      discount: "",
-      time: "old",
-    },
-  ];
+  const data: any = [];
 
   return (
     <>
@@ -42,10 +18,10 @@ export default function WishList() {
           <div className="wish-list">
             <div className="wish-list-box">
               {data.length <= 0 ? (
-                ""
+                <div className="no-product"></div>
               ) : (
                 <>
-                  {data.map((item, index) => {
+                  {data.map((item: any, index: any) => {
                     const { discount: discount, price: price, time } = item;
                     const per = (
                       ((Number(discount) - Number(price)) / Number(price)) *
