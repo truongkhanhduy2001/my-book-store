@@ -50,7 +50,7 @@ export default function SellerView() {
         <div className="best-seller-container-view">
           <div className="best-seller-view">
             <div className="best-seller-box-view">
-              {data.slice(-12).map((item, index) => {
+              {data.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *

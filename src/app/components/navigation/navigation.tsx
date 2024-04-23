@@ -72,6 +72,7 @@ export default function Navigate() {
     };
   }, [pathname]);
 
+  const handleClick = () => {};
   return (
     <nav className="nav-main">
       <div className="nav-bar">
@@ -100,7 +101,7 @@ export default function Navigate() {
           </div>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/" className="nav-link active">
+              <Link href="/" className="nav-link active" onClick={handleClick}>
                 Home
               </Link>
             </li>

@@ -1,20 +1,7 @@
-:root {
-  /* Color */
-  --white-color: hsl(0, 0%, 100%);
-  --title-color: hsl(230, 70%, 16%);
-  --text-color: hsl(230, 16%, 45%);
-  --first-color: hsl(230, 62%, 56%);
-  --second-color: #80bfff;
-  --border-color: hsl(230, 50%, 90%);
-  --card-color: hsl(230, 100%, 97%);
-}
 .form-container-login {
   position: relative;
-  overflow: hidden;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  background-color: #f0f8ff;
+  background-color: var(--BG);
 }
 
 .form-container-login .overlay-container {
@@ -23,23 +10,27 @@
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .form-container-login .overlay-container .overlay {
   position: relative;
   display: flex;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: 100vh;
 }
 
 .form-container-login .overlay-container .overlay .overlay-panel-overlay-left {
   flex: 1;
-  overflow: hidden;
   position: relative;
+}
+
+.form-container-login
+  .overlay-container
+  .overlay
+  .overlay-panel-overlay-left
+  img {
+  position: relative !important;
+  height: 100%;
 }
 
 .form-container-login .overlay-container .overlay .overlay-panel-overlay-right {
@@ -47,7 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--card-color);
+  background-color: var(--BG);
 }
 
 .form-container-login
@@ -58,7 +49,7 @@
   max-width: 500px;
   padding: 40px;
   width: 100%;
-  background-color: var(--card-color);
+  background-color: var(--BG);
 }
 .form-container-login
   .overlay-container
@@ -68,6 +59,7 @@
   div:first-child {
   display: flex;
 }
+
 .form-container-login
   .overlay-container
   .overlay
@@ -80,6 +72,7 @@
   font-size: 100px;
   color: var(--first-color);
 }
+
 .form-container-login
   .overlay-container
   .overlay
@@ -136,6 +129,7 @@ input[type="password"]:hover {
 .checkbox {
   margin-right: 10px;
 }
+
 .RM {
   color: var(--first-color);
   font-size: 14px;
@@ -178,6 +172,7 @@ input[type="password"]:hover {
   color: var(--first-color);
   outline: 1px solid var(--first-color);
 }
+
 .btn-register button:hover {
   background-color: var(--second-color);
   outline-color: var(--white-color);
@@ -207,4 +202,146 @@ input[type="password"]:hover {
 
 .toggle-password:hover {
   opacity: 0.7;
+}
+
+/* Responsive */
+/*  */
+@media (max-width: calc(576px - 1px)) {
+  .form-container-login .overlay-container .overlay {
+    flex-direction: column;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-left
+    img {
+    width: 100%;
+    height: 500px !important;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-right
+    .from-login
+    i {
+    font-size: 50px;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--border-color);
+  }
+}
+
+/*  */
+@media (min-width: 576px) and (max-width: calc(768px - 1px)) {
+  .form-container-login .overlay-container .overlay {
+    flex-direction: column;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-left
+    img {
+    width: 100%;
+    height: 500px !important;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-right
+    .from-login
+    i {
+    font-size: 50px;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--border-color);
+  }
+}
+
+/*  */
+@media (min-width: 768px) and (max-width: calc(992px - 1px)) {
+  .form-container-login .overlay-container .overlay {
+    flex-direction: column;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-left
+    img {
+    width: 100%;
+    height: 500px !important;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-right
+    .from-login
+    i {
+    font-size: 50px;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--border-color);
+  }
+}
+
+/*  */
+
+@media (min-width: 992px) and (max-width: calc(1200px - 1px)) {
+  .form-container-login .overlay-container .overlay {
+    flex-direction: column;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-left
+    img {
+    width: 100%;
+    height: 500px !important;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-right
+    .from-login
+    i {
+    font-size: 50px;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--border-color);
+  }
+}
+
+/*  */
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .form-container-login .overlay-container .overlay {
+    flex-direction: column;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-left
+    img {
+    width: 100%;
+    height: 500px !important;
+  }
+  .form-container-login
+    .overlay-container
+    .overlay
+    .overlay-panel-overlay-right
+    .from-login
+    i {
+    font-size: 50px;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--border-color);
+  }
 }

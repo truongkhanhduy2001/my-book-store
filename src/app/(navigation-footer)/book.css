@@ -49,13 +49,28 @@
 }
 
 .section-books .books-container .books {
+  display: flex;
   max-width: var(--width-home);
   width: 100%;
 }
 
+/* Filter */
+.section-books .books-container .books .books-left {
+  width: 25%;
+  margin: 16px 10px 0px 0px;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  background: var(--card-color);
+  height: 500px;
+}
+
 /* Card */
+.section-books .books-container .books .books-right {
+  width: 75%;
+}
+
 .section-books .books-container .books .books-box {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
 }

@@ -3,7 +3,6 @@ import Link from "next/link";
 import "./discountView.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
-import SideBar from "@/app/components/filter/filter";
 
 export default function DiscountView() {
   const data = [
@@ -11,21 +10,21 @@ export default function DiscountView() {
       title: "Dune",
       price: "100",
       discount: "55",
-      type: "Adventure",
+      type: ["Adventure"],
       time: "old",
     },
     {
       title: "Anime",
       price: "100",
       discount: "45",
-      type: "Horror",
+      type: ["Horror"],
       time: "old",
     },
     {
       title: "Naruto",
       price: "100",
       discount: "60",
-      type: "Adventure",
+      type: ["Adventure"],
       time: "old",
     },
   ];
@@ -46,22 +45,17 @@ export default function DiscountView() {
         </div>
         <div className="discount-container-view">
           <div className="discount-view">
-            <div className="discount-left">
-              <SideBar />
+            <div className="discount-box-view">
+              {data.map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
+                return <CardBook key={index} item={item} per={per} />;
+              })}
             </div>
-            <div className="discount-right">
-              <div className="discount-box-view">
-                {data.slice(-12).map((item, index) => {
-                  const { discount: discount, price: price, time } = item;
-                  const per = (
-                    ((Number(discount) - Number(price)) / Number(price)) *
-                    100
-                  ).toFixed(0);
-                  return <CardBook key={index} item={item} per={per} />;
-                })}
-              </div>
-              <Paginate />
-            </div>
+            <Paginate />
           </div>
         </div>
       </section>

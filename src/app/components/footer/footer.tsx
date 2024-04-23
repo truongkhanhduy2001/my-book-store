@@ -26,27 +26,22 @@ import {
 export default function Footer() {
   // Scroll up
   useEffect(() => {
-    const scrollUp: any = document.querySelector(".scroll-up");
-    window.addEventListener("scroll", (e: any) => {
+    const checkScroll = () => {
       const scroll = window.scrollY;
       if (scroll < 350) {
         scrollUp.style.display = "none";
       } else {
         scrollUp.style.display = "block";
       }
-    });
+    };
+    const scrollUp: any = document.querySelector(".scroll-up");
+    window.addEventListener("scroll", checkScroll);
+    checkScroll();
     return () => {
-      const scrollUp: any = document.querySelector(".scroll-up");
-      window.removeEventListener("scroll", (e: any) => {
-        const scroll = window.scrollY;
-        if (scroll < 350) {
-          scrollUp.style.display = "none";
-        } else {
-          scrollUp.style.display = "block";
-        }
-      });
+      window.removeEventListener("scroll", checkScroll);
     };
   }, []);
+
   const scrollToTop = () => {
     scroll.scrollToTop({
       duration: 1000,

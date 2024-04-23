@@ -50,7 +50,7 @@ export default function ArrivalsView() {
         <div className="arrivals-container-view">
           <div className="arrivals-view">
             <div className="arrivals-box-view">
-              {data.slice(-12).map((item, index) => {
+              {data.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
