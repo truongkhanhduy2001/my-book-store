@@ -64,3 +64,94 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 15px;
 }
+
+/* Responsive */
+/* 576px - 1px */
+@media (max-width: calc(576px - 1px)) {
+  .section-p1-view {
+    margin-top: 35px;
+  }
+  .section-p1-view .section-p1-container-view {
+    max-width: 300px;
+  }
+  .section-p1-view .best-seller-container-view .best-seller-view {
+    max-width: 300px;
+    flex-direction: column;
+  }
+  .section-p1-view
+    .best-seller-container-view
+    .best-seller-view
+    .best-seller-box-view {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 768px - 1px */
+@media (min-width: 576px) and (max-width: calc(768px - 1px)) {
+  .section-p1-view {
+    margin-top: 35px;
+  }
+  .section-p1-view .section-p1-container-view {
+    max-width: 500px;
+  }
+  .section-p1-view .best-seller-container-view .best-seller-view {
+    max-width: 500px;
+    flex-direction: column;
+  }
+  .section-p1-view
+    .best-seller-container-view
+    .best-seller-view
+    .best-seller-box-view {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 992px - 1px */
+@media (min-width: 768px) and (max-width: calc(992px - 1px)) {
+  .section-p1-view {
+    margin-top: 35px;
+  }
+  .section-p1-view .section-p1-container-view {
+    max-width: 700px;
+  }
+  .section-p1-view .best-seller-container-view .best-seller-view {
+    max-width: 700px;
+    flex-direction: column;
+  }
+  .section-p1-view
+    .best-seller-container-view
+    .best-seller-view
+    .best-seller-box-view {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 1200px - 1px */
+@media (min-width: 992px) and (max-width: calc(1200px - 1px)) {
+  .section-p1-view {
+    margin-top: 35px;
+  }
+  .section-p1-view .section-p1-container-view {
+    max-width: 900px;
+  }
+  .section-p1-view .best-seller-container-view .best-seller-view {
+    max-width: 900px;
+    flex-direction: column;
+  }
+  .section-p1-view
+    .best-seller-container-view
+    .best-seller-view
+    .best-seller-box-view {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 1300px */
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .section-p1-view .section-p1-container-view {
+    max-width: 1200px;
+  }
+  .section-p1-view .best-seller-container-view .best-seller-view {
+    max-width: 1200px;
+  }
+}

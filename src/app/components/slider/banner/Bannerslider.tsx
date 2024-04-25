@@ -2,13 +2,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css/effect-coverflow";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import "./Bannerslider.css";
 
 export default function BannerSlider() {
   return (
     <>
       <Swiper
+        effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
         loop={true}
@@ -17,8 +19,13 @@ export default function BannerSlider() {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        spaceBetween={40}
-        modules={[Pagination, Autoplay]}
+        coverflowEffect={{
+          rotate: 3,
+          stretch: 0,
+          depth: 50,
+          modifier: 3,
+        }}
+        modules={[EffectCoverflow, Pagination, Autoplay]}
         className="mySwiper"
       >
         <SwiperSlide>
@@ -28,7 +35,7 @@ export default function BannerSlider() {
             fill
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          ></Image>
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image
@@ -37,7 +44,7 @@ export default function BannerSlider() {
             fill
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          ></Image>
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image
@@ -46,7 +53,7 @@ export default function BannerSlider() {
             fill
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          ></Image>
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image
@@ -55,7 +62,7 @@ export default function BannerSlider() {
             fill
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          ></Image>
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image
@@ -64,7 +71,7 @@ export default function BannerSlider() {
             fill
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          ></Image>
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image
@@ -73,11 +80,8 @@ export default function BannerSlider() {
             fill
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          ></Image>
+          />
         </SwiperSlide>
-        <div className="stand">
-          <img src="/images/stand.png" />
-        </div>
       </Swiper>
     </>
   );

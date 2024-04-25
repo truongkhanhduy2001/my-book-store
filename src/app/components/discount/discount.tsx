@@ -138,11 +138,27 @@ export default function Discount() {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1025,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 540,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
         },
       },
       {
@@ -156,7 +172,7 @@ export default function Discount() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -174,7 +190,7 @@ export default function Discount() {
         <div className="p3-container">
           <ul className="p3-list">
             <li className="nav-discount active">
-              <h3 onClick={handleAllBooks}>All books</h3>
+              <h3 onClick={handleAllBooks}>All</h3>
             </li>
             <li className="nav-discount">
               <h3 onClick={handleTypeAdventure}>Adventure</h3>

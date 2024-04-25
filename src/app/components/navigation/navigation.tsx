@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PiMagnifyingGlass, PiHeartStraight, PiHandbag } from "react-icons/pi";
-import { FaList, FaBookOpen, FaRegTrashAlt } from "react-icons/fa";
+import { FaBookOpen, FaRegTrashAlt, FaHome } from "react-icons/fa";
 import { VscChromeClose, VscAccount } from "react-icons/vsc";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
-import { IoIosClose, IoIosLogOut } from "react-icons/io";
+import { IoIosLogOut } from "react-icons/io";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
 export default function Navigate() {
@@ -76,9 +76,6 @@ export default function Navigate() {
   return (
     <nav className="nav-main">
       <div className="nav-bar">
-        <i className="open-menu">
-          <FaList />
-        </i>
         <div className="logo">
           <Link href="/" className="logo-link">
             <i>
@@ -87,22 +84,13 @@ export default function Navigate() {
           </Link>
         </div>
         <div className="nav-menu">
-          <div className="logo-toggle">
-            <div className="logo">
-              <Link href="/" className="logo-link">
-                <i>
-                  <FaBookOpen />
-                </i>
-              </Link>
-            </div>
-            <i className="close">
-              <IoIosClose />
-            </i>
-          </div>
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="/" className="nav-link active" onClick={handleClick}>
-                Home
+                <i className="fa-home">
+                  <FaHome />
+                </i>
+                <h1>Home</h1>
               </Link>
             </li>
             <li className="nav-item">
@@ -139,6 +127,9 @@ export default function Navigate() {
             </li>
           ) : (
             <li className="book-accounts-name">
+              <i className="Vs-acc">
+                <VscAccount />
+              </i>
               <h3>Trương Khánh Duy</h3>
               <div className="book-user-container">
                 <Link href="#" className="user-details">

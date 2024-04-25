@@ -26,7 +26,7 @@
 .section-p2 .section-p2-container h3 {
   display: flex;
   font-size: var(--h3);
-  margin-top: 10px;
+  margin-top: 5px;
   color: var(--text-color);
 }
 
@@ -90,7 +90,7 @@
   .arrivals-label {
   position: absolute;
   top: 15%; /* căn theo chiều dọc */
-  left: 10%; /* căn theo chiều ngang */
+  left: 13%; /* căn theo chiều ngang */
   z-index: 1;
   transform: translate(-50%, -50%);
   background-color: var(--first-color);
@@ -131,7 +131,7 @@
   .arrivals-img
   img {
   width: 100%;
-  height: 100%;
+  height: 100% !important;
   object-fit: cover;
   object-position: center;
   transition: 0.3s;
@@ -365,4 +365,243 @@
   .HeartIcon.active {
   fill: red;
 }
-/* Responsive Styles */
+
+/* Responsive */
+/* 576px - 1px */
+@media (max-width: calc(576px - 1px)) {
+  .section-p2 .section-p2-container {
+    max-width: 300px;
+  }
+  .section-p2 .section-p2-container h2 {
+    font-size: 20px;
+  }
+  .section-p2 .section-p2-container h3 {
+    font-size: 15px;
+  }
+  .section-p2 .arrivals-container .arrivals {
+    max-width: 300px;
+  }
+  .section-p2 .arrivals-container .arrivals .arrivals-box {
+    grid-template-columns: 1fr;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag {
+    margin-left: 20px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag
+    .Icon-Container {
+    display: flex;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-img {
+    width: 100px;
+    height: 150px;
+    margin-top: 40px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-label {
+    top: 30%;
+    left: 9%;
+  }
+}
+
+/* 768px - 1px */
+@media (min-width: 576px) and (max-width: calc(768px - 1px)) {
+  .section-p2 .section-p2-container {
+    max-width: 500px;
+  }
+  .section-p2 .section-p2-container h2 {
+    font-size: 20px;
+  }
+  .section-p2 .section-p2-container h3 {
+    font-size: 15px;
+  }
+  .section-p2 .arrivals-container .arrivals {
+    max-width: 500px;
+  }
+  .section-p2 .arrivals-container .arrivals .arrivals-box {
+    grid-template-columns: 1fr;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag {
+    margin-left: 20px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag
+    .Icon-Container {
+    display: flex;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-img {
+    width: 100px;
+    height: 150px;
+    margin-top: 40px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-label {
+    top: 30%;
+    left: 9%;
+  }
+}
+
+/* 992px - 1px */
+@media (min-width: 768px) and (max-width: calc(992px - 1px)) {
+  .section-p2 .section-p2-container {
+    max-width: 700px;
+  }
+  .section-p2 .section-p2-container h2 {
+    font-size: 20px;
+  }
+  .section-p2 .section-p2-container h3 {
+    font-size: 15px;
+  }
+  .section-p2 .arrivals-container .arrivals {
+    max-width: 700px;
+  }
+  .section-p2 .arrivals-container .arrivals .arrivals-box {
+    grid-template-columns: 1fr 1fr;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag {
+    margin-left: 20px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag
+    .Icon-Container {
+    display: flex;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-img {
+    width: 100px;
+    height: 150px;
+    margin-top: 40px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-label {
+    top: 30%;
+    left: 9%;
+  }
+}
+
+/* 1200px - 1px */
+@media (min-width: 992px) and (max-width: calc(1200px - 1px)) {
+  .section-p2 .section-p2-container {
+    max-width: 900px;
+  }
+  .section-p2 .section-p2-container h2 {
+    font-size: 20px;
+  }
+  .section-p2 .section-p2-container h3 {
+    font-size: 15px;
+  }
+  .section-p2 .arrivals-container .arrivals {
+    max-width: 900px;
+  }
+  .section-p2 .arrivals-container .arrivals .arrivals-box {
+    grid-template-columns: 1fr 1fr;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag {
+    margin-left: 20px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag
+    .Icon-Container {
+    display: flex;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-img {
+    width: 100px;
+    height: 150px;
+    margin-top: 40px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-label {
+    top: 30%;
+    left: 20%;
+  }
+}
+
+/* 1300px */
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .section-p2 .section-p2-container {
+    max-width: 1200px;
+  }
+  .section-p2 .arrivals-container .arrivals {
+    max-width: 1200px;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-tag
+    .Icon-Container {
+    display: flex;
+  }
+}

@@ -5,14 +5,46 @@ import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 export default function WishList() {
-  const data: any = [];
+  const data: any = [
+    {
+      title: "Dune",
+      price: "100",
+      discount: "95",
+      time: "new",
+    },
+    {
+      title: "Anime",
+      price: "100",
+      discount: "45",
+      time: "old",
+    },
+    {
+      title: "Naruto",
+      price: "100",
+      discount: "",
+      time: "old",
+    },
+    {
+      title: "Drama",
+      price: "100",
+      discount: "",
+      time: "old",
+    },
+  ];
 
   return (
     <>
-      {/* Arrivals */}
+      {/* Wish list */}
       <section className="section-wish-list">
         <div className="section-wish-list-container">
-          <h2>Wish List</h2>
+          <ul className="page-link">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/wishlist">Wish list</Link>
+            </li>
+          </ul>
         </div>
         <div className="wish-list-container">
           <div className="wish-list">
@@ -36,7 +68,7 @@ export default function WishList() {
           </div>
         </div>
       </section>
-      {/* End Arrivals */}
+      {/* End Wish list */}
     </>
   );
 }

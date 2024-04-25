@@ -258,7 +258,7 @@ export default function Footer() {
         </ul>
         Design By
         <span>
-          <i className="icon-ds"></i>Trương Khánh Duy, Nguyễn Văn Điểm
+          <i className="icon-ds"></i>Duy, Điểm
         </span>
         | All rights reservel!
       </div>

@@ -12,7 +12,7 @@ export default function Adventure() {
       price: "100",
       discount: "",
       type: ["Adventure", "Comedy"],
-      time: "old",
+      time: "new",
     },
     {
       title: "Anime",

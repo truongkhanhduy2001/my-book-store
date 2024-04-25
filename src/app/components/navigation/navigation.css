@@ -24,19 +24,6 @@
   justify-content: space-between;
 }
 
-/* Open menu */
-.nav-main .nav-bar .open-menu {
-  color: var(--title-color);
-  font-size: 25px;
-  padding: 5px;
-  cursor: pointer;
-  display: none;
-}
-
-.nav-main .nav-bar .open-menu:hover {
-  color: var(--first-color);
-}
-
 /* Logo */
 .nav-main .nav-bar .logo {
   cursor: pointer;
@@ -46,9 +33,6 @@
 }
 
 /* Menu */
-.nav-main .nav-bar .nav-menu .logo-toggle {
-  display: none;
-}
 
 .nav-main .nav-bar .nav-menu .nav-list {
   display: flex;
@@ -66,6 +50,11 @@
   color: var(--title-color);
   text-decoration: none;
   padding: 0px 10px;
+}
+
+/* Icon home */
+.nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link i {
+  display: none;
 }
 
 .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link:hover {
@@ -138,6 +127,10 @@
 /* Home Accounts */
 .nav-main .nav-bar .icons-list .book-accounts-name {
   position: relative;
+}
+
+.nav-main .nav-bar .icons-list .book-accounts-name i {
+  display: none;
 }
 
 .nav-main .nav-bar .icons-list .book-accounts-name h3 {
@@ -256,8 +249,6 @@
 
 /* Search */
 .nav-main .nav-bar .icons-list .book-search {
-  /* padding: 0.6rem 1rem;
-  margin: 0px 150px; */
   position: relative;
 }
 
@@ -625,49 +616,356 @@
 }
 
 /* Responsive */
-@media (max-width: 790px) {
-  .nav-main .nav-bar .open-menu {
-    display: block;
+/* 576px - 1px */
+@media (max-width: calc(576px - 1px)) {
+  .nav-main .nav-bar {
+    padding: 0px 15px;
   }
-
+  .nav-main .nav-bar .logo {
+    font-size: 35px;
+  }
   .nav-main .nav-bar .nav-menu {
     position: fixed;
-    height: 450px;
-    width: 300px;
-    left: -100%;
-    top: 0;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    background-color: var(--card-color);
-    border-radius: 0 0 5px;
-    z-index: 100;
-    transition: all 0.4s ease;
-  }
-
-  .nav-main .nav-bar .nav-menu .logo-toggle {
-    display: block;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
+    box-shadow: 0 -8px 32px hsla(0, 0%, 0%, 0.1);
+    padding: 5px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--BG);
   }
-
-  .nav-main .nav-bar .nav-menu .logo-toggle .close {
-    color: var(--title-color);
-    font-size: 25px;
-    cursor: pointer;
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item {
+    padding: 7px 5px;
   }
-
-  .nav-main .nav-bar .nav-menu .logo-toggle .close:hover {
-    color: var(--first-color);
-  }
-
-  .nav-main .nav-bar .nav-menu .nav-list {
-    flex-direction: column;
-  }
-
   .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link {
+    font-size: 15px;
+    padding: 0px 5px;
+    display: flex;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link h1 {
+    display: none;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link i {
     display: block;
-    margin-top: 20px;
+    font-size: 20px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link::before {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list {
+    font-size: 20px;
+    gap: 0px;
+  }
+  .nav-main .nav-bar .icons-list li {
+    padding: 7px 8px;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name {
+    order: 1;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name i {
+    display: block;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name h3 {
+    display: none;
+  }
+
+  .nav-main .nav-bar .icons-list .book-search .search-container {
+    right: -50px;
+    min-width: 200px;
+  }
+
+  .nav-main
+    .nav-bar
+    .icons-list
+    .book-search
+    .search-container
+    .search-form
+    input[type="search"] {
+    min-width: 200px;
+  }
+  .nav-main .nav-bar .icons-list .book-heart .count-wish {
+    bottom: 17px;
+    left: 18px;
+    height: 17px;
+    width: 17px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .count-cart {
+    bottom: 17px;
+    left: 18px;
+    height: 17px;
+    width: 17px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .cart-dropdown {
+    display: none !important;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name .book-user-container {
+    right: 10px;
+    width: 140px;
+  }
+}
+
+/* 768px - 1px */
+@media (min-width: 576px) and (max-width: calc(768px - 1px)) {
+  .nav-main .nav-bar {
+    padding: 0px 15px;
+    max-width: 500px;
+  }
+  .nav-main .nav-bar .logo {
+    font-size: 35px;
+  }
+  .nav-main .nav-bar .nav-menu {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -8px 32px hsla(0, 0%, 0%, 0.1);
+    padding: 5px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--BG);
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item {
+    padding: 7px 5px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link {
+    font-size: 15px;
+    padding: 0px 5px;
+    display: flex;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link h1 {
+    display: none;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link i {
+    display: block;
+    font-size: 20px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link::before {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list {
+    font-size: 20px;
+    gap: 0px;
+  }
+  .nav-main .nav-bar .icons-list li {
+    padding: 7px 8px;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name {
+    order: 1;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name i {
+    display: block;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name h3 {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list .book-search .search-container {
+    right: 0px;
+    min-width: 200px;
+  }
+
+  .nav-main
+    .nav-bar
+    .icons-list
+    .book-search
+    .search-container
+    .search-form
+    input[type="search"] {
+    min-width: 200px;
+  }
+  .nav-main .nav-bar .icons-list .book-heart .count-wish {
+    bottom: 17px;
+    left: 18px;
+    height: 17px;
+    width: 17px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .count-cart {
+    bottom: 17px;
+    left: 18px;
+    height: 17px;
+    width: 17px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .cart-dropdown {
+    display: none !important;
+  }
+}
+
+/* 992px - 1px */
+@media (min-width: 768px) and (max-width: calc(992px - 1px)) {
+  .nav-main .nav-bar {
+    padding: 0px 15px;
+    max-width: 700px;
+  }
+  .nav-main .nav-bar .logo {
+    font-size: 45px;
+  }
+  .nav-main .nav-bar .nav-menu {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -8px 32px hsla(0, 0%, 0%, 0.1);
+    padding: 5px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--BG);
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item {
+    padding: 7px 10px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link {
+    font-size: 25px;
+    padding: 0px 5px;
+    display: flex;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link h1 {
+    display: none;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link i {
+    display: block;
+    font-size: 40px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link::before {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list {
+    font-size: 30px;
+    gap: 5px;
+  }
+  .nav-main .nav-bar .icons-list li {
+    padding: 7px 10px;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name {
+    order: 1;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name i {
+    display: block;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name h3 {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list .book-heart .count-wish {
+    bottom: 20px;
+    left: 25px;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    font-size: 13px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .count-cart {
+    bottom: 20px;
+    left: 25px;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    font-size: 13px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .cart-dropdown {
+    display: none !important;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name .book-user-container {
+    right: 10px;
+    width: 140px;
+  }
+}
+
+/* 1200px - 1px */
+@media (min-width: 992px) and (max-width: calc(1200px - 1px)) {
+  .nav-main .nav-bar {
+    padding: 0px 20px;
+    max-width: 900px;
+  }
+  .nav-main .nav-bar .logo {
+    font-size: 50px;
+  }
+  .nav-main .nav-bar .nav-menu {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -8px 32px hsla(0, 0%, 0%, 0.1);
+    padding: 5px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--BG);
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item {
+    padding: 7px 20px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link {
+    font-size: 30px;
+    padding: 0px 5px;
+    display: flex;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link h1 {
+    display: none;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link i {
+    display: block;
+    font-size: 30px;
+  }
+  .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link::before {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list {
+    font-size: 30px;
+    gap: 0px;
+  }
+  .nav-main .nav-bar .icons-list li {
+    padding: 7px 15px;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name {
+    order: 1;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name i {
+    display: block;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name h3 {
+    display: none;
+  }
+  .nav-main .nav-bar .icons-list .book-search .search-container {
+    right: 0px;
+    min-width: 200px;
+  }
+
+  .nav-main
+    .nav-bar
+    .icons-list
+    .book-search
+    .search-container
+    .search-form
+    input[type="search"] {
+    min-width: 200px;
+  }
+  .nav-main .nav-bar .icons-list .book-heart .count-wish {
+    bottom: 20px;
+    left: 30px;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    font-size: 15px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .count-cart {
+    bottom: 20px;
+    left: 30px;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    font-size: 15px;
+  }
+  .nav-main .nav-bar .icons-list .book-cart .cart-dropdown {
+    display: none !important;
+  }
+  .nav-main .nav-bar .icons-list .book-accounts-name .book-user-container {
+    right: 10px;
+    width: 140px;
   }
 }
