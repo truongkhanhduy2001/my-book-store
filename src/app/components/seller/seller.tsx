@@ -152,7 +152,11 @@ export default function Seller() {
                   100
                 ).toFixed(0);
                 return (
-                  <Link key={index} href="#" className="best-seller-card">
+                  <Link
+                    key={index}
+                    href="/productDetail"
+                    className="best-seller-card"
+                  >
                     {time == "new" && (
                       <div className="best-seller-label">
                         <span className="new">NEW</span>

@@ -218,7 +218,11 @@ export default function Discount() {
                   100
                 ).toFixed(0);
                 return (
-                  <Link key={index} href="#" className="discount-card">
+                  <Link
+                    key={index}
+                    href="/productDetail"
+                    className="discount-card"
+                  >
                     {time == "new" && (
                       <div className="discount-label">
                         <span className="new">NEW</span>

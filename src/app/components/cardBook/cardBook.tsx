@@ -33,7 +33,7 @@ export default function CardBook(props: any) {
 
   return (
     <>
-      <Link href="#" className="template-card">
+      <Link href="/productDetail" className="template-card">
         {item.time == "new" && (
           <div className="template-label">
             <span className="new">NEW</span>
@@ -51,7 +51,7 @@ export default function CardBook(props: any) {
               maxWidth: "100%",
               height: "auto",
             }}
-          ></Image>
+          />
         </div>
         <div className="template-tag">
           <h2>Dune</h2>

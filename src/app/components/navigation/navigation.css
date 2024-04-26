@@ -42,6 +42,7 @@
 .nav-main .nav-bar .nav-menu .nav-list .nav-item {
   padding: 7px 10px;
   list-style: none;
+  display: flex;
 }
 
 .nav-main .nav-bar .nav-menu .nav-list .nav-item .nav-link {

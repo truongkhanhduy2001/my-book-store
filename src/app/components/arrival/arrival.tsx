@@ -87,7 +87,11 @@ export default function Arrival() {
                 100
               ).toFixed(0);
               return (
-                <Link key={index} href="#" className="arrivals-card">
+                <Link
+                  key={index}
+                  href="/productDetail"
+                  className="arrivals-card"
+                >
                   {time == "new" && (
                     <div className="arrivals-label">
                       <span className="new">NEW</span>
@@ -104,7 +108,7 @@ export default function Arrival() {
                         maxWidth: "100%",
                         height: "auto",
                       }}
-                    ></Image>
+                    />
                   </div>
                   <div className="arrivals-tag">
                     <h2>{item.title}</h2>
