@@ -130,7 +130,7 @@
   position: relative;
 }
 
-.nav-main .nav-bar .icons-list .book-accounts-name i {
+.nav-main .nav-bar .icons-list .book-accounts-name .Vs-acc {
   display: none;
 }
 
@@ -666,7 +666,7 @@
   .nav-main .nav-bar .icons-list .book-accounts-name {
     order: 1;
   }
-  .nav-main .nav-bar .icons-list .book-accounts-name i {
+  .nav-main .nav-bar .icons-list .book-accounts-name .Vs-acc {
     display: block;
   }
   .nav-main .nav-bar .icons-list .book-accounts-name h3 {
@@ -758,7 +758,7 @@
   .nav-main .nav-bar .icons-list .book-accounts-name {
     order: 1;
   }
-  .nav-main .nav-bar .icons-list .book-accounts-name i {
+  .nav-main .nav-bar .icons-list .book-accounts-name .Vs-acc {
     display: block;
   }
   .nav-main .nav-bar .icons-list .book-accounts-name h3 {
@@ -845,7 +845,7 @@
   .nav-main .nav-bar .icons-list .book-accounts-name {
     order: 1;
   }
-  .nav-main .nav-bar .icons-list .book-accounts-name i {
+  .nav-main .nav-bar .icons-list .book-accounts-name .Vs-acc {
     display: block;
   }
   .nav-main .nav-bar .icons-list .book-accounts-name h3 {
@@ -926,7 +926,7 @@
   .nav-main .nav-bar .icons-list .book-accounts-name {
     order: 1;
   }
-  .nav-main .nav-bar .icons-list .book-accounts-name i {
+  .nav-main .nav-bar .icons-list .book-accounts-name .Vs-acc {
     display: block;
   }
   .nav-main .nav-bar .icons-list .book-accounts-name h3 {
