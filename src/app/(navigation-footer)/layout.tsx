@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import Navigate from "@/app/components/navigation/navigation";
 import Footer from "@/app/components/footer/footer";
+import Newsletter from "../components/newsletter/newsletter";
 import "../globals.css";
 
 interface LayoutProps {
@@ -13,6 +14,7 @@ export default function LayOut({ children }: LayoutProps) {
       {/* Navbar */}
       <Navigate />
       {children}
+      <Newsletter />
       <Footer />
     </main>
   );

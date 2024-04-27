@@ -17,6 +17,12 @@ export default function Detail() {
     setValue(event.target.value);
   };
 
+  // Icon heart
+  const handleHeart = (e: any) => {
+    e.target.closest(".HeartIcon").classList.toggle("active");
+    e.preventDefault();
+  };
+
   return (
     <>
       {/* Detail */}
@@ -51,7 +57,12 @@ export default function Detail() {
             </div>
             {/* Right */}
             <div className="product-content">
-              <h2 className="product-title">Dune</h2>
+              <div className="product-title">
+                <h2>Dune</h2>
+                <i>
+                  <FiHeart className="HeartIcon" onClick={handleHeart} />
+                </i>
+              </div>
               <div className="product-rating">
                 <i className="star">
                   <FaStar />
@@ -128,13 +139,80 @@ export default function Detail() {
                   </i>
                   <p className="add-cart"> Add cart</p>
                 </div>
-                <div className="wishlist-btn">
-                  <i>
-                    <FiHeart />
-                  </i>
-                  <p className="add-wish"> Add wishlist</p>
-                </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="product-view-info">
+          <div className="product-view-content-title">Information</div>
+          <div className="product-view-tab-content-ad">
+            <div className="product-view-tab-content-additional">
+              <table className="data-table table-additional">
+                <colgroup>
+                  <col width="25%"></col>
+                  <col></col>
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th className="table-label">Writer</th>
+                    <td className="data-writer">John</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Categories</th>
+                    <td className="data-categories">Thriller, Comedy</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Năm XB</th>
+                    <td className="data-year">2023</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Languages</th>
+                    <td className="data-language">English</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Weight(gr)</th>
+                    <td className="data-weight">330</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Kích thước bao bìa</th>
+                    <td className="data-size">24 x 15.5 x 1.5 cm</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Số trang</th>
+                    <td className="data-page">316</td>
+                  </tr>
+                  <tr>
+                    <th className="table-label">Hình thức</th>
+                    <td className="data-book-layout">Bìa mềm</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="product-view-description">
+              <h1>Description</h1>
+              <p>
+                Explore a mesmerizing and complex science fiction universe with
+                Dune - one of Frank Herbert greatest masterpieces. From the
+                award-winning author of Hugo and Nebula, this book takes you on
+                an adventure through space, with a rich plot and
+                multi-dimensional characters. Full Description: Dune is one of
+                the seminal works of science fiction literature, immersing
+                readers in a journey through a detailed and intricate fictional
+                world. Set in a unique future setting, the book explores the
+                planet Arrakis - a place where a rare and valuable resource
+                known as Spice is found. Spice is not only a crucial source of
+                income but also a determining factor in the struggle for power.
+                In the narrative, you follow Paul Atreides, a young scion of a
+                noble house, as he faces challenges and dangers on the golden
+                desert planet of Arrakis. Paul rise from a talented young man to
+                a skilled leader is the highlight of the story, while the
+                resistance against the rule of the Harkonnen and Corrino houses
+                creates dramatic and compelling situations. Dune is not just a
+                standout adventure story but also a profound work of art with
+                themes of power, religion, and destiny. With captivating
+                language and dramatic plots, this book is sure to leave a strong
+                impression on any science fiction enthusiast.
+              </p>
             </div>
           </div>
         </div>

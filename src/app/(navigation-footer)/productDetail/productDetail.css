@@ -85,6 +85,11 @@
 }
 
 .section-detail .detail-container .detail .product-content .product-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-detail .detail-container .detail .product-content .product-title h2 {
   font-size: 30px;
   position: relative;
   text-transform: capitalize;
@@ -97,7 +102,8 @@
   .detail-container
   .detail
   .product-content
-  .product-title::after {
+  .product-title
+  h2::after {
   content: "";
   position: absolute;
   left: 0;
@@ -107,6 +113,29 @@
   background: var(--first-color);
 }
 
+/* Icon heart */
+.section-detail .detail-container .detail .product-content .product-title i {
+  display: flex;
+  color: var(--first-color);
+  font-size: 20px;
+  padding: 8px 8px;
+  border: 1px solid var(--first-color);
+  height: 38px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.section-detail
+  .detail-container
+  .detail
+  .product-content
+  .product-title
+  .HeartIcon.active {
+  fill: red;
+}
+
+/* Rating */
 .section-detail .detail-container .detail .product-content .product-rating {
   display: flex;
   align-items: center;
@@ -143,6 +172,7 @@
   color: var(--text-color);
 }
 
+/* Description */
 .section-detail .detail-container .detail .product-content .product-detail h2 {
   font-size: 25px;
   color: var(--title-color);
@@ -308,84 +338,93 @@
   clip-path: circle(0px at 125px 27.5px);
 }
 
-/* Wish button */
+.section-detail .product-view-info {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+}
+
+/* Information */
+.section-detail .product-view-info .product-view-content-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--title-color);
+  margin-top: 100px;
+}
+
+/* Table */
 .section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .wishlist-btn {
-  font-size: 12px;
-  letter-spacing: 2px;
-  display: inline-block;
-  text-align: center;
-  font-weight: bold;
-  padding: 5px 5px;
-  border: 3px solid red;
-  border-radius: 20px;
-  position: relative;
-  color: red;
-  text-decoration: none;
-  transition: 0.3s ease all;
-  z-index: 1;
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-tab-content-additional {
+  border-bottom: 1px solid #c1c1c1;
 }
 
 .section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .wishlist-btn
-  i {
-  font-size: 12px;
-  position: absolute;
-  top: 48.5%;
-  left: 15%;
-  transform: translate(-50%, -50%);
-  transition: 0.25s;
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-tab-content-additional
+  .data-table {
+  border: none;
+  box-shadow: none;
+  width: 50%;
+  margin: 10px 0;
+  color: var(--title-color);
 }
 
 .section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .wishlist-btn
-  .add-wish {
-  font-weight: bold;
-  font-size: 12px;
-  margin-left: 30px;
-  transition: 0.25s;
-  color: red;
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-tab-content-additional
+  .data-table
+  tbody
+  th,
+.section-detail
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-tab-content-additional
+  .data-table
+  tbody
+  td {
+  font-size: 15px;
+  border: none;
+  padding: 5px;
 }
 
 .section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .wishlist-btn:hover {
-  cursor: pointer;
-  background: red;
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-tab-content-additional
+  .data-table
+  tbody
+  tr
+  .table-label {
+  display: table-cell;
+  padding-left: 0 !important;
+  line-height: 1.6;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: baseline;
+  font-weight: normal;
 }
 
 .section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .wishlist-btn:hover
-  i {
-  left: 50%;
-  color: var(--white-color);
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-description
+  h1 {
+  font-size: 20px;
+  color: var(--title-color);
+  font-weight: 700;
+  margin-top: 10px;
 }
 
 .section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .wishlist-btn:hover
+  .product-view-info
+  .product-view-tab-content-ad
+  .product-view-description
   p {
-  clip-path: circle(0px at 125px 27.5px);
+  font-size: 15px;
+  color: var(--title-color);
+  margin-top: 10px;
 }
