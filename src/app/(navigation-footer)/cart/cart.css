@@ -1,0 +1,103 @@
+/* Cart */
+/* Header */
+.section-cart {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--margin-top-view);
+}
+
+.section-cart .section-cart-container {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+  display: flex;
+}
+
+.section-cart .section-cart-container .page-link {
+  display: inline-block;
+}
+
+.section-cart .section-cart-container .page-link li {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.section-cart .section-cart-container .page-link li a {
+  color: var(--title-color);
+}
+
+.section-cart .section-cart-container .page-link li + li {
+  margin-left: 10px;
+}
+
+.section-cart .section-cart-container .page-link li + li::before {
+  color: var(--title-color);
+  content: "/";
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.section-cart .section-cart-container .page-link li a:hover {
+  color: var(--first-color);
+}
+
+/* Body */
+.section-cart .cart-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--margin-top-font);
+}
+
+.section-cart .cart-container .table-container {
+  display: flex;
+  max-width: var(--width-home);
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.section-cart .cart-container .table-container .table-cart {
+  color: var(--title-color);
+}
+
+/* Style for table */
+.section-cart .cart-container .table-container .table-cart {
+  width: 70%;
+  border-collapse: collapse;
+}
+
+/* Style for table header */
+.section-cart .cart-container .table-container .table-cart th {
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style for table data */
+.section-cart .cart-container .table-container .table-cart td {
+  padding: 8px;
+}
+
+.section-cart .cart-container .table-container .table-cart td img {
+  width: auto;
+  height: auto;
+}
+
+.section-cart .cart-container .table-container .table-cart .table-title,
+.section-cart .cart-container .table-container .table-cart .table-writer,
+.section-cart .cart-container .table-container .table-cart .table-categories,
+.section-cart .cart-container .table-container .table-cart .table-price,
+.section-cart .cart-container .table-container .table-cart .table-subtotal {
+  margin: 0;
+}
+
+.section-cart .cart-container .table-container .table-cart .fa-trash {
+  cursor: pointer;
+  color: var(--first-color);
+}
+
+.section-cart .cart-container p {
+  color: var(--title-color);
+  font-size: 15px;
+}

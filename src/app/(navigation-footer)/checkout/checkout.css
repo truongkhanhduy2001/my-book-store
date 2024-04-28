@@ -1,0 +1,197 @@
+/* Cart */
+/* Header */
+.section-check {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--margin-top-view);
+}
+
+.section-check .section-check-container {
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+  display: flex;
+}
+
+.section-check .section-check-container .page-link {
+  display: inline-block;
+}
+
+.section-check .section-check-container .page-link li {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.section-check .section-check-container .page-link li a {
+  color: var(--title-color);
+}
+
+.section-check .section-check-container .page-link li + li {
+  margin-left: 10px;
+}
+
+.section-check .section-check-container .page-link li + li::before {
+  color: var(--title-color);
+  content: "/";
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.section-check .section-check-container .page-link li a:hover {
+  color: var(--first-color);
+}
+
+/* Body */
+.section-check .checkout-container {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: var(--width-home);
+  width: 100%;
+  margin: auto;
+}
+
+.section-check .checkout-container .checkout-group {
+  margin: 10px;
+}
+
+.section-check .checkout-container .checkout-group:nth-child(2) {
+  border: 1px solid var(--text-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.section-check .checkout-container .checkout-group .section-title {
+  font-size: 20px;
+  color: var(--title-color);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.section-check .checkout-container .checkout-group .section-title-total {
+  font-size: 25px;
+  color: var(--first-color);
+  font-weight: 700;
+  margin: 20px;
+}
+
+.section-check .checkout-container .checkout-group .checkout-title {
+  font-size: 20px;
+  color: var(--title-color);
+  font-weight: 700;
+  margin: 20px 0px 20px 0px;
+}
+
+.section-check .checkout-container .checkout-group .order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.section-check .checkout-container .checkout-group .order-table tr th,
+.section-check .checkout-container .checkout-group .order-table tr td {
+  padding: 10px;
+  text-align: center;
+  color: var(--title-color);
+  font-size: 15px;
+}
+
+.section-check .checkout-container .checkout-group .order-table th {
+  text-align: left;
+  padding: 8px;
+}
+
+.section-check .checkout-container .checkout-group .order-table tr th {
+  font-size: 20px;
+}
+
+.section-check
+  .checkout-container
+  .checkout-group
+  .order-table
+  tr
+  td
+  .table-ship {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.section-check
+  .checkout-container
+  .checkout-group
+  .order-table
+  tr
+  td
+  .order-total,
+.section-check
+  .checkout-container
+  .checkout-group
+  .order-table
+  tr
+  td
+  .table-total-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--first-color);
+}
+
+/* Form billing */
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--title-color);
+}
+
+/* payment-method */
+.section-check .checkout-container .checkout-group .payment-method {
+  padding: 20px;
+  color: var(--text-color);
+  font-size: 15px;
+}
+
+.section-check
+  .checkout-container
+  .checkout-group
+  .payment-method
+  .input-radio
+  label {
+  margin-left: 10px;
+}
+
+.section-check .checkout-container .checkout-group .input-checkbox {
+  padding: 20px;
+  color: var(--text-color);
+  font-size: 15px;
+}
+
+.section-check .checkout-container .checkout-group .input-checkbox label {
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 5px;
+  min-height: 20px;
+  padding-left: 10px;
+}
+
+.section-check .checkout-container .checkout-group .order-submit {
+  display: block;
+  margin-top: 30px;
+}
+
+.primary-btn {
+  background-color: var(--first-color);
+  border: none;
+  border-radius: 40px;
+  color: var(--white-color);
+  display: inline-block;
+  font-weight: 700;
+  padding: 12px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  width: 500px;
+  margin: auto;
+}

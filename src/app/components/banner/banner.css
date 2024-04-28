@@ -18,6 +18,7 @@
 .banner-container .banner .banner-tag {
   flex-direction: column;
   font-weight: bold;
+  margin-right: 16px;
 }
 
 .banner-container .banner .banner-tag h1 {
@@ -68,6 +69,7 @@
   .banner-container .banner .banner-tag {
     display: flex;
     align-items: center;
+    margin-right: 0 !important;
   }
   .banner-container .banner .banner-tag h1 {
     font-size: 30px;
@@ -94,6 +96,7 @@
   .banner-container .banner .banner-tag {
     display: flex;
     align-items: center;
+    margin-right: 0 !important;
   }
   .banner-container .banner .banner-tag h1 {
     font-size: 30px;
@@ -120,6 +123,7 @@
   .banner-container .banner .banner-tag {
     display: flex;
     align-items: center;
+    margin-right: 0 !important;
   }
   .banner-container .banner .banner-tag p {
     text-align: center;
@@ -138,6 +142,7 @@
   .banner-container .banner .banner-tag {
     display: flex;
     align-items: center;
+    margin-right: 0 !important;
   }
   .banner-container .banner .banner-tag p {
     text-align: center;

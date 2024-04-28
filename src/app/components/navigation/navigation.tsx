@@ -209,13 +209,15 @@ export default function Navigate() {
                   </i>
                 </div>
                 <div className="cart-list">
-                  {data.length <= 0 ? (
-                    <div className="no-product"></div>
-                  ) : (
+                  {data.length > 0 ? (
                     <>
                       {data.map((item: any, index: any) => {
                         return (
-                          <Link key={index} href="#" className="book-widget">
+                          <Link
+                            key={index}
+                            href="/productDetail"
+                            className="book-widget"
+                          >
                             <div className="book-img">
                               <Image
                                 src="/images/biasach1.png"
@@ -246,6 +248,8 @@ export default function Navigate() {
                         );
                       })}
                     </>
+                  ) : (
+                    <div className="no-product"></div>
                   )}
                 </div>
                 <div className="cart-total">
