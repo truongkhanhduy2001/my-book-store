@@ -184,3 +184,98 @@ textarea.input {
   text-transform: uppercase;
   transition: all 0.2s;
 }
+
+/* Responsive */
+/* 576px - 1px */
+@media (max-width: calc(576px - 1px)) {
+  .section-check .section-check-container {
+    max-width: 300px;
+  }
+  .section-check .section .container {
+    max-width: 300px;
+    flex-direction: column;
+  }
+  .section-check .section .container .row {
+    flex-direction: column;
+  }
+  .section-check .section .container .row .col-md-7 {
+    width: 100%;
+  }
+  .section-check .section .container .row .col-md-5 {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+/* 768px - 1px */
+@media (min-width: 576px) and (max-width: calc(768px - 1px)) {
+  .section-check .section-check-container {
+    max-width: 500px;
+  }
+  .section-check .section .container {
+    max-width: 500px;
+    flex-direction: column;
+  }
+  .section-check .section .container .row {
+    flex-direction: column;
+  }
+  .section-check .section .container .row .col-md-7 {
+    width: 100%;
+  }
+  .section-check .section .container .row .col-md-5 {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+/* 992px - 1px */
+@media (min-width: 768px) and (max-width: calc(992px - 1px)) {
+  .section-check .section-check-container {
+    max-width: 700px;
+  }
+  .section-check .section .container {
+    max-width: 700px;
+    flex-direction: column;
+  }
+  .section-check .section .container .row {
+    flex-direction: column;
+  }
+  .section-check .section .container .row .col-md-7 {
+    width: 100%;
+  }
+  .section-check .section .container .row .col-md-5 {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+/* 1200px - 1px */
+@media (min-width: 992px) and (max-width: calc(1200px - 1px)) {
+  .section-check .section-check-container {
+    max-width: 900px;
+  }
+  .section-check .section .container {
+    max-width: 900px;
+    flex-direction: column;
+  }
+  .section-check .section .container .row {
+    flex-direction: column;
+  }
+  .section-check .section .container .row .col-md-7 {
+    width: 100%;
+  }
+  .section-check .section .container .row .col-md-5 {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+/* 1300px */
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .section-check .section-check-container {
+    max-width: 1200px;
+  }
+  .section-check .section .container {
+    max-width: 1200px;
+  }
+}

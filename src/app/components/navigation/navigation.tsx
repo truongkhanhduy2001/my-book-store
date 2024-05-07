@@ -194,6 +194,11 @@ export default function Navigate() {
             </li>
           ) : (
             <li className="book-cart">
+              <Link className="link-cart" href="/checkout">
+                <i className="book-cart-icon-mb">
+                  <PiHandbag />
+                </i>
+              </Link>
               <i className="book-cart-icon">
                 <PiHandbag />
               </i>
