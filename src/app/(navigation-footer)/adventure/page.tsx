@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
-import SideBar from "@/app/components/filter/filter";
 export default function Adventure() {
   const data = [
     {
@@ -43,26 +42,16 @@ export default function Adventure() {
       time: "old",
     },
   ];
-  const [dataLists, setDataList] = useState([]);
-  const [type, setType] = useState(["Adventure"]);
 
-  const getDataParent = (data: any) => {
-    setType([data, ...type]);
-  };
+  const [dataLists, setDataList] = useState(data);
 
-  const getDataRemove = (data: any) => {
-    let filter: any = type.filter((item: any) => {
-      return item != data;
+  // Filter page
+  useLayoutEffect(() => {
+    const filterData = dataLists.filter((item: any) => {
+      return item.type.includes("Adventure");
     });
-    setType([...filter]);
-  };
-
-  useEffect(() => {
-    let filter: any = data.filter((item: any) => {
-      return item.type.some((e: any) => type.includes(e));
-    });
-    setDataList(filter);
-  }, [type]);
+    setDataList(filterData);
+  }, []);
 
   return (
     <>
@@ -80,26 +69,17 @@ export default function Adventure() {
         </div>
         <div className="books-container">
           <div className="books">
-            <div className="books-left">
-              <SideBar
-                parent={getDataParent}
-                parentRemoveType={getDataRemove}
-                typeDefault="Adventure"
-              />
+            <div className="books-box">
+              {dataLists.map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
+                return <CardBook key={index} item={item} per={per} />;
+              })}
             </div>
-            <div className="books-right">
-              <div className="books-box">
-                {dataLists.map((item, index) => {
-                  const { discount: discount, price: price, time } = item;
-                  const per = (
-                    ((Number(discount) - Number(price)) / Number(price)) *
-                    100
-                  ).toFixed(0);
-                  return <CardBook key={index} item={item} per={per} />;
-                })}
-              </div>
-              <Paginate />
-            </div>
+            <Paginate />
           </div>
         </div>
       </section>

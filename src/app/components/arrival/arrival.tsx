@@ -80,7 +80,7 @@ export default function Arrival() {
       <div className="arrivals-container">
         <div className="arrivals">
           <div className="arrivals-box">
-            {data.slice(-3).map((item, index) => {
+            {data.slice(-6).map((item, index) => {
               const { discount: discount, price: price, time } = item;
               const per = (
                 ((Number(discount) - Number(price)) / Number(price)) *

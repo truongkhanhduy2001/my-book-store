@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
-import SideBar from "@/app/components/filter/filter";
+
 export default function Horror() {
   const data = [
     {
@@ -63,22 +63,17 @@ export default function Horror() {
         </div>
         <div className="books-container">
           <div className="books">
-            <div className="books-left">
-              <SideBar />
+            <div className="books-box">
+              {dataLists.map((item, index) => {
+                const { discount: discount, price: price, time } = item;
+                const per = (
+                  ((Number(discount) - Number(price)) / Number(price)) *
+                  100
+                ).toFixed(0);
+                return <CardBook key={index} item={item} per={per} />;
+              })}
             </div>
-            <div className="books-right">
-              <div className="books-box">
-                {dataLists.map((item, index) => {
-                  const { discount: discount, price: price, time } = item;
-                  const per = (
-                    ((Number(discount) - Number(price)) / Number(price)) *
-                    100
-                  ).toFixed(0);
-                  return <CardBook key={index} item={item} per={per} />;
-                })}
-              </div>
-              <Paginate />
-            </div>
+            <Paginate />
           </div>
         </div>
       </section>

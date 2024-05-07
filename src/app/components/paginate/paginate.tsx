@@ -11,7 +11,6 @@ const theme = createTheme({
         root: {
           // Thay đổi CSS cho Stack
           display: "flex",
-          justifyContent: "flex-end", // Căn giữa theo chiều ngang, nên Stack sẽ nằm ở bên phải
         },
       },
     },
@@ -19,7 +18,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           display: "flex",
-          justifyContent: "flex-end", // Căn giữa theo chiều ngang
         },
       },
     },
@@ -32,8 +30,8 @@ export default function Paginate() {
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end",
           paddingTop: "20px",
+          justifyContent: "flex-end",
         }}
       >
         <Stack spacing={2}></Stack>

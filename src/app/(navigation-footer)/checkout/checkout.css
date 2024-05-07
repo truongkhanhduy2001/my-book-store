@@ -44,143 +44,134 @@
 }
 
 /* Body */
-.section-check .checkout-container {
-  grid-template-columns: repeat(2, 1fr);
+
+.section-check .section {
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.section-check .section .container {
   max-width: var(--width-home);
   width: 100%;
   margin: auto;
 }
 
-.section-check .checkout-container .checkout-group {
-  margin: 10px;
+.section-check .section .container .row {
+  display: flex;
 }
 
-.section-check .checkout-container .checkout-group:nth-child(2) {
-  border: 1px solid var(--text-color);
-  padding: 10px;
-  border-radius: 5px;
+.section-check .section .container .row .col-md-7 {
+  width: 58.33333333%;
+  margin-right: 10px;
 }
 
-.section-check .checkout-container .checkout-group .section-title {
-  font-size: 20px;
+.section-title {
+  margin-bottom: 30px;
+  margin-top: 15px;
+  position: relative;
+}
+
+.section-title .title {
+  display: inline-block;
+  margin: 0;
+  text-transform: uppercase;
   color: var(--title-color);
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 20px;
 }
 
-.section-check .checkout-container .checkout-group .section-title-total {
-  font-size: 25px;
-  color: var(--first-color);
-  font-weight: 700;
-  margin: 20px;
-}
-
-.section-check .checkout-container .checkout-group .checkout-title {
-  font-size: 20px;
-  color: var(--title-color);
-  font-weight: 700;
-  margin: 20px 0px 20px 0px;
-}
-
-.section-check .checkout-container .checkout-group .order-table {
-  width: 100%;
-  border-collapse: collapse;
+.form-group {
   margin-bottom: 15px;
 }
 
-.section-check .checkout-container .checkout-group .order-table tr th,
-.section-check .checkout-container .checkout-group .order-table tr td {
-  padding: 10px;
-  text-align: center;
-  color: var(--title-color);
-  font-size: 15px;
-}
-
-.section-check .checkout-container .checkout-group .order-table th {
-  text-align: left;
-  padding: 8px;
-}
-
-.section-check .checkout-container .checkout-group .order-table tr th {
-  font-size: 20px;
-}
-
-.section-check
-  .checkout-container
-  .checkout-group
-  .order-table
-  tr
-  td
-  .table-ship {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.section-check
-  .checkout-container
-  .checkout-group
-  .order-table
-  tr
-  td
-  .order-total,
-.section-check
-  .checkout-container
-  .checkout-group
-  .order-table
-  tr
-  td
-  .table-total-price {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--first-color);
-}
-
-/* Form billing */
-.form-input {
+.input {
+  background-color: var(--white-color);
+  border: 1px solid var(--text-color);
+  height: 40px;
+  padding: 0 15px;
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  color: var(--title-color);
+  border-radius: 5px;
+}
+
+textarea.input {
+  min-height: 90px;
+  padding: 15px;
+}
+
+/* Order details */
+.section-check .section .container .row .col-md-5 {
+  width: 41.66666667%;
+}
+
+.section-check .section .container .row .order-details {
+  border-bottom: 1px solid var(--text-color);
+  padding: 0 30px 30px;
+  position: relative;
+}
+
+.section-check .section .container .row .order-details::before {
+  border-top: 1px solid var(--text-color);
+  content: "";
+  height: 30px;
+  left: -1px;
+  position: absolute;
+  right: -1px;
+  top: -15px;
+}
+
+.section-check .section .container .row .order-details,
+.section-check .section .container .row .order-details::before {
+  border-left: 1px solid var(--text-color);
+  border-right: 1px solid var(--text-color);
+}
+
+.order-summary {
+  margin: 20px 0;
   color: var(--title-color);
 }
 
-/* payment-method */
-.section-check .checkout-container .checkout-group .payment-method {
-  padding: 20px;
-  color: var(--text-color);
-  font-size: 15px;
+.order-details .order-col {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.section-check
-  .checkout-container
-  .checkout-group
-  .payment-method
-  .input-radio
-  label {
-  margin-left: 10px;
+.order-summary .order-col .order-total {
+  color: var(--first-color);
+  font-size: 24px;
 }
 
-.section-check .checkout-container .checkout-group .input-checkbox {
-  padding: 20px;
-  color: var(--text-color);
-  font-size: 15px;
+.order-details .payment-method {
+  margin: 30px 0;
+  color: var(--title-color);
 }
 
-.section-check .checkout-container .checkout-group .input-checkbox label {
+.input-checkbox label,
+.input-radio label {
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 5px;
   min-height: 20px;
   padding-left: 10px;
 }
 
-.section-check .checkout-container .checkout-group .order-submit {
+.input-radio .caption {
+  margin-top: 5px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s;
+}
+
+.input-checkbox label {
+  color: var(--title-color);
+}
+
+.order-details .order-submit {
   display: block;
   margin-top: 30px;
 }
-
 .primary-btn {
   background-color: var(--first-color);
   border: none;
@@ -192,6 +183,4 @@
   text-align: center;
   text-transform: uppercase;
   transition: all 0.2s;
-  width: 500px;
-  margin: auto;
 }
