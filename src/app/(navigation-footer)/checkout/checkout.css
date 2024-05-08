@@ -131,6 +131,21 @@ textarea.input {
   color: var(--title-color);
 }
 
+.section-check
+  .section
+  .container
+  .row
+  .order-details
+  .order-summary
+  .order-products
+  .order-col
+  div
+  .link-prod
+  img {
+  width: 100%;
+  height: auto;
+}
+
 .order-details .order-col {
   display: flex;
   justify-content: space-between;
@@ -205,6 +220,20 @@ textarea.input {
     margin-top: 20px;
     width: 100%;
   }
+
+  .section-check
+    .section
+    .container
+    .row
+    .order-details
+    .order-summary
+    .order-products
+    .order-col
+    div
+    .link-prod {
+    display: inline-block;
+    max-width: 64px;
+  }
 }
 
 /* 768px - 1px */
@@ -225,6 +254,19 @@ textarea.input {
   .section-check .section .container .row .col-md-5 {
     margin-top: 20px;
     width: 100%;
+  }
+  .section-check
+    .section
+    .container
+    .row
+    .order-details
+    .order-summary
+    .order-products
+    .order-col
+    div
+    .link-prod {
+    display: inline-block;
+    max-width: 64px;
   }
 }
 

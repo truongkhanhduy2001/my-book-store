@@ -47,25 +47,23 @@ export default function WishList() {
           </ul>
         </div>
         <div className="wish-list-container">
-          <div className="wish-list">
-            <div className="wish-list-box">
-              {data.length > 0 ? (
-                <>
-                  {data.map((item: any, index: any) => {
-                    const { discount: discount, price: price, time } = item;
-                    const per = (
-                      ((Number(discount) - Number(price)) / Number(price)) *
-                      100
-                    ).toFixed(0);
-                    return <CardBook key={index} item={item} per={per} />;
-                  })}
-                </>
-              ) : (
-                <div className="no-product"></div>
-              )}
+          {data.length > 0 ? (
+            <div className="wish-list">
+              <div className="wish-list-box">
+                {data.map((item: any, index: any) => {
+                  const { discount: discount, price: price, time } = item;
+                  const per = (
+                    ((Number(discount) - Number(price)) / Number(price)) *
+                    100
+                  ).toFixed(0);
+                  return <CardBook key={index} item={item} per={per} />;
+                })}
+              </div>
+              <Paginate />
             </div>
-            <Paginate />
-          </div>
+          ) : (
+            <div className="no-product"></div>
+          )}
         </div>
       </section>
       {/* End Wish list */}

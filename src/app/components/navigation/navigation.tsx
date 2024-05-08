@@ -9,8 +9,13 @@ import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
+
 export default function Navigate() {
-  const data: any = [];
+  const data: any = [
+    {
+      title: "Dune",
+    },
+  ];
 
   // Login Condition
   const [checkLogin, setCheckLogin] = useState(true);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaRegTrashAlt } from "react-icons/fa";
 import "./cart.css";
-import { title } from "process";
+
 export default function Cart() {
   // Giả sử bạn có một mảng chứa các mục trong giỏ hàng
   const data: any = [
@@ -32,9 +32,7 @@ export default function Cart() {
               <table className="table-cart">
                 <tbody>
                   <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Writer</th>
+                    <th>Product</th>
                     <th>Categories</th>
                     <th>Price</th>
                     <th>Quantity</th>
@@ -44,7 +42,7 @@ export default function Cart() {
                   {/* Sử dụng map để lặp qua các mục trong giỏ hàng */}
                   {data.map((item: any, index: any) => (
                     <tr key={index}>
-                      <td>
+                      <td className="td-product">
                         <Link href="/productDetail">
                           <Image
                             src="/images/biasach1.png"
@@ -58,12 +56,7 @@ export default function Cart() {
                             }}
                           />
                         </Link>
-                      </td>
-                      <td>
                         <h3 className="table-title">{item.title}</h3>
-                      </td>
-                      <td>
-                        <h3 className="table-writer">John</h3>
                       </td>
                       <td>
                         <h3 className="table-categories">Romance</h3>

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./checkout.css";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function CheckOut() {
   return (
@@ -147,27 +148,62 @@ export default function CheckOut() {
                   <h3 className="title">Your Order</h3>
                 </div>
                 <div className="order-summary">
-                  <div className="order-col">
-                    <div>
-                      <strong>PRODUCT</strong>
-                    </div>
-                    <div>
-                      <strong>TOTAL</strong>
-                    </div>
-                  </div>
-                  <div className="order-products">
-                    <div className="order-col">
-                      <div>1x Acer Aspire 3</div>
-                      <div id="price-checkout">500</div>
-                    </div>
-                  </div>
-                  <div className="order-col">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th className="w-full text-start px-[10px]">PRODUCT</th>
+                        <th className="w-full text-start px-[10px]">TOTAL</th>
+                        <th className="w-full text-start px-[10px]">REMOVE</th>
+                      </tr>
+                      <tr className="mt-[8px]">
+                        <td className="w-full inline-block px-[10px]">
+                          <div className="flex items-center">
+                            <Link
+                              className="link-prod mr-[10px]"
+                              href="/productDetail"
+                            >
+                              <Image
+                                src="/images/biasach1.png"
+                                alt="Main Image"
+                                width={100}
+                                height={100}
+                                priority={true}
+                                style={{
+                                  maxWidth: "100%",
+                                  height: "auto",
+                                }}
+                              />
+                            </Link>
+                            <h1>1x Dune</h1>
+                          </div>
+                        </td>
+                        <td className="w-full px-[10px]">
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                            id="price-checkout"
+                          >
+                            500
+                          </div>
+                        </td>
+                        <td className="w-full px-[10px]">
+                          <div className="flex justify-center">
+                            <FaRegTrashAlt className="cursor-pointer" />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div className="order-col px-[10px] mt-[32px]">
                     <div>Shipping</div>
                     <div>
                       <strong>FREE</strong>
                     </div>
                   </div>
-                  <div className="order-col">
+                  <div className="order-col px-[10px]">
                     <div>
                       <strong>TOTAL</strong>
                     </div>
@@ -176,7 +212,7 @@ export default function CheckOut() {
                     </div>
                   </div>
                 </div>
-                <div className="payment-method">
+                <div className="payment-method px-[10px]">
                   <div className="input-radio">
                     <input
                       type="radio"
@@ -237,7 +273,7 @@ export default function CheckOut() {
                     </div>
                   </div>
                 </div>
-                <div className="input-checkbox">
+                <div className="input-checkbox px-[10px]">
                   <input
                     type="checkbox"
                     id="terms"
@@ -250,7 +286,7 @@ export default function CheckOut() {
                 <Link
                   href=""
                   id="submit-bill-form"
-                  className="primary-btn order-submit"
+                  className="primary-btn order-submit px-[10px]"
                 >
                   Place order
                 </Link>
