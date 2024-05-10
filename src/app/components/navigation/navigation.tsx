@@ -278,11 +278,24 @@ export default function Navigate() {
                                 {item.title}
                               </h3>
                               <div className="book-price flex">
-                                <h3 className="text-[16px] text-[var(--title-color)] font-bold">
+                                {data && (
+                                  <h3 className="text-[16px] text-[var(--title-color)] font-bold">
+                                    $20
+                                  </h3>
+                                )}
+                                <h4
+                                  style={
+                                    data != ""
+                                      ? {
+                                          textDecoration: "line-through",
+                                          color: "hsl(230, 16%, 45%)",
+                                          fontWeight: "400",
+                                        }
+                                      : { textDecoration: "none" }
+                                  }
+                                  className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
+                                >
                                   $100
-                                </h3>
-                                <h4 className="ml-[6px] font-normal text-[16px] text-[var(--title-color)] line-through">
-                                  $28.60
                                 </h4>
                               </div>
                               <span className="cart-quanity text-[16px] text-[var(--text-color)]">

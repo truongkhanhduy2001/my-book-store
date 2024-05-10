@@ -23,6 +23,8 @@ export default function Detail() {
     e.preventDefault();
   };
 
+  let data = "$20";
+
   return (
     <>
       {/* Detail */}
@@ -93,10 +95,23 @@ export default function Detail() {
                 </span>
               </div>
               <div className="product-price flex">
-                <h3 className="text-[var(--title-color)] text-[25px] font-bold">
-                  $20
-                </h3>
-                <h4 className="text-[25px] text-[var(--text-color)] font-normal ml-[6px] line-through">
+                {data && (
+                  <h3 className="text-[var(--title-color)] text-[25px] font-bold">
+                    $20
+                  </h3>
+                )}
+                <h4
+                  style={
+                    data != ""
+                      ? {
+                          textDecoration: "line-through",
+                          color: "hsl(230, 16%, 45%)",
+                          fontWeight: "400",
+                        }
+                      : { textDecoration: "none" }
+                  }
+                  className="text-[25px] text-[var(--text-color)] font-normal ml-[6px]"
+                >
                   $100
                 </h4>
               </div>
