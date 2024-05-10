@@ -15,61 +15,70 @@ export default function Cart() {
   return (
     <>
       {/* Cart */}
-      <section className="section-cart">
-        <div className="section-cart-container">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-cart flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-cart-container max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/cart">Cart</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/cart"
+              >
+                Cart
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="cart-container">
+        <div className="cart-container flex justify-center mt-[var(--margin-top-font)]">
           {data.length > 0 ? (
-            <div className="table-container">
-              <table className="table-cart">
+            <div className="table-container flex max-w-[var(--width-home)] w-[100%] mt-[20px] justify-center">
+              <table className="table-cart text-[var(--title-color)] w-[100%]">
                 <tbody>
                   <tr>
-                    <th>Product</th>
-                    <th>Categories</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Remove</th>
+                    <th className="p-[8px] text-left">Product</th>
+                    <th className="p-[8px] text-left">Categories</th>
+                    <th className="p-[8px] text-left">Price</th>
+                    <th className="p-[8px] text-left">Quantity</th>
+                    <th className="p-[8px] text-left">Subtotal</th>
+                    <th className="p-[8px] text-left">Remove</th>
                   </tr>
                   {/* Sử dụng map để lặp qua các mục trong giỏ hàng */}
                   {data.map((item: any, index: any) => (
                     <tr key={index}>
-                      <td className="td-product">
-                        <Link href="/productDetail">
+                      <td className="p-[8px] flex items-center">
+                        <Link className="!relative" href="/productDetail">
                           <Image
+                            className="max-w-[100px] w-[100%] h-[auto] !relative"
                             src="/images/biasach1.png"
                             alt="Main Image"
-                            width={100}
-                            height={100}
+                            fill
                             priority={true}
-                            style={{
-                              maxWidth: "100%",
-                              height: "auto",
-                            }}
+                            sizes="(max-with: 768px)100vw"
                           />
                         </Link>
-                        <h3 className="table-title">{item.title}</h3>
+                        <h3 className="table-title text-[20px] font-medium ml-[10px]">
+                          {item.title}
+                        </h3>
                       </td>
-                      <td>
+                      <td className="p-[8px]">
                         <h3 className="table-categories">Romance</h3>
                       </td>
-                      <td>
+                      <td className="p-[8px]">
                         <span className="table-price">$100</span>
                       </td>
-                      <td>x1</td>
-                      <td>
+                      <td className="p-[8px]">x1</td>
+                      <td className="p-[8px]">
                         <span className="table-subtotal">$100</span>
                       </td>
-                      <td>
-                        <i className="fa-trash">
+                      <td className="p-[8px]">
+                        <i className="fa-trash cursor-pointer text-[red]">
                           <FaRegTrashAlt />
                         </i>
                       </td>
@@ -79,7 +88,9 @@ export default function Cart() {
               </table>
             </div>
           ) : (
-            <p>Your cart is empty.</p>
+            <p className="text-[var(--title-color)] text-[15px]">
+              Your cart is empty.
+            </p>
           )}
         </div>
       </section>

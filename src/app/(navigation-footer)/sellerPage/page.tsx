@@ -10,7 +10,7 @@ export default function SellerView() {
     {
       title: "Dune",
       price: "100",
-      discount: "95",
+      discount: "60",
       time: "new",
     },
     {
@@ -36,20 +36,30 @@ export default function SellerView() {
   return (
     <>
       {/* Best Seller */}
-      <section className="section-p1-view">
-        <div className="section-p1-container-view">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-p1-view flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-p1-container-view max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/sellerPage">Best seller</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/sellerPage"
+              >
+                Best seller
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="best-seller-container-view">
-          <div className="best-seller-view">
-            <div className="best-seller-box-view">
+        <div className="best-seller-container-view flex justify-center mt-[var(--margin-top-font)]">
+          <div className="best-seller-view max-w-[var(--width-home)] w-[100%]">
+            <div className="best-seller-box-view grid grid-cols-4 gap-[15px]">
               {data.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (

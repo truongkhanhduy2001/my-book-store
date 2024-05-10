@@ -35,21 +35,31 @@ export default function WishList() {
   return (
     <>
       {/* Wish list */}
-      <section className="section-wish-list">
-        <div className="section-wish-list-container">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-wish-list flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-wish-list-container max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/wishlist">Wish list</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/wishlist"
+              >
+                Wish list
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="wish-list-container">
+        <div className="wish-list-container flex justify-center mt-[var(--margin-top-font)]">
           {data.length > 0 ? (
-            <div className="wish-list">
-              <div className="wish-list-box">
+            <div className="wish-list max-w-[var(--width-home)] w-[100%]">
+              <div className="wish-list-box grid grid-cols-4 gap-[15px]">
                 {data.map((item: any, index: any) => {
                   const { discount: discount, price: price, time } = item;
                   const per = (

@@ -27,25 +27,42 @@ export default function DiscountView() {
       type: ["Adventure"],
       time: "old",
     },
+    {
+      title: "Naruto",
+      price: "100",
+      discount: "60",
+      type: ["Adventure"],
+      time: "old",
+    },
   ];
 
   return (
     <>
       {/* Discount */}
-      <section className="section-p3-view">
-        <div className="section-p3-container-view">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-p3-view flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-p3-container-view max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/discountPage">Book discount</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/discountPage"
+              >
+                Book discount
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="discount-container-view">
-          <div className="discount-view">
-            <div className="discount-box-view">
+        <div className="discount-container-view flex justify-center mt-[var(--margin-top-font)]">
+          <div className="discount-view max-w-[var(--width-home)] w-[100%]">
+            <div className="discount-box-view grid grid-cols-4 gap-[15px]">
               {data.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (

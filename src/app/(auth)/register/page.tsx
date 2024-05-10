@@ -59,11 +59,15 @@ export default function Register() {
   };
 
   return (
-    <div className="form-container-register">
-      <div className="overlay-container" id="overlayCon">
-        <div className="overlay">
-          <div className="overlay-panel-overlay-left">
+    <div className="form-container-register relative w-[100%] bg-[var(--BG)]">
+      <div
+        className="overlay-container absolute top-0 left-0 w-[100%] h-[100%]"
+        id="overlayCon"
+      >
+        <div className="overlay relative flex w-[100%] h-[100vh]">
+          <div className="overlay-panel-overlay-left flex-1 relative">
             <Image
+              className="!relative h-[100%]"
               src="/images/picture1.png"
               alt="image"
               fill
@@ -71,16 +75,20 @@ export default function Register() {
               priority={true}
             ></Image>
           </div>
-          <div className="overlay-panel-overlay-right">
-            <form className="form-register">
+          <div className="overlay-panel-overlay-right flex-1 flex items-center justify-center bg-[var(--BG)]">
+            <form className="form-register max-w-[500px] p-[40px] w-[100%] bg-[var(--BG)]">
               <div>
-                <i>
+                <i className="flex pb-[20px] m-[auto] text-[100px] text-[var(--first-color)]">
                   <FaBookOpen />
                 </i>
               </div>
-              <h1>Create an account</h1>
-              <div className="infield">
-                <label className="name">Full Name</label>
+              <h1 className="text-[var(--title-color)] opacity-[0.7] text-[24px] mb-[20px] text-center">
+                Create an account
+              </h1>
+              <div className="infield mb-[20px]">
+                <label className="name mb-[10px] text-[var(--title-color)] block font-bold">
+                  Full Name
+                </label>
                 <InputRegister
                   value={Text}
                   type="text"
@@ -91,8 +99,10 @@ export default function Register() {
                   RefName={RefName}
                 />
               </div>
-              <div className="infield">
-                <label className="email">E-mail</label>
+              <div className="infield mb-[20px]">
+                <label className="email mb-[10px] text-[var(--title-color)] block font-bold">
+                  E-mail
+                </label>
                 <InputRegister
                   value={email}
                   type="email"
@@ -103,9 +113,11 @@ export default function Register() {
                   RefName={null}
                 />
               </div>
-              <div className="infield">
-                <label className="password-field">Password</label>
-                <div className="password-container">
+              <div className="infield mb-[20px]">
+                <label className="password-field mb-[10px] text-[var(--title-color)] block font-bold">
+                  Password
+                </label>
+                <div className="password-container relative">
                   <InputRegister
                     value={password}
                     type={showPassword ? "text" : "password"}
@@ -118,7 +130,7 @@ export default function Register() {
                   {passwordTyped && (
                     <button
                       type="button"
-                      className="toggle-password"
+                      className="toggle-password absolute top-[50%] translate-y-[-50%] right-[26px] hover:opacity-[0.7]"
                       onClick={toggleShowPassword}
                     >
                       {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -126,11 +138,11 @@ export default function Register() {
                   )}
                 </div>
               </div>
-              <div className="infield">
-                <label className="confirm-password-field">
+              <div className="infield mb-[20px]">
+                <label className="confirm-password-field mb-[10px] text-[var(--title-color)] block font-bold ">
                   Confirm Password
                 </label>
-                <div className="confirm-password-container">
+                <div className="confirm-password-container relative">
                   <InputRegister
                     value={ConfirmPassword}
                     type={showConfirmPassword ? "text" : "password"}
@@ -143,7 +155,7 @@ export default function Register() {
                   {ConfirmpasswordTyped && (
                     <button
                       type="button"
-                      className="toggle-confirm-password"
+                      className="toggle-confirm-password absolute top-[50%] translate-y-[-50%] right-[26px] hover:opacity-[0.7]"
                       onClick={toggleShowConfirmPassword}
                     >
                       {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
@@ -151,44 +163,48 @@ export default function Register() {
                   )}
                 </div>
               </div>
-              <div className="form-checkbox">
-                <input className="checkbox" type="checkbox"></input>
-                <label className="terms-conditions RM">
+              <div className="form-checkbox mb-[120px] flex items-center">
+                <input className="checkbox mr-[10px]" type="checkbox" />
+                <label className="terms-conditions RM text-[var(--first-color)] text-[14px] font-bold cursor-pointer">
                   I agree to the Terms & Conditions
                 </label>
               </div>
               <Link href="#">
-                <div className="btn-register">
-                  <button>Register</button>
+                <div className="btn-register text-center mb-[20px]">
+                  <button className="pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)]">
+                    Register
+                  </button>
                 </div>
               </Link>
               <Link href="/login">
-                <div className="btn-login">
-                  <button>Login</button>
+                <div className="btn-login text-center mt-[20px]">
+                  <button className="pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--white-color)] text-[var(--second-color)] rounded-[5px] cursor-pointer w-[100%] outline-1 outline outline-[var(--second-color)] hover:bg-[var(--second-color)] hover:outline-[var(--white-color)] hover:text-[--white-color]">
+                    Login
+                  </button>
                 </div>
               </Link>
             </form>
           </div>
         </div>
       </div>
-      <div className="modal">
-        <div className="modalContainer">
+      <div className="modal fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0, 0, 0, 0.6)] hidden">
+        <div className="modalContainer w-[500px] h-[500px] m-[auto] bg-[var(--white-color)] rounded-[5px]">
           <h3 className="modal-close">
-            <i>
+            <i className="flex text-right justify-end cursor-pointer text-[var(--title-color)] text-[35px] p-[10px]">
               <IoClose />
             </i>
           </h3>
-          <h2>
-            <i>
+          <h2 className="text-[20px] font-bold text-[var(--first-color)] flex text-center justify-center">
+            <i className="text-[30px] pr-[10px]">
               <IoDocumentTextOutline />
             </i>
             Term and conditions
           </h2>
-          <h1>
+          <h1 className="text-[var(--title-color)] p-[10px]">
             Please read these terms and conditions carefully before using our
             services:
           </h1>
-          <p>
+          <p className="text-[var(--title-color)] p-[10px]">
             1. Acceptance of Terms: By accessing or using any part of our
             service, you agree to abide by these terms and conditions. If you do
             not agree to any part of these terms, please refrain from using the

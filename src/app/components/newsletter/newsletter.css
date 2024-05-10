@@ -1,36 +1,6 @@
 /* Start */
-.newsletter {
-  display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  position: relative;
-  margin-top: var(--margin-top);
-}
-
-.newsletter .newsletter-container {
-  margin: auto;
-  max-width: var(--width-home);
-  width: 100%;
-}
-
-.newsletter .newsletter-container .newsletter-content {
-  display: flex;
-  align-items: center; /* Căn giữa theo chiều dọc */
-  justify-content: center; /* Căn giữa theo chiều ngang */
-}
-
-/* Left */
-.newsletter .newsletter-container .newsletter-content .newsletter-left {
-  display: flex;
-  padding: 0 15px;
-  flex: 0 0 60%;
-}
-
 /* Image */
-
 .newsletter .newsletter-container .newsletter-content .newsletter-left img {
-  width: 350px;
   animation: moveUpDown 2s infinite alternate;
 }
 
@@ -75,25 +45,6 @@
 }
 
 /* Right */
-.newsletter .newsletter-container .newsletter-content .newsletter-right {
-  padding: 0 15px;
-  flex: 0 0 40%;
-}
-
-.newsletter
-  .newsletter-container
-  .newsletter-content
-  .newsletter-right
-  .newsletter-heading {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: var(--title-color);
-}
-
-.newsletter .newsletter-container .newsletter-content .newsletter-right strong {
-  color: var(--first-color);
-  font-size: 24px;
-}
 
 /* Input email */
 .newsletter
@@ -101,47 +52,7 @@
   .newsletter-content
   .newsletter-right
   .email-input {
-  color: var(--title-color);
-  width: 350px;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  font-size: 16px;
   transition: width 0.3s;
-}
-
-.newsletter
-  .newsletter-container
-  .newsletter-content
-  .newsletter-right
-  .email-input:hover {
-  border-color: var(--first-color);
-}
-
-/* Button */
-.newsletter
-  .newsletter-container
-  .newsletter-content
-  .newsletter-right
-  .subscribe-button {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: var(--first-color);
-  color: var(--white-color);
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.newsletter
-  .newsletter-container
-  .newsletter-content
-  .newsletter-right
-  .subscribe-button:hover {
-  box-shadow: 0 4px 32px var(--first-color);
 }
 
 /* Responsive */

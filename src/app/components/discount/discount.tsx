@@ -179,36 +179,68 @@ export default function Discount() {
     ],
   };
   return (
-    <section className="section-p3" id="discounts">
-      <div className="section-p3-container">
-        <h2>Book Discount</h2>
+    <section
+      className="section-p3 flex flex-col mt-[var(--margin-top)]"
+      id="discounts"
+    >
+      <div className="section-p3-container max-w-[var(--width-home)] w-[100%] m-[auto] flex justify-between">
+        <h2 className="text-[25px] text-[var(--title-color)] font-bold">
+          Book Discount
+        </h2>
         <Link href="/discountPage" style={{ display: "inline-block" }}>
-          <h3>View all</h3>
+          <h3 className="text-[18px] mt-[5px] text-[var(--text-color)] hover:text-[var(--first-color)]">
+            View all
+          </h3>
         </Link>
       </div>
-      <div className="section1-p3-container">
-        <div className="p3-container">
-          <ul className="p3-list">
-            <li className="nav-discount active">
-              <h3 onClick={handleAllBooks}>All</h3>
+      <div className="section1-p3-container flex">
+        <div className="p3-container max-w-[var(--width-home)] w-[100%] m-[auto]">
+          <ul className="p3-list flex mt-[var(--margin-top-font)]">
+            <li className="nav-discount active mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]">
+              <h3
+                className="text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
+                onClick={handleAllBooks}
+              >
+                All
+              </h3>
             </li>
-            <li className="nav-discount">
-              <h3 onClick={handleTypeAdventure}>Adventure</h3>
+            <li className="nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]">
+              <h3
+                className="text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
+                onClick={handleTypeAdventure}
+              >
+                Adventure
+              </h3>
             </li>
-            <li className="nav-discount">
-              <h3 onClick={handleTypeComedy}>Comedy</h3>
+            <li className="nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]">
+              <h3
+                className="text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
+                onClick={handleTypeComedy}
+              >
+                Comedy
+              </h3>
             </li>
-            <li className="nav-discount">
-              <h3 onClick={handleTypeScience}>Science</h3>
+            <li className="nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]">
+              <h3
+                className="text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
+                onClick={handleTypeScience}
+              >
+                Science
+              </h3>
             </li>
-            <li className="nav-discount">
-              <h3 onClick={handleTypeHorror}>Horror</h3>
+            <li className="nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]">
+              <h3
+                className="text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
+                onClick={handleTypeHorror}
+              >
+                Horror
+              </h3>
             </li>
           </ul>
         </div>
       </div>
-      <div className="discount-container">
-        <div className="discount">
+      <div className="discount-container flex justify-center mt-[var(--margin-top-font)]">
+        <div className="discount max-w-[var(--width-home)] w-[100%]">
           <div className="discount-box slider-container">
             <Slider {...settings}>
               {dataList.slice(-4).map((item, index) => {
@@ -221,33 +253,39 @@ export default function Discount() {
                   <Link
                     key={index}
                     href="/productDetail"
-                    className="discount-card"
+                    className="discount-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer hover:border-[var(--first-color)]"
                   >
                     {time == "new" && (
-                      <div className="discount-label">
-                        <span className="new">NEW</span>
+                      <div className="discount-label absolute top-[10%] left-[27%] z-[1] translate-x-[-50%] translate-y-[-50%] bg-[var(--first-color)] rounded-[5px]">
+                        <span className="new text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
+                          NEW
+                        </span>
                       </div>
                     )}
-                    <div className="discount-img">
+                    <div className="discount-img !relative w-[150px] h-[220px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
                       <Image
+                        className="!relative duration-[300ms]"
                         src="/images/biasach1.png"
                         alt="Main Image"
-                        width={100}
-                        height={100}
+                        fill
                         priority={true}
-                        style={{
-                          maxWidth: "100%",
-                          height: "auto",
-                        }}
+                        sizes="(max-with: 768px)100vw"
                       />
                     </div>
                     <div className="discount-tag">
-                      <h2>{item.title}</h2>
-                      <div className="Discountwriter">John Deo</div>
-                      <div className="Discountcategories">{item.type}</div>
-                      <div className="Discountbook-price">
+                      <h2 className="mt-[12px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
+                        {item.title}
+                      </h2>
+                      <div className="Discountwriter text-[var(--text-color)] text-[16px]">
+                        John Deo
+                      </div>
+                      <div className="Discountcategories text-[var(--second-color)] mt-[8px] text-[16px]">
+                        {item.type}
+                      </div>
+                      <div className="Discountbook-price mt-[8px] mb-[15px] flex justify-center">
                         {item.discount != "" && (
                           <h4
+                            className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
                             style={{
                               textDecoration: "none",
                               color: "hsl(230, 70%, 16%)",
@@ -259,6 +297,7 @@ export default function Discount() {
                           </h4>
                         )}
                         <h3
+                          className="text-[var(--title-color)] text-[16px] font-bold"
                           style={
                             item.discount != ""
                               ? {
@@ -273,23 +312,27 @@ export default function Discount() {
                         </h3>
 
                         {item.discount != "" && (
-                          <span className="sale">-{per}%</span>
+                          <span className="sale text-[14px] border-[1px] border-solid bg-[var(--first-color)] text-[var(--white-color)] pt-[2px] pb-[2px] pl-[5px] pr-[5px] rounded-[5px] ml-[6px]">
+                            -{per}%
+                          </span>
                         )}
                       </div>
-                      <div className="Discountcart-btn">
-                        <i>
+                      <div className="Discountcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
+                        <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms]">
                           <FaShoppingCart />
                         </i>
-                        <p className="add-cart"> Add cart</p>
+                        <p className="add-cart text-[12px] font-bold ml-[30px] text-[var(--first-color)] duration-[250ms]">
+                          Add cart
+                        </p>
                       </div>
-                      <div className="Icon-Container">
-                        <i>
+                      <div className="Icon-Container text-[var(--first-color)] hidden flex-col absolute top-[20px] right-[20px]">
+                        <i className="text-[20px] font-bold mb-[8px]">
                           <LuEye />
                         </i>
-                        <i>
+                        <i className="text-[20px] font-bold mb-[8px]">
                           <FaArrowRightArrowLeft />
                         </i>
-                        <i>
+                        <i className="text-[20px] font-bold mb-[8px]">
                           <FiHeart
                             className="HeartIcon"
                             onClick={handleHeart}

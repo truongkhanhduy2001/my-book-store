@@ -50,20 +50,30 @@ export default function Science() {
   return (
     <>
       {/* Cartoon */}
-      <section className="section-books">
-        <div className="section-books-container">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-books flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-books-container max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/science">Science</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/science"
+              >
+                Science
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="books-container">
-          <div className="books">
-            <div className="books-box">
+        <div className="books-container flex justify-center mt-[var(--margin-top-font)]">
+          <div className="books max-w-[var(--width-home)] w-[100%]">
+            <div className="books-box grid grid-cols-4 gap-[15px]">
               {dataLists.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (

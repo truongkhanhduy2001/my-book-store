@@ -36,20 +36,30 @@ export default function ArrivalsView() {
   return (
     <>
       {/* Arrivals */}
-      <section className="section-p2-view">
-        <div className="section-p2-container-view">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-p2-view flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-p2-container-view max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/arrivalPage">New arrivals</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/arrivalPage"
+              >
+                New arrivals
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="arrivals-container-view">
-          <div className="arrivals-view">
-            <div className="arrivals-box-view">
+        <div className="arrivals-container-view flex justify-center mt-[var(--margin-top-font)]">
+          <div className="arrivals-view max-w-[var(--width-home)] w-[100%]">
+            <div className="arrivals-box-view grid grid-cols-4 gap-[15px]">
               {data.map((item, index) => {
                 const { discount: discount, price: price, time } = item;
                 const per = (

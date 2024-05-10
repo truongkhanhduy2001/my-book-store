@@ -1,33 +1,5 @@
 /* Book List */
 /* Header */
-.section-p3-view {
-  display: flex;
-  flex-direction: column;
-  margin-top: var(--margin-top-view);
-}
-
-.section-p3-view .section-p3-container-view {
-  max-width: var(--width-home);
-  width: 100%;
-  margin: auto;
-  display: flex;
-}
-
-.section-p3-view .section-p3-container-view .page-link {
-  display: inline-block;
-}
-
-.section-p3-view .section-p3-container-view .page-link li {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.section-p3-view .section-p3-container-view .page-link li a {
-  color: var(--title-color);
-}
-
 .section-p3-view .section-p3-container-view .page-link li + li {
   margin-left: 10px;
 }
@@ -37,28 +9,6 @@
   content: "/";
   display: inline-block;
   margin-right: 10px;
-}
-
-.section-p3-view .section-p3-container-view .page-link li a:hover {
-  color: var(--first-color);
-}
-
-/* Body */
-.section-p3-view .discount-container-view {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--margin-top-font);
-}
-
-.section-p3-view .discount-container-view .discount-view {
-  max-width: var(--width-home);
-  width: 100%;
-}
-
-.section-p3-view .discount-container-view .discount-view .discount-box-view {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15px;
 }
 
 /* End */

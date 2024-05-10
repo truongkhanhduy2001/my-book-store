@@ -8,47 +8,59 @@ export default function CheckOut() {
   return (
     <>
       {/* Check out */}
-      <section className="section-check">
-        <div className="section-check-container">
-          <ul className="page-link">
-            <li>
-              <Link href="/">Home</Link>
+      <section className="section-check flex flex-col mt-[var(--margin-top-view)]">
+        <div className="section-check-container max-w-[var(--width-home)] w-[100%] m-[auto] flex">
+          <ul className="page-link  inline-block">
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/"
+              >
+                Home
+              </Link>
             </li>
-            <li>
-              <Link href="/checkout">Check out</Link>
+            <li className="inline-block text-[12px] font-medium uppercase">
+              <Link
+                className="text-[var(--title-color)] hover:text-[var(--first-color)]"
+                href="/checkout"
+              >
+                Check out
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="section">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-7">
+        <div className="section pt-[30px] pd-[30px]">
+          <div className="container max-w-[var(--width-home)] w-[100%] m-[auto]">
+            <div className="row flex">
+              <div className="col-md-7 w-[58.33333333%] mr-[10px]">
                 <div className="billing-details">
-                  <div className="section-title">
-                    <h3 className="title">Billing address</h3>
+                  <div className="section-title mb-[30px] mt-[15px] relative">
+                    <h3 className="title inline-block m-0 uppercase text-[var(--title-color)] text-[24px] font-bold">
+                      Billing address
+                    </h3>
                   </div>
                   <form id="bill-form">
-                    <div className="form-group">
+                    <div className="form-group mb-[15px]">
                       <input
-                        className="input"
+                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                         type="email"
                         id="email"
                         name="email"
                         placeholder="Email"
                       />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-[15px]">
                       <input
-                        className="input"
+                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                         type="text"
                         id="addressBill"
                         name="addressBill"
                         placeholder="Address"
                       />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-[15px]">
                       <select
-                        className="input"
+                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                         name="cityBill"
                         id="cityBill"
                         defaultValue=""
@@ -123,18 +135,18 @@ export default function CheckOut() {
                         <option value="63">Hồ Chí Minh</option>
                       </select>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-[15px]">
                       <input
-                        className="input"
+                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                         type="tel"
                         id="telBill"
                         name="telBill"
                         placeholder="Telephone"
                       />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mb-[15px]">
                       <textarea
-                        className="input"
+                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] min-h-[100px] p-[15px] rounded-[5px] border-solid border border-[var(--text-color)]"
                         id="notesBill"
                         name="notesBill"
                         placeholder="Order Notes"
@@ -143,11 +155,13 @@ export default function CheckOut() {
                   </form>
                 </div>
               </div>
-              <div className="col-md-5 order-details">
-                <div className="section-title text-center">
-                  <h3 className="title">Your Order</h3>
+              <div className="col-md-5 order-details w-[41.66666667%] pl-[10px] pr-[10px] pb-[10px] rounded-[5px] border-solid border border-[var(--text-color)]">
+                <div className="section-title text-center mb-[30px] mt-[15px] relative">
+                  <h3 className="title inline-block m-0 uppercase text-[var(--title-color)] text-[24px] font-bold">
+                    Your Order
+                  </h3>
                 </div>
-                <div className="order-summary">
+                <div className="order-summary mt-[20px] mb-[20px] text-[var(--title-color)]">
                   <table>
                     <tbody>
                       <tr>
@@ -159,19 +173,16 @@ export default function CheckOut() {
                         <td className="w-full inline-block px-[10px]">
                           <div className="flex items-center">
                             <Link
-                              className="link-prod mr-[10px]"
+                              className="link-prod mr-[10px] !relative"
                               href="/productDetail"
                             >
                               <Image
+                                className="max-w-[100px] w-[100%] h-[auto] !relative"
                                 src="/images/biasach1.png"
                                 alt="Main Image"
-                                width={100}
-                                height={100}
+                                fill
                                 priority={true}
-                                style={{
-                                  maxWidth: "100%",
-                                  height: "auto",
-                                }}
+                                sizes="(max-with: 768px)100vw"
                               />
                             </Link>
                             <h1>1x Dune</h1>
@@ -191,28 +202,30 @@ export default function CheckOut() {
                         </td>
                         <td className="w-full px-[10px]">
                           <div className="flex justify-center">
-                            <FaRegTrashAlt className="cursor-pointer" />
+                            <FaRegTrashAlt className="cursor-pointer text-[red]" />
                           </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                  <div className="order-col px-[10px] mt-[32px]">
+                  <div className="order-col px-[10px] mt-[32px] flex justify-between w-[100%] mb-[10px]">
                     <div>Shipping</div>
                     <div>
                       <strong>FREE</strong>
                     </div>
                   </div>
-                  <div className="order-col px-[10px]">
+                  <div className="order-col px-[10px] flex justify-between w-[100%] mb-[10px]">
                     <div>
                       <strong>TOTAL</strong>
                     </div>
                     <div>
-                      <strong className="order-total">$500</strong>
+                      <strong className="order-total text-[var(--first-color)] text-[24px]">
+                        $500
+                      </strong>
                     </div>
                   </div>
                 </div>
-                <div className="payment-method px-[10px]">
+                <div className="payment-method px-[10px] text-[var(--title-color)] mt-[30px] mb-[30px]">
                   <div className="input-radio">
                     <input
                       type="radio"
@@ -220,7 +233,10 @@ export default function CheckOut() {
                       className="payment"
                       id="payment-1"
                     />
-                    <label htmlFor="payment-1">
+                    <label
+                      className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
+                      htmlFor="payment-1"
+                    >
                       <span></span>Direct Payment
                     </label>
                   </div>
@@ -231,13 +247,16 @@ export default function CheckOut() {
                       className="payment"
                       id="payment-2"
                     />
-                    <label htmlFor="payment-2">
+                    <label
+                      className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
+                      htmlFor="payment-2"
+                    >
                       <span></span>Paypal System
                     </label>
-                    <div className="caption">
+                    <div className="caption mt-[5px] max-h-[800px]">
                       <input
                         form="bill-form"
-                        className="input"
+                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                         type="text"
                         name="creditCardBill"
                         id="creditCardBill"
@@ -245,7 +264,7 @@ export default function CheckOut() {
                       />
                       <div style={{ display: "flex", marginTop: "10px" }}>
                         <input
-                          className="input"
+                          className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-r-none border-solid border border-[var(--text-color)]"
                           type="text"
                           name="cvvBill"
                           id="cvvBill"
@@ -254,7 +273,7 @@ export default function CheckOut() {
                         <div style={{ display: "flex" }}>
                           <input
                             form="bill-form"
-                            className="input"
+                            className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] border-solid border border-[var(--text-color)]"
                             type="text"
                             name="monthCreditBill"
                             id="monthCreditBill"
@@ -262,7 +281,7 @@ export default function CheckOut() {
                           />
                           <input
                             form="bill-form"
-                            className="input"
+                            className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-l-none border-solid border border-[var(--text-color)]"
                             type="text"
                             name="yearCreditBill"
                             id="yearCreditBill"
@@ -279,14 +298,17 @@ export default function CheckOut() {
                     id="terms"
                     className="terms-checkout"
                   />
-                  <label htmlFor="terms">
+                  <label
+                    className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px] text-[var(--title-color)]"
+                    htmlFor="terms"
+                  >
                     <span></span>I have read and accept the terms & conditions
                   </label>
                 </div>
                 <Link
                   href=""
                   id="submit-bill-form"
-                  className="primary-btn order-submit px-[10px]"
+                  className="primary-btn order-submit px-[10px] bg-[var(--first-color)] rounded-[40px] text-[var(--white-color)] inline-block font-medium uppercase pl-[30px] pr-[30px] pt-[12px] pb-[12px] text-center border-none"
                 >
                   Place order
                 </Link>
