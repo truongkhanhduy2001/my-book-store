@@ -67,7 +67,7 @@ export default function WishList() {
                   </p>
                 </div>
                 <Link href="/">
-                  <button className="block w-[100%] p-[15px] font-bold cursor-pointer text-[var(--white-color)] bg-[var(--first-color)] rounded-[10px]">
+                  <button className="block w-[100%] p-[15px] font-bold cursor-pointer text-[var(--white-color)] bg-[var(--first-color)] rounded-[10px] hover:rounded-[20px]">
                     Continue Shopping
                   </button>
                 </Link>
