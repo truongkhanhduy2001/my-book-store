@@ -354,7 +354,7 @@ export default function Navigate() {
                   </Link>
                   <Link
                     href="/checkout"
-                    className="check-link nav-link flex flex-1 justify-center px-[20px] py-[10px] border-[1px] border-solid border-[var(--first-color)] rounded-[5px] text-[var(--white-color)] bg-[var(--first-color)] hover:text-[var(--first-color)] hover:bg-[var(--BG)]"
+                    className="check-link flex flex-1 justify-center px-[20px] py-[10px] border-[1px] border-solid border-[var(--first-color)] rounded-[5px] text-[var(--white-color)] bg-[var(--first-color)] hover:text-[var(--first-color)] hover:bg-[var(--BG)]"
                   >
                     Check out
                     <i className="check-icon px-[10px] py-[4px]">
