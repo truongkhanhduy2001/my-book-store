@@ -5,6 +5,12 @@ import "./checkout.css";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function CheckOut() {
+  let data: any = [
+    {
+      discount: "20",
+      price: "100",
+    },
+  ];
   return (
     <>
       {/* Check out */}
@@ -189,16 +195,12 @@ export default function CheckOut() {
                           </div>
                         </td>
                         <td className="w-full px-[10px]">
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                            id="price-checkout"
-                          >
-                            500
-                          </div>
+                          {data.discount && (
+                            <span id="price-checkout">${data.discount}</span>
+                          )}
+                          {!data.discount && (
+                            <span id="price-checkout">${data.price}</span>
+                          )}
                         </td>
                         <td className="w-full px-[10px]">
                           <div className="flex justify-center">

@@ -74,6 +74,7 @@ export default function CardBook(props: any) {
                   color: "hsl(230, 70%, 16%)",
                   fontWeight: "bold",
                   marginRight: "8px",
+                  marginTop: "2px",
                 }}
               >
                 ${item.discount}
@@ -87,6 +88,7 @@ export default function CardBook(props: any) {
                       textDecoration: "line-through",
                       color: "hsl(230, 16%, 45%)",
                       fontWeight: "400",
+                      marginTop: "2px",
                     }
                   : { textDecoration: "none" }
               }

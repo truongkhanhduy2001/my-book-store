@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { TiShoppingCart } from "react-icons/ti";
 import "./cart.css";
 
 export default function Cart() {
@@ -9,6 +10,8 @@ export default function Cart() {
   const data: any = [
     {
       title: "Dune",
+      discount: "20",
+      price: "100",
     },
   ];
 
@@ -71,7 +74,12 @@ export default function Cart() {
                         <h3 className="table-categories">Romance</h3>
                       </td>
                       <td className="p-[8px]">
-                        <span className="table-price">$100</span>
+                        {item.discount && (
+                          <span className="table-price">${item.discount}</span>
+                        )}
+                        {!item.discount && (
+                          <span className="table-price">${item.price}</span>
+                        )}
                       </td>
                       <td className="p-[8px]">x1</td>
                       <td className="p-[8px]">
@@ -88,9 +96,24 @@ export default function Cart() {
               </table>
             </div>
           ) : (
-            <p className="text-[var(--title-color)] text-[15px]">
-              Your cart is empty.
-            </p>
+            <div className="wrapper text-[var(--title-color)] text-[15px]">
+              <div className="wrap-container w-[350px]">
+                <div className="content text-center px-[30px] pt-[60px] pb-[30px]">
+                  <p className="title text-[18px] font-bold text-[var(--first-color)]">
+                    Uh, oh!
+                  </p>
+                  <TiShoppingCart className="text-[80px] text-[var(--first-color)] text-center justify-center w-[100%]" />
+                  <p className="info text-[15px] font-normal text-[var(--text-color)] opacity-[0.7]">
+                    Your Cart is empty!
+                  </p>
+                </div>
+                <Link href="/">
+                  <button className="block w-[100%] p-[15px] font-bold cursor-pointer text-[var(--white-color)] bg-[var(--first-color)] rounded-[10px]">
+                    Continue Shopping
+                  </button>
+                </Link>
+              </div>
+            </div>
           )}
         </div>
       </section>

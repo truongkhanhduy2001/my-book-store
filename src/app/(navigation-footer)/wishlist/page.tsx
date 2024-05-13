@@ -4,6 +4,7 @@ import Image from "next/image";
 import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
+import { TiShoppingCart } from "react-icons/ti";
 export default function WishList() {
   const data: any = [
     {
@@ -11,24 +12,6 @@ export default function WishList() {
       price: "100",
       discount: "95",
       time: "new",
-    },
-    {
-      title: "Anime",
-      price: "100",
-      discount: "45",
-      time: "old",
-    },
-    {
-      title: "Naruto",
-      price: "100",
-      discount: "",
-      time: "old",
-    },
-    {
-      title: "Drama",
-      price: "100",
-      discount: "",
-      time: "old",
     },
   ];
 
@@ -72,7 +55,24 @@ export default function WishList() {
               <Paginate />
             </div>
           ) : (
-            <div className="no-product"></div>
+            <div className="wrapper text-[var(--title-color)] text-[15px]">
+              <div className="wrap-container w-[350px]">
+                <div className="content text-center px-[30px] pt-[60px] pb-[30px]">
+                  <p className="title text-[18px] font-bold text-[var(--first-color)]">
+                    Uh, oh!
+                  </p>
+                  <TiShoppingCart className="text-[80px] text-[var(--first-color)] text-center justify-center w-[100%]" />
+                  <p className="info text-[15px] font-normal text-[var(--text-color)] opacity-[0.7]">
+                    Your wish list is empty!
+                  </p>
+                </div>
+                <Link href="/">
+                  <button className="block w-[100%] p-[15px] font-bold cursor-pointer text-[var(--white-color)] bg-[var(--first-color)] rounded-[10px]">
+                    Continue Shopping
+                  </button>
+                </Link>
+              </div>
+            </div>
           )}
         </div>
       </section>

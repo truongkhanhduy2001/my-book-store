@@ -291,6 +291,7 @@ export default function Discount() {
                               color: "hsl(230, 70%, 16%)",
                               fontWeight: "bold",
                               marginRight: "8px",
+                              marginTop: "2px",
                             }}
                           >
                             ${item.discount}
@@ -304,6 +305,7 @@ export default function Discount() {
                                   textDecoration: "line-through",
                                   color: "hsl(230, 16%, 45%)",
                                   fontWeight: "400",
+                                  marginTop: "2px",
                                 }
                               : { textDecoration: "none" }
                           }

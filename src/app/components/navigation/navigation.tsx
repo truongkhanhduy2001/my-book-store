@@ -7,6 +7,7 @@ import { FaBookOpen, FaRegTrashAlt, FaHome } from "react-icons/fa";
 import { VscChromeClose, VscAccount } from "react-icons/vsc";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
+import { TiShoppingCart } from "react-icons/ti";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
 
@@ -57,7 +58,13 @@ export default function Navigate() {
   const url: any = ["/", "/horror", "/comedy", "/science", "/adventure"];
 
   useEffect(() => {
+    const cartDropdown = document.querySelector(".cart-dropdown");
     const navLinks = document.querySelectorAll(".nav-link");
+    // Remove modal
+    function handleShowCart() {
+      cartDropdown?.classList.remove("active");
+    }
+    handleShowCart();
     // Loại bỏ lớp 'active' từ tất cả các phần tử .nav-link
     navLinks.forEach((navLink) => {
       navLink.classList.remove("active");
@@ -81,7 +88,7 @@ export default function Navigate() {
 
   return (
     <nav className="nav-main h-[60px] w-[100%] bg-[var(--BG)] sticky z-[100] top-0 left-0 right-0">
-      <div className="nav-bar relative max-w[var(--width-home)] w-[100%] h-[100%] bg-[var(--BG)] ml-[auto] mr-[auto] px-[30px] flex items-center justify-between">
+      <div className="nav-bar relative max-w-[var(--width-home)] w-[100%] h-[100%] bg-[var(--BG)] ml-[auto] mr-[auto] px-[30px] flex items-center justify-between">
         <div className="logo text-[45px] text-[var(--first-color)] mt-[auto] mb-[auto] cursor-pointer">
           <Link href="/" className="logo-link">
             <i>
@@ -312,10 +319,22 @@ export default function Navigate() {
                       })}
                     </>
                   ) : (
-                    <div className="no-product"></div>
+                    <div className="wrapper text-[var(--title-color)] text-[15px]">
+                      <div className="wrap-container w-[100%]">
+                        <div className="content text-center px-[30px] pt-[40px] pb-[40px]">
+                          <p className="title text-[18px] font-bold text-[var(--first-color)]">
+                            Uh, oh!
+                          </p>
+                          <TiShoppingCart className="text-[80px] text-[var(--first-color)] text-center justify-center w-[100%]" />
+                          <p className="info text-[15px] font-normal text-[var(--text-color)] opacity-[0.7]">
+                            Your cart is empty!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
-                <div className="cart-total mb-[15px] border-top-[1px] border-solid border-[var(--text-color)] px-[12px] pt-[15px]">
+                <div className="cart-total mb-[15px] border-top-[1px] border-solid border-[var(--text-color)] px-[12px] pt-[15px] border-t-[1px]">
                   <div className="total-title flex justify-end text-[var(--title-color)] text-[18px] font-bold uppercase">
                     SubTotal
                   </div>
@@ -335,7 +354,7 @@ export default function Navigate() {
                   </Link>
                   <Link
                     href="/checkout"
-                    className="check-link flex flex-1 justify-center px-[20px] py-[10px] border-[1px] border-solid border-[var(--first-color)] rounded-[5px] text-[var(--white-color)] bg-[var(--first-color)] hover:text-[var(--first-color)] hover:bg-[var(--BG)]"
+                    className="check-link nav-link flex flex-1 justify-center px-[20px] py-[10px] border-[1px] border-solid border-[var(--first-color)] rounded-[5px] text-[var(--white-color)] bg-[var(--first-color)] hover:text-[var(--first-color)] hover:bg-[var(--BG)]"
                   >
                     Check out
                     <i className="check-icon px-[10px] py-[4px]">
