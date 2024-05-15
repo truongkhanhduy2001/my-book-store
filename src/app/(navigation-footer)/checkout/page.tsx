@@ -280,8 +280,7 @@ export default function CheckOut() {
                         </option>
                       </select>
                     </div>
-                    <div className="form-group mb-[15px]"></div>
-                    <div className="form-group mb-[15px]"></div>
+
                     <div className="form-group mb-[15px]">
                       <input
                         className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
