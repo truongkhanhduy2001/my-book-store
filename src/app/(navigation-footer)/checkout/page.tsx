@@ -469,14 +469,14 @@ export default function CheckOut() {
                     )}
                   </div>
                 </div>
-                <div className="input-checkbox px-[10px]">
+                <div className="input-checkbox px-[10px] flex">
                   <input
                     type="checkbox"
                     id="terms"
                     className="terms-checkout"
                   />
                   <label
-                    className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px] text-[var(--title-color)]"
+                    className="cursor-pointer font-normal min-h-[20px] pl-[10px] text-[var(--title-color)]"
                     htmlFor="terms"
                   >
                     <span></span>I have read and accept the terms & conditions
