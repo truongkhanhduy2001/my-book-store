@@ -72,9 +72,6 @@
 
 /* Body */
 /* Card */
-.section-p3 .discount-container .discount .discount-box .discount-card {
-  transition: transform 0.1s ease;
-}
 
 .section-p3
   .discount-container
@@ -84,10 +81,6 @@
   .discount-tag
   .Icon-Container {
   display: inline-flex !important;
-}
-
-.section-p3 .discount-container .discount .discount-box .discount-card:hover {
-  transition: 0.1s ease;
 }
 
 /* Image */

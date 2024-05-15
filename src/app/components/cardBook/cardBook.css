@@ -1,14 +1,6 @@
 /* Start */
-.template-card {
-  transition: transform 0.1s ease;
-}
-
 .template-card:hover .template-tag .Icon-Container {
   display: inline-flex !important;
-}
-
-.template-card:hover {
-  transition: 0.1s ease;
 }
 
 /* Image */

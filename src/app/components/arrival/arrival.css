@@ -2,9 +2,6 @@
 /* Header */
 /* Body */
 /* Card */
-.section-p2 .arrivals-container .arrivals .arrivals-box .arrivals-card {
-  transition: transform 0.1s ease;
-}
 
 .section-p2
   .arrivals-container
@@ -14,10 +11,6 @@
   .arrivals-tag
   .Icon-Container {
   display: inline-flex !important;
-}
-
-.section-p2 .arrivals-container .arrivals .arrivals-box .arrivals-card:hover {
-  transition: 0.1s ease;
 }
 
 /* Image */

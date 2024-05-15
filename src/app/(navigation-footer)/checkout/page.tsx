@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
 import "./checkout.css";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -11,6 +12,184 @@ export default function CheckOut() {
       price: "100",
     },
   ];
+
+  const [Email, setEmail] = useState("");
+  const [Address, setAddress] = useState("");
+  const [Tel, setTel] = useState("");
+  const [Notes, setNotes] = useState("");
+  const [Card, setCard] = useState("");
+  const [NameCard, setNameCard] = useState("");
+  const [CVV, setCVV] = useState("");
+  const [Month, setMonth] = useState("");
+  const [Year, setYear] = useState("");
+
+  const RefEmail: any = useRef(null);
+  useEffect(() => {
+    RefEmail.current.focus();
+  }, []);
+
+  const handleEmail = (e: any) => {
+    setEmail(e.target.value);
+  };
+
+  const handleAddress = (e: any) => {
+    setAddress(e.target.value);
+  };
+
+  const handleTel = (e: any) => {
+    setTel(e.target.value);
+  };
+
+  const handleNotes = (e: any) => {
+    setNotes(e.target.value);
+  };
+
+  const handleCard = (e: any) => {
+    setCard(e.target.value);
+  };
+
+  const handleNameCard = (e: any) => {
+    setNameCard(e.target.value);
+  };
+
+  const handleCVV = (e: any) => {
+    setCVV(e.target.value);
+  };
+
+  const handleMonth = (e: any) => {
+    setMonth(e.target.value);
+  };
+
+  const handleYear = (e: any) => {
+    setYear(e.target.value);
+  };
+
+  // Option select
+  useEffect(() => {
+    const citis: any = document.querySelector("#city");
+    const districts: any = document.querySelector("#district");
+    const wards: any = document.querySelector("#ward");
+
+    fetch(
+      "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        for (const x of data) {
+          citis.options[citis.options.length] = new Option(x.Name, x.Id);
+        }
+        citis.onchange = function () {
+          districts.length = 1;
+          wards.length = 1;
+          if (this.value != "") {
+            const result = data.filter((n: any) => n.Id === this.value);
+
+            for (const k of result[0].Districts) {
+              districts.options[districts.options.length] = new Option(
+                k.Name,
+                k.Id
+              );
+            }
+          }
+        };
+        districts.onchange = function () {
+          wards.length = 1;
+          const dataCity = data.filter((n: any) => n.Id === citis.value);
+          if (this.value != "") {
+            const dataWards = dataCity[0].Districts.filter(
+              (n: any) => n.Id === this.value
+            )[0].Wards;
+
+            for (const w of dataWards) {
+              wards.options[wards.options.length] = new Option(w.Name, w.Id);
+            }
+          }
+        };
+      });
+  });
+
+  //Radio
+  const [radio, setradio] = useState(1);
+
+  useEffect(() => {
+    const payment: any = document.querySelector("#payment-1");
+    payment.addEventListener("change", (e: any) => {
+      console.log(e.target.value);
+    });
+  });
+
+  useEffect(() => {
+    credit_card_format(Card);
+  }, [Card]);
+
+  useEffect(() => {
+    formatCardName(NameCard);
+  }, [NameCard]);
+
+  useEffect(() => {
+    CVV_number(CVV);
+  }, [CVV]);
+
+  useEffect(() => {
+    Expired_month(Month);
+  }, [Month]);
+
+  useEffect(() => {
+    Expired_year(Year);
+  }, [Year]);
+
+  // Credit card number
+  function credit_card_format(value: any) {
+    const val = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+    const matches = val.match(/\d{4,16}/g);
+    const match = (matches && matches[0]) || "";
+    const parts = [];
+
+    for (let i = 0, len = match.length; i < len; i += 4) {
+      parts.push(match.substring(i, i + 4));
+    }
+
+    if (parts.length) {
+      return setCard(parts.join(" "));
+    } else {
+      return setCard(val);
+    }
+  }
+
+  // Name card
+  function formatCardName(value: any) {
+    const uppercaseName = value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toUpperCase();
+
+    return setNameCard(uppercaseName);
+  }
+
+  // CVV number
+  function CVV_number(value: any) {
+    const cvvRegex = value.replace(/[^0-9]/gi, "");
+    // Giới hạn độ dài của chuỗi CVV thành 3 ký tự
+    return setCVV(cvvRegex.slice(0, 3));
+  }
+
+  // Expired month
+  function Expired_month(value: any) {
+    const mon = value
+      .replace(/[^0-9]/gi, "")
+      .replace(/^([2-9])$/gi, "0$1")
+      .replace(/^0{1,}/gi, "0");
+    return setMonth(mon.slice(0, 2));
+  }
+
+  // Expired year
+  function Expired_year(value: any) {
+    const yea = value.replace(/[^0-9]/gi, "");
+    return setYear(yea.slice(0, 2));
+  }
+
   return (
     <>
       {/* Check out */}
@@ -53,6 +232,9 @@ export default function CheckOut() {
                         id="email"
                         name="email"
                         placeholder="Email"
+                        value={Email}
+                        onChange={handleEmail}
+                        ref={RefEmail}
                       />
                     </div>
                     <div className="form-group mb-[15px]">
@@ -62,85 +244,44 @@ export default function CheckOut() {
                         id="addressBill"
                         name="addressBill"
                         placeholder="Address"
+                        value={Address}
+                        onChange={handleAddress}
                       />
                     </div>
-                    <div className="form-group mb-[15px]">
+                    <div className="form-group mb-[15px] flex">
                       <select
-                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        name="cityBill"
-                        id="cityBill"
+                        className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                        name="city"
+                        id="city"
                         defaultValue=""
                       >
                         <option disabled value="">
-                          Choose city
+                          Choose province
                         </option>
-                        {/* Các option đã được sắp xếp lại */}
-                        <option value="0">An Giang</option>
-                        <option value="1">Bắc Giang</option>
-                        <option value="2">Bắc Kan</option>
-                        <option value="3">Bạc Lieu</option>
-                        <option value="4">Bắc Ninh</option>
-                        <option value="5">Bà Rịa-Vũng Tàu</option>
-                        <option value="6">Bến Tre</option>
-                        <option value="7">Bình Định</option>
-                        <option value="8">Bình Dương</option>
-                        <option value="9">Bình Phước</option>
-                        <option value="10">Bình Thuận</option>
-                        <option value="11">Cà Mau</option>
-                        <option value="12">Cao Bằng</option>
-                        <option value="13">Đắc Lắk</option>
-                        <option value="14">Đắc Nông</option>
-                        <option value="15">Điện Biên</option>
-                        <option value="16">Đồng Nai</option>
-                        <option value="17">Đồng Tháp</option>
-                        <option value="18">Gia Lai</option>
-                        <option value="19">Hà Giang</option>
-                        <option value="20">Hải Dương</option>
-                        <option value="21">Hà Nam</option>
-                        <option value="22">Hà Tây</option>
-                        <option value="23">Hà Tĩnh</option>
-                        <option value="24">Hậu Giang</option>
-                        <option value="25">Hòa Bình</option>
-                        <option value="26">Hưng Yên</option>
-                        <option value="27">Khánh Hòa</option>
-                        <option value="28">Kiên Giang</option>
-                        <option value="29">Kon Tum</option>
-                        <option value="30">Lai Châu</option>
-                        <option value="31">Lâm Đồng</option>
-                        <option value="32">Lạng Sơn</option>
-                        <option value="33">Lào Cai</option>
-                        <option value="34">Long An</option>
-                        <option value="35">Nam Định</option>
-                        <option value="36">Nghệ An</option>
-                        <option value="37">Ninh Bình</option>
-                        <option value="38">Ninh Thuậnn</option>
-                        <option value="39">Phú Thọ</option>
-                        <option value="40">Phú Yên</option>
-                        <option value="41">Quảng Bình</option>
-                        <option value="42">Quảng Nam</option>
-                        <option value="43">Quảng Ngải</option>
-                        <option value="44">Quảng Ninh</option>
-                        <option value="45">Quảng Trị</option>
-                        <option value="46">Sóc Trăng</option>
-                        <option value="47">Sơn La</option>
-                        <option value="48">Tây Ninh</option>
-                        <option value="49">Thái Bình</option>
-                        <option value="50">Thái Nguyên</option>
-                        <option value="51">Thanh Hóa</option>
-                        <option value="52">Thừa Thiên-Huế</option>
-                        <option value="53">Tiền Giang</option>
-                        <option value="54">Trà Vinh</option>
-                        <option value="55">Tuyên Quang</option>
-                        <option value="56">Vĩnh Long</option>
-                        <option value="57">Vĩnh Phúc</option>
-                        <option value="58">Yên Bái</option>
-                        <option value="59">Cần Thơ</option>
-                        <option value="60">Đà Nẵng</option>
-                        <option value="61">Hải Phòng</option>
-                        <option value="62">Hà Nội</option>
-                        <option value="63">Hồ Chí Minh</option>
+                      </select>
+                      <select
+                        className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                        name="district"
+                        id="district"
+                        defaultValue=""
+                      >
+                        <option disabled value="">
+                          Choose district
+                        </option>
+                      </select>
+                      <select
+                        className="input bg-[var(--white-color)] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                        name="ward"
+                        id="ward"
+                        defaultValue=""
+                      >
+                        <option disabled value="">
+                          Choose ward
+                        </option>
                       </select>
                     </div>
+                    <div className="form-group mb-[15px]"></div>
+                    <div className="form-group mb-[15px]"></div>
                     <div className="form-group mb-[15px]">
                       <input
                         className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
@@ -148,6 +289,8 @@ export default function CheckOut() {
                         id="telBill"
                         name="telBill"
                         placeholder="Telephone"
+                        value={Tel}
+                        onChange={handleTel}
                       />
                     </div>
                     <div className="form-group mb-[15px]">
@@ -156,6 +299,8 @@ export default function CheckOut() {
                         id="notesBill"
                         name="notesBill"
                         placeholder="Order Notes"
+                        value={Notes}
+                        onChange={handleNotes}
                       ></textarea>
                     </div>
                   </form>
@@ -228,18 +373,23 @@ export default function CheckOut() {
                   </div>
                 </div>
                 <div className="payment-method px-[10px] text-[var(--title-color)] mt-[30px] mb-[30px]">
-                  <div className="input-radio">
+                  <div className="input-radio flex">
                     <input
                       type="radio"
                       name="payment"
                       className="payment"
                       id="payment-1"
+                      value={radio}
+                      defaultChecked={radio == 1 ? true : false}
+                      onChange={() => {
+                        setradio(1);
+                      }}
                     />
                     <label
-                      className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
+                      className="cursor-pointer font-normal min-h-[20px] pl-[10px]"
                       htmlFor="payment-1"
                     >
-                      <span></span>Direct Payment
+                      Direct Payment
                     </label>
                   </div>
                   <div className="input-radio">
@@ -248,50 +398,75 @@ export default function CheckOut() {
                       name="payment"
                       className="payment"
                       id="payment-2"
+                      value={radio}
+                      defaultChecked={radio == 2 ? true : false}
+                      onChange={() => {
+                        setradio(2);
+                      }}
                     />
                     <label
                       className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
                       htmlFor="payment-2"
                     >
-                      <span></span>Paypal System
+                      Paypal System
                     </label>
-                    <div className="caption mt-[5px] max-h-[800px]">
-                      <input
-                        form="bill-form"
-                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        type="text"
-                        name="creditCardBill"
-                        id="creditCardBill"
-                        placeholder="Enter your credit card number"
-                      />
-                      <div style={{ display: "flex", marginTop: "10px" }}>
+                    {radio == 2 && (
+                      <div className="caption mt-[5px] max-h-[800px]">
                         <input
-                          className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-r-none border-solid border border-[var(--text-color)]"
+                          form="bill-form"
+                          className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] mb-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                           type="text"
-                          name="cvvBill"
-                          id="cvvBill"
-                          placeholder="Enter your cvv"
+                          name="creditCardBill"
+                          id="creditCardBill"
+                          placeholder="Enter your credit card number"
+                          onChange={handleCard}
+                          value={Card}
                         />
-                        <div style={{ display: "flex" }}>
+                        <input
+                          form="bill-form"
+                          className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                          type="text"
+                          name="nameBill"
+                          id="nameBill"
+                          placeholder="Enter your name card"
+                          onChange={handleNameCard}
+                          value={NameCard}
+                        />
+                        <div style={{ display: "flex", marginTop: "10px" }}>
                           <input
-                            form="bill-form"
-                            className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] border-solid border border-[var(--text-color)]"
+                            className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-r-none border-solid border border-[var(--text-color)]"
                             type="text"
-                            name="monthCreditBill"
-                            id="monthCreditBill"
-                            placeholder="Month"
+                            name="cvvBill"
+                            id="cvvBill"
+                            placeholder="Enter your cvv"
+                            onChange={handleCVV}
+                            value={CVV}
                           />
-                          <input
-                            form="bill-form"
-                            className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-l-none border-solid border border-[var(--text-color)]"
-                            type="text"
-                            name="yearCreditBill"
-                            id="yearCreditBill"
-                            placeholder="Year"
-                          />
+                          <div style={{ display: "flex" }}>
+                            <input
+                              form="bill-form"
+                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] border-solid border border-[var(--text-color)]"
+                              type="text"
+                              name="monthCreditBill"
+                              id="monthCreditBill"
+                              placeholder="Month"
+                              onChange={handleMonth}
+                              value={Month}
+                            />
+                            <input
+                              form="bill-form"
+                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-l-none border-solid border border-[var(--text-color)]"
+                              type="text"
+                              name="yearCreditBill"
+                              id="yearCreditBill"
+                              placeholder="Year"
+                              onChange={handleYear}
+                              value={Year}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
                 <div className="input-checkbox px-[10px]">

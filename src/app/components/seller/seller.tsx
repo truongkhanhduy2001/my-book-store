@@ -162,7 +162,7 @@ export default function Seller() {
                   <Link
                     key={index}
                     href="/productDetail"
-                    className="best-seller-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] cursor-pointer border-[2px] border-solid border-[var(--border-color)] hover:border-[var(--first-color)]"
+                    className="best-seller-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] cursor-pointer border-[2px] border-solid border-[var(--border-color)] transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                   >
                     {time == "new" && (
                       <div className="best-seller-label absolute top-[10%] left-[27%] z-[1] translate-x-[-50%] translate-y-[-50%] bg-[var(--first-color)] rounded-[5px]">
