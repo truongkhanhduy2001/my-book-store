@@ -1,58 +1,9 @@
 /* Footer */
 
-.footer .box-container .box a:hover i {
-  padding-right: 1.5rem;
-  transition: 0.4s;
-}
-
 /* Start icon social */
-.footer .wrapper-container .wrapper .icon:hover span i {
-  color: var(--white-color);
-}
-
-.footer .wrapper-container .wrapper .icon .tooltip {
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.footer .wrapper-container .wrapper .icon:hover .tooltip {
-  top: -60px;
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .footer .wrapper-container .wrapper .icon:hover span,
 .footer .wrapper-container .wrapper .icon:hover .tooltip {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4);
-}
-
-.footer .wrapper-container .wrapper .facebook:hover span,
-.footer .wrapper-container .wrapper .facebook:hover .tooltip,
-.footer .wrapper-container .wrapper .facebook:hover .tooltip::before {
-  background: #3b5999;
-}
-
-.footer .wrapper-container .wrapper .twitter:hover span,
-.footer .wrapper-container .wrapper .twitter:hover .tooltip,
-.footer .wrapper-container .wrapper .twitter:hover .tooltip::before {
-  background: #46c1f6;
-}
-
-.footer .wrapper-container .wrapper .github:hover span,
-.footer .wrapper-container .wrapper .github:hover .tooltip,
-.footer .wrapper-container .wrapper .github:hover .tooltip::before {
-  background: var(--text-color);
-}
-
-.footer .wrapper-container .wrapper .youtube:hover span,
-.footer .wrapper-container .wrapper .youtube:hover .tooltip,
-.footer .wrapper-container .wrapper .youtube:hover .tooltip::before {
-  background: #de463b;
-}
-
-.footer .wrapper-container .wrapper .instagram:hover span,
-.footer .wrapper-container .wrapper .instagram:hover .tooltip,
-.footer .wrapper-container .wrapper .instagram:hover .tooltip::before {
-  background: #e1306c;
 }
 
 /* End icon social */

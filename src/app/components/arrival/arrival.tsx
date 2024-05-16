@@ -97,7 +97,7 @@ export default function Arrival() {
                 <Link
                   key={index}
                   href="/productDetail"
-                  className="arrivals-card h-[100%] !flex relative p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
+                  className="arrivals-card group/arrivals-card h-[100%] !flex relative p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                 >
                   {time == "new" && (
                     <div className="arrivals-label absolute top-[15%] left-[13%] translate-x-[-50%] translate-y-[-50%] z-[1] bg-[var(--first-color)] rounded-[5px]">
@@ -108,7 +108,7 @@ export default function Arrival() {
                   )}
                   <div className="arrivals-img !relative w-[150px] h-[220px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
                     <Image
-                      className="!relative duration-[300ms]"
+                      className="!relative duration-[300ms] group-hover/arrivals-card:scale-110"
                       src="/images/biasach1.png"
                       alt="Main Image"
                       fill
@@ -161,15 +161,15 @@ export default function Arrival() {
                         </span>
                       )}
                     </div>
-                    <div className="Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] hover:bg-[var(--first-color)] transition duration-[300ms] tracking-[2px]">
-                      <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms]">
+                    <div className="Arrivalcart-btn group/Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] hover:bg-[var(--first-color)] transition duration-[300ms] tracking-[2px]">
+                      <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/Arrivalcart-btn:left-[50%] group-hover/Arrivalcart-btn:text-[var(--white-color)]">
                         <FaShoppingCart />
                       </i>
                       <p className="add-cart font-bold text-[12px] ml-[30px] text-[var(--first-color)] duration-[250ms]">
                         Add cart
                       </p>
                     </div>
-                    <div className="Icon-Container text-[var(--first-color)] hidden flex-col absolute top-[20px] right-[20px]">
+                    <div className="Icon-Container group-hover/arrivals-card:!inline-flex text-[var(--first-color)] hidden flex-col absolute top-[20px] right-[20px]">
                       <i className="text-[20px] font-bold mb-[8px]">
                         <LuEye />
                       </i>

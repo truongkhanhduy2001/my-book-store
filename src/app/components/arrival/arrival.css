@@ -1,53 +1,5 @@
 /* New Arrivals */
 /* Header */
-/* Body */
-/* Card */
-
-.section-p2
-  .arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card:hover
-  .arrivals-tag
-  .Icon-Container {
-  display: inline-flex !important;
-}
-
-/* Image */
-.section-p2
-  .arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card:hover
-  .arrivals-img
-  img {
-  transform: scale(1.1);
-}
-
-/* Button Cart */
-.section-p2
-  .arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card
-  .arrivals-tag
-  .Arrivalcart-btn:hover
-  i {
-  left: 50%;
-  color: var(--white-color);
-}
-
-.section-p2
-  .arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card
-  .arrivals-tag
-  .Arrivalcart-btn:hover
-  p {
-  clip-path: circle(0px at 125px 27.5px);
-}
-
 /* Icon heart */
 .section-p2
   .arrivals-container

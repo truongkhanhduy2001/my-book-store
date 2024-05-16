@@ -30,18 +30,6 @@
   -webkit-box-orient: vertical;
 }
 
-/* Cart */
-.section-detail
-  .detail-container
-  .detail
-  .product-content
-  .purchase-info
-  .purchase-btn:hover
-  i {
-  left: 50%;
-  color: var(--white-color);
-}
-
 .section-detail
   .detail-container
   .detail
@@ -51,10 +39,6 @@
   p {
   clip-path: circle(0px at 125px 27.5px);
 }
-
-/* Information */
-
-/* Table */
 
 /* Responsive */
 /* 576px - 1px */

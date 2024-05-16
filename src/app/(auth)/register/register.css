@@ -1,12 +1,3 @@
-.form-container-register
-  .overlay-container
-  .overlay
-  .overlay-panel-overlay-right
-  .form-register
-  div:first-child {
-  display: flex;
-}
-
 .modal.show-modal {
   display: flex;
 }
@@ -24,19 +15,6 @@
     transform: scale(1);
     opacity: 1;
   }
-}
-
-/* Show and hide password */
-
-.pd-right {
-  padding-right: 56px !important ;
-}
-
-.toggle-password > *,
-.toggle-confirm-password > * {
-  width: 20px;
-  height: 20px;
-  color: var(--text-color); /* Màu sắc của biểu tượng */
 }
 
 /* Responsive */

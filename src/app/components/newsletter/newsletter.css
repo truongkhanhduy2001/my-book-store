@@ -44,17 +44,6 @@
   animation: moveDiagonal2 2s infinite alternate;
 }
 
-/* Right */
-
-/* Input email */
-.newsletter
-  .newsletter-container
-  .newsletter-content
-  .newsletter-right
-  .email-input {
-  transition: width 0.3s;
-}
-
 /* Responsive */
 /* 576px - 1px */
 @media (max-width: calc(576px - 1px)) {

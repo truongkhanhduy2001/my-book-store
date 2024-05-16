@@ -49,7 +49,7 @@ export default function Login() {
           </div>
           <div className="overlay-panel-overlay-right flex-1 flex items-center justify-center bg-[var(--BG)]">
             <form className="from-login max-w-[500px] p-[40px] w-[100%] bg-[var(--BG)]">
-              <div>
+              <div className="first:flex">
                 <i className="flex pb-[20px] m-[auto] text-[100px] text-[var(--first-color)]">
                   <FaBookOpen />
                 </i>
@@ -84,7 +84,7 @@ export default function Login() {
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Password"
-                    style="pd-right "
+                    style="pd-right !pr-[56px]"
                     onChange={handlePassword}
                     RefEmail={null}
                   />
@@ -94,7 +94,11 @@ export default function Login() {
                       className="toggle-password absolute top-[50%] right-[26px] translate-y-[-50%] hover:opacity-[0.7]"
                       onClick={toggleShowPassword}
                     >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      {showPassword ? (
+                        <FaEyeSlash className="w-[20px] h-[20px] text-[#555]" />
+                      ) : (
+                        <FaEye className="w-[20px] h-[20px] text-[#555]" />
+                      )}
                     </button>
                   )}
                 </div>

@@ -29,20 +29,9 @@
 .nav-main .nav-bar .icons-list li {
   -webkit-box-align: center;
   -webkit-box-pack: center;
-  justify-content: center;
-}
-
-.nav-main .nav-bar .icons-list li i:hover {
-  color: var(--first-color);
 }
 
 /* Home Accounts */
-.nav-main .nav-bar .icons-list .book-accounts-name:hover .book-user-container {
-  visibility: visible;
-  transition: 0.3s;
-  transform: scale(1);
-  opacity: 1;
-}
 
 .nav-main .nav-bar .icons-list .book-accounts-name .book-user-container {
   top: calc(100% + 10.5px);
@@ -56,37 +45,17 @@
   .user-details
   p {
   -webkit-box-align: center;
-  transition: opacity 0.1s ease;
 }
 
 /* Search */
-.nav-main .nav-bar .icons-list .book-search:hover .search-container {
-  visibility: visible;
-  transition: 0.5s;
-  transform: scale(1);
-  opacity: 1;
-}
-
 .nav-main .nav-bar .icons-list .book-search .search-container {
   top: calc(100% + 10.5px);
 }
 
 /* Home Cart */
-
 /* Dropdown modal cart */
 .nav-main .nav-bar .icons-list .book-cart .cart-dropdown {
   top: calc(100% + 10.5px);
-}
-
-/* Button product cart */
-.nav-main
-  .nav-bar
-  .icons-list
-  .book-cart
-  .cart-dropdown
-  .cart-btn
-  a:first-child {
-  margin-right: 10px; /* Tạo khoảng cách giữa các nút */
 }
 
 /* Active */

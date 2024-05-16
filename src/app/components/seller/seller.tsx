@@ -162,7 +162,7 @@ export default function Seller() {
                   <Link
                     key={index}
                     href="/productDetail"
-                    className="best-seller-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] cursor-pointer border-[2px] border-solid border-[var(--border-color)] transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
+                    className="best-seller-card group/best-seller-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] cursor-pointer border-[2px] border-solid border-[var(--border-color)] transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                   >
                     {time == "new" && (
                       <div className="best-seller-label absolute top-[10%] left-[27%] z-[1] translate-x-[-50%] translate-y-[-50%] bg-[var(--first-color)] rounded-[5px]">
@@ -173,7 +173,7 @@ export default function Seller() {
                     )}
                     <div className="best-seller-img !relative w-[150px] h-[220px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
                       <Image
-                        className="!relative duration-[300ms]"
+                        className="!relative duration-[300ms] group-hover/best-seller-card:scale-110"
                         src="/images/biasach1.png"
                         alt="Main Image"
                         fill
@@ -228,15 +228,15 @@ export default function Seller() {
                           </span>
                         )}
                       </div>
-                      <div className="Sellercart-btn text-[12px] text-[var(--first-color)] inline-block text-center font-bold border-[3px] border-solid border-[var(--first-color)] p-[5px] rounded-[5px] relative z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
-                        <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms]">
+                      <div className="Sellercart-btn group/Sellercart-btn text-[12px] text-[var(--first-color)] inline-block text-center font-bold border-[3px] border-solid border-[var(--first-color)] p-[5px] rounded-[5px] relative z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
+                        <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/Sellercart-btn:left-[50%] group-hover/Sellercart-btn:text-[var(--white-color)]">
                           <FaShoppingCart />
                         </i>
                         <p className="add-cart font-bold text-[12px] ml-[30px] text-[var(--first-color)] duration-[250ms]">
                           Add cart
                         </p>
                       </div>
-                      <div className="Icon-Container text-[var(--first-color)] hidden flex-col absolute top-[20px] right-[20px]">
+                      <div className="Icon-Container group-hover/best-seller-card:!inline-flex text-[var(--first-color)] hidden flex-col absolute top-[20px] right-[20px]">
                         <i className="text-[20px] font-bold mb-[8px]">
                           <LuEye />
                         </i>

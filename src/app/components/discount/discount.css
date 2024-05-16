@@ -52,11 +52,6 @@
   transition: 0.3s;
 }
 
-.section-p3 .section1-p3-container .p3-container .p3-list li:hover::before {
-  width: 100%;
-  transition: 0.3s;
-}
-
 .section-p3
   .section1-p3-container
   .p3-container
@@ -66,58 +61,7 @@
   color: var(--first-color);
 }
 
-.section-p3 .section1-p3-container .p3-container .p3-list li:hover h3 {
-  color: var(--first-color);
-}
-
 /* Body */
-/* Card */
-
-.section-p3
-  .discount-container
-  .discount
-  .discount-box
-  .discount-card:hover
-  .discount-tag
-  .Icon-Container {
-  display: inline-flex !important;
-}
-
-/* Image */
-.section-p3
-  .discount-container
-  .discount
-  .discount-box
-  .discount-card:hover
-  .discount-img
-  img {
-  transform: scale(1.1);
-}
-
-/* Button Cart */
-.section-p3
-  .discount-container
-  .discount
-  .discount-box
-  .discount-card
-  .discount-tag
-  .Discountcart-btn:hover
-  i {
-  left: 50%;
-  color: var(--white-color);
-}
-
-.section-p3
-  .discount-container
-  .discount
-  .discount-box
-  .discount-card
-  .discount-tag
-  .Discountcart-btn:hover
-  p {
-  clip-path: circle(0px at 125px 27.5px);
-}
-
 /* Icon heart */
 .section-p3
   .discount-container

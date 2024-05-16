@@ -35,45 +35,6 @@
 
 /* Best seller */
 /* Header */
-
-/* Body */
-
-/* Card */
-.section-p1
-  .best-seller-container
-  .best-seller
-  .best-seller-box
-  .best-seller-card:hover
-  .best-seller-tag
-  .Icon-Container {
-  display: inline-flex !important;
-}
-
-/* Image */
-
-.section-p1
-  .best-seller-container
-  .best-seller
-  .best-seller-box
-  .best-seller-card:hover
-  .best-seller-img
-  img {
-  transform: scale(1.1);
-}
-
-/* Button cart */
-.section-p1
-  .best-seller-container
-  .best-seller
-  .best-seller-box
-  .best-seller-card
-  .best-seller-tag
-  .Sellercart-btn:hover
-  i {
-  left: 50%;
-  color: var(--white-color);
-}
-
 .section-p1
   .best-seller-container
   .best-seller

@@ -8,14 +8,22 @@ export default function Newsletter() {
     >
       <div className="newsletter-container m-[auto] max-w-[var(--width-home)] w-[100%]">
         <div className="newsletter-content flex items-center justify-center">
-          <div className="newsletter-left flex pl-[15px] pr-[15px] flex-[60%]">
-            <img
-              className="newsletter-img-1 w-[350px]"
+          <div className="newsletter-left flex pl-[15px] pr-[15px] flex-[60%] justify-center !relative">
+            <Image
+              className="newsletter-img-1 max-w-[200px] w-[100%] h-[auto] !relative"
               src="/images/newsletter-1.png"
+              alt="newsletter"
+              fill
+              priority={true}
+              sizes="(max-with: 768px)100vw"
             />
-            <img
-              className="newsletter-img-2 w-[350px]"
+            <Image
+              className="newsletter-img-2 max-w-[200px] w-[100%] h-[auto] !relative"
               src="/images/newsletter-2.png"
+              alt="newsletter"
+              fill
+              priority={true}
+              sizes="(max-with: 768px)100vw"
             />
           </div>
           <div className="newsletter-right pl-[15px] pr-[15px] flex-[40%]">
@@ -27,7 +35,7 @@ export default function Newsletter() {
             </h2>
             <input
               type="email"
-              className="email-input text-[var(--title-color)] w-[350px] p-[10px] mb-[10px] border border-solid border-[var(--border-color)] rounded-[5px] text-[16px] hover:border-[var(--first-color)]"
+              className="email-input text-[var(--title-color)] w-[350px] p-[10px] mb-[10px] border border-solid border-[var(--border-color)] rounded-[5px] text-[16px] hover:border-[var(--first-color)] duration-[100ms]"
               placeholder="Enter your email"
             ></input>
             <button className="subscribe-button block mt-[10px] pt-[10px] pb-[10px] pl-[20px] pr-[20px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] text-[16px] cursor-pointer hover:shadow-[0_4px_32px_var(--first-color)]">

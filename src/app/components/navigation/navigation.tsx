@@ -149,25 +149,25 @@ export default function Navigate() {
           {!checkLogin ? (
             <li className="book-accounts flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
-                <i>
+                <i className="hover:text-[var(--first-color)]">
                   <VscAccount />
                 </i>
               </Link>
             </li>
           ) : (
-            <li className="book-accounts-name flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
-              <i className="Vs-acc hidden">
+            <li className="book-accounts-name group/book-accounts-name flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
+              <i className="Vs-acc hidden hover:text-[var(--first-color)]">
                 <VscAccount />
               </i>
               <h3 className="text-[16px] text-[var(--text-color)]">
                 Trương Khánh Duy
               </h3>
-              <div className="book-user-container absolute bg-[var(--BG)] flex flex-col right-0 w-[100%] h-[auto] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent">
+              <div className="book-user-container absolute bg-[var(--BG)] flex flex-col right-0 w-[100%] h-[auto] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent group-hover/book-accounts-name:duration-[300ms] group-hover/book-accounts-name:scale-100 group-hover/book-accounts-name:opacity-100 group-hover/book-accounts-name:visible">
                 <Link
                   href="#"
                   className="user-details text-[14px] text-[var(--text-color)] font-bold leading-[150%]"
                 >
-                  <p className="accounts flex text-[14px] text-[var(--text-color)] font-normal items-center px-[16px] py-[8px] leading-[150%] opacity-[1] cursor-pointer hover:font-medium hover:text-[var(--first-color)] hover:opacity-[0.7]">
+                  <p className="accounts flex text-[14px] text-[var(--text-color)] font-normal items-center px-[16px] py-[8px] leading-[150%] opacity-[1] transition-opacity duration-[100ms] ease cursor-pointer hover:font-medium hover:text-[var(--first-color)] hover:opacity-[0.7]">
                     <i className="mr-[10px]">
                       <VscAccount />
                     </i>
@@ -189,11 +189,11 @@ export default function Navigate() {
             </li>
           )}
           {/* Search */}
-          <li className="book-search flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
-            <i className="search">
+          <li className="book-search group/book-search flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
+            <i className="search hover:text-[var(--first-color)]">
               <PiMagnifyingGlass />
             </i>
-            <div className="search-container absolute bg-[var(--card-color)] flex flex-col right-0 min-w-[400px] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] z-[10] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent">
+            <div className="search-container absolute bg-[var(--card-color)] flex flex-col right-0 min-w-[400px] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] z-[10] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent group-hover/book-search:duration-[300ms] group-hover/book-search:scale-100 group-hover/book-search:opacity-100 group-hover/book-search:visible">
               <form action="#" className="search-form">
                 <input
                   className="min-w-[400px] py-[10px] pl-[36px] pr-[10px] rounded-[5px] bg-[var(--card-color)] text-[18px] text-[var(--text-color)] outline-none border-[1px] border-solid border-[var(--border-color)]"
@@ -207,7 +207,7 @@ export default function Navigate() {
           {!checkLogin ? (
             <li className="book-heart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
-                <i>
+                <i className="hover:text-[var(--first-color)]">
                   <PiHeartStraight />
                 </i>
               </Link>
@@ -218,7 +218,7 @@ export default function Navigate() {
           ) : (
             <li className="book-heart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/wishlist">
-                <i>
+                <i className="hover:text-[var(--first-color)]">
                   <PiHeartStraight />
                 </i>
               </Link>
@@ -231,7 +231,7 @@ export default function Navigate() {
           {!checkLogin ? (
             <li className="book-cart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
-                <i>
+                <i className="hover:text-[var(--first-color)]">
                   <PiHandbag />
                 </i>
                 <span className="count-cart">0</span>
@@ -240,11 +240,11 @@ export default function Navigate() {
           ) : (
             <li className="book-cart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link className="link-cart" href="/checkout">
-                <i className="book-cart-icon-mb hidden">
+                <i className="book-cart-icon-mb hidden hover:text-[var(--first-color)]">
                   <PiHandbag />
                 </i>
               </Link>
-              <i className="book-cart-icon block">
+              <i className="book-cart-icon block hover:text-[var(--first-color)]">
                 <PiHandbag />
               </i>
               <span className="count-cart absolute bottom-[20px] left-[25px] bg-[var(--first-color)] text-[var(--white-color)] h-[18px] w-[18px] leading-[18px] rounded-[50%] text-center text-[10px]">
@@ -345,7 +345,7 @@ export default function Navigate() {
                 <div className="cart-btn flex justify-between text-[18px] px-[12px] mb-[16px]">
                   <Link
                     href="/cart"
-                    className="view-link flex flex-1 justify-center px-[20px] py-[10px] border-[1px] border-solid border-[var(--first-color)] rounded-[5px] text-[var(--first-color)] hover:text-[var(--white-color)] hover:bg-[var(--first-color)]"
+                    className="view-link flex flex-1 justify-center px-[20px] py-[10px] border-[1px] border-solid border-[var(--first-color)] rounded-[5px] text-[var(--first-color)] hover:text-[var(--white-color)] hover:bg-[var(--first-color)] first:mr-[10px]"
                   >
                     View Cart
                     <i className="view-icon px-[10px] py-[4px]">

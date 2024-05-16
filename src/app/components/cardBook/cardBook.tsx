@@ -35,7 +35,7 @@ export default function CardBook(props: any) {
     <>
       <Link
         href="/productDetail"
-        className="template-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] border-solid border-[2px] border-[var(--border-color)] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
+        className="template-card group/template-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] border-solid border-[2px] border-[var(--border-color)] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
       >
         {item.time == "new" && (
           <div className="template-label absolute top-[10%] left-[27%] z-[1] bg-[var(--first-color)] rounded-[5px] translate-x-[-50%] translate-y-[-50%]">
@@ -47,7 +47,7 @@ export default function CardBook(props: any) {
 
         <div className="template-img !relative w-[150px] h-[220px] mt-0 mb-0 ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
           <Image
-            className="!relative duration-[300ms]"
+            className="!relative duration-[300ms] group-hover/template-card:scale-110"
             src="/images/biasach1.png"
             alt="Main Image"
             fill
@@ -102,15 +102,15 @@ export default function CardBook(props: any) {
               </span>
             )}
           </div>
-          <div className="template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
-            <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms]">
+          <div className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
+            <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/template-btn:left-[50%] group-hover/template-btn:text-[var(--white-color)]">
               <FaShoppingCart />
             </i>
             <p className="add-cart font-bold text-[12px] text-[var(--first-color)] ml-[30px] duration-[250ms]">
               Add cart
             </p>
           </div>
-          <div className="Icon-Container hidden flex-col absolute text-[var(--first-color)] top-[20px] right-[20px]">
+          <div className="Icon-Container group-hover/template-card:!inline-flex hidden flex-col absolute text-[var(--first-color)] top-[20px] right-[20px]">
             <i className="text-[20px] font-bold mb-[8px]">
               <LuEye />
             </i>

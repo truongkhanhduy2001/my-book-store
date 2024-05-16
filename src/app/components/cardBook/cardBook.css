@@ -1,23 +1,4 @@
 /* Start */
-.template-card:hover .template-tag .Icon-Container {
-  display: inline-flex !important;
-}
-
-/* Image */
-.template-card:hover .template-img img {
-  transform: scale(1.1);
-}
-
-/* Button cart */
-.template-card .template-tag .template-btn:hover i {
-  left: 50%;
-  color: var(--white-color);
-}
-
-.template-card .template-tag .template-btn:hover p {
-  clip-path: circle(0px at 125px 27.5px);
-}
-
 /* Icon heart */
 .template-card .template-tag .Icon-Container .HeartIcon.active {
   fill: red;

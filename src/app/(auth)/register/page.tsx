@@ -77,7 +77,7 @@ export default function Register() {
           </div>
           <div className="overlay-panel-overlay-right flex-1 flex items-center justify-center bg-[var(--BG)]">
             <form className="form-register max-w-[500px] p-[40px] w-[100%] bg-[var(--BG)]">
-              <div>
+              <div className="first:flex">
                 <i className="flex pb-[20px] m-[auto] text-[100px] text-[var(--first-color)]">
                   <FaBookOpen />
                 </i>
@@ -123,7 +123,7 @@ export default function Register() {
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Password"
-                    style="pd-right"
+                    style="pd-right !pr-[56px]"
                     onChange={handlePassword}
                     RefName={null}
                   />
@@ -133,7 +133,11 @@ export default function Register() {
                       className="toggle-password absolute top-[50%] translate-y-[-50%] right-[26px] hover:opacity-[0.7]"
                       onClick={toggleShowPassword}
                     >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      {showPassword ? (
+                        <FaEyeSlash className="w-[20px] h-[20px] text-[var(--text-color)]" />
+                      ) : (
+                        <FaEye className="w-[20px] h-[20px] text-[var(--text-color)]" />
+                      )}
                     </button>
                   )}
                 </div>
@@ -148,7 +152,7 @@ export default function Register() {
                     type={showConfirmPassword ? "text" : "password"}
                     name="Confirm password"
                     placeholder="Confirm Password"
-                    style="pd-right"
+                    style="pd-right !pr-[56px]"
                     onChange={handleConfirmPassword}
                     RefName={null}
                   />
@@ -158,7 +162,11 @@ export default function Register() {
                       className="toggle-confirm-password absolute top-[50%] translate-y-[-50%] right-[26px] hover:opacity-[0.7]"
                       onClick={toggleShowConfirmPassword}
                     >
-                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                      {showConfirmPassword ? (
+                        <FaEyeSlash className="w-[20px] h-[20px] text-[var(--text-color)]" />
+                      ) : (
+                        <FaEye className="w-[20px] h-[20px] text-[var(--text-color)]" />
+                      )}
                     </button>
                   )}
                 </div>
