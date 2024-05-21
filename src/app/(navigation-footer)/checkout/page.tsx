@@ -2,6 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./checkout.css";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -13,32 +15,29 @@ export default function CheckOut() {
     },
   ];
 
-  const [Email, setEmail] = useState("");
-  const [Address, setAddress] = useState("");
-  const [Tel, setTel] = useState("");
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    address: Yup.string()
+      .required("Address is required")
+      .min(5, "Address must be at least 5 characters"),
+    city: Yup.string().required("City is required"),
+    district: Yup.string().required("District is required"),
+    ward: Yup.string().required("Ward is required"),
+    telephone: Yup.string()
+      .required("Telephone is required")
+      .matches(/^\d+$/, "Telephone must be only digits")
+      .min(10, "Telephone must be at least 10 digits")
+      .max(15, "Telephone must be at most 15 digits"),
+  });
+
   const [Notes, setNotes] = useState("");
   const [Card, setCard] = useState("");
   const [NameCard, setNameCard] = useState("");
   const [CVV, setCVV] = useState("");
   const [Month, setMonth] = useState("");
   const [Year, setYear] = useState("");
-
-  const RefEmail: any = useRef(null);
-  useEffect(() => {
-    RefEmail.current.focus();
-  }, []);
-
-  const handleEmail = (e: any) => {
-    setEmail(e.target.value);
-  };
-
-  const handleAddress = (e: any) => {
-    setAddress(e.target.value);
-  };
-
-  const handleTel = (e: any) => {
-    setTel(e.target.value);
-  };
 
   const handleNotes = (e: any) => {
     setNotes(e.target.value);
@@ -214,284 +213,333 @@ export default function CheckOut() {
             </li>
           </ul>
         </div>
-        <div className="section pt-[30px] pd-[30px]">
-          <div className="container max-w-[var(--width-home)] w-[100%] m-[auto]">
-            <div className="row flex">
-              <div className="col-md-7 w-[58.33333333%] mr-[10px]">
-                <div className="billing-details">
-                  <div className="section-title mb-[30px] mt-[15px] relative">
-                    <h3 className="title inline-block m-0 uppercase text-[var(--title-color)] text-[24px] font-bold">
-                      Billing address
-                    </h3>
-                  </div>
-                  <form id="bill-form">
-                    <div className="form-group mb-[15px]">
-                      <input
-                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email"
-                        value={Email}
-                        onChange={handleEmail}
-                        ref={RefEmail}
-                      />
-                    </div>
-                    <div className="form-group mb-[15px]">
-                      <input
-                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        type="text"
-                        id="addressBill"
-                        name="addressBill"
-                        placeholder="Address"
-                        value={Address}
-                        onChange={handleAddress}
-                      />
-                    </div>
-                    <div className="form-group mb-[15px] flex">
-                      <select
-                        className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        name="city"
-                        id="city"
-                        defaultValue=""
-                      >
-                        <option disabled value="">
-                          Choose province
-                        </option>
-                      </select>
-                      <select
-                        className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        name="district"
-                        id="district"
-                        defaultValue=""
-                      >
-                        <option disabled value="">
-                          Choose district
-                        </option>
-                      </select>
-                      <select
-                        className="input bg-[var(--white-color)] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        name="ward"
-                        id="ward"
-                        defaultValue=""
-                      >
-                        <option disabled value="">
-                          Choose ward
-                        </option>
-                      </select>
-                    </div>
-
-                    <div className="form-group mb-[15px]">
-                      <input
-                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        type="tel"
-                        id="telBill"
-                        name="telBill"
-                        placeholder="Telephone"
-                        value={Tel}
-                        onChange={handleTel}
-                      />
-                    </div>
-                    <div className="form-group mb-[15px]">
-                      <textarea
-                        className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] min-h-[100px] p-[15px] rounded-[5px] border-solid border border-[var(--text-color)]"
-                        id="notesBill"
-                        name="notesBill"
-                        placeholder="Order Notes"
-                        value={Notes}
-                        onChange={handleNotes}
-                      ></textarea>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div className="col-md-5 order-details w-[41.66666667%] pl-[10px] pr-[10px] pb-[10px] rounded-[5px] border-solid border border-[var(--text-color)]">
-                <div className="section-title text-center mb-[30px] mt-[15px] relative">
-                  <h3 className="title inline-block m-0 uppercase text-[var(--title-color)] text-[24px] font-bold">
-                    Your Order
-                  </h3>
-                </div>
-                <div className="order-summary mt-[20px] mb-[20px] text-[var(--title-color)]">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <th className="w-full text-start px-[10px]">PRODUCT</th>
-                        <th className="w-full text-start px-[10px]">TOTAL</th>
-                        <th className="w-full text-start px-[10px]">REMOVE</th>
-                      </tr>
-                      <tr className="mt-[8px]">
-                        <td className="w-full inline-block px-[10px]">
-                          <div className="flex items-center">
-                            <Link
-                              className="link-prod mr-[10px] !relative"
-                              href="/productDetail"
+        <Formik
+          initialValues={{
+            email: "",
+            address: "",
+            city: "",
+            district: "",
+            ward: "",
+            telephone: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(false);
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <div className="section pt-[30px] pd-[30px]">
+                <div className="container max-w-[var(--width-home)] w-[100%] m-[auto]">
+                  <div className="row flex">
+                    <div className="col-md-7 w-[58.33333333%] mr-[10px]">
+                      <div className="billing-details">
+                        <div className="section-title mb-[30px] mt-[15px] relative">
+                          <h3 className="title inline-block m-0 uppercase text-[var(--title-color)] text-[24px] font-bold">
+                            Billing address
+                          </h3>
+                        </div>
+                        <div id="bill-form">
+                          <div className="form-group mb-[15px]">
+                            <Field
+                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="Email"
+                            />
+                            <ErrorMessage
+                              name="email"
+                              component="div"
+                              className="text-[red]"
+                            />
+                          </div>
+                          <div className="form-group mb-[15px]">
+                            <Field
+                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              type="text"
+                              id="address"
+                              name="address"
+                              placeholder="Address"
+                            />
+                            <ErrorMessage
+                              name="address"
+                              component="div"
+                              className="text-[red]"
+                            />
+                          </div>
+                          <div className="form-group mb-[15px] flex">
+                            <Field
+                              as="select"
+                              className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              name="city"
+                              id="city"
                             >
-                              <Image
-                                className="max-w-[100px] w-[100%] h-[auto] !relative"
-                                src="/images/biasach1.png"
-                                alt="Main Image"
-                                fill
-                                priority={true}
-                                sizes="(max-with: 768px)100vw"
-                              />
-                            </Link>
-                            <h1>1x Dune</h1>
-                          </div>
-                        </td>
-                        <td className="w-full px-[10px]">
-                          {data.discount && (
-                            <span id="price-checkout">${data.discount}</span>
-                          )}
-                          {!data.discount && (
-                            <span id="price-checkout">${data.price}</span>
-                          )}
-                        </td>
-                        <td className="w-full px-[10px]">
-                          <div className="flex justify-center">
-                            <FaRegTrashAlt className="cursor-pointer text-[red]" />
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div className="order-col px-[10px] mt-[32px] flex justify-between w-[100%] mb-[10px]">
-                    <div>Shipping</div>
-                    <div>
-                      <strong>FREE</strong>
-                    </div>
-                  </div>
-                  <div className="order-col px-[10px] flex justify-between w-[100%] mb-[10px]">
-                    <div>
-                      <strong>TOTAL</strong>
-                    </div>
-                    <div>
-                      <strong className="order-total text-[var(--first-color)] text-[24px]">
-                        $500
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-                <div className="payment-method px-[10px] text-[var(--title-color)] mt-[30px] mb-[30px]">
-                  <div className="input-radio flex">
-                    <input
-                      type="radio"
-                      name="payment"
-                      className="payment"
-                      id="payment-1"
-                      value={radio}
-                      defaultChecked={radio == 1 ? true : false}
-                      onChange={() => {
-                        setradio(1);
-                      }}
-                    />
-                    <label
-                      className="cursor-pointer font-normal min-h-[20px] pl-[10px]"
-                      htmlFor="payment-1"
-                    >
-                      Direct Payment
-                    </label>
-                  </div>
-                  <div className="input-radio">
-                    <input
-                      type="radio"
-                      name="payment"
-                      className="payment"
-                      id="payment-2"
-                      value={radio}
-                      defaultChecked={radio == 2 ? true : false}
-                      onChange={() => {
-                        setradio(2);
-                      }}
-                    />
-                    <label
-                      className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
-                      htmlFor="payment-2"
-                    >
-                      Paypal System
-                    </label>
-                    {radio == 2 && (
-                      <div className="caption mt-[5px] max-h-[800px]">
-                        <input
-                          form="bill-form"
-                          className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] mb-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                          type="text"
-                          name="creditCardBill"
-                          id="creditCardBill"
-                          placeholder="Enter your credit card number"
-                          onChange={handleCard}
-                          value={Card}
-                        />
-                        <input
-                          form="bill-form"
-                          className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                          type="text"
-                          name="nameBill"
-                          id="nameBill"
-                          placeholder="Enter your name card"
-                          onChange={handleNameCard}
-                          value={NameCard}
-                        />
-                        <div style={{ display: "flex", marginTop: "10px" }}>
-                          <input
-                            className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-r-none border-solid border border-[var(--text-color)]"
-                            type="text"
-                            name="cvvBill"
-                            id="cvvBill"
-                            placeholder="Enter your cvv"
-                            onChange={handleCVV}
-                            value={CVV}
-                          />
-                          <div style={{ display: "flex" }}>
-                            <input
-                              form="bill-form"
-                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] border-solid border border-[var(--text-color)]"
-                              type="text"
-                              name="monthCreditBill"
-                              id="monthCreditBill"
-                              placeholder="Month"
-                              onChange={handleMonth}
-                              value={Month}
+                              <option disabled value="">
+                                Choose province
+                              </option>
+                            </Field>
+                            <ErrorMessage
+                              name="city"
+                              component="div"
+                              className="text-[red]"
                             />
-                            <input
-                              form="bill-form"
-                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-l-none border-solid border border-[var(--text-color)]"
-                              type="text"
-                              name="yearCreditBill"
-                              id="yearCreditBill"
-                              placeholder="Year"
-                              onChange={handleYear}
-                              value={Year}
+                            <Field
+                              as="select"
+                              className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              name="district"
+                              id="district"
+                            >
+                              <option disabled value="">
+                                Choose district
+                              </option>
+                            </Field>
+                            <ErrorMessage
+                              name="district"
+                              component="div"
+                              className="text-[red]"
                             />
+                            <Field
+                              as="select"
+                              className="input bg-[var(--white-color)] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              name="ward"
+                              id="ward"
+                            >
+                              <option disabled value="">
+                                Choose ward
+                              </option>
+                            </Field>
+                            <ErrorMessage
+                              name="ward"
+                              component="div"
+                              className="text-[red]"
+                            />
+                          </div>
+
+                          <div className="form-group mb-[15px]">
+                            <Field
+                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              type="text"
+                              id="telephone"
+                              name="telephone"
+                              placeholder="Telephone"
+                            />
+                          </div>
+                          <div className="form-group mb-[15px]">
+                            <textarea
+                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] min-h-[100px] p-[15px] rounded-[5px] border-solid border border-[var(--text-color)]"
+                              id="notesBill"
+                              name="notesBill"
+                              placeholder="Order Notes"
+                              value={Notes}
+                              onChange={handleNotes}
+                            ></textarea>
                           </div>
                         </div>
                       </div>
-                    )}
+                    </div>
+                    <div className="col-md-5 order-details w-[41.66666667%] pl-[10px] pr-[10px] pb-[10px] rounded-[5px] border-solid border border-[var(--text-color)]">
+                      <div className="section-title text-center mb-[30px] mt-[15px] relative">
+                        <h3 className="title inline-block m-0 uppercase text-[var(--title-color)] text-[24px] font-bold">
+                          Your Order
+                        </h3>
+                      </div>
+                      <div className="order-summary mt-[20px] mb-[20px] text-[var(--title-color)]">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <th className="w-full text-start px-[10px]">
+                                PRODUCT
+                              </th>
+                              <th className="w-full text-start px-[10px]">
+                                TOTAL
+                              </th>
+                              <th className="w-full text-start px-[10px]">
+                                REMOVE
+                              </th>
+                            </tr>
+                            <tr className="mt-[8px]">
+                              <td className="w-full inline-block px-[10px]">
+                                <div className="flex items-center">
+                                  <Link
+                                    className="link-prod mr-[10px] !relative"
+                                    href="/productDetail"
+                                  >
+                                    <Image
+                                      className="max-w-[100px] w-[100%] h-[auto] !relative"
+                                      src="/images/biasach1.png"
+                                      alt="Main Image"
+                                      fill
+                                      priority={true}
+                                      sizes="(max-with: 768px)100vw"
+                                    />
+                                  </Link>
+                                  <h1>1x Dune</h1>
+                                </div>
+                              </td>
+                              <td className="w-full px-[10px]">
+                                {data.discount && (
+                                  <span id="price-checkout">
+                                    ${data.discount}
+                                  </span>
+                                )}
+                                {!data.discount && (
+                                  <span id="price-checkout">${data.price}</span>
+                                )}
+                              </td>
+                              <td className="w-full px-[10px]">
+                                <div className="flex justify-center">
+                                  <FaRegTrashAlt className="cursor-pointer text-[red]" />
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div className="order-col px-[10px] mt-[32px] flex justify-between w-[100%] mb-[10px]">
+                          <div>Shipping</div>
+                          <div>
+                            <strong>FREE</strong>
+                          </div>
+                        </div>
+                        <div className="order-col px-[10px] flex justify-between w-[100%] mb-[10px]">
+                          <div>
+                            <strong>TOTAL</strong>
+                          </div>
+                          <div>
+                            <strong className="order-total text-[var(--first-color)] text-[24px]">
+                              $500
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="payment-method px-[10px] text-[var(--title-color)] mt-[30px] mb-[30px]">
+                        <div className="input-radio flex">
+                          <input
+                            type="radio"
+                            name="payment"
+                            className="payment"
+                            id="payment-1"
+                            value={radio}
+                            defaultChecked={radio == 1 ? true : false}
+                            onChange={() => {
+                              setradio(1);
+                            }}
+                          />
+                          <label
+                            className="cursor-pointer font-normal min-h-[20px] pl-[10px]"
+                            htmlFor="payment-1"
+                          >
+                            Direct Payment
+                          </label>
+                        </div>
+                        <div className="input-radio">
+                          <input
+                            type="radio"
+                            name="payment"
+                            className="payment"
+                            id="payment-2"
+                            value={radio}
+                            defaultChecked={radio == 2 ? true : false}
+                            onChange={() => {
+                              setradio(2);
+                            }}
+                          />
+                          <label
+                            className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
+                            htmlFor="payment-2"
+                          >
+                            Paypal System
+                          </label>
+                          {radio == 2 && (
+                            <div className="caption mt-[5px] max-h-[800px]">
+                              <input
+                                form="bill-form"
+                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] mb-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                                type="text"
+                                name="creditCardBill"
+                                id="creditCardBill"
+                                placeholder="Enter your credit card number"
+                                onChange={handleCard}
+                                value={Card}
+                              />
+                              <input
+                                form="bill-form"
+                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                                type="text"
+                                name="nameBill"
+                                id="nameBill"
+                                placeholder="Enter your name card"
+                                onChange={handleNameCard}
+                                value={NameCard}
+                              />
+                              <div
+                                style={{ display: "flex", marginTop: "10px" }}
+                              >
+                                <input
+                                  className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-r-none border-solid border border-[var(--text-color)]"
+                                  type="text"
+                                  name="cvvBill"
+                                  id="cvvBill"
+                                  placeholder="Enter your cvv"
+                                  onChange={handleCVV}
+                                  value={CVV}
+                                />
+                                <div style={{ display: "flex" }}>
+                                  <input
+                                    form="bill-form"
+                                    className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] border-solid border border-[var(--text-color)]"
+                                    type="text"
+                                    name="monthCreditBill"
+                                    id="monthCreditBill"
+                                    placeholder="Month"
+                                    onChange={handleMonth}
+                                    value={Month}
+                                  />
+                                  <input
+                                    form="bill-form"
+                                    className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-l-none border-solid border border-[var(--text-color)]"
+                                    type="text"
+                                    name="yearCreditBill"
+                                    id="yearCreditBill"
+                                    placeholder="Year"
+                                    onChange={handleYear}
+                                    value={Year}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="input-checkbox px-[10px] flex">
+                        <input
+                          type="checkbox"
+                          id="terms"
+                          className="terms-checkout"
+                        />
+                        <label
+                          className="cursor-pointer font-normal min-h-[20px] pl-[10px] text-[var(--title-color)]"
+                          htmlFor="terms"
+                        >
+                          <span></span>I have read and accept the terms &
+                          conditions
+                        </label>
+                      </div>
+                      <button
+                        type="submit"
+                        id="submit-bill-form"
+                        className="primary-btn order-submit px-[10px] bg-[var(--first-color)] rounded-[40px] text-[var(--white-color)] inline-block font-medium uppercase pl-[30px] pr-[30px] pt-[12px] pb-[12px] text-center border-none"
+                        disabled={isSubmitting}
+                      >
+                        Place order
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="input-checkbox px-[10px] flex">
-                  <input
-                    type="checkbox"
-                    id="terms"
-                    className="terms-checkout"
-                  />
-                  <label
-                    className="cursor-pointer font-normal min-h-[20px] pl-[10px] text-[var(--title-color)]"
-                    htmlFor="terms"
-                  >
-                    <span></span>I have read and accept the terms & conditions
-                  </label>
-                </div>
-                <Link
-                  href=""
-                  id="submit-bill-form"
-                  className="primary-btn order-submit px-[10px] bg-[var(--first-color)] rounded-[40px] text-[var(--white-color)] inline-block font-medium uppercase pl-[30px] pr-[30px] pt-[12px] pb-[12px] text-center border-none"
-                >
-                  Place order
-                </Link>
               </div>
-            </div>
-          </div>
-        </div>
+            </Form>
+          )}
+        </Formik>
       </section>
       {/* End Checkout */}
     </>

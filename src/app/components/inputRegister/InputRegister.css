@@ -1,9 +1,0 @@
-.InputRegister {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--text-color);
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
-  background-color: var(--white-color);
-  color: var(--title-color);
-}

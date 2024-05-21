@@ -308,7 +308,7 @@ export default function Navigate() {
                               <span className="cart-quanity text-[16px] text-[var(--text-color)]">
                                 x1
                               </span>
-                              <div className="book-delete flex justify-end text-[var(--first-color)] text-[15px]">
+                              <div className="book-delete flex justify-end text-[red] text-[15px]">
                                 <i>
                                   <FaRegTrashAlt />
                                 </i>

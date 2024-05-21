@@ -1,23 +1,35 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import Image from "next/image";
 import Link from "next/link";
 import "./register.css";
 import { IoDocumentTextOutline, IoClose } from "react-icons/io5";
 import { FaEye, FaBookOpen, FaEyeSlash } from "react-icons/fa";
-import InputRegister from "@/app/components/inputRegister/register";
 
 export default function Register() {
-  const [Text, setText] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordTyped, setPasswordTyped] = useState(false);
-  const [ConfirmpasswordTyped, setConfirmPasswordTyped] = useState(false);
+  // validate
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .required("Name is required")
+      .min(3, "Name must be at least 3 characters")
+      .max(15, "Name must be at most 15 characters"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters")
+      .max(20, "Password must be at most 20 characters")
+      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .matches(
+        /[^a-zA-Z0-9]/,
+        "Password must contain at least one special character"
+      ),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password")], "Passwords must match")
+      .required("Confirm Password is required"),
+  });
 
-  const RefName: any = useRef(null);
   useEffect(() => {
     const iconClose = document.querySelector(".modal-close");
     const modal = document.querySelector(".modal");
@@ -30,33 +42,7 @@ export default function Register() {
     termsConditions?.addEventListener("click", () => {
       modal?.classList.add("show-modal");
     });
-
-    RefName.current.focus();
   }, []);
-
-  const handleText = (e: any) => {
-    setText(e.target.value);
-  };
-  const handleEmail = (e: any) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePassword = (e: any) => {
-    setPassword(e.target.value);
-    setPasswordTyped(e.target.value !== "");
-  };
-  const handleConfirmPassword = (e: any) => {
-    setConfirmPassword(e.target.value);
-    setConfirmPasswordTyped(e.target.value !== "");
-  };
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
 
   return (
     <div className="form-container-register relative w-[100%] bg-[var(--BG)]">
@@ -76,7 +62,7 @@ export default function Register() {
             ></Image>
           </div>
           <div className="overlay-panel-overlay-right flex-1 flex items-center justify-center bg-[var(--BG)]">
-            <form className="form-register max-w-[500px] p-[40px] w-[100%] bg-[var(--BG)]">
+            <div className="form-register max-w-[500px] p-[40px] w-[100%] bg-[var(--BG)]">
               <div className="first:flex">
                 <i className="flex pb-[20px] m-[auto] text-[100px] text-[var(--first-color)]">
                   <FaBookOpen />
@@ -85,105 +71,101 @@ export default function Register() {
               <h1 className="text-[var(--title-color)] opacity-[0.7] text-[24px] mb-[20px] text-center">
                 Create an account
               </h1>
-              <div className="infield mb-[20px]">
-                <label className="name mb-[10px] text-[var(--title-color)] block font-bold">
-                  Full Name
-                </label>
-                <InputRegister
-                  value={Text}
-                  type="text"
-                  placeholder="Your Full Name"
-                  name="name"
-                  style=""
-                  onChange={handleText}
-                  RefName={RefName}
-                />
-              </div>
-              <div className="infield mb-[20px]">
-                <label className="email mb-[10px] text-[var(--title-color)] block font-bold">
-                  E-mail
-                </label>
-                <InputRegister
-                  value={email}
-                  type="email"
-                  placeholder="Example@gmail.com"
-                  name="email"
-                  style=""
-                  onChange={handleEmail}
-                  RefName={null}
-                />
-              </div>
-              <div className="infield mb-[20px]">
-                <label className="password-field mb-[10px] text-[var(--title-color)] block font-bold">
-                  Password
-                </label>
-                <div className="password-container relative">
-                  <InputRegister
-                    value={password}
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    placeholder="Password"
-                    style="pd-right !pr-[56px]"
-                    onChange={handlePassword}
-                    RefName={null}
-                  />
-                  {passwordTyped && (
+              <Formik
+                initialValues={{
+                  name: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: "",
+                }}
+                validationSchema={validationSchema}
+                onSubmit={(values, { setSubmitting }) => {
+                  console.log(values);
+                  setSubmitting(false);
+                }}
+              >
+                {({ isSubmitting }) => (
+                  <Form>
+                    <div className="infield mb-[20px]">
+                      <label className="name mb-[10px] text-[var(--title-color)] block font-bold">
+                        Full Name
+                      </label>
+                      <Field
+                        className="w-[100%] p-[10px] border-[1px] border-solid border-[var(--text-color)] rounded-[5px] bg-[var(--white-color)] text-[var(--title-color)] transition-colors duration-[300ms] ease"
+                        type="text"
+                        name="name"
+                        placeholder="Full name"
+                      />
+                      <ErrorMessage
+                        className="text-[red]"
+                        component="div"
+                        name="name"
+                      />
+                    </div>
+                    <div className="infield mb-[20px]">
+                      <label className="email mb-[10px] text-[var(--title-color)] block font-bold">
+                        E-mail
+                      </label>
+                      <Field
+                        className="w-[100%] p-[10px] border-[1px] border-solid border-[var(--text-color)] rounded-[5px] bg-[var(--white-color)] text-[var(--title-color)] transition-colors duration-[300ms] ease"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                      />
+                      <ErrorMessage
+                        className="text-[red]"
+                        component="div"
+                        name="email"
+                      />
+                    </div>
+                    <div className="infield mb-[20px]">
+                      <label className="password-field mb-[10px] text-[var(--title-color)] block font-bold">
+                        Password
+                      </label>
+                      <Field
+                        className="w-[100%] p-[10px] border-[1px] border-solid border-[var(--text-color)] rounded-[5px] bg-[var(--white-color)] text-[var(--title-color)] transition-colors duration-[300ms] ease"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                      />
+                      <ErrorMessage
+                        className="text-[red]"
+                        component="div"
+                        name="password"
+                      />
+                    </div>
+                    <div className="infield mb-[20px]">
+                      <label className="confirm-password-field mb-[10px] text-[var(--title-color)] block font-bold ">
+                        Confirm Password
+                      </label>
+                      <Field
+                        className="w-[100%] p-[10px] border-[1px] border-solid border-[var(--text-color)] rounded-[5px] bg-[var(--white-color)] text-[var(--title-color)] transition-colors duration-[300ms] ease"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Comfirm Password"
+                      />
+                      <ErrorMessage
+                        className="text-[red]"
+                        component="div"
+                        name="confirmPassword"
+                      />
+                    </div>
+                    <div className="form-checkbox mb-[120px] flex items-center">
+                      <input className="checkbox mr-[10px]" type="checkbox" />
+                      <label className="terms-conditions RM text-[var(--first-color)] text-[14px] font-bold cursor-pointer">
+                        I agree to the Terms & Conditions
+                      </label>
+                    </div>
                     <button
-                      type="button"
-                      className="toggle-password absolute top-[50%] translate-y-[-50%] right-[26px] hover:opacity-[0.7]"
-                      onClick={toggleShowPassword}
+                      className="pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]"
+                      type="submit"
+                      disabled={isSubmitting}
                     >
-                      {showPassword ? (
-                        <FaEyeSlash className="w-[20px] h-[20px] text-[var(--text-color)]" />
-                      ) : (
-                        <FaEye className="w-[20px] h-[20px] text-[var(--text-color)]" />
-                      )}
+                      Register
                     </button>
-                  )}
-                </div>
-              </div>
-              <div className="infield mb-[20px]">
-                <label className="confirm-password-field mb-[10px] text-[var(--title-color)] block font-bold ">
-                  Confirm Password
-                </label>
-                <div className="confirm-password-container relative">
-                  <InputRegister
-                    value={ConfirmPassword}
-                    type={showConfirmPassword ? "text" : "password"}
-                    name="Confirm password"
-                    placeholder="Confirm Password"
-                    style="pd-right !pr-[56px]"
-                    onChange={handleConfirmPassword}
-                    RefName={null}
-                  />
-                  {ConfirmpasswordTyped && (
-                    <button
-                      type="button"
-                      className="toggle-confirm-password absolute top-[50%] translate-y-[-50%] right-[26px] hover:opacity-[0.7]"
-                      onClick={toggleShowConfirmPassword}
-                    >
-                      {showConfirmPassword ? (
-                        <FaEyeSlash className="w-[20px] h-[20px] text-[var(--text-color)]" />
-                      ) : (
-                        <FaEye className="w-[20px] h-[20px] text-[var(--text-color)]" />
-                      )}
-                    </button>
-                  )}
-                </div>
-              </div>
-              <div className="form-checkbox mb-[120px] flex items-center">
-                <input className="checkbox mr-[10px]" type="checkbox" />
-                <label className="terms-conditions RM text-[var(--first-color)] text-[14px] font-bold cursor-pointer">
-                  I agree to the Terms & Conditions
-                </label>
-              </div>
-              <Link href="#">
-                <div className="btn-register text-center mb-[20px]">
-                  <button className="pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]">
-                    Register
-                  </button>
-                </div>
-              </Link>
+                  </Form>
+                )}
+              </Formik>
               <Link href="/login">
                 <div className="btn-login text-center mt-[20px]">
                   <button className="pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--white-color)] text-[var(--second-color)] rounded-[5px] cursor-pointer w-[100%] outline-1 outline outline-[var(--second-color)] hover:bg-[var(--second-color)] hover:outline-[var(--white-color)] hover:text-[--white-color] hover:rounded-[20px]">
@@ -191,7 +173,7 @@ export default function Register() {
                   </button>
                 </div>
               </Link>
-            </form>
+            </div>
           </div>
         </div>
       </div>
