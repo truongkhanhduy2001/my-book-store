@@ -5,44 +5,67 @@ import * as Yup from "yup";
 import Image from "next/image";
 import Link from "next/link";
 import "./register.css";
-import { IoDocumentTextOutline, IoClose } from "react-icons/io5";
-import { FaEye, FaBookOpen, FaEyeSlash } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
+import Cookie from "js-cookie";
 
 export default function Register() {
+  const [loading, setloading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   // validate
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required("Name is required")
-      .min(3, "Name must be at least 3 characters")
-      .max(15, "Name must be at most 15 characters"),
+      .min(3, "Name must be at least 3 characters"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters")
-      .max(20, "Password must be at most 20 characters")
-      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .matches(
-        /[^a-zA-Z0-9]/,
-        "Password must contain at least one special character"
-      ),
+      .min(6, "Password must be at least 6 characters"),
+    // .max(20, "Password must be at most 20 characters")
+    // .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    // .matches(
+    //   /[^a-zA-Z0-9]/,
+    //   "Password must contain at least one special character"
+    // )
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("Confirm Password is required"),
   });
 
-  useEffect(() => {
-    const iconClose = document.querySelector(".modal-close");
-    const modal = document.querySelector(".modal");
-    const termsConditions = document.querySelector(".terms-conditions");
-
-    iconClose?.addEventListener("click", () => {
-      modal?.classList.remove("show-modal");
-    });
-
-    termsConditions?.addEventListener("click", () => {
-      modal?.classList.add("show-modal");
-    });
-  }, []);
+  const handleSubmit = (values: any, setSubmitting: any) => {
+    setloading(true);
+    setError(null);
+    try {
+      fetch("/api/users/registerUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.success) {
+            Cookie.set("TOKEN-USER", data.token, {
+              sameSite: "strict",
+              secure: true,
+              path: "/",
+              expires: 7,
+            });
+            // Check for success flag
+            window.location.href = "/";
+          } else {
+            // Handle registration failure
+            setError(data.message);
+            setloading(false);
+          }
+        });
+      setSubmitting(false);
+    } catch (error) {
+      console.error(error);
+      setloading(false);
+    }
+  };
 
   return (
     <div className="form-container-register relative w-[100%] bg-[var(--BG)]">
@@ -79,10 +102,9 @@ export default function Register() {
                   confirmPassword: "",
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                  console.log(values);
-                  setSubmitting(false);
-                }}
+                onSubmit={(values, { setSubmitting }) =>
+                  handleSubmit(values, setSubmitting)
+                }
               >
                 {({ isSubmitting }) => (
                   <Form>
@@ -117,6 +139,9 @@ export default function Register() {
                         component="div"
                         name="email"
                       />
+                      {error && (
+                        <div className="text-[red] mb-[20px]">{error}</div>
+                      )}
                     </div>
                     <div className="infield mb-[20px]">
                       <label className="password-field mb-[10px] text-[var(--title-color)] block font-bold">
@@ -150,18 +175,12 @@ export default function Register() {
                         name="confirmPassword"
                       />
                     </div>
-                    <div className="form-checkbox mb-[120px] flex items-center">
-                      <input className="checkbox mr-[10px]" type="checkbox" />
-                      <label className="terms-conditions RM text-[var(--first-color)] text-[14px] font-bold cursor-pointer">
-                        I agree to the Terms & Conditions
-                      </label>
-                    </div>
                     <button
-                      className="pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]"
+                      className="mt-[50px] pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]"
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                     >
-                      Register
+                      {loading ? "Register..." : "Register"}
                     </button>
                   </Form>
                 )}
@@ -175,39 +194,6 @@ export default function Register() {
               </Link>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="modal fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0, 0, 0, 0.6)] hidden">
-        <div className="modalContainer w-[500px] h-[500px] m-[auto] bg-[var(--white-color)] rounded-[5px]">
-          <h3 className="modal-close">
-            <i className="flex text-right justify-end cursor-pointer text-[var(--title-color)] text-[35px] p-[10px]">
-              <IoClose />
-            </i>
-          </h3>
-          <h2 className="text-[20px] font-bold text-[var(--first-color)] flex text-center justify-center">
-            <i className="text-[30px] pr-[10px]">
-              <IoDocumentTextOutline />
-            </i>
-            Term and conditions
-          </h2>
-          <h1 className="text-[var(--title-color)] p-[10px]">
-            Please read these terms and conditions carefully before using our
-            services:
-          </h1>
-          <p className="text-[var(--title-color)] p-[10px]">
-            1. Acceptance of Terms: By accessing or using any part of our
-            service, you agree to abide by these terms and conditions. If you do
-            not agree to any part of these terms, please refrain from using the
-            service immediately.<br></br> 2. Compliance with Laws: You agree to
-            comply with all applicable laws when using our service and accept
-            responsibility for your own conduct.<br></br> 3. Privacy: We are
-            committed to protecting your personal information in accordance with
-            our Privacy Policy. By using our service, you consent to the
-            collection, use, and disclosure of your personal information as
-            outlined in the Privacy Policy.<br></br> 4. Changes to Terms: We
-            reserve the right to change or update these terms and conditions at
-            any time without prior notice.
-          </p>
         </div>
       </div>
     </div>

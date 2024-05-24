@@ -6,7 +6,6 @@ import Seller from "../components/seller/seller";
 import Arrival from "../components/arrival/arrival";
 import Discount from "../components/discount/discount";
 import Loader from "../components/loader/loader";
-import { notFound } from "next/navigation";
 
 export default function Home() {
   const [loading, setloading] = useState(false);

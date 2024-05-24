@@ -10,13 +10,15 @@ import { IoIosLogOut } from "react-icons/io";
 import { TiShoppingCart } from "react-icons/ti";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
-
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 export default function Navigate() {
   const data: any = [
     {
       title: "Dune",
     },
   ];
+  const router = useRouter();
 
   // Login Condition
   const [checkLogin, setCheckLogin] = useState(true);
@@ -85,7 +87,11 @@ export default function Navigate() {
   }, [pathname]);
 
   const handleClick = () => {};
-
+  const handleLogOut = () => {
+    console.log("12313");
+    Cookies.remove("TOKEN-USER");
+    router.push("/login");
+  };
   return (
     <nav className="nav-main h-[60px] w-[100%] bg-[var(--BG)] sticky z-[100] top-0 left-0 right-0">
       <div className="nav-bar relative max-w-[var(--width-home)] w-[100%] h-[100%] bg-[var(--BG)] ml-[auto] mr-[auto] px-[30px] flex items-center justify-between">
@@ -174,9 +180,9 @@ export default function Navigate() {
                     My Account
                   </p>
                 </Link>
-                <Link
-                  href="/login"
+                <div
                   className="user-details text-[14px] text-[var(--text-color)] font-bold leading-[150%]"
+                  onClick={handleLogOut}
                 >
                   <p className="logouts flex text-[14px] text-[var(--text-color)] font-normal items-center px-[16px] py-[8px] leading-[150%] opacity-[1] cursor-pointer hover:font-medium hover:text-[red] hover:opacity-[0.7]">
                     <i className="mr-[10px]">
@@ -184,7 +190,7 @@ export default function Navigate() {
                     </i>
                     Logout
                   </p>
-                </Link>
+                </div>
               </div>
             </li>
           )}

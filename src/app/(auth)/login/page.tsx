@@ -5,9 +5,49 @@ import * as Yup from "yup";
 import "./login.css";
 import Image from "next/image";
 import Link from "next/link";
-import { FaEye, FaBookOpen, FaEyeSlash } from "react-icons/fa";
+import { FaBookOpen } from "react-icons/fa";
+import Cookie from "js-cookie";
 
 export default function Login() {
+  const [loading, setloading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (values: any, setSubmitting: any) => {
+    setError(null);
+    setloading(true);
+    try {
+      fetch("/api/users/loginUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.success) {
+            Cookie.set("TOKEN-USER", data.token, {
+              sameSite: "strict",
+              secure: true,
+              path: "/",
+              expires: 7,
+            });
+            // Check for success flag
+            window.location.href = "/";
+          } else {
+            // Handle login failure
+            setError(data.message);
+            setloading(false);
+          }
+        });
+      setSubmitting(false);
+    } catch (error) {
+      console.error(error);
+      setloading(false);
+    }
+  };
+
   // validate
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -53,7 +93,7 @@ export default function Login() {
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                  setSubmitting(false);
+                  handleSubmit(values, setSubmitting);
                 }}
               >
                 {({ isSubmitting }) => (
@@ -90,12 +130,15 @@ export default function Login() {
                         name="password"
                       />
                     </div>
+                    {error && (
+                      <div className="text-[red] mb-[20px]">{error}</div>
+                    )}
                     <button
                       className="pt-[12px] mt-[50px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]"
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || loading}
                     >
-                      Login
+                      {loading ? "Login..." : "Login"}
                     </button>
                   </Form>
                 )}
