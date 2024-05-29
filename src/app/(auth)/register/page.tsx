@@ -7,32 +7,35 @@ import Link from "next/link";
 import "./register.css";
 import { FaBookOpen } from "react-icons/fa";
 import Cookie from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
-  const [loading, setloading] = useState(false);
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+
   // validate
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Name is required")
+      .required("Please enter your Name")
       .min(3, "Name must be at least 3 characters"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Please enter your Email")
+      .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"),
     password: Yup.string()
-      .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
-    // .max(20, "Password must be at most 20 characters")
-    // .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    // .matches(
-    //   /[^a-zA-Z0-9]/,
-    //   "Password must contain at least one special character"
-    // )
+      .required("Please enter your Password")
+      .min(6, "Password must be at least 6 characters")
+      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .matches(
+        /[^a-zA-Z0-9]/,
+        "Password must contain at least one special character"
+      ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
-      .required("Confirm Password is required"),
+      .required("Please enter your Confirm Password"),
   });
 
   const handleSubmit = (values: any, setSubmitting: any) => {
-    setloading(true);
     setError(null);
     try {
       fetch("/api/users/registerUser", {
@@ -44,7 +47,7 @@ export default function Register() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setSubmitting(false);
           if (data.success) {
             Cookie.set("TOKEN-USER", data.token, {
               sameSite: "strict",
@@ -53,17 +56,14 @@ export default function Register() {
               expires: 7,
             });
             // Check for success flag
-            window.location.href = "/";
+            router.push("/");
           } else {
             // Handle registration failure
             setError(data.message);
-            setloading(false);
           }
         });
-      setSubmitting(false);
     } catch (error) {
       console.error(error);
-      setloading(false);
     }
   };
 
@@ -178,9 +178,9 @@ export default function Register() {
                     <button
                       className="mt-[50px] pt-[12px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]"
                       type="submit"
-                      disabled={isSubmitting || loading}
+                      disabled={isSubmitting}
                     >
-                      {loading ? "Register..." : "Register"}
+                      {isSubmitting ? "Register..." : "Register"}
                     </button>
                   </Form>
                 )}

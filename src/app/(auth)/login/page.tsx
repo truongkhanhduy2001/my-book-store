@@ -7,14 +7,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaBookOpen } from "react-icons/fa";
 import Cookie from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
-  const [loading, setloading] = useState(false);
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (values: any, setSubmitting: any) => {
     setError(null);
-    setloading(true);
+    setSubmitting(true);
     try {
       fetch("/api/users/loginUser", {
         method: "POST",
@@ -25,7 +26,7 @@ export default function Login() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setSubmitting(false);
           if (data.success) {
             Cookie.set("TOKEN-USER", data.token, {
               sameSite: "strict",
@@ -34,26 +35,23 @@ export default function Login() {
               expires: 7,
             });
             // Check for success flag
-            window.location.href = "/";
+            router.push("/");
           } else {
             // Handle login failure
             setError(data.message);
-            setloading(false);
           }
         });
-      setSubmitting(false);
     } catch (error) {
       console.error(error);
-      setloading(false);
     }
   };
 
   // validate
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string()
-      .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Please enter your Email"),
+    password: Yup.string().required("Please enter your Password"),
   });
 
   return (
@@ -136,9 +134,9 @@ export default function Login() {
                     <button
                       className="pt-[12px] mt-[50px] pb-[12px] pl-[10px] pr-[10px] bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px] cursor-pointer w-[100%] outline-none hover:bg-[var(--white-color)] hover:text-[var(--first-color)] hover:outline-[1px] hover:outline-[var(--first-color)] hover:rounded-[20px]"
                       type="submit"
-                      disabled={isSubmitting || loading}
+                      disabled={isSubmitting}
                     >
-                      {loading ? "Login..." : "Login"}
+                      {isSubmitting ? "Login..." : "Login"}
                     </button>
                   </Form>
                 )}

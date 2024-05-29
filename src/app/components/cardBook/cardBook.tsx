@@ -66,7 +66,7 @@ export default function CardBook(props: any) {
             {item.type}
           </div>
           <div className="template-price flex mb-[15px] mt-[8px] justify-center">
-            {item.discount != "" && (
+            {item.discount > "0" && (
               <h4
                 className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
                 style={{
@@ -83,7 +83,7 @@ export default function CardBook(props: any) {
             <h3
               className="text-[var(--title-color)] text-[16px] font-bold"
               style={
-                item.discount != ""
+                item.discount > "0"
                   ? {
                       textDecoration: "line-through",
                       color: "hsl(230, 16%, 45%)",
@@ -96,7 +96,7 @@ export default function CardBook(props: any) {
               ${item.price}
             </h3>
 
-            {item.discount != "" && (
+            {item.discount > "0" && (
               <span className="sale text-[14px] border border-solid rounded-[5px] bg-[var(--first-color)] text-[var(--white-color)] pt-[2px] pb-[2px] pl-[5px] pr-[5px] ml-[6px]">
                 -{per}%
               </span>

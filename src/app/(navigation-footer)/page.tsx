@@ -5,28 +5,15 @@ import Services from "../components/serviced/services";
 import Seller from "../components/seller/seller";
 import Arrival from "../components/arrival/arrival";
 import Discount from "../components/discount/discount";
-import Loader from "../components/loader/loader";
 
 export default function Home() {
-  const [loading, setloading] = useState(false);
-
-  useEffect(() => {
-    setloading(true);
-  }, []);
-
   return (
     <>
-      {!loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Banner />
-          <Services />
-          <Seller />
-          <Arrival />
-          <Discount />
-        </>
-      )}
+      <Banner />
+      <Services />
+      <Seller />
+      <Arrival />
+      <Discount />
     </>
   );
 }

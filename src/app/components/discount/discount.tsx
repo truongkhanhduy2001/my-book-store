@@ -17,7 +17,7 @@ export default function Discount() {
       title: "Dune",
       type: ["Horror"],
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
@@ -31,7 +31,7 @@ export default function Discount() {
       title: "Anime",
       type: "Science",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "old",
     },
     {
@@ -283,7 +283,7 @@ export default function Discount() {
                         {item.type}
                       </div>
                       <div className="Discountbook-price mt-[8px] mb-[15px] flex justify-center">
-                        {item.discount != "" && (
+                        {item.discount > "0" && (
                           <h4
                             className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
                             style={{
@@ -300,7 +300,7 @@ export default function Discount() {
                         <h3
                           className="text-[var(--title-color)] text-[16px] font-bold"
                           style={
-                            item.discount != ""
+                            item.discount > "0"
                               ? {
                                   textDecoration: "line-through",
                                   color: "hsl(230, 16%, 45%)",
@@ -313,7 +313,7 @@ export default function Discount() {
                           ${item.price}
                         </h3>
 
-                        {item.discount != "" && (
+                        {item.discount > "0" && (
                           <span className="sale text-[14px] border-[1px] border-solid bg-[var(--first-color)] text-[var(--white-color)] pt-[2px] pb-[2px] pl-[5px] pr-[5px] rounded-[5px] ml-[6px]">
                             -{per}%
                           </span>

@@ -16,17 +16,14 @@ export default function CheckOut() {
   ];
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
     address: Yup.string()
-      .required("Address is required")
+      .required("Please enter your Address")
       .min(5, "Address must be at least 5 characters"),
-    city: Yup.string().required("City is required"),
-    district: Yup.string().required("District is required"),
-    ward: Yup.string().required("Ward is required"),
+    city: Yup.string().required("Please select your City"),
+    district: Yup.string().required("Please select your District"),
+    ward: Yup.string().required("Please select your Ward"),
     telephone: Yup.string()
-      .required("Telephone is required")
+      .required("Please enter your Telephone")
       .matches(/^\d+$/, "Telephone must be only digits")
       .min(10, "Telephone must be at least 10 digits")
       .max(15, "Telephone must be at most 15 digits"),
@@ -110,7 +107,7 @@ export default function CheckOut() {
   });
 
   //Radio
-  const [radio, setradio] = useState(1);
+  const [radio, setradio] = useState(0);
 
   useEffect(() => {
     const payment: any = document.querySelector("#payment-1");
@@ -194,7 +191,7 @@ export default function CheckOut() {
       {/* Check out */}
       <section className="section-check flex flex-col mt-[var(--margin-top-view)]">
         <div className="section-check-container max-w-[var(--width-home)] w-[100%] m-[auto] flex">
-          <ul className="page-link  inline-block">
+          <ul className="page-link inline-block">
             <li className="inline-block text-[12px] font-medium uppercase">
               <Link
                 className="text-[var(--title-color)] hover:text-[var(--first-color)]"
@@ -215,7 +212,6 @@ export default function CheckOut() {
         </div>
         <Formik
           initialValues={{
-            email: "",
             address: "",
             city: "",
             district: "",
@@ -243,20 +239,6 @@ export default function CheckOut() {
                           <div className="form-group mb-[15px]">
                             <Field
                               className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                              type="email"
-                              id="email"
-                              name="email"
-                              placeholder="Email"
-                            />
-                            <ErrorMessage
-                              name="email"
-                              component="div"
-                              className="text-[red]"
-                            />
-                          </div>
-                          <div className="form-group mb-[15px]">
-                            <Field
-                              className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                               type="text"
                               id="address"
                               name="address"
@@ -268,52 +250,58 @@ export default function CheckOut() {
                               className="text-[red]"
                             />
                           </div>
-                          <div className="form-group mb-[15px] flex">
-                            <Field
-                              as="select"
-                              className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                              name="city"
-                              id="city"
-                            >
-                              <option disabled value="">
-                                Choose province
-                              </option>
-                            </Field>
-                            <ErrorMessage
-                              name="city"
-                              component="div"
-                              className="text-[red]"
-                            />
-                            <Field
-                              as="select"
-                              className="input bg-[var(--white-color)] pl-[15px] pr-[15px] mr-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                              name="district"
-                              id="district"
-                            >
-                              <option disabled value="">
-                                Choose district
-                              </option>
-                            </Field>
-                            <ErrorMessage
-                              name="district"
-                              component="div"
-                              className="text-[red]"
-                            />
-                            <Field
-                              as="select"
-                              className="input bg-[var(--white-color)] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                              name="ward"
-                              id="ward"
-                            >
-                              <option disabled value="">
-                                Choose ward
-                              </option>
-                            </Field>
-                            <ErrorMessage
-                              name="ward"
-                              component="div"
-                              className="text-[red]"
-                            />
+                          <div className="form-group mb-[15px] flex flex-wrap">
+                            <div className="field-container w-[33.33%] pr-[5px]">
+                              <Field
+                                as="select"
+                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                                name="city"
+                                id="city"
+                              >
+                                <option disabled value="">
+                                  Choose province
+                                </option>
+                              </Field>
+                              <ErrorMessage
+                                name="city"
+                                component="div"
+                                className="text-[red]"
+                              />
+                            </div>
+                            <div className="field-container w-[33.33%] pr-[5px]">
+                              <Field
+                                as="select"
+                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                                name="district"
+                                id="district"
+                              >
+                                <option disabled value="">
+                                  Choose district
+                                </option>
+                              </Field>
+                              <ErrorMessage
+                                name="district"
+                                component="div"
+                                className="text-[red]"
+                              />
+                            </div>
+                            <div className="field-container w-[33.33%]">
+                              <Field
+                                as="select"
+                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                                name="ward"
+                                id="ward"
+                              >
+                                <option disabled value="">
+                                  Choose ward
+                                </option>
+                              </Field>
+                              <ErrorMessage
+                                name="ward"
+                                component="div"
+                                className="text-[red]"
+                              />
+                            </div>
                           </div>
 
                           <div className="form-group mb-[15px]">
@@ -323,6 +311,11 @@ export default function CheckOut() {
                               id="telephone"
                               name="telephone"
                               placeholder="Telephone"
+                            />
+                            <ErrorMessage
+                              name="telephone"
+                              component="div"
+                              className="text-[red]"
                             />
                           </div>
                           <div className="form-group mb-[15px]">
@@ -378,12 +371,12 @@ export default function CheckOut() {
                                 </div>
                               </td>
                               <td className="w-full px-[10px]">
-                                {data.discount && (
+                                {data.discount > "0" && (
                                   <span id="price-checkout">
                                     ${data.discount}
                                   </span>
                                 )}
-                                {!data.discount && (
+                                {data.discount == "0" && (
                                   <span id="price-checkout">${data.price}</span>
                                 )}
                               </td>

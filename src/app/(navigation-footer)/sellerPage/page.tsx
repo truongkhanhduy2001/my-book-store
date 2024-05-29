@@ -23,13 +23,13 @@ export default function SellerView() {
     {
       title: "Naruto",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "old",
     },
     {
       title: "Drama",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "old",
     },
   ];

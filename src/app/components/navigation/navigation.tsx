@@ -16,6 +16,8 @@ export default function Navigate() {
   const data: any = [
     {
       title: "Dune",
+      price: "100",
+      discount: "40",
     },
   ];
   const router = useRouter();
@@ -88,7 +90,6 @@ export default function Navigate() {
 
   const handleClick = () => {};
   const handleLogOut = () => {
-    console.log("12313");
     Cookies.remove("TOKEN-USER");
     router.push("/login");
   };
@@ -291,14 +292,23 @@ export default function Navigate() {
                                 {item.title}
                               </h3>
                               <div className="book-price flex">
-                                {data && (
-                                  <h3 className="text-[16px] text-[var(--title-color)] font-bold">
-                                    $20
-                                  </h3>
+                                {item.discount > "0" && (
+                                  <h4
+                                    className="text-[16px] text-[var(--title-color)] font-normal"
+                                    style={{
+                                      textDecoration: "none",
+                                      color: "hsl(230, 70%, 16%)",
+                                      fontWeight: "bold",
+                                      marginRight: "8px",
+                                    }}
+                                  >
+                                    ${item.discount}
+                                  </h4>
                                 )}
-                                <h4
+                                <h3
+                                  className="text-[var(--title-color)] text-[16px] font-bold"
                                   style={
-                                    data != ""
+                                    item.discount > "0"
                                       ? {
                                           textDecoration: "line-through",
                                           color: "hsl(230, 16%, 45%)",
@@ -306,10 +316,9 @@ export default function Navigate() {
                                         }
                                       : { textDecoration: "none" }
                                   }
-                                  className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
                                 >
-                                  $100
-                                </h4>
+                                  ${item.price}
+                                </h3>
                               </div>
                               <span className="cart-quanity text-[16px] text-[var(--text-color)]">
                                 x1

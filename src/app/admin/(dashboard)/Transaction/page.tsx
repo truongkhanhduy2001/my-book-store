@@ -1,11 +1,10 @@
 import DefaultLayout from "@/app/components/layouts/DefaultLayout";
-import UserTab from "@/app/components/UserTab/UserTab";
-
-export default function HomeAdmin() {
+import TransactionTab from "@/app/components/TransactionTab/TransactionTab";
+export default function Transaction() {
   return (
     <>
       <DefaultLayout>
-        <UserTab />
+        <TransactionTab />
       </DefaultLayout>
     </>
   );

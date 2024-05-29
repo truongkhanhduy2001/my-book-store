@@ -10,7 +10,7 @@ export default function Horror() {
     {
       title: "Dune",
       price: "100",
-      discount: "",
+      discount: "0",
       type: "Horror",
       time: "new",
     },
@@ -24,14 +24,14 @@ export default function Horror() {
     {
       title: "Naruto",
       price: "100",
-      discount: "",
+      discount: "0",
       type: "Horror",
       time: "old",
     },
     {
       title: "Drama",
       price: "100",
-      discount: "",
+      discount: "0",
       type: "Horror",
       time: "old",
     },

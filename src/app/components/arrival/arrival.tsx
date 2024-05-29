@@ -12,37 +12,37 @@ export default function Arrival() {
     {
       title: "Dune",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "Anime",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "Naruto",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "Drama",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "game",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "game",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
   ];
@@ -127,7 +127,7 @@ export default function Arrival() {
                       Thriller, Horror, Romance
                     </div>
                     <div className="Arrivalbook-price mt-[8px] mb-[15px]">
-                      {item.discount != "" && (
+                      {item.discount > "0" && (
                         <h4
                           className="text-[16px] text-[var(--title-color)] font-normal"
                           style={{
@@ -143,7 +143,7 @@ export default function Arrival() {
                       <h3
                         className="text-[var(--title-color)] text-[16px] font-bold"
                         style={
-                          item.discount != ""
+                          item.discount > "0"
                             ? {
                                 textDecoration: "line-through",
                                 color: "hsl(230, 16%, 45%)",
@@ -155,7 +155,7 @@ export default function Arrival() {
                         ${item.price}
                       </h3>
 
-                      {item.discount != "" && (
+                      {item.discount > "0" && (
                         <span className="sale text-[14px] border-[1px] border-solid bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px]">
                           -{per}%
                         </span>

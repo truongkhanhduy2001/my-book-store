@@ -10,7 +10,7 @@ export default function Science() {
     {
       title: "Dune",
       price: "100",
-      discount: "",
+      discount: "0",
       type: "Science",
       time: "new",
     },
@@ -24,14 +24,14 @@ export default function Science() {
     {
       title: "Naruto",
       price: "100",
-      discount: "",
+      discount: "0",
       type: "Science",
       time: "old",
     },
     {
       title: "Drama",
       price: "100",
-      discount: "",
+      discount: "0",
       type: "Science",
       time: "old",
     },

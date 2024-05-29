@@ -238,27 +238,6 @@
   color: #de7e85;
 }
 
-.notfound-social {
-  margin-top: 25px;
-}
-
-.notfound-social > a {
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  width: 40px;
-  font-size: 14px;
-  color: hsl(230, 70%, 16%);
-  margin: 0px 6px;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
-}
-.notfound-social > a:hover {
-  color: hsl(0, 0%, 100%);
-  background-color: #de7e85;
-  border-radius: 50%;
-}
-
 @media only screen and (max-width: 480px) {
   .notfound .notfound-404 h1 {
     font-size: 146px;

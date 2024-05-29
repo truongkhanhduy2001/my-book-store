@@ -10,7 +10,7 @@ export default function Comedy() {
     {
       title: "Dune",
       price: "100",
-      discount: "",
+      discount: "0",
       type: ["Comedy", "Adventure"],
       time: "new",
     },
@@ -24,14 +24,14 @@ export default function Comedy() {
     {
       title: "Naruto",
       price: "100",
-      discount: "",
+      discount: "0",
       type: ["Comedy"],
       time: "old",
     },
     {
       title: "Drama",
       price: "100",
-      discount: "",
+      discount: "0",
       type: ["Comedy"],
       time: "old",
     },

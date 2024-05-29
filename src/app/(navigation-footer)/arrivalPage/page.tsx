@@ -10,25 +10,25 @@ export default function ArrivalsView() {
     {
       title: "Dune",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "Anime",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "Naruto",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
     {
       title: "Drama",
       price: "100",
-      discount: "",
+      discount: "0",
       time: "new",
     },
   ];

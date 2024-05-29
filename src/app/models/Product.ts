@@ -1,0 +1,60 @@
+import mongoose from "mongoose";
+
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
+  genre: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  time: {
+    type: String,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  discount: {
+    type: Number,
+    required: true,
+  },
+  year: {
+    type: Number,
+    required: true,
+  },
+  stock: {
+    type: Number,
+    required: true,
+  },
+  language: {
+    type: String,
+    required: true,
+  },
+  pageCount: {
+    type: Number,
+    required: true,
+  },
+  isBestSeller: {
+    type: Boolean,
+    default: false,
+  },
+  isNewArrival: {
+    type: Boolean,
+    default: false,
+  },
+  isDiscount: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+export default mongoose.models.Product ||
+  mongoose.model("Product", productSchema);

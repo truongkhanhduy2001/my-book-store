@@ -74,10 +74,10 @@ export default function Cart() {
                         <h3 className="table-categories">Romance</h3>
                       </td>
                       <td className="p-[8px]">
-                        {item.discount && (
+                        {item.discount > "0" && (
                           <span className="table-price">${item.discount}</span>
                         )}
-                        {!item.discount && (
+                        {item.discount == "0" && (
                           <span className="table-price">${item.price}</span>
                         )}
                       </td>

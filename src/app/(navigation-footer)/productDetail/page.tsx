@@ -1,12 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FaStar,
-  FaStarHalfAlt,
-  FaShoppingCart,
-  FaCheckCircle,
-} from "react-icons/fa";
+import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import React, { useState } from "react";
 import "./productDetail.css";
@@ -74,47 +69,33 @@ export default function Detail() {
                   <FiHeart className="HeartIcon" onClick={handleHeart} />
                 </i>
               </div>
-              <div className="product-rating flex items-center text-[var(--first-color)] mb-[10px]">
-                <i className="star">
-                  <FaStar />
-                </i>
-                <i className="star">
-                  <FaStar />
-                </i>
-                <i className="star">
-                  <FaStar />
-                </i>
-                <i className="star">
-                  <FaStar />
-                </i>
-                <i className="haft-star">
-                  <FaStarHalfAlt />
-                </i>
-                <span className="font-semibold ml-[5px] mr-[5px] mt-[4px]">
-                  4.7
-                </span>
+              <div className="flex justify-between mt-[10px]">
+                <div className="product-price flex">
+                  {data && (
+                    <h3 className="text-[var(--title-color)] text-[25px] font-bold">
+                      $20
+                    </h3>
+                  )}
+                  <h4
+                    style={
+                      data != ""
+                        ? {
+                            textDecoration: "line-through",
+                            color: "hsl(230, 16%, 45%)",
+                            fontWeight: "400",
+                          }
+                        : { textDecoration: "none" }
+                    }
+                    className="text-[25px] text-[var(--text-color)] font-normal ml-[6px]"
+                  >
+                    $100
+                  </h4>
+                </div>
+                <div className="stock flex justify-center items-center text-[15px] text-[var(--title-color)] font-medium ml-[20px]">
+                  10 product available
+                </div>
               </div>
-              <div className="product-price flex">
-                {data && (
-                  <h3 className="text-[var(--title-color)] text-[25px] font-bold">
-                    $20
-                  </h3>
-                )}
-                <h4
-                  style={
-                    data != ""
-                      ? {
-                          textDecoration: "line-through",
-                          color: "hsl(230, 16%, 45%)",
-                          fontWeight: "400",
-                        }
-                      : { textDecoration: "none" }
-                  }
-                  className="text-[25px] text-[var(--text-color)] font-normal ml-[6px]"
-                >
-                  $100
-                </h4>
-              </div>
+
               <div className="product-detail">
                 <h2 className="text-[25px] text-[var(--title-color)] font-bold mb-[10px]">
                   Description about content:
@@ -178,6 +159,9 @@ export default function Detail() {
                     Add cart
                   </p>
                 </div>
+                <span className="sold-count flex justify-center items-center text-[15px] text-[var(--title-color)] font-medium ml-[5px]">
+                  1 sold
+                </span>
               </div>
             </div>
           </div>
