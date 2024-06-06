@@ -2,7 +2,6 @@
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import DefaultLayout from "@/app/components/layouts/DefaultLayout";
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 
 export default function AddProduct() {
@@ -77,7 +76,7 @@ export default function AddProduct() {
   };
 
   return (
-    <DefaultLayout>
+    <>
       <Breadcrumb pageName="Add Product" />
 
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
@@ -431,6 +430,6 @@ export default function AddProduct() {
           )}
         </Formik>
       </div>
-    </DefaultLayout>
+    </>
   );
 }

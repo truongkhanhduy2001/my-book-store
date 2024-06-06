@@ -1,11 +1,39 @@
-import { Inter } from "next/font/google";
+"use client";
+import React, { useState, ReactNode } from "react";
+import Sidebar from "@/app/components/sideAdmin/sidebar";
+import DropdownAdmin from "@/app/components/dropAdmin/dropAdmin";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function RootLayout({
+export default function DefaultLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return <main className={inter.className}>{children}</main>;
+}) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  return (
+    <>
+      {/* <!-- ===== Page Wrapper Start ===== --> */}
+      <div className="flex h-screen overflow-hidden">
+        {/* <!-- ===== Sidebar Start ===== --> */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        {/* <!-- ===== Sidebar End ===== --> */}
+
+        {/* <!-- ===== Content Area Start ===== --> */}
+        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+          {/* <!-- ===== Header Start ===== --> */}
+          <DropdownAdmin />
+          {/* <!-- ===== Header End ===== --> */}
+
+          {/* <!-- ===== Main Content Start ===== --> */}
+          <main>
+            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+              {children}
+            </div>
+          </main>
+          {/* <!-- ===== Main Content End ===== --> */}
+        </div>
+        {/* <!-- ===== Content Area End ===== --> */}
+      </div>
+      {/* <!-- ===== Page Wrapper End ===== --> */}
+    </>
+  );
 }

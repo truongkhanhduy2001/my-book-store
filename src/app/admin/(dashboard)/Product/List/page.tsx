@@ -1,5 +1,4 @@
 "use client";
-import DefaultLayout from "@/app/components/layouts/DefaultLayout";
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 import Paginate from "@/app/components/paginate/paginate";
 import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
@@ -74,7 +73,7 @@ export default function List() {
   };
 
   return (
-    <DefaultLayout>
+    <>
       <Breadcrumb pageName="Product List" />
       <div className="max-w-7xl mx-auto">
         <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
@@ -169,6 +168,6 @@ export default function List() {
         </div>
         <Paginate />
       </div>
-    </DefaultLayout>
+    </>
   );
 }
