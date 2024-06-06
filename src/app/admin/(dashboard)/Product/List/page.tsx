@@ -1,36 +1,82 @@
+"use client";
 import DefaultLayout from "@/app/components/layouts/DefaultLayout";
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import Paginate from "@/app/components/paginate/paginate";
+import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+interface Product {
+  _id: string;
+  image: string;
+  name: string;
+  author: string;
+  genre: string;
+  description: string;
+  time: string;
+  price: number;
+  discount: number;
+  year: number;
+  stock: number;
+  language: string;
+  pageCount: number;
+  isBestSeller: boolean;
+  isNewArrival: boolean;
+  isDiscount: boolean;
+}
 
 export default function List() {
-  const products = [
-    {
-      id: 1,
-      title: "Dune",
-      author: "Duy",
-      genre: "Adventure, Comedy, Comic",
-      description:
-        "Chào mừng bạn đến với thế giới của Dune, một cuốn sách phiêu lưu, hài hước và truyện tranh. Đây là một câu chuyện về",
-      time: "new",
-      price: "$100",
-      discount: "$20",
-      year: "2024",
-      stock: "10",
-      language: "English",
-      pageCount: "316",
-      isBestSeller: false,
-      isNewArrival: false,
-      isDiscount: false,
-    },
-    // Add more products as needed
-  ];
+  const [products, setProducts] = useState<Product[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/admin/productAdmin", {
+          method: "GET",
+        });
+        const data = await response.json();
+        if (data.success) {
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleViewDetail = (id: string) => {
+    router.push(`/admin/Product/Detail/${id}`);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await fetch("/api/admin/productAdmin", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product._id !== id)
+        );
+      }
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+    }
+  };
 
   return (
-    <>
-      <DefaultLayout>
-        <Breadcrumb pageName="Product List" />
+    <DefaultLayout>
+      <Breadcrumb pageName="Product List" />
+      <div className="max-w-7xl mx-auto">
         <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white text-[var(--title-color)]">
@@ -40,47 +86,33 @@ export default function List() {
                   <th className="p-4 text-left">Title</th>
                   <th className="p-4 text-left">Author</th>
                   <th className="p-4 text-left">Genre</th>
-                  <th className="p-4 text-left">Description</th>
-                  <th className="p-4 text-left">Time</th>
                   <th className="p-4 text-left">Price</th>
                   <th className="p-4 text-left">Discount</th>
-                  <th className="p-4 text-left">Year</th>
                   <th className="p-4 text-left">Stock</th>
-                  <th className="p-4 text-left">Language</th>
-                  <th className="p-4 text-left">Count</th>
                   <th className="p-4 text-left">Tags</th>
                   <th className="p-4 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {products.map((product) => (
-                  <tr key={product.id} className="border-b">
+                  <tr key={product._id} className="border-b">
                     <td className="p-4 !relative">
                       <Image
                         className="max-w-[100px] w-[100%] h-[auto] !relative"
-                        src="/images/biasach1.png"
+                        src={product.image}
                         alt="Main Image"
                         fill
                         priority={true}
                         sizes="(max-with: 768px)100vw"
                       />
                     </td>
-                    <td className="p-4">{product.title}</td>
+                    <td className="p-4">{product.name}</td>
                     <td className="p-4">{product.author}</td>
                     <td className="p-4">{product.genre}</td>
-                    <td className="p-4">
-                      <div className="truncate max-w-[200px]">
-                        {product.description}
-                      </div>
-                    </td>
-                    <td className="p-4">{product.time}</td>
                     <td className="p-4">{product.price}</td>
                     <td className="p-4">{product.discount}</td>
-                    <td className="p-4">{product.year}</td>
                     <td className="p-4">{product.stock}</td>
-                    <td className="p-4">{product.language}</td>
-                    <td className="p-4">{product.pageCount}</td>
-                    <td className="p-4">
+                    <td className="p-4 flex flex-col justify-center text-center mt-[50px]">
                       {product.isBestSeller && (
                         <span className="inline-block px-2 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
                           Best Seller
@@ -105,20 +137,29 @@ export default function List() {
                         )}
                     </td>
                     <td className="p-4">
-                      <Link href="#">
+                      <div className="flex space-x-2">
                         <button
-                          // onClick={() => handleEdit(product.id)}
-                          className="text-blue-500 hover:underline ml-2"
+                          // Xử lý sự kiện khi nút "Xem chi tiết" được nhấn
+                          onClick={() => handleViewDetail(product._id)}
+                          className="text-green-500 hover:underline ml-2" // Định kiểu cho nút
                         >
-                          <FaEdit />
+                          <FaEye />
                         </button>
-                      </Link>
-                      <button
-                        // onClick={() => handleDelete(product.id)}
-                        className="text-red-500 hover:underline ml-2"
-                      >
-                        <FaTrashAlt />
-                      </button>
+                        <Link href="#">
+                          <button
+                            // onClick={() => handleEdit(product.id)}
+                            className="text-blue-500 hover:underline ml-2"
+                          >
+                            <FaEdit />
+                          </button>
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(product._id)}
+                          className="text-red-500 hover:underline ml-2"
+                        >
+                          <FaTrashAlt />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -126,7 +167,8 @@ export default function List() {
             </table>
           </div>
         </div>
-      </DefaultLayout>
-    </>
+        <Paginate />
+      </div>
+    </DefaultLayout>
   );
 }

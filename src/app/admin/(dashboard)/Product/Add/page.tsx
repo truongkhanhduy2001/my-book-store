@@ -1,16 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useRouter } from "next/navigation";
 import DefaultLayout from "@/app/components/layouts/DefaultLayout";
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 
 export default function AddProduct() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = (values: any, { setSubmitting, resetForm }: any) => {
+  const filesRef: any = useRef();
+  const handleSubmit = (values: any, setSubmitting: any, resetForm: any) => {
     setError(null);
     setSubmitting(true);
     try {
@@ -26,7 +24,7 @@ export default function AddProduct() {
           setSubmitting(false);
           if (data.success) {
             resetForm();
-            router.push("/admin/Product/Add");
+            filesRef.current.value = "";
           } else {
             setError(data.message);
           }
@@ -38,7 +36,7 @@ export default function AddProduct() {
 
   // Validate
   const productSchema = Yup.object({
-    bookImage: Yup.mixed().required("Book Image is required"),
+    image: Yup.mixed().required("Please choose Book Image"),
     name: Yup.string().required("Please enter Book Title"),
     author: Yup.string().required("Please enter Author Name"),
     genre: Yup.string().required("Please enter Genre"),
@@ -67,9 +65,15 @@ export default function AddProduct() {
   });
 
   // Upload
-  const handleFileChange = (setFieldValue: any) => (event: any) => {
-    const file = event.currentTarget.files[0];
-    setFieldValue("bookImage", file); // Update value of bookImage field in Formik state
+  const handleFileChange = (e: any, setFieldValue: any) => {
+    const file = e.target.files[0];
+    const reader: any = new FileReader();
+    reader.onloadend = () => {
+      setFieldValue("image", reader.result); // Convert to base64 and set to formik state
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -79,7 +83,7 @@ export default function AddProduct() {
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
         <Formik
           initialValues={{
-            bookImage: "",
+            image: "",
             name: "",
             author: "",
             genre: "",
@@ -95,9 +99,9 @@ export default function AddProduct() {
             isNewArrival: false,
             isDiscount: false,
           }}
-          ProductSchema={productSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            handleSubmit(values, setSubmitting);
+          validationSchema={productSchema}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            handleSubmit(values, setSubmitting, resetForm);
           }}
         >
           {({ isSubmitting, setFieldValue }) => (
@@ -106,19 +110,20 @@ export default function AddProduct() {
               <div className="mb-6">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="bookImage"
+                  htmlFor="image"
                 >
                   Book Image
                 </label>
                 <input
                   type="file"
-                  id="bookImage"
-                  name="bookImage"
+                  id="image"
+                  name="image"
+                  ref={filesRef}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
-                  onChange={handleFileChange(setFieldValue)}
+                  onChange={(e: any) => handleFileChange(e, setFieldValue)}
                 />
                 <ErrorMessage
-                  name="bookImage"
+                  name="image"
                   component="div"
                   className="text-red-500 text-sm"
                 />
@@ -413,7 +418,7 @@ export default function AddProduct() {
                   </label>
                 </div>
               </div>
-
+              {error && <div className="text-[red]">{error}</div>}
               {/* Submit Button */}
               <button
                 type="submit"
