@@ -2,35 +2,16 @@
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 import Paginate from "@/app/components/paginate/paginate";
 import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-interface Product {
-  _id: string;
-  image: string;
-  name: string;
-  author: string;
-  genre: string;
-  description: string;
-  time: string;
-  price: number;
-  discount: number;
-  year: number;
-  stock: number;
-  language: string;
-  pageCount: number;
-  isBestSeller: boolean;
-  isNewArrival: boolean;
-  isDiscount: boolean;
-}
-
 export default function List() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]) as any;
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch("/api/admin/productAdmin", {
@@ -48,10 +29,6 @@ export default function List() {
     fetchProducts();
   }, []);
 
-  const handleViewDetail = (id: string) => {
-    router.push(`/admin/Product/Detail/${id}`);
-  };
-
   const handleDelete = async (id: string) => {
     try {
       const response = await fetch("/api/admin/productAdmin", {
@@ -63,8 +40,8 @@ export default function List() {
       });
       const data = await response.json();
       if (data.success) {
-        setProducts((prevProducts) =>
-          prevProducts.filter((product) => product._id !== id)
+        setProducts((prevProducts: any) =>
+          prevProducts.filter((product: any) => product._id !== id)
         );
       }
     } catch (error) {
@@ -93,7 +70,7 @@ export default function List() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {products.map((product: any) => (
                   <tr key={product._id} className="border-b">
                     <td className="p-4 !relative">
                       <Image
@@ -111,7 +88,7 @@ export default function List() {
                     <td className="p-4">{product.price}</td>
                     <td className="p-4">{product.discount}</td>
                     <td className="p-4">{product.stock}</td>
-                    <td className="p-4 flex flex-col justify-center text-center mt-[50px]">
+                    <td className="p-4 text-center">
                       {product.isBestSeller && (
                         <span className="inline-block px-2 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
                           Best Seller
@@ -136,25 +113,20 @@ export default function List() {
                         )}
                     </td>
                     <td className="p-4">
-                      <div className="flex space-x-2">
-                        <button
-                          // Xử lý sự kiện khi nút "Xem chi tiết" được nhấn
-                          onClick={() => handleViewDetail(product._id)}
-                          className="text-green-500 hover:underline ml-2" // Định kiểu cho nút
-                        >
-                          <FaEye />
-                        </button>
-                        <Link href="#">
-                          <button
-                            // onClick={() => handleEdit(product.id)}
-                            className="text-blue-500 hover:underline ml-2"
-                          >
+                      <div className="flex items-center space-x-2 justify-center">
+                        <Link href={`/admin/Product/List/See/${product._id}`}>
+                          <button className="text-green-500 hover:underline ml-2 text-[20px] flex justify-center">
+                            <FaEye />
+                          </button>
+                        </Link>
+                        <Link href={`/admin/Product/List/Edit/${product._id}`}>
+                          <button className="text-blue-500 hover:underline ml-2 text-[20px] flex justify-center">
                             <FaEdit />
                           </button>
                         </Link>
                         <button
                           onClick={() => handleDelete(product._id)}
-                          className="text-red-500 hover:underline ml-2"
+                          className="text-red-500 hover:underline ml-2 text-[17px] mt-[2px]"
                         >
                           <FaTrashAlt />
                         </button>

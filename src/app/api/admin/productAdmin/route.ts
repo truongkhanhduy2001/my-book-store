@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   await connectDB();
   try {
-    const _id = req.nextUrl.searchParams.get("_id");
+    const _id = req.nextUrl.searchParams.get("id");
     if (_id) {
       const product = await Product.findById(new ObjectId(_id));
       if (!product) {
@@ -115,6 +115,14 @@ export async function PUT(req: NextRequest) {
   try {
     const { _id, updateData } = await req.json();
 
+    // Check if _id is a valid ObjectId
+    if (!_id || !ObjectId.isValid(_id)) {
+      return NextResponse.json({
+        success: false,
+        message: "Invalid product ID.",
+      });
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(
       new ObjectId(_id),
       updateData,
@@ -136,6 +144,7 @@ export async function PUT(req: NextRequest) {
       product: updatedProduct,
     });
   } catch (err: any) {
+    console.error("Error updating product:", err); // Log the error for debugging
     return NextResponse.json({ success: false, error: err.message });
   }
 }

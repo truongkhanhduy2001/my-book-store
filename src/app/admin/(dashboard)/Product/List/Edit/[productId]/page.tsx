@@ -1,35 +1,64 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-export default function AddProduct() {
+export default function UpdateProduct({
+  params,
+}: {
+  params: { productId: string };
+}) {
   const [error, setError] = useState<string | null>(null);
+  const [product, setProduct] = useState<any>(null);
   const filesRef: any = useRef();
-  const handleSubmit = (values: any, setSubmitting: any, resetForm: any) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch(`/api/admin/productAdmin/?id=${params.productId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setProduct(data.product);
+        } else {
+          setError(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching product:", error);
+        setError("Error fetching product");
+      });
+  }, [params.productId]);
+
+  const handleSubmit = (values: any, setSubmitting: any) => {
     setError(null);
     setSubmitting(true);
     try {
-      fetch("/api/admin/productAdmin", {
-        method: "POST",
+      fetch(`/api/admin/productAdmin/?id=${params.productId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          _id: params.productId, // Ensure the correct _id is being sent
+          updateData: values,
+        }),
       })
         .then((res) => res.json())
         .then((data) => {
           setSubmitting(false);
           if (data.success) {
-            resetForm();
-            filesRef.current.value = "";
+            setProduct(data.product);
+            router.push("/admin/Product/List");
           } else {
             setError(data.message);
           }
         });
     } catch (error) {
-      console.error(error);
+      console.error("Error updating product:", error);
+      setError("Error updating product");
     }
   };
 
@@ -77,32 +106,51 @@ export default function AddProduct() {
     }
   };
 
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <Breadcrumb pageName="Add Product" />
-
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <nav>
+          <ol className="flex items-center gap-2">
+            <li className="font-medium text-[var(--first-color)] text-[18px]">
+              <Link
+                href="/admin/Product/List"
+                className="text-[20px] text-[var(-first--color)]"
+              >
+                Back to product list
+              </Link>
+            </li>
+          </ol>
+        </nav>
+      </div>
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+        <h1 className="mb-6 text-black text-[18px] text-center font-bold">
+          Update product
+        </h1>
         <Formik
           initialValues={{
-            image: "",
-            name: "",
-            author: "",
-            genre: "",
-            description: "",
-            time: "",
-            price: "",
-            discount: "",
-            year: "",
-            stock: "",
-            language: "",
-            pageCount: "",
-            isBestSeller: false,
-            isNewArrival: false,
-            isDiscount: false,
+            image: product.image || "",
+            name: product.name || "",
+            author: product.author || "",
+            genre: product.genre || "",
+            description: product.description || "",
+            time: product.time || "",
+            price: product.price || "",
+            discount: product.discount || "",
+            year: product.year || "",
+            stock: product.stock || "",
+            language: product.language || "",
+            pageCount: product.pageCount || "",
+            isBestSeller: product.isBestSeller || false,
+            isNewArrival: product.isNewArrival || false,
+            isDiscount: product.isDiscount || false,
           }}
           validationSchema={productSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
-            handleSubmit(values, setSubmitting, resetForm);
+          onSubmit={(values, { setSubmitting }) => {
+            handleSubmit(values, setSubmitting);
           }}
         >
           {({ isSubmitting, setFieldValue }) => (
@@ -129,8 +177,19 @@ export default function AddProduct() {
                   component="div"
                   className="text-red-500 text-sm"
                 />
+                {product.image && (
+                  <div className="mt-[10px] !relative">
+                    <Image
+                      className="max-w-[100px] w-[100%] h-[auto] !relative"
+                      src={product.image}
+                      alt="Main Image"
+                      fill
+                      priority={true}
+                      sizes="(max-with: 768px)100vw"
+                    />
+                  </div>
+                )}
               </div>
-
               {/* Book Title */}
               <div className="mb-6">
                 <label
@@ -427,7 +486,7 @@ export default function AddProduct() {
                 className="w-full py-3 mt-6 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Adding..." : "Add book"}
+                {isSubmitting ? "Updating..." : "Update book"}
               </button>
             </Form>
           )}

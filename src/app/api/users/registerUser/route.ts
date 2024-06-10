@@ -8,7 +8,8 @@ export async function POST(req: NextRequest) {
 
   try {
     const { email, password, name } = await req.json();
-    const users = await User.findOne({ email });
+    const emailToLowerCase = email.toLowerCase();
+    const users = await User.findOne({ email: emailToLowerCase });
     if (users) {
       return NextResponse.json({
         success: false,
