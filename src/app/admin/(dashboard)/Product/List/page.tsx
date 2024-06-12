@@ -5,11 +5,9 @@ import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
 import { useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function List() {
   const [products, setProducts] = useState([]) as any;
-  const router = useRouter();
 
   useLayoutEffect(() => {
     const fetchProducts = async () => {

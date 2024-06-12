@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 function ProductSee({ params }: { params: { productId: string } }) {
-  const [product, setProduct] = useState({}) as any;
+  const [product, setProduct] = useState<any>(null);
   useLayoutEffect(() => {
     try {
       fetch(`/api/admin/productAdmin/?id=${params.productId}`, {
@@ -12,7 +12,9 @@ function ProductSee({ params }: { params: { productId: string } }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          setProduct(data.product);
+          if (data.success) {
+            setProduct(data.product);
+          }
         });
     } catch {
       console.log("Error");

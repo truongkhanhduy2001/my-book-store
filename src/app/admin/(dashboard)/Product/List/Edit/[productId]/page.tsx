@@ -15,6 +15,7 @@ export default function UpdateProduct({
   const [product, setProduct] = useState<any>(null);
   const filesRef: any = useRef();
   const router = useRouter();
+  const formdata = new FormData();
 
   useEffect(() => {
     fetch(`/api/admin/productAdmin/?id=${params.productId}`)
@@ -35,16 +36,32 @@ export default function UpdateProduct({
   const handleSubmit = (values: any, setSubmitting: any) => {
     setError(null);
     setSubmitting(true);
+    formdata.append("file", values.image);
+    formdata.append("name", values.name);
+    formdata.append("author", values.author);
+    formdata.append("genre", values.genre);
+    formdata.append("description", values.description);
+    formdata.append("time", values.time);
+    formdata.append("price", values.price.toString());
+    formdata.append("discount", values.discount.toString());
+    formdata.append("year", values.year.toString());
+    formdata.append("stock", values.stock.toString());
+    formdata.append("language", values.language);
+    formdata.append("pageCount", values.pageCount.toString());
+    formdata.append("isBestSeller", values.isBestSeller ? "true" : "false");
+    formdata.append("isNewArrival", values.isNewArrival ? "true" : "false");
+    formdata.append("isDiscount", values.isDiscount ? "true" : "false");
     try {
       fetch(`/api/admin/productAdmin/?id=${params.productId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          _id: params.productId, // Ensure the correct _id is being sent
-          updateData: values,
-        }),
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify({
+        //   _id: params.productId, // Ensure the correct _id is being sent
+        //   updateData: values,
+        // }),
+        body: formdata,
       })
         .then((res) => res.json())
         .then((data) => {
@@ -97,13 +114,14 @@ export default function UpdateProduct({
   // Upload
   const handleFileChange = (e: any, setFieldValue: any) => {
     const file = e.target.files[0];
-    const reader: any = new FileReader();
-    reader.onloadend = () => {
-      setFieldValue("image", reader.result); // Convert to base64 and set to formik state
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    // const reader: any = new FileReader();
+    // reader.onloadend = () => {
+    //   setFieldValue("image", reader.result); // Convert to base64 and set to formik state
+    // };
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
+    setFieldValue("image", file);
   };
 
   if (!product) {

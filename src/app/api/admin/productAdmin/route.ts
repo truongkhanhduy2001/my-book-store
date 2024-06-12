@@ -2,28 +2,29 @@ import connectDB from "@/app/lib/connectDB";
 import Product from "@/app/models/Product";
 import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
+import { UploadImage } from "@/app/lib/uploadImg";
 
 export async function POST(req: NextRequest) {
   await connectDB();
 
   try {
-    const {
-      image,
-      name,
-      author,
-      genre,
-      description,
-      time,
-      price,
-      discount,
-      year,
-      stock,
-      language,
-      pageCount,
-      isBestSeller,
-      isNewArrival,
-      isDiscount,
-    } = await req.json();
+    const data = await req.formData();
+    const image = data.get("file") as File;
+    const upload: any = await UploadImage(image);
+    const name = data.get("name")?.toString();
+    const author = data.get("author")?.toString();
+    const genre = data.get("genre")?.toString();
+    const description = data.get("description")?.toString();
+    const time = data.get("time")?.toString();
+    const price = parseFloat(data.get("price")?.toString() || "0");
+    const discount = parseFloat(data.get("discount")?.toString() || "0");
+    const year = parseInt(data.get("year")?.toString() || "0");
+    const stock = parseInt(data.get("stock")?.toString() || "0");
+    const language = data.get("language")?.toString();
+    const pageCount = parseInt(data.get("pageCount")?.toString() || "0", 10);
+    const isBestSeller = data.get("isBestSeller")?.toString() === "true";
+    const isNewArrival = data.get("isNewArrival")?.toString() === "true";
+    const isDiscount = data.get("isDiscount")?.toString() === "true";
 
     // Validate field formats
     if (
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Check for existing product with the same name and author
-    const existingProduct = await Product.findOne({ image });
+    const existingProduct = await Product.findOne({ image: upload.secure_url });
     if (existingProduct) {
       return NextResponse.json({
         success: false,
@@ -57,7 +58,7 @@ export async function POST(req: NextRequest) {
     }
 
     const product = new Product({
-      image,
+      image: upload.secure_url, // Assuming the upload function returns a secure_url
       name,
       author,
       genre,
@@ -112,14 +113,68 @@ export async function GET(req: NextRequest) {
 // Function to handle PUT requests
 export async function PUT(req: NextRequest) {
   await connectDB();
-  try {
-    const { _id, updateData } = await req.json();
 
-    // Check if _id is a valid ObjectId
+  try {
+    const data = await req.formData();
+    const _id = req.nextUrl.searchParams.get("id");
+
     if (!_id || !ObjectId.isValid(_id)) {
       return NextResponse.json({
         success: false,
         message: "Invalid product ID.",
+      });
+    }
+
+    const updateData: any = {};
+    const image = data.get("file") as File;
+
+    if (image) {
+      const upload: any = await UploadImage(image);
+      updateData.image = upload.secure_url; // Assuming the upload function returns a secure_url
+    }
+
+    const fields = [
+      "name",
+      "author",
+      "genre",
+      "description",
+      "time",
+      "price",
+      "discount",
+      "year",
+      "stock",
+      "language",
+      "pageCount",
+      "isBestSeller",
+      "isNewArrival",
+      "isDiscount",
+    ];
+
+    fields.forEach((field) => {
+      const value = data.get(field);
+      if (value !== null) {
+        updateData[field] = value.toString();
+      }
+    });
+
+    // Validate field formats
+    if (
+      parseFloat(updateData.price) < 0 ||
+      parseInt(updateData.year) < 1000 ||
+      parseInt(updateData.year) > new Date().getFullYear() ||
+      parseInt(updateData.stock) < 0 ||
+      parseInt(updateData.pageCount) < 1
+    ) {
+      return NextResponse.json({
+        success: false,
+        message: "Invalid values provided.",
+      });
+    }
+
+    if (parseFloat(updateData.discount) >= parseFloat(updateData.price)) {
+      return NextResponse.json({
+        success: false,
+        message: "Discount price must be less than the original price.",
       });
     }
 

@@ -7,16 +7,34 @@ import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 export default function AddProduct() {
   const [error, setError] = useState<string | null>(null);
   const filesRef: any = useRef();
+  const formdata = new FormData();
+
   const handleSubmit = (values: any, setSubmitting: any, resetForm: any) => {
     setError(null);
     setSubmitting(true);
+    formdata.append("file", values.image);
+    formdata.append("name", values.name);
+    formdata.append("author", values.author);
+    formdata.append("genre", values.genre);
+    formdata.append("description", values.description);
+    formdata.append("time", values.time);
+    formdata.append("price", values.price.toString());
+    formdata.append("discount", values.discount.toString());
+    formdata.append("year", values.year.toString());
+    formdata.append("stock", values.stock.toString());
+    formdata.append("language", values.language);
+    formdata.append("pageCount", values.pageCount.toString());
+    formdata.append("isBestSeller", values.isBestSeller ? "true" : "false");
+    formdata.append("isNewArrival", values.isNewArrival ? "true" : "false");
+    formdata.append("isDiscount", values.isDiscount ? "true" : "false");
     try {
       fetch("/api/admin/productAdmin", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(values),
+        body: formdata,
       })
         .then((res) => res.json())
         .then((data) => {
@@ -68,13 +86,14 @@ export default function AddProduct() {
   // Upload
   const handleFileChange = (e: any, setFieldValue: any) => {
     const file = e.target.files[0];
-    const reader: any = new FileReader();
-    reader.onloadend = () => {
-      setFieldValue("image", reader.result); // Convert to base64 and set to formik state
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    // const reader: any = new FileReader();
+    // reader.onloadend = () => {
+    //   setFieldValue("image", reader.result);
+    // };
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
+    setFieldValue("image", file);
   };
 
   return (
