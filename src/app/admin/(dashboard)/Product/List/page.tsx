@@ -8,16 +8,25 @@ import Link from "next/link";
 
 export default function List() {
   const [products, setProducts] = useState([]) as any;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const limit = 3; // Limit for admin page
 
   useLayoutEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("/api/admin/productAdmin", {
-          method: "GET",
-        });
+        const response = await fetch(
+          `/api/admin/productAdmin?page=${currentPage}&limit=${limit}`,
+          {
+            method: "GET",
+          }
+        );
         const data = await response.json();
         if (data.success) {
           setProducts(data.products);
+          setTotalPages(data.totalPages);
+          setTotalProducts(data.totalProducts);
         }
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -25,7 +34,7 @@ export default function List() {
     };
 
     fetchProducts();
-  }, []);
+  }, [currentPage]);
 
   const handleDelete = async (id: string) => {
     try {
@@ -41,6 +50,10 @@ export default function List() {
         setProducts((prevProducts: any) =>
           prevProducts.filter((product: any) => product._id !== id)
         );
+        setTotalProducts((prevTotal) => prevTotal - 1); // Giảm tổng số sản phẩm đi 1
+        if (totalProducts % limit === 1 && currentPage > 1) {
+          setCurrentPage((prevPage) => prevPage - 1); // Nếu số trang giảm xuống, cập nhật trang hiện tại
+        }
       }
     } catch (error) {
       console.error("Failed to delete product:", error);
@@ -136,7 +149,13 @@ export default function List() {
             </table>
           </div>
         </div>
-        <Paginate />
+        {totalProducts > limit && (
+          <Paginate
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
     </>
   );

@@ -2,7 +2,8 @@ import connectDB from "@/app/lib/connectDB";
 import Product from "@/app/models/Product";
 import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
-import { UploadImage } from "@/app/lib/uploadImg";
+import { DeleteImg, UploadImage } from "@/app/lib/uploadImg";
+import { FaBookBible } from "react-icons/fa6";
 
 export async function POST(req: NextRequest) {
   await connectDB();
@@ -59,6 +60,7 @@ export async function POST(req: NextRequest) {
 
     const product = new Product({
       image: upload.secure_url, // Assuming the upload function returns a secure_url
+      image_Id: upload.public_id,
       name,
       author,
       genre,
@@ -92,6 +94,9 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     const _id = req.nextUrl.searchParams.get("id");
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "6", 10); // Default to 6 for user pages
+
     if (_id) {
       const product = await Product.findById(new ObjectId(_id));
       if (!product) {
@@ -102,8 +107,17 @@ export async function GET(req: NextRequest) {
       }
       return NextResponse.json({ success: true, product });
     } else {
-      const products = await Product.find();
-      return NextResponse.json({ success: true, products });
+      const products = await Product.find()
+        .skip((page - 1) * limit)
+        .limit(limit);
+      const totalProducts = await Product.countDocuments();
+      return NextResponse.json({
+        success: true,
+        products,
+        totalProducts,
+        totalPages: Math.ceil(totalProducts / limit),
+        currentPage: page,
+      });
     }
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message });
@@ -125,12 +139,24 @@ export async function PUT(req: NextRequest) {
       });
     }
 
+    const existingProduct = await Product.findById(new ObjectId(_id));
+    if (!existingProduct) {
+      return NextResponse.json({
+        success: false,
+        message: "Product not found.",
+      });
+    }
+
     const updateData: any = {};
     const image = data.get("file") as File;
 
     if (image) {
+      // Delete old image
+      await DeleteImg(existingProduct.image_Id);
+      // Upload new image
       const upload: any = await UploadImage(image);
-      updateData.image = upload.secure_url; // Assuming the upload function returns a secure_url
+      updateData.image = upload.secure_url;
+      updateData.image_Id = upload.public_id;
     }
 
     const fields = [
@@ -209,7 +235,10 @@ export async function DELETE(req: NextRequest) {
   await connectDB();
   try {
     const { _id } = await req.json();
+    const book = await Product.findById({ _id });
 
+    const del: any = await DeleteImg(book.image_Id);
+    console.log(del);
     const deletedProduct = await Product.findByIdAndDelete(new ObjectId(_id));
 
     if (!deletedProduct) {

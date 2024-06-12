@@ -58,6 +58,9 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  image_Id: {
+    type: String,
+  },
 });
 
 export default mongoose.models.Product ||

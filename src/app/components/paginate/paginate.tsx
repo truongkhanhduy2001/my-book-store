@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// Theme
 const theme = createTheme({
   components: {
     MuiStack: {
       styleOverrides: {
         root: {
-          // Thay đổi CSS cho Stack
           display: "flex",
         },
       },
@@ -24,7 +22,15 @@ const theme = createTheme({
   },
 });
 
-export default function Paginate() {
+export default function Paginate({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: any) {
+  const handlePageChange = (event: any, value: any) => {
+    onPageChange(value);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -34,8 +40,14 @@ export default function Paginate() {
           justifyContent: "flex-end",
         }}
       >
-        <Stack spacing={2}></Stack>
-        <Pagination count={2} color="primary" />
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Stack>
       </div>
     </ThemeProvider>
   );
