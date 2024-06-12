@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.4.0",
     "@mui/material": "^5.15.15",
     "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "classnames": "^2.5.1",
     "cloudinary": "^2.2.0",
@@ -40,6 +41,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/multer": "^1.4.11",
