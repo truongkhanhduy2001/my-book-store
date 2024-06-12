@@ -12,14 +12,13 @@ export async function POST(req: NextRequest) {
       name: "admin",
       password: "123456",
       role: "admin",
-    });
+    }).save();
     const { name, password } = await req.json();
 
     const admin = await Admin.findOne({ name });
 
     if (admin) {
-      const isPasswordMatch = await bcrypt.compare(password, admin.password);
-      if (isPasswordMatch) {
+      if (admin.password == password) {
         if (admin.role === "admin") {
           const id = admin._id;
           const token = await signToken({ id, name, role: admin.role });
