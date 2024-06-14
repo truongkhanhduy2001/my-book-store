@@ -11,28 +11,28 @@ export default function List() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
-  const limit = 3; // Limit for admin page
+  const limit = 2; // Limit for admin page
 
-  useLayoutEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(
-          `/api/admin/productAdmin?page=${currentPage}&limit=${limit}`,
-          {
-            method: "GET",
-          }
-        );
-        const data = await response.json();
-        if (data.success) {
-          setProducts(data.products);
-          setTotalPages(data.totalPages);
-          setTotalProducts(data.totalProducts);
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch(
+        `/api/admin/productAdmin?page=${currentPage}&limit=${limit}`
+      );
+      const data = await response.json();
+
+      if (data.success) {
+        setProducts(data.products);
+        setTotalPages(data.totalPages);
+        setTotalProducts(data.totalProducts);
+        if (data.products.length == 0) {
+          setCurrentPage(data.totalPages);
         }
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
       }
-    };
-
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    }
+  };
+  useLayoutEffect(() => {
     fetchProducts();
   }, [currentPage]);
 
@@ -50,10 +50,7 @@ export default function List() {
         setProducts((prevProducts: any) =>
           prevProducts.filter((product: any) => product._id !== id)
         );
-        setTotalProducts((prevTotal) => prevTotal - 1); // Giảm tổng số sản phẩm đi 1
-        if (totalProducts % limit === 1 && currentPage > 1) {
-          setCurrentPage((prevPage) => prevPage - 1); // Nếu số trang giảm xuống, cập nhật trang hiện tại
-        }
+        fetchProducts();
       }
     } catch (error) {
       console.error("Failed to delete product:", error);
@@ -86,7 +83,7 @@ export default function List() {
                     <td className="p-4 !relative">
                       <Image
                         className="max-w-[100px] w-[100%] h-[auto] !relative"
-                        src={product.image}
+                        src={product.image || "/images/biasach1.png"}
                         alt="Main Image"
                         fill
                         priority={true}

@@ -6,13 +6,14 @@ import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 
 export default function AddProduct() {
   const [error, setError] = useState<string | null>(null);
+  const [image, setImage] = useState() as any;
   const filesRef: any = useRef();
   const formdata = new FormData();
 
   const handleSubmit = (values: any, setSubmitting: any, resetForm: any) => {
     setError(null);
     setSubmitting(true);
-    formdata.append("file", values.image);
+    formdata.append("file", image);
     formdata.append("name", values.name);
     formdata.append("author", values.author);
     formdata.append("genre", values.genre);
@@ -93,6 +94,7 @@ export default function AddProduct() {
     // if (file) {
     //   reader.readAsDataURL(file);
     // }
+    setImage(file);
     setFieldValue("image", file);
   };
 
