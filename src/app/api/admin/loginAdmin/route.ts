@@ -2,7 +2,6 @@ import connectDB from "@/app/lib/connectDB";
 import Admin from "@/app/models/Admin";
 import { NextResponse, NextRequest } from "next/server";
 import { signToken } from "@/app/utils/jwt";
-import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   await connectDB();

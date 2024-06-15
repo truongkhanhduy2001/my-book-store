@@ -20,16 +20,16 @@ export default function Register() {
       .min(3, "Name must be at least 3 characters"),
     email: Yup.string()
       .email("Invalid email")
-      .required("Please enter your Email")
-      .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"),
+      .required("Please enter your Email"),
+    // .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"),
     password: Yup.string()
       .required("Please enter your Password")
-      .min(6, "Password must be at least 6 characters")
-      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .matches(
-        /[^a-zA-Z0-9]/,
-        "Password must contain at least one special character"
-      ),
+      .min(6, "Password must be at least 6 characters"),
+    // .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    // .matches(
+    //   /[^a-zA-Z0-9]/,
+    //   "Password must contain at least one special character"
+    // ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("Please enter your Confirm Password"),
@@ -152,6 +152,7 @@ export default function Register() {
                         type="password"
                         name="password"
                         placeholder="Password"
+                        autoComplete="new-password"
                       />
                       <ErrorMessage
                         className="text-[red]"
@@ -168,6 +169,7 @@ export default function Register() {
                         type="password"
                         name="confirmPassword"
                         placeholder="Comfirm Password"
+                        autoComplete="new-password"
                       />
                       <ErrorMessage
                         className="text-[red]"

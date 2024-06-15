@@ -11,7 +11,6 @@ export async function POST(req: NextRequest) {
     const data = await req.formData();
     const image = data.get("file") as File;
     const upload: any = await UploadImage(image);
-    console.log(image);
     const name = data.get("name")?.toString();
     const author = data.get("author")?.toString();
     const genre = data.get("genre")?.toString();

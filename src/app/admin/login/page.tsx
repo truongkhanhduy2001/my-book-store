@@ -76,6 +76,7 @@ export default function LoginPage() {
                   type="text"
                   name="name"
                   placeholder="User name"
+                  autoComplete="username"
                 />
                 <ErrorMessage
                   className="text-[red]"
@@ -92,6 +93,7 @@ export default function LoginPage() {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  autoComplete="current-password"
                 />
                 <ErrorMessage
                   className="text-[red]"

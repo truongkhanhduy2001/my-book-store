@@ -121,6 +121,7 @@ export default function Login() {
                         type="password"
                         name="password"
                         placeholder="Password"
+                        autoComplete="current-password"
                       />
                       <ErrorMessage
                         className="text-[red]"

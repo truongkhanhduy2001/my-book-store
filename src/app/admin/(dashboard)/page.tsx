@@ -2,16 +2,59 @@
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
 import { FaTrashAlt } from "react-icons/fa";
 import Paginate from "@/app/components/paginate/paginate";
+import { useState, useLayoutEffect } from "react";
 
 export default function UserTab() {
-  const users = [
-    {
-      id: 1,
-      name: "Trương Khánh Duy",
-      email: "truongkhanhduy@gmail.com",
-    },
-    // Add more products as needed
-  ];
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const limit = 2; // Limit for admin page
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(
+        `/api/admin/getUser?page=${currentPage}&limit=${limit}`
+      );
+      const data = await response.json();
+
+      if (data.success) {
+        setUsers(data.users);
+        setTotalPages(data.totalPages);
+        setTotalUsers(data.totalUsers);
+        if (data.users.length == 0) {
+          setCurrentPage(data.totalPages);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+    }
+  };
+
+  useLayoutEffect(() => {
+    fetchUsers();
+  }, [currentPage]);
+
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await fetch("/api/admin/getUser", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setUsers((prevUsers: any) =>
+          prevUsers.filter((user: any) => user._id !== id)
+        );
+        fetchUsers();
+      }
+    } catch (error) {
+      console.error("Failed to delete user:", error);
+    }
+  };
 
   return (
     <>
@@ -28,17 +71,19 @@ export default function UserTab() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
-                  <tr key={user.id} className="border-b">
+                {users.map((user: any) => (
+                  <tr key={user._id} className="border-b">
                     <td className="p-4">{user.name}</td>
                     <td className="p-4">{user.email}</td>
                     <td className="p-4">
-                      <button
-                        // onClick={() => handleDelete(product.id)}
-                        className="text-red-500 hover:underline ml-2"
-                      >
-                        <FaTrashAlt />
-                      </button>
+                      <div>
+                        <button
+                          onClick={() => handleDelete(user._id)}
+                          className="text-red-500 hover:underline text-[17px] mt-[2px]"
+                        >
+                          <FaTrashAlt />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -46,7 +91,13 @@ export default function UserTab() {
             </table>
           </div>
         </div>
-        <Paginate />
+        {totalUsers > limit && (
+          <Paginate
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
     </>
   );

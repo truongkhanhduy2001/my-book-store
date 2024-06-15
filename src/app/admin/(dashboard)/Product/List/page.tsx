@@ -11,7 +11,7 @@ export default function List() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
-  const limit = 2; // Limit for admin page
+  const limit = 3; // Limit for admin page
 
   const fetchProducts = async () => {
     try {
@@ -32,6 +32,7 @@ export default function List() {
       console.error("Failed to fetch products:", error);
     }
   };
+
   useLayoutEffect(() => {
     fetchProducts();
   }, [currentPage]);
