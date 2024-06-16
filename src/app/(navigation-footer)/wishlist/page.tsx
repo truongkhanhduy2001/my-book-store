@@ -5,7 +5,10 @@ import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 import { TiShoppingCart } from "react-icons/ti";
+import useAuthentication from "@/app/hooks/useAuthentication";
 export default function WishList() {
+  const isAuthenticated = useAuthentication();
+
   const data: any = [
     {
       title: "Dune",

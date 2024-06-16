@@ -117,6 +117,7 @@ export default function Register() {
                         type="text"
                         name="name"
                         placeholder="Full name"
+                        autoComplete="name"
                       />
                       <ErrorMessage
                         className="text-[red]"
@@ -133,6 +134,7 @@ export default function Register() {
                         type="email"
                         name="email"
                         placeholder="Email"
+                        autoComplete="email"
                       />
                       <ErrorMessage
                         className="text-[red]"

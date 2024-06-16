@@ -3,9 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import useAuthentication from "@/app/hooks/useAuthentication";
 import "./cart.css";
 
 export default function Cart() {
+  const isAuthenticated = useAuthentication();
+
   // Giả sử bạn có một mảng chứa các mục trong giỏ hàng
   const data: any = [
     {

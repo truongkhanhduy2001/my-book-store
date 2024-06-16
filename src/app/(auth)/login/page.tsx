@@ -105,6 +105,7 @@ export default function Login() {
                         type="email"
                         name="email"
                         placeholder="Email"
+                        autoComplete="email"
                       />
                       <ErrorMessage
                         className="text-[red]"

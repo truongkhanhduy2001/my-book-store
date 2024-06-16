@@ -6,8 +6,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./checkout.css";
 import { FaRegTrashAlt } from "react-icons/fa";
+import useAuthentication from "@/app/hooks/useAuthentication";
 
 export default function CheckOut() {
+  const isAuthenticated = useAuthentication();
+
   let data: any = [
     {
       discount: "20",
