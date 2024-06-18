@@ -13,23 +13,23 @@ export async function POST(req: NextRequest) {
         const id = user._id;
         const token = await signToken({ id, email });
         return NextResponse.json({
-          success: true,
+          status: 200,
           message: "Login Successful",
           token: token,
         });
       }
 
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "The email or password is incorrect.",
       });
     }
 
     return NextResponse.json({
-      success: false,
+      status: 400,
       message: "The email or password is incorrect.",
     });
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }

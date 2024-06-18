@@ -27,7 +27,7 @@ export default function Login() {
         .then((res) => res.json())
         .then((data) => {
           setSubmitting(false);
-          if (data.success) {
+          if (data.status === 200) {
             Cookie.set("TOKEN-USER", data.token, {
               sameSite: "strict",
               secure: true,

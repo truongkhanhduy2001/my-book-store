@@ -40,7 +40,7 @@ export default function AddProduct() {
         .then((res) => res.json())
         .then((data) => {
           setSubmitting(false);
-          if (data.success) {
+          if (data.status === 201) {
             resetForm();
             filesRef.current.value = "";
           } else {

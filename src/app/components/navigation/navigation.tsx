@@ -12,8 +12,9 @@ import "./navigation.css";
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+
 export default function Navigate() {
-  const data: any = [
+  const dat: any = [
     {
       title: "Dune",
       price: "100",
@@ -23,7 +24,39 @@ export default function Navigate() {
   const router = useRouter();
 
   // Login Condition
-  const [checkLogin, setCheckLogin] = useState(true);
+  const [checkLogin, setCheckLogin] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const token = Cookies.get("TOKEN-USER");
+    if (token) {
+      setCheckLogin(true);
+      fetchUserInfo(token);
+    } else {
+      setCheckLogin(false);
+    }
+  }, []);
+
+  const fetchUserInfo = async (token: string) => {
+    try {
+      const response = await fetch("/api/users/Info", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch user info");
+      }
+      const data = await response.json();
+      if (data.status === 200) {
+        console.log("User info:", data);
+        setUserName(data.userName);
+      }
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
 
   useEffect(() => {
     // Cart Dropdown
@@ -88,11 +121,20 @@ export default function Navigate() {
     };
   }, [pathname]);
 
-  const handleClick = () => {};
   const handleLogOut = () => {
-    Cookies.remove("TOKEN-USER");
-    router.push("/login");
+    try {
+      fetch("/api/users/logout", { method: "POST" })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 200) {
+            router.push("/login");
+          }
+        });
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
+
   return (
     <nav className="nav-main h-[60px] w-[100%] bg-[var(--BG)] sticky z-[100] top-0 left-0 right-0">
       <div className="nav-bar relative max-w-[var(--width-home)] w-[100%] h-[100%] bg-[var(--BG)] ml-[auto] mr-[auto] px-[30px] flex items-center justify-between">
@@ -108,8 +150,9 @@ export default function Navigate() {
             <li className="nav-item flex px-[10px] py-[7px]">
               <Link
                 href="/"
+                as="/"
+                passHref
                 className="nav-link active relative text-[18px] text-[var(--title-color)] px-[10px] hover:text-[var(--first-color)] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]"
-                onClick={handleClick}
               >
                 <i className="fa-home hidden">
                   <FaHome />
@@ -120,6 +163,8 @@ export default function Navigate() {
             <li className="nav-item flex px-[10px] py-[7px]">
               <Link
                 href="/adventure"
+                as="/adventure"
+                passHref
                 className="nav-link relative text-[18px] text-[var(--title-color)] px-[10px] hover:text-[var(--first-color)] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]"
               >
                 Adventure
@@ -128,6 +173,8 @@ export default function Navigate() {
             <li className="nav-item flex px-[10px] py-[7px]">
               <Link
                 href="/comedy"
+                as="/comedy"
+                passHref
                 className="nav-link relative text-[18px] text-[var(--title-color)] px-[10px] hover:text-[var(--first-color)] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]"
               >
                 Comedy
@@ -136,6 +183,8 @@ export default function Navigate() {
             <li className="nav-item flex px-[10px] py-[7px]">
               <Link
                 href="/science"
+                as="/science"
+                passHref
                 className="nav-link relative text-[18px] text-[var(--title-color)] px-[10px] hover:text-[var(--first-color)] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]"
               >
                 Science
@@ -144,6 +193,8 @@ export default function Navigate() {
             <li className="nav-item flex px-[10px] py-[7px]">
               <Link
                 href="/horror"
+                as="/horror"
+                passHref
                 className="nav-link relative text-[18px] text-[var(--title-color)] px-[10px] hover:text-[var(--first-color)] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms]"
               >
                 Horror
@@ -167,7 +218,7 @@ export default function Navigate() {
                 <VscAccount />
               </i>
               <h3 className="text-[16px] text-[var(--text-color)]">
-                Trương Khánh Duy
+                {userName}
               </h3>
               <div className="book-user-container absolute bg-[var(--BG)] flex flex-col right-0 w-[100%] h-[auto] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent group-hover/book-accounts-name:duration-[300ms] group-hover/book-accounts-name:scale-100 group-hover/book-accounts-name:opacity-100 group-hover/book-accounts-name:visible">
                 <Link
@@ -241,7 +292,9 @@ export default function Navigate() {
                 <i className="hover:text-[var(--first-color)]">
                   <PiHandbag />
                 </i>
-                <span className="count-cart">0</span>
+                <span className="count-cart absolute bottom-[20px] left-[25px] bg-[var(--first-color)] text-[var(--white-color)] h-[18px] w-[18px] leading-[18px] rounded-[50%] text-center text-[10px]">
+                  0
+                </span>
               </Link>
             </li>
           ) : (
@@ -268,9 +321,9 @@ export default function Navigate() {
                   </i>
                 </div>
                 <div className="cart-list mb-[15px] max-h-[249px] px-[12px] overflow-y-auto">
-                  {data.length > 0 ? (
+                  {dat.length > 0 ? (
                     <>
-                      {data.map((item: any, index: any) => {
+                      {dat.map((item: any, index: any) => {
                         return (
                           <Link
                             key={index}

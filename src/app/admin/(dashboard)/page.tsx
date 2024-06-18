@@ -18,7 +18,7 @@ export default function UserTab() {
       );
       const data = await response.json();
 
-      if (data.success) {
+      if (data.status === 200) {
         setUsers(data.users);
         setTotalPages(data.totalPages);
         setTotalUsers(data.totalUsers);
@@ -45,7 +45,7 @@ export default function UserTab() {
         body: JSON.stringify({ _id: id }),
       });
       const data = await response.json();
-      if (data.success) {
+      if (data.status === 200) {
         setUsers((prevUsers: any) =>
           prevUsers.filter((user: any) => user._id !== id)
         );

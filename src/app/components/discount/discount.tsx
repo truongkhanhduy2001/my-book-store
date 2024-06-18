@@ -18,13 +18,13 @@ export default function Discount() {
       type: ["Horror"],
       price: "100",
       discount: "0",
-      time: "new",
+      time: "old",
     },
     {
       title: "Dune",
       type: ["Horror", "Comedy"],
       price: "100",
-      discount: "60",
+      discount: "0",
       time: "old",
     },
     {

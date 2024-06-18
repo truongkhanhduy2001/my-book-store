@@ -21,7 +21,7 @@ export default function UpdateProduct({
     fetch(`/api/admin/productAdmin/?id=${params.productId}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) {
+        if (data.status === 200) {
           setProduct(data.product);
         } else {
           setError(data.message);
@@ -66,7 +66,7 @@ export default function UpdateProduct({
         .then((res) => res.json())
         .then((data) => {
           setSubmitting(false);
-          if (data.success) {
+          if (data.status === 201) {
             setProduct(data.product);
             router.push("/admin/Product/List");
           } else {

@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
       // Fetch single user by _id
       if (!ObjectId.isValid(_id)) {
         return NextResponse.json({
-          success: false,
+          status: 400,
           message: "Invalid user ID.",
         });
       }
@@ -24,12 +24,12 @@ export async function GET(req: NextRequest) {
       const user = await User.findById(new ObjectId(_id));
       if (!user) {
         return NextResponse.json({
-          success: false,
+          status: 400,
           message: "User not found.",
         });
       }
 
-      return NextResponse.json({ success: true, user });
+      return NextResponse.json({ status: 200, user });
     } else {
       // Fetch paginated list of users
       const users = await User.find()
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
       const totalUsers = await User.countDocuments();
 
       return NextResponse.json({
-        success: true,
+        status: 200,
         users,
         totalUsers,
         totalPages: Math.ceil(totalUsers / limit),
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
       });
     }
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }
 
@@ -58,7 +58,7 @@ export async function DELETE(req: NextRequest) {
 
     if (!_id || !ObjectId.isValid(_id)) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Invalid user ID.",
       });
     }
@@ -67,17 +67,17 @@ export async function DELETE(req: NextRequest) {
 
     if (!deletedUser) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "User not found.",
       });
     }
 
     return NextResponse.json({
-      success: true,
+      status: 200,
       message: "User deleted successfully",
       user: deletedUser,
     });
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }

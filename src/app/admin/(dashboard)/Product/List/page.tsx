@@ -20,7 +20,7 @@ export default function List() {
       );
       const data = await response.json();
 
-      if (data.success) {
+      if (data.status === 200) {
         setProducts(data.products);
         setTotalPages(data.totalPages);
         setTotalProducts(data.totalProducts);
@@ -47,7 +47,7 @@ export default function List() {
         body: JSON.stringify({ _id: id }),
       });
       const data = await response.json();
-      if (data.success) {
+      if (data.status === 200) {
         setProducts((prevProducts: any) =>
           prevProducts.filter((product: any) => product._id !== id)
         );

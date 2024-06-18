@@ -7,9 +7,7 @@ async function connectDB() {
   if (connection.isConnected) {
     return;
   }
-  const db = await mongoose.connect(
-    "mongodb+srv://truongkhanhduydata:LljWL6XST4IhhRHB@cluster.qgnzikg.mongodb.net/Bookstore"
-  );
+  const db = await mongoose.connect("mongodb://localhost:27017/Bookstore");
 
   connection.isConnected = db.connections[0].readyState;
 }

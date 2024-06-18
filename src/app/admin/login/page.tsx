@@ -22,7 +22,7 @@ export default function LoginPage() {
         .then((res) => res.json())
         .then((data) => {
           setSubmitting(false);
-          if (data.success) {
+          if (data.status === 200) {
             Cookie.set("TOKEN-ADMIN", data.token, {
               sameSite: "strict",
               secure: true,

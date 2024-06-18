@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     const users = await User.findOne({ email: emailToLowerCase });
     if (users) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "User already exists",
       });
     }
@@ -28,11 +28,11 @@ export async function POST(req: NextRequest) {
     const token = await signToken({ id, email: newEmail });
 
     return NextResponse.json({
-      success: true,
+      status: 200,
       message: "Registration Successful",
       token: token,
     });
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }

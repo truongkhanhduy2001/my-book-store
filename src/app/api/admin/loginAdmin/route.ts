@@ -2,6 +2,7 @@ import connectDB from "@/app/lib/connectDB";
 import Admin from "@/app/models/Admin";
 import { NextResponse, NextRequest } from "next/server";
 import { signToken } from "@/app/utils/jwt";
+import { stat } from "fs";
 
 export async function POST(req: NextRequest) {
   await connectDB();
@@ -20,25 +21,25 @@ export async function POST(req: NextRequest) {
             const id = admin._id;
             const token = await signToken({ id, name, role: admin.role });
             return NextResponse.json({
-              success: true,
+              status: 200,
               message: "Admin Login Successful",
               token: token,
             });
           } else {
             return NextResponse.json({
-              success: false,
+              status: 403,
               message: "Access denied. Not an admin.",
             });
           }
         }
 
         return NextResponse.json({
-          success: false,
+          status: 401,
           message: "The name or password is incorrect.",
         });
       }
       return NextResponse.json({
-        success: false,
+        status: 401,
         message: "The name or password is incorrect.",
       });
     } else {
@@ -49,6 +50,6 @@ export async function POST(req: NextRequest) {
       }).save();
     }
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }

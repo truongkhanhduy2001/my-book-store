@@ -3,6 +3,7 @@ import Product from "@/app/models/Product";
 import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
 import { DeleteImg, UploadImage } from "@/app/lib/uploadImg";
+import { stat } from "fs";
 
 export async function POST(req: NextRequest) {
   await connectDB();
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
       pageCount < 1
     ) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Invalid values provided.",
       });
     }
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
     // Logical consistency checks
     if (discount >= price) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Discount price must be less than the original price.",
       });
     }
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
     const existingProduct = await Product.findOne({ image: upload.secure_url });
     if (existingProduct) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "A product with the same image already exists.",
       });
     }
@@ -79,12 +80,12 @@ export async function POST(req: NextRequest) {
     const savedProduct = await product.save();
 
     return NextResponse.json({
-      success: true,
+      status: 201,
       message: "Product added successfully",
       product: savedProduct,
     });
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }
 
@@ -100,18 +101,18 @@ export async function GET(req: NextRequest) {
       const product = await Product.findById(new ObjectId(_id));
       if (!product) {
         return NextResponse.json({
-          success: false,
+          status: 400,
           message: "Product not found.",
         });
       }
-      return NextResponse.json({ success: true, product });
+      return NextResponse.json({ status: 200, product });
     } else {
       const products = await Product.find()
         .skip((page - 1) * limit)
         .limit(limit);
       const totalProducts = await Product.countDocuments();
       return NextResponse.json({
-        success: true,
+        status: 200,
         products,
         totalProducts,
         totalPages: Math.ceil(totalProducts / limit),
@@ -119,7 +120,7 @@ export async function GET(req: NextRequest) {
       });
     }
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }
 
@@ -133,7 +134,7 @@ export async function PUT(req: NextRequest) {
 
     if (!_id || !ObjectId.isValid(_id)) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Invalid product ID.",
       });
     }
@@ -141,7 +142,7 @@ export async function PUT(req: NextRequest) {
     const existingProduct = await Product.findById(new ObjectId(_id));
     if (!existingProduct) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Product not found.",
       });
     }
@@ -191,14 +192,14 @@ export async function PUT(req: NextRequest) {
       parseInt(updateData.pageCount) < 1
     ) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Invalid values provided.",
       });
     }
 
     if (parseFloat(updateData.discount) >= parseFloat(updateData.price)) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Discount price must be less than the original price.",
       });
     }
@@ -213,19 +214,19 @@ export async function PUT(req: NextRequest) {
 
     if (!updatedProduct) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Product not found.",
       });
     }
 
     return NextResponse.json({
-      success: true,
+      status: 201,
       message: "Product updated successfully",
       product: updatedProduct,
     });
   } catch (err: any) {
     console.error("Error updating product:", err); // Log the error for debugging
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }
 
@@ -237,22 +238,22 @@ export async function DELETE(req: NextRequest) {
     const book = await Product.findById({ _id });
 
     const del: any = await DeleteImg(book.image_Id);
-    console.log(del);
+
     const deletedProduct = await Product.findByIdAndDelete(new ObjectId(_id));
 
     if (!deletedProduct) {
       return NextResponse.json({
-        success: false,
+        status: 400,
         message: "Product not found.",
       });
     }
 
     return NextResponse.json({
-      success: true,
+      status: 200,
       message: "Product deleted successfully",
       product: deletedProduct,
     });
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message });
+    return NextResponse.json({ status: 500, error: err.message });
   }
 }
