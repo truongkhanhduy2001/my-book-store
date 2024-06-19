@@ -39,7 +39,7 @@ export default function Navigate() {
 
   const fetchUserInfo = async (token: string) => {
     try {
-      const response = await fetch("/api/admin/getUser", {
+      const response = await fetch("/api/users/Info", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
