@@ -5,9 +5,10 @@ import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 import { TiShoppingCart } from "react-icons/ti";
-import useAuthentication from "@/app/hooks/useAuthentication";
+import { useCustomContext } from "@/provider/CustomProvider";
+
 export default function WishList() {
-  const isAuthenticated = useAuthentication();
+  const { user } = useCustomContext();
 
   const data: any = [
     {

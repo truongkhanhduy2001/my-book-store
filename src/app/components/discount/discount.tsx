@@ -11,6 +11,7 @@ import { FiHeart } from "react-icons/fi";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { useCustomContext } from "@/provider/CustomProvider";
 export default function Discount() {
   const data = [
     {
@@ -85,21 +86,20 @@ export default function Discount() {
     changePositionNav(e.target.closest(".nav-discount"));
   };
 
-  // Login condition
-  const [checkLogin, setCheckLogin] = useState(false);
+  const { user } = useCustomContext();
 
   // Button Cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".Discountcart-btn");
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
-        if (!checkLogin) {
+        if (!user) {
           window.location.href = "/login";
         }
         e.preventDefault();
       });
     });
-  }, [checkLogin]);
+  }, [user]);
 
   // Icon heart
   const handleHeart = (e: any) => {

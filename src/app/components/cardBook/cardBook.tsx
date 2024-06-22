@@ -7,23 +7,24 @@ import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
+import { useCustomContext } from "@/provider/CustomProvider";
+
 export default function CardBook(props: any) {
   const { item, per } = props;
-  // Login condition
-  const [checkLogin, setCheckLogin] = useState(false);
+  const { user } = useCustomContext();
 
   // Button cart
   useEffect(() => {
     const btntocart = document.querySelectorAll(".template-btn");
     btntocart.forEach((item, index) => {
       item.addEventListener("click", (e) => {
-        if (!checkLogin) {
+        if (!user) {
           window.location.href = "/login";
         }
         e.preventDefault();
       });
     });
-  }, [checkLogin]);
+  }, [user]);
 
   // Icon heart
   const handleHeart = (e: any) => {

@@ -193,17 +193,6 @@ function ProductSee({ params }: { params: { productId: string } }) {
         <div className="flex flex-wrap mb-6 justify-center items-center">
           <div className="flex items-center mr-6 w-1/3 px-2">
             <span className="text-gray-700 text-sm font-bold">
-              Best Seller:
-            </span>
-            <input
-              type="checkbox"
-              checked={product.isBestSeller}
-              name="isBestSeller"
-              disabled
-            />
-          </div>
-          <div className="flex items-center mr-6 w-1/3 px-2">
-            <span className="text-gray-700 text-sm font-bold">
               New Arrival:
             </span>
             <input

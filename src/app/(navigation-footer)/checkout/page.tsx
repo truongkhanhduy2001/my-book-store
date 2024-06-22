@@ -7,10 +7,10 @@ import * as Yup from "yup";
 import "./checkout.css";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
-import useAuthentication from "@/app/hooks/useAuthentication";
+import { useCustomContext } from "@/provider/CustomProvider";
 
 export default function CheckOut() {
-  const isAuthenticated = useAuthentication();
+  const { user } = useCustomContext();
 
   const data: any = [
     {

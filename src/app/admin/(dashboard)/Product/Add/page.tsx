@@ -25,16 +25,11 @@ export default function AddProduct() {
     formdata.append("stock", values.stock.toString());
     formdata.append("language", values.language);
     formdata.append("pageCount", values.pageCount.toString());
-    formdata.append("isBestSeller", values.isBestSeller ? "true" : "false");
     formdata.append("isNewArrival", values.isNewArrival ? "true" : "false");
     formdata.append("isDiscount", values.isDiscount ? "true" : "false");
     try {
       fetch("/api/admin/productAdmin", {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify(values),
         body: formdata,
       })
         .then((res) => res.json())
@@ -79,7 +74,6 @@ export default function AddProduct() {
     pageCount: Yup.number()
       .required("Please enter Page Count")
       .min(1, "Page Count must be at least 1"),
-    isBestSeller: Yup.boolean(),
     isNewArrival: Yup.boolean(),
     isDiscount: Yup.boolean(),
   });
@@ -87,13 +81,6 @@ export default function AddProduct() {
   // Upload
   const handleFileChange = (e: any, setFieldValue: any) => {
     const file = e.target.files[0];
-    // const reader: any = new FileReader();
-    // reader.onloadend = () => {
-    //   setFieldValue("image", reader.result);
-    // };
-    // if (file) {
-    //   reader.readAsDataURL(file);
-    // }
     setImage(file);
     setFieldValue("image", file);
   };
@@ -117,7 +104,6 @@ export default function AddProduct() {
             stock: "",
             language: "",
             pageCount: "",
-            isBestSeller: false,
             isNewArrival: false,
             isDiscount: false,
           }}
@@ -393,22 +379,6 @@ export default function AddProduct() {
               </div>
 
               <div className="flex flex-wrap mb-6 justify-center items-center">
-                {/* Best Seller */}
-                <div className="flex items-center mr-6 w-1/3 px-2">
-                  <Field
-                    type="checkbox"
-                    id="isBestSeller"
-                    name="isBestSeller"
-                    className="mr-2"
-                  />
-                  <label
-                    htmlFor="isBestSeller"
-                    className="text-gray-700 text-sm font-bold"
-                  >
-                    Best Seller
-                  </label>
-                </div>
-
                 {/* New Arrival */}
                 <div className="flex items-center mr-6 w-1/3 px-2">
                   <Field

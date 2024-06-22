@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Head from "next/head";
 import { Jost } from "next/font/google";
 import "./globals.css";
+import { CustomProvider } from "@/provider/CustomProvider";
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className={jost.className}>{children}</body>
+      <body className={jost.className}>
+        <CustomProvider>{children}</CustomProvider>
+      </body>
     </html>
   );
 }

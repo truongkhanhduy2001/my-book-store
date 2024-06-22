@@ -10,10 +10,12 @@ import { IoIosLogOut } from "react-icons/io";
 import { TiShoppingCart } from "react-icons/ti";
 import "./navigation.css";
 import { usePathname } from "next/navigation";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useCustomContext } from "@/provider/CustomProvider";
 
 export default function Navigate() {
+  const { user } = useCustomContext();
+
   const dat: any = [
     {
       title: "Dune",
@@ -22,41 +24,6 @@ export default function Navigate() {
     },
   ];
   const router = useRouter();
-
-  // Login Condition
-  const [checkLogin, setCheckLogin] = useState(false);
-  const [userName, setUserName] = useState("");
-
-  useEffect(() => {
-    const token = Cookies.get("TOKEN-USER");
-    if (token) {
-      setCheckLogin(true);
-      fetchUserInfo(token);
-    } else {
-      setCheckLogin(false);
-    }
-  }, []);
-
-  const fetchUserInfo = async (token: string) => {
-    try {
-      const response = await fetch("/api/users/Info", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to fetch user info");
-      }
-      const data = await response.json();
-      if (data.status === 200) {
-        console.log("User info:", data);
-        setUserName(data.userName);
-      }
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-    }
-  };
 
   useEffect(() => {
     // Cart Dropdown
@@ -70,8 +37,8 @@ export default function Navigate() {
     function handleHideCart(e: any) {
       cartDropdown?.classList.remove("active");
     }
-    checkLogin && bookCart.addEventListener("click", handleShowCart);
-    checkLogin && cartIconClose.addEventListener("click", handleHideCart);
+    user && bookCart.addEventListener("click", handleShowCart);
+    user && cartIconClose.addEventListener("click", handleHideCart);
 
     // Scroll
     const handleScroll = () => {
@@ -88,7 +55,7 @@ export default function Navigate() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [user]);
 
   // Active Page
   const pathname = usePathname();
@@ -204,7 +171,7 @@ export default function Navigate() {
         </div>
         {/* Icon */}
         <ul className="icons-list text-[25px] text-[var(--title-color)] grid grid-flow-col auto-cols-auto gap-[15px]">
-          {!checkLogin ? (
+          {!user ? (
             <li className="book-accounts flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
                 <i className="hover:text-[var(--first-color)]">
@@ -218,7 +185,7 @@ export default function Navigate() {
                 <VscAccount />
               </i>
               <h3 className="text-[16px] text-[var(--text-color)]">
-                {userName}
+                {user?.name}
               </h3>
               <div className="book-user-container absolute bg-[var(--BG)] flex flex-col right-0 w-[100%] h-[auto] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent group-hover/book-accounts-name:duration-[300ms] group-hover/book-accounts-name:scale-100 group-hover/book-accounts-name:opacity-100 group-hover/book-accounts-name:visible">
                 <Link
@@ -262,7 +229,7 @@ export default function Navigate() {
             </div>
           </li>
           {/* Heart */}
-          {!checkLogin ? (
+          {!user ? (
             <li className="book-heart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
                 <i className="hover:text-[var(--first-color)]">
@@ -286,7 +253,7 @@ export default function Navigate() {
             </li>
           )}
           {/* Cart */}
-          {!checkLogin ? (
+          {!user ? (
             <li className="book-cart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
                 <i className="hover:text-[var(--first-color)]">

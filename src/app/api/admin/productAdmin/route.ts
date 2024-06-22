@@ -3,7 +3,6 @@ import Product from "@/app/models/Product";
 import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
 import { DeleteImg, UploadImage } from "@/app/lib/uploadImg";
-import { stat } from "fs";
 
 export async function POST(req: NextRequest) {
   await connectDB();
@@ -23,7 +22,6 @@ export async function POST(req: NextRequest) {
     const stock = parseInt(data.get("stock")?.toString() || "0");
     const language = data.get("language")?.toString();
     const pageCount = parseInt(data.get("pageCount")?.toString() || "0", 10);
-    const isBestSeller = data.get("isBestSeller")?.toString() === "true";
     const isNewArrival = data.get("isNewArrival")?.toString() === "true";
     const isDiscount = data.get("isDiscount")?.toString() === "true";
 
@@ -72,7 +70,6 @@ export async function POST(req: NextRequest) {
       stock,
       language,
       pageCount,
-      isBestSeller,
       isNewArrival,
       isDiscount,
     });
@@ -147,16 +144,23 @@ export async function PUT(req: NextRequest) {
       });
     }
 
-    const updateData: any = {};
+    let updateData: any = {};
     const image = data.get("file") as File;
 
     if (image) {
       // Delete old image
       await DeleteImg(existingProduct.image_Id);
       // Upload new image
-      const upload: any = await UploadImage(image);
-      updateData.image = upload.secure_url;
-      updateData.image_Id = upload.public_id;
+      if (typeof image === "object") {
+        const upload: any = await UploadImage(image);
+        updateData.image = upload.secure_url;
+        updateData.image_Id = upload.public_id;
+      } else {
+        updateData = {
+          image: existingProduct.image,
+          image_Id: existingProduct.image_Id,
+        };
+      }
     }
 
     const fields = [
@@ -171,7 +175,6 @@ export async function PUT(req: NextRequest) {
       "stock",
       "language",
       "pageCount",
-      "isBestSeller",
       "isNewArrival",
       "isDiscount",
     ];
@@ -222,7 +225,6 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({
       status: 201,
       message: "Product updated successfully",
-      product: updatedProduct,
     });
   } catch (err: any) {
     console.error("Error updating product:", err); // Log the error for debugging

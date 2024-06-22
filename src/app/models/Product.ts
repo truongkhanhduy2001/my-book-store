@@ -46,10 +46,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  isBestSeller: {
-    type: Boolean,
-    default: false,
-  },
   isNewArrival: {
     type: Boolean,
     default: false,

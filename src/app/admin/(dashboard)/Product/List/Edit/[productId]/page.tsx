@@ -13,6 +13,7 @@ export default function UpdateProduct({
 }) {
   const [error, setError] = useState<string | null>(null);
   const [product, setProduct] = useState<any>(null);
+  const [image, setImage] = useState<any>(null);
   const filesRef: any = useRef();
   const router = useRouter();
   const formdata = new FormData();
@@ -23,6 +24,7 @@ export default function UpdateProduct({
       .then((data) => {
         if (data.status === 200) {
           setProduct(data.product);
+          setImage(data.product.image);
         } else {
           setError(data.message);
         }
@@ -36,7 +38,7 @@ export default function UpdateProduct({
   const handleSubmit = (values: any, setSubmitting: any) => {
     setError(null);
     setSubmitting(true);
-    formdata.append("file", values.image);
+    formdata.append("file", image);
     formdata.append("name", values.name);
     formdata.append("author", values.author);
     formdata.append("genre", values.genre);
@@ -48,19 +50,11 @@ export default function UpdateProduct({
     formdata.append("stock", values.stock.toString());
     formdata.append("language", values.language);
     formdata.append("pageCount", values.pageCount.toString());
-    formdata.append("isBestSeller", values.isBestSeller ? "true" : "false");
     formdata.append("isNewArrival", values.isNewArrival ? "true" : "false");
     formdata.append("isDiscount", values.isDiscount ? "true" : "false");
     try {
       fetch(`/api/admin/productAdmin/?id=${params.productId}`, {
         method: "PUT",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify({
-        //   _id: params.productId, // Ensure the correct _id is being sent
-        //   updateData: values,
-        // }),
         body: formdata,
       })
         .then((res) => res.json())
@@ -106,7 +100,6 @@ export default function UpdateProduct({
     pageCount: Yup.number()
       .required("Please enter Page Count")
       .min(1, "Page Count must be at least 1"),
-    isBestSeller: Yup.boolean(),
     isNewArrival: Yup.boolean(),
     isDiscount: Yup.boolean(),
   });
@@ -114,13 +107,7 @@ export default function UpdateProduct({
   // Upload
   const handleFileChange = (e: any, setFieldValue: any) => {
     const file = e.target.files[0];
-    // const reader: any = new FileReader();
-    // reader.onloadend = () => {
-    //   setFieldValue("image", reader.result); // Convert to base64 and set to formik state
-    // };
-    // if (file) {
-    //   reader.readAsDataURL(file);
-    // }
+    setImage(file);
     setFieldValue("image", file);
   };
 
@@ -162,7 +149,6 @@ export default function UpdateProduct({
             stock: product.stock || "",
             language: product.language || "",
             pageCount: product.pageCount || "",
-            isBestSeller: product.isBestSeller || false,
             isNewArrival: product.isNewArrival || false,
             isDiscount: product.isDiscount || false,
           }}
@@ -449,22 +435,6 @@ export default function UpdateProduct({
               </div>
 
               <div className="flex flex-wrap mb-6 justify-center items-center">
-                {/* Best Seller */}
-                <div className="flex items-center mr-6 w-1/3 px-2">
-                  <Field
-                    type="checkbox"
-                    id="isBestSeller"
-                    name="isBestSeller"
-                    className="mr-2"
-                  />
-                  <label
-                    htmlFor="isBestSeller"
-                    className="text-gray-700 text-sm font-bold"
-                  >
-                    Best Seller
-                  </label>
-                </div>
-
                 {/* New Arrival */}
                 <div className="flex items-center mr-6 w-1/3 px-2">
                   <Field

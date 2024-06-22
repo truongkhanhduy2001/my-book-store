@@ -98,11 +98,6 @@ export default function List() {
                     <td className="p-4">{product.discount}</td>
                     <td className="p-4">{product.stock}</td>
                     <td className="p-4 text-center">
-                      {product.isBestSeller && (
-                        <span className="inline-block px-2 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
-                          Best Seller
-                        </span>
-                      )}
                       {product.isNewArrival && (
                         <span className="inline-block px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
                           New Arrival
@@ -113,13 +108,11 @@ export default function List() {
                           Discount
                         </span>
                       )}
-                      {!product.isBestSeller &&
-                        !product.isNewArrival &&
-                        !product.isDiscount && (
-                          <span className="inline-block px-2 py-1 bg-gray-300 text-black text-xs font-semibold rounded-full">
-                            No Tags
-                          </span>
-                        )}
+                      {!product.isNewArrival && !product.isDiscount && (
+                        <span className="inline-block px-2 py-1 bg-gray-300 text-black text-xs font-semibold rounded-full">
+                          No Tags
+                        </span>
+                      )}
                     </td>
                     <td className="p-4">
                       <div className="flex items-center space-x-2 justify-center">
