@@ -5,11 +5,9 @@ import Cookie from "js-cookie";
 
 export default function useAuthentication() {
   const [user, setUser] = useState(null);
-  const [loadingAuth, setLoadingAuth] = useState(false);
   const pathName = usePathname();
   useEffect(() => {
     const validateToken = async () => {
-      setLoadingAuth(true);
       const token = Cookie.get("TOKEN-USER");
       const response = await fetch("/api/users/validation_user", {
         method: "POST",
@@ -20,7 +18,6 @@ export default function useAuthentication() {
       });
 
       const result = await response.json();
-      setLoadingAuth(false);
       if (result.status === 200) {
         setUser(result.data);
       } else {
@@ -32,5 +29,5 @@ export default function useAuthentication() {
     validateToken();
   }, [pathName]);
 
-  return { user, loadingAuth };
+  return { user };
 }
