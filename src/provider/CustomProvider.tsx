@@ -10,7 +10,7 @@ interface CustomContextType {
 const CustomContext = createContext<CustomContextType | undefined>(undefined);
 
 export const CustomProvider = ({ children }: { children: ReactNode }) => {
-  const { user, loadingAuth } = useAuthentication();
+  const { user } = useAuthentication();
   return (
     <CustomContext.Provider value={{ user }}>{children}</CustomContext.Provider>
   );
