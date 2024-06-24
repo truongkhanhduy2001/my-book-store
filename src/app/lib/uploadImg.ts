@@ -17,6 +17,7 @@ export const UploadImage = async (file: File) => {
       {
         upload_preset: "BookStore",
         resource_type: "auto",
+        tags: "ProductImage",
       },
       (error, result) => {
         if (error) {

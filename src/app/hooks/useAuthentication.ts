@@ -26,8 +26,10 @@ export default function useAuthentication() {
         // router.push("/login");
       }
     };
-    validateToken();
-  }, [pathName]);
+    if (!user) {
+      validateToken();
+    }
+  }, [pathName, user]);
 
   return { user };
 }

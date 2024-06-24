@@ -16,10 +16,10 @@ export async function POST(req: NextRequest) {
   try {
     const decoded: any = await jwt.verify(token, SECRET_KEY);
     const user = await User.findById(decoded.id);
+    console.log(user);
     if (!user) {
       return NextResponse.json({ error: "Invalid token", status: 401 });
     }
-
     return NextResponse.json({ data: user, status: 200 });
   } catch (error) {
     return NextResponse.json({ error: "Invalid token" });

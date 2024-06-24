@@ -147,20 +147,25 @@ export async function PUT(req: NextRequest) {
     let updateData: any = {};
     const image = data.get("file") as File;
 
-    if (image) {
-      // Delete old image
-      await DeleteImg(existingProduct.image_Id);
-      // Upload new image
-      if (typeof image === "object") {
-        const upload: any = await UploadImage(image);
+    if (image && typeof image === "object") {
+      // Upload new image first
+      const upload: any = await UploadImage(image);
+      if (upload && upload.secure_url && upload.public_id) {
+        // Delete old image only after new image is successfully uploaded
+        await DeleteImg(existingProduct.image_Id);
         updateData.image = upload.secure_url;
         updateData.image_Id = upload.public_id;
       } else {
-        updateData = {
-          image: existingProduct.image,
-          image_Id: existingProduct.image_Id,
-        };
+        // Handle the case where image upload fails
+        console.error("Failed to upload new image");
+        // Optionally, revert to the existing image or handle this scenario as needed
       }
+    } else {
+      // If there's no new image or the new image is not an object, keep the existing image
+      updateData = {
+        image: existingProduct.image,
+        image_Id: existingProduct.image_Id,
+      };
     }
 
     const fields = [
