@@ -49,7 +49,7 @@ export default function CardBook(props: any) {
         <div className="template-img !relative w-[150px] h-[220px] mt-0 mb-0 ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
           <Image
             className="!relative duration-[300ms] group-hover/template-card:scale-110"
-            src={product.image || "/images/biasach1.png"}
+            src={product?.image || "/images/biasach1.png"}
             alt="Main Image"
             fill
             priority={true}
