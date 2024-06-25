@@ -58,16 +58,16 @@ export default function CardBook(props: any) {
         </div>
         <div className="template-tag">
           <h2 className="mt-[12px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
-            {product.name}
+            {product?.name}
           </h2>
           <div className="template-writer text-[var(--text-color)] text-[16px]">
-            {product.author}
+            {product?.author}
           </div>
           <div className="template-categories text-[var(--second-color)] text-[16px] mt-[8px]">
-            {product.genre}
+            {product?.genre}
           </div>
           <div className="template-price flex mb-[15px] mt-[8px] justify-center">
-            {product.discount > "0" && (
+            {product?.discount > "0" && (
               <h4
                 className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
                 style={{
@@ -78,13 +78,13 @@ export default function CardBook(props: any) {
                   marginTop: "2px",
                 }}
               >
-                ${product.discount}
+                ${product?.discount}
               </h4>
             )}
             <h3
               className="text-[var(--title-color)] text-[16px] font-bold"
               style={
-                product.discount > "0"
+                product?.discount > "0"
                   ? {
                       textDecoration: "line-through",
                       color: "hsl(230, 16%, 45%)",
@@ -94,10 +94,10 @@ export default function CardBook(props: any) {
                   : { textDecoration: "none" }
               }
             >
-              ${product.price}
+              ${product?.price}
             </h3>
 
-            {product.discount > "0" && (
+            {product?.discount > "0" && (
               <span className="sale text-[14px] border border-solid rounded-[5px] bg-[var(--first-color)] text-[var(--white-color)] pt-[2px] pb-[2px] pl-[5px] pr-[5px] ml-[6px]">
                 -{per}%
               </span>
