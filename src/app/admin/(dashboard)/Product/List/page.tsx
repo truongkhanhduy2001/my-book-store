@@ -74,7 +74,6 @@ export default function List() {
                   <th className="p-4 text-left">Price</th>
                   <th className="p-4 text-left">Discount</th>
                   <th className="p-4 text-left">Stock</th>
-                  <th className="p-4 text-left">Tags</th>
                   <th className="p-4 text-left">Actions</th>
                 </tr>
               </thead>
@@ -97,23 +96,6 @@ export default function List() {
                     <td className="p-4">{product.price}</td>
                     <td className="p-4">{product.discount}</td>
                     <td className="p-4">{product.stock}</td>
-                    <td className="p-4 text-center">
-                      {product.isNewArrival && (
-                        <span className="inline-block px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
-                          New Arrival
-                        </span>
-                      )}
-                      {product.isDiscount && (
-                        <span className="inline-block px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-full">
-                          Discount
-                        </span>
-                      )}
-                      {!product.isNewArrival && !product.isDiscount && (
-                        <span className="inline-block px-2 py-1 bg-gray-300 text-black text-xs font-semibold rounded-full">
-                          No Tags
-                        </span>
-                      )}
-                    </td>
                     <td className="p-4">
                       <div className="flex items-center space-x-2 justify-center">
                         <Link href={`/admin/Product/List/See/${product._id}`}>

@@ -50,8 +50,6 @@ export default function UpdateProduct({
     formdata.append("stock", values.stock.toString());
     formdata.append("language", values.language);
     formdata.append("pageCount", values.pageCount.toString());
-    formdata.append("isNewArrival", values.isNewArrival ? "true" : "false");
-    formdata.append("isDiscount", values.isDiscount ? "true" : "false");
     try {
       fetch(`/api/admin/productAdmin/?id=${params.productId}`, {
         method: "PUT",
@@ -100,8 +98,6 @@ export default function UpdateProduct({
     pageCount: Yup.number()
       .required("Please enter Page Count")
       .min(1, "Page Count must be at least 1"),
-    isNewArrival: Yup.boolean(),
-    isDiscount: Yup.boolean(),
   });
 
   // Upload
@@ -149,8 +145,6 @@ export default function UpdateProduct({
             stock: product.stock || "",
             language: product.language || "",
             pageCount: product.pageCount || "",
-            isNewArrival: product.isNewArrival || false,
-            isDiscount: product.isDiscount || false,
           }}
           validationSchema={productSchema}
           onSubmit={(values, { setSubmitting }) => {
@@ -432,40 +426,6 @@ export default function UpdateProduct({
                   component="div"
                   className="text-red-500 text-sm"
                 />
-              </div>
-
-              <div className="flex flex-wrap mb-6 justify-center items-center">
-                {/* New Arrival */}
-                <div className="flex items-center mr-6 w-1/3 px-2">
-                  <Field
-                    type="checkbox"
-                    id="isNewArrival"
-                    name="isNewArrival"
-                    className="mr-2"
-                  />
-                  <label
-                    htmlFor="isNewArrival"
-                    className="text-gray-700 text-sm font-bold"
-                  >
-                    New Arrival
-                  </label>
-                </div>
-
-                {/* Discount */}
-                <div className="flex items-center">
-                  <Field
-                    type="checkbox"
-                    id="isDiscount"
-                    name="isDiscount"
-                    className="mr-2"
-                  />
-                  <label
-                    htmlFor="isDiscount"
-                    className="text-gray-700 text-sm font-bold"
-                  >
-                    Discount
-                  </label>
-                </div>
               </div>
               {error && <div className="text-[red]">{error}</div>}
               {/* Submit Button */}

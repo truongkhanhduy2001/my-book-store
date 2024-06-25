@@ -1,40 +1,28 @@
 "use client";
 import Link from "next/link";
 import "./discountView.css";
+import { useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
+import { useEffect } from "react";
 
 export default function DiscountView() {
-  const data = [
-    {
-      title: "Dune",
-      price: "100",
-      discount: "55",
-      type: ["Adventure"],
-      time: "old",
-    },
-    {
-      title: "Anime",
-      price: "100",
-      discount: "45",
-      type: ["Horror"],
-      time: "old",
-    },
-    {
-      title: "Naruto",
-      price: "100",
-      discount: "60",
-      type: ["Adventure"],
-      time: "old",
-    },
-    {
-      title: "Naruto",
-      price: "100",
-      discount: "60",
-      type: ["Adventure"],
-      time: "old",
-    },
-  ];
+  const [products, setProducts] = useState(null) as any;
+
+  useEffect(() => {
+    const fetchDataDiscount = async () => {
+      try {
+        const res = await fetch("/api/product/discount");
+        const data = await res.json();
+        setProducts(data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!products) {
+      fetchDataDiscount();
+    }
+  }, [products]);
 
   return (
     <>
@@ -63,13 +51,20 @@ export default function DiscountView() {
         <div className="discount-container-view flex justify-center mt-[var(--margin-top-font)]">
           <div className="discount-view max-w-[var(--width-home)] w-[100%]">
             <div className="discount-box-view grid grid-cols-4 gap-[15px]">
-              {data.map((item, index) => {
-                const { discount: discount, price: price, time } = item;
+              {products?.map((product: any) => {
+                const { discount: discount, price: price, time } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
                 ).toFixed(0);
-                return <CardBook key={index} item={item} per={per} />;
+                return (
+                  <CardBook
+                    key={product._id}
+                    product={product}
+                    per={per}
+                    time={time}
+                  />
+                );
               })}
             </div>
             <Paginate />

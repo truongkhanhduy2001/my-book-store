@@ -23,16 +23,4 @@ export default async function middleware(req: any) {
     const absoluteURL = new URL("/admin/login", req.nextUrl.origin);
     return NextResponse.redirect(absoluteURL.toString());
   }
-
-  //  Nếu người dùng đã đăng nhập và cố gắng truy cập vào /login, chuyển hướng họ về trang chính
-  if (accessTokenUser && pathname === "/login") {
-    return NextResponse.redirect(new URL("/", req.nextUrl.origin).toString());
-  }
-
-  // Nếu admin đã đăng nhập và cố gắng truy cập vào /admin/login, chuyển hướng họ về trang admin
-  if (accessTokenAdmin && pathname === "/admin/login") {
-    return NextResponse.redirect(
-      new URL("/admin", req.nextUrl.origin).toString()
-    );
-  }
 }

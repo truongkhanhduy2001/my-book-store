@@ -46,14 +46,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  isNewArrival: {
-    type: Boolean,
-    default: false,
-  },
-  isDiscount: {
-    type: Boolean,
-    default: false,
-  },
   image_Id: {
     type: String,
   },

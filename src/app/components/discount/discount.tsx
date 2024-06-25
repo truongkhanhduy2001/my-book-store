@@ -13,80 +13,65 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
 export default function Discount() {
-  const data = [
-    {
-      title: "Dune",
-      type: ["Horror"],
-      price: "100",
-      discount: "0",
-      time: "old",
-    },
-    {
-      title: "Dune",
-      type: ["Horror", "Comedy"],
-      price: "100",
-      discount: "0",
-      time: "old",
-    },
-    {
-      title: "Anime",
-      type: "Science",
-      price: "100",
-      discount: "0",
-      time: "old",
-    },
-    {
-      title: "Anime",
-      type: "Adventure",
-      price: "100",
-      discount: "67",
-      time: "old",
-    },
-  ];
+  const { user } = useCustomContext();
+  const [products, setProducts] = useState(null) as any;
+
+  useEffect(() => {
+    const fetchDataDiscount = async () => {
+      try {
+        const res = await fetch("/api/product/discount");
+        const data = await res.json();
+        setProducts(data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!products) {
+      fetchDataDiscount();
+    }
+  }, [products]);
 
   // Type
-  const [dataList, setDataList] = useState(data);
+  // const [dataList, setDataList] = useState(data);
 
-  function changePositionNav(e: any) {
-    document.querySelector(".nav-discount.active")?.classList.remove("active");
-    e.classList.add("active");
-  }
+  // function changePositionNav(e: any) {
+  //   document.querySelector(".nav-discount.active")?.classList.remove("active");
+  //   e.classList.add("active");
+  // }
 
-  const handleAllBooks = (e: any) => {
-    setDataList(data);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
+  // const handleAllBooks = (e: any) => {
+  //   setDataList(data);
+  //   changePositionNav(e.target.closest(".nav-discount"));
+  // };
 
-  const handleTypeComedy = (e: any) => {
-    const item = data.filter((item, index) => {
-      return item.type.includes("Comedy");
-    });
-    setDataList(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-  const handleTypeHorror = (e: any) => {
-    const item = data.filter((item, index) => {
-      return item.type.includes("Horror");
-    });
-    setDataList(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-  const handleTypeScience = (e: any) => {
-    const item = data.filter((item, index) => {
-      return item.type.includes("Science");
-    });
-    setDataList(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-  const handleTypeAdventure = (e: any) => {
-    const item = data.filter((item, index) => {
-      return item.type.includes("Adventure");
-    });
-    setDataList(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-
-  const { user } = useCustomContext();
+  // const handleTypeComedy = (e: any) => {
+  //   const item = data.filter((item, index) => {
+  //     return item.type.includes("Comedy");
+  //   });
+  //   setDataList(item);
+  //   changePositionNav(e.target.closest(".nav-discount"));
+  // };
+  // const handleTypeHorror = (e: any) => {
+  //   const item = data.filter((item, index) => {
+  //     return item.type.includes("Horror");
+  //   });
+  //   setDataList(item);
+  //   changePositionNav(e.target.closest(".nav-discount"));
+  // };
+  // const handleTypeScience = (e: any) => {
+  //   const item = data.filter((item, index) => {
+  //     return item.type.includes("Science");
+  //   });
+  //   setDataList(item);
+  //   changePositionNav(e.target.closest(".nav-discount"));
+  // };
+  // const handleTypeAdventure = (e: any) => {
+  //   const item = data.filter((item, index) => {
+  //     return item.type.includes("Adventure");
+  //   });
+  //   setDataList(item);
+  //   changePositionNav(e.target.closest(".nav-discount"));
+  // };
 
   // Button Cart
   useEffect(() => {
@@ -199,7 +184,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount active mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleAllBooks}
+                // onClick={handleAllBooks}
               >
                 All
               </h3>
@@ -207,7 +192,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeAdventure}
+                // onClick={handleTypeAdventure}
               >
                 Adventure
               </h3>
@@ -215,7 +200,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeComedy}
+                // onClick={handleTypeComedy}
               >
                 Comedy
               </h3>
@@ -223,7 +208,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeScience}
+                // onClick={handleTypeScience}
               >
                 Science
               </h3>
@@ -231,7 +216,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeHorror}
+                // onClick={handleTypeHorror}
               >
                 Horror
               </h3>
@@ -243,15 +228,15 @@ export default function Discount() {
         <div className="discount max-w-[var(--width-home)] w-[100%]">
           <div className="discount-box slider-container">
             <Slider {...settings}>
-              {dataList.slice(-4).map((item, index) => {
-                const { discount: discount, price: price, time } = item;
+              {products?.map((product: any) => {
+                const { discount: discount, price: price, time } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
                 ).toFixed(0);
                 return (
                   <Link
-                    key={index}
+                    key={product._id}
                     href="/productDetail"
                     className="discount-card group/discount-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                   >
@@ -265,7 +250,7 @@ export default function Discount() {
                     <div className="discount-img !relative w-[150px] h-[220px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
                       <Image
                         className="!relative duration-[300ms] group-hover/discount-card:scale-110"
-                        src="/images/biasach1.png"
+                        src={product.image}
                         alt="Main Image"
                         fill
                         priority={true}
@@ -274,16 +259,16 @@ export default function Discount() {
                     </div>
                     <div className="discount-tag">
                       <h2 className="mt-[12px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
-                        {item.title}
+                        {product.name}
                       </h2>
                       <div className="Discountwriter text-[var(--text-color)] text-[16px]">
-                        John Deo
+                        {product.author}
                       </div>
                       <div className="Discountcategories text-[var(--second-color)] mt-[8px] text-[16px]">
-                        {item.type}
+                        {product.genre}
                       </div>
                       <div className="Discountbook-price mt-[8px] mb-[15px] flex justify-center">
-                        {item.discount > "0" && (
+                        {discount > "0" && (
                           <h4
                             className="ml-[6px] font-normal text-[16px] text-[var(--title-color)]"
                             style={{
@@ -294,13 +279,13 @@ export default function Discount() {
                               marginTop: "2px",
                             }}
                           >
-                            ${item.discount}
+                            ${discount}
                           </h4>
                         )}
                         <h3
                           className="text-[var(--title-color)] text-[16px] font-bold"
                           style={
-                            item.discount > "0"
+                            discount > "0"
                               ? {
                                   textDecoration: "line-through",
                                   color: "hsl(230, 16%, 45%)",
@@ -310,10 +295,10 @@ export default function Discount() {
                               : { textDecoration: "none" }
                           }
                         >
-                          ${item.price}
+                          ${price}
                         </h3>
 
-                        {item.discount > "0" && (
+                        {discount > "0" && (
                           <span className="sale text-[14px] border-[1px] border-solid bg-[var(--first-color)] text-[var(--white-color)] pt-[2px] pb-[2px] pl-[5px] pr-[5px] rounded-[5px] ml-[6px]">
                             -{per}%
                           </span>

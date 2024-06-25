@@ -377,40 +377,6 @@ export default function AddProduct() {
                   className="text-red-500 text-sm"
                 />
               </div>
-
-              <div className="flex flex-wrap mb-6 justify-center items-center">
-                {/* New Arrival */}
-                <div className="flex items-center mr-6 w-1/3 px-2">
-                  <Field
-                    type="checkbox"
-                    id="isNewArrival"
-                    name="isNewArrival"
-                    className="mr-2"
-                  />
-                  <label
-                    htmlFor="isNewArrival"
-                    className="text-gray-700 text-sm font-bold"
-                  >
-                    New Arrival
-                  </label>
-                </div>
-
-                {/* Discount */}
-                <div className="flex items-center">
-                  <Field
-                    type="checkbox"
-                    id="isDiscount"
-                    name="isDiscount"
-                    className="mr-2"
-                  />
-                  <label
-                    htmlFor="isDiscount"
-                    className="text-gray-700 text-sm font-bold"
-                  >
-                    Discount
-                  </label>
-                </div>
-              </div>
               {error && <div className="text-[red]">{error}</div>}
               {/* Submit Button */}
               <button

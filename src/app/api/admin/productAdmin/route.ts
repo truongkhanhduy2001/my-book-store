@@ -22,8 +22,6 @@ export async function POST(req: NextRequest) {
     const stock = parseInt(data.get("stock")?.toString() || "0");
     const language = data.get("language")?.toString();
     const pageCount = parseInt(data.get("pageCount")?.toString() || "0", 10);
-    const isNewArrival = data.get("isNewArrival")?.toString() === "true";
-    const isDiscount = data.get("isDiscount")?.toString() === "true";
 
     // Validate field formats
     if (
@@ -70,8 +68,6 @@ export async function POST(req: NextRequest) {
       stock,
       language,
       pageCount,
-      isNewArrival,
-      isDiscount,
     });
 
     const savedProduct = await product.save();
@@ -180,8 +176,6 @@ export async function PUT(req: NextRequest) {
       "stock",
       "language",
       "pageCount",
-      "isNewArrival",
-      "isDiscount",
     ];
 
     fields.forEach((field) => {
