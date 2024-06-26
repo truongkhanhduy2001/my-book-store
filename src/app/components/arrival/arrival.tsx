@@ -9,46 +9,23 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
 export default function Arrival() {
-  const data = [
-    {
-      title: "Dune",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "Anime",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "Naruto",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "Drama",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "game",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "game",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-  ];
-
   const { user } = useCustomContext();
+  const [products, setProducts] = useState(null) as any;
+
+  useEffect(() => {
+    const fetchDataArrival = async () => {
+      try {
+        const res = await fetch("/api/product/arrival");
+        const data = await res.json();
+        setProducts(data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!products) {
+      fetchDataArrival();
+    }
+  }, [products]);
 
   // Button Cart
   useEffect(() => {
@@ -87,15 +64,15 @@ export default function Arrival() {
       <div className="arrivals-container flex justify-center mt-[var(--margin-top-font)]">
         <div className="arrivals max-w-[var(--width-home)] w-[100%]">
           <div className="arrivals-box grid grid-cols-3 gap-[15px]">
-            {data.slice(-6).map((item, index) => {
-              const { discount: discount, price: price, time } = item;
+            {products?.slice(-6).map((product: any) => {
+              const { discount: discount, price: price, time } = product;
               const per = (
                 ((Number(discount) - Number(price)) / Number(price)) *
                 100
               ).toFixed(0);
               return (
                 <Link
-                  key={index}
+                  key={product._id}
                   href="/productDetail"
                   className="arrivals-card group/arrivals-card h-[100%] !flex relative p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                 >
@@ -109,7 +86,7 @@ export default function Arrival() {
                   <div className="arrivals-img !relative w-[150px] h-[220px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
                     <Image
                       className="!relative duration-[300ms] group-hover/arrivals-card:scale-110"
-                      src="/images/biasach1.png"
+                      src={product.image}
                       alt="Main Image"
                       fill
                       priority={true}
@@ -118,16 +95,16 @@ export default function Arrival() {
                   </div>
                   <div className="arrivals-tag">
                     <h2 className="mt-[20px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
-                      {item.title}
+                      {product.name}
                     </h2>
                     <div className="Arrivalwriter text-[var(--text-color)] text-[16px]">
-                      John Deo
+                      {product.author}
                     </div>
                     <div className="Arrivalcategories text-[var(--second-color)] mt-[8px] text-[16px]">
-                      Thriller, Horror, Romance
+                      {product.genre}
                     </div>
                     <div className="Arrivalbook-price mt-[8px] mb-[15px]">
-                      {item.discount > "0" && (
+                      {discount > "0" && (
                         <h4
                           className="text-[16px] text-[var(--title-color)] font-normal"
                           style={{
@@ -137,13 +114,13 @@ export default function Arrival() {
                             marginRight: "8px",
                           }}
                         >
-                          ${item.discount}
+                          ${discount}
                         </h4>
                       )}
                       <h3
                         className="text-[var(--title-color)] text-[16px] font-bold"
                         style={
-                          item.discount > "0"
+                          discount > "0"
                             ? {
                                 textDecoration: "line-through",
                                 color: "hsl(230, 16%, 45%)",
@@ -152,10 +129,10 @@ export default function Arrival() {
                             : { textDecoration: "none" }
                         }
                       >
-                        ${item.price}
+                        ${price}
                       </h3>
 
-                      {item.discount > "0" && (
+                      {discount > "0" && (
                         <span className="sale text-[14px] border-[1px] border-solid bg-[var(--first-color)] text-[var(--white-color)] rounded-[5px]">
                           -{per}%
                         </span>

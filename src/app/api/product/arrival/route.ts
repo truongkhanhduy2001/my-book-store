@@ -8,19 +8,19 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     const products = await Product.find();
-    const discountedProducts = products.filter(
-      (products) => products.discount > 0
+    const arrivalProducts = products.filter(
+      (products) => products.time === "new"
     );
-    if (discountedProducts.length > 0) {
+    if (arrivalProducts.length > 0) {
       return NextResponse.json({
         status: 200,
-        message: "Discounted products found.",
-        data: discountedProducts,
+        message: "Arrival products found.",
+        data: arrivalProducts,
       });
     } else {
       return NextResponse.json({
         status: 404,
-        message: "No discounted products found.",
+        message: "No arrival products found.",
       });
     }
   } catch (err: any) {
