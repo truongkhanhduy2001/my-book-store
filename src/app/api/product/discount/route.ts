@@ -6,11 +6,14 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     const products = await Product.find();
+    console.log(`Found ${products.length} products`);
+
     const discountedProducts = products.filter(
       (products) => products.discount > 0
     );
+    console.log(`Found ${discountedProducts.length} discounted products`);
 
-    if (discountedProducts) {
+    if (discountedProducts.length > 0) {
       return NextResponse.json({
         status: 200,
         message: "Discounted products found.",
