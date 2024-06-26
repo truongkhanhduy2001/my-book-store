@@ -5,23 +5,28 @@ import { NextResponse, NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   await connectDB();
   try {
-    const product = await Product.find();
-    const discount = product.filter((product, index) => {
-      return product.discount > 0;
-    });
-    if (product) {
+    const products = await Product.find();
+    console.log(`Found ${products.length} products`);
+
+    const discountedProducts = products.filter(
+      (product) => product.discount > 0
+    );
+    console.log(`Found ${discountedProducts.length} discounted products`);
+
+    if (discountedProducts.length > 0) {
       return NextResponse.json({
         status: 200,
-        message: "Product found.",
-        data: discount,
+        message: "Discounted products found.",
+        data: discountedProducts,
       });
     } else {
       return NextResponse.json({
-        status: 400,
-        message: "Product not found.",
+        status: 404,
+        message: "No discounted products found.",
       });
     }
   } catch (err: any) {
+    console.error("Error fetching products:", err.message);
     return NextResponse.json({ status: 500, error: err.message });
   }
 }
