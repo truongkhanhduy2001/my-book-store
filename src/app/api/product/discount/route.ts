@@ -6,12 +6,9 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     const products = await Product.find();
-    console.log(`Found ${products.length} products`);
-
     const discountedProducts = products.filter(
-      (product) => product.discount > 0
+      (products) => products.discount > 0
     );
-    console.log(`Found ${discountedProducts.length} discounted products`);
 
     if (discountedProducts.length > 0) {
       return NextResponse.json({
