@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
       (products) => products.discount > 0
     );
 
-    if (discountedProducts.length > 0) {
+    if (discountedProducts) {
       return NextResponse.json({
         status: 200,
         message: "Discounted products found.",
