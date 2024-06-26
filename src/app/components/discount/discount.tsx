@@ -36,37 +36,17 @@ export default function Discount() {
     e.classList.add("active");
   }
 
-  const handleAllBooks = (e: any) => {
-    setProducts(products);
+  const filterProductsByType = (type: string, e: any) => {
+    if (!products) return;
+    const filteredProducts = products.filter((product: any) =>
+      product.genre.includes(type)
+    );
+    setProducts(filteredProducts);
     changePositionNav(e.target.closest(".nav-discount"));
   };
 
-  const handleTypeComedy = (e: any) => {
-    const item = products.filter((item: any) => {
-      return item.type.includes("Comedy");
-    });
-    setProducts(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-  const handleTypeHorror = (e: any) => {
-    const item = products.filter((item: any) => {
-      return item.type.includes("Horror");
-    });
-    setProducts(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-  const handleTypeScience = (e: any) => {
-    const item = products.filter((item: any) => {
-      return item.type.includes("Science");
-    });
-    setProducts(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-  const handleTypeAdventure = (e: any) => {
-    const item = products.filter((item: any) => {
-      return item.type.includes("Adventure");
-    });
-    setProducts(item);
+  const handleAllBooks = (e: any) => {
+    setProducts(products);
     changePositionNav(e.target.closest(".nav-discount"));
   };
 
@@ -189,7 +169,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeAdventure}
+                onClick={(e) => filterProductsByType("Adventure", e)}
               >
                 Adventure
               </h3>
@@ -197,7 +177,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeComedy}
+                onClick={(e) => filterProductsByType("Comedy", e)}
               >
                 Comedy
               </h3>
@@ -205,7 +185,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeScience}
+                onClick={(e) => filterProductsByType("Science", e)}
               >
                 Science
               </h3>
@@ -213,7 +193,7 @@ export default function Discount() {
             <li className="nav-discount group/nav-discount mr-[18px] relative duration-[400ms] before:content-[''] before:w-0 before:h-[4px] before:rounded-[4px] before:bg-[var(--first-color)] before:absolute before:bottom-0 before:left-[50%] before:translate-x-[-50%] before:duration-[300ms] before:hover:w-[100%] before:hover:duration-[300ms]">
               <h3
                 className="group-hover/nav-discount:text-[var(--first-color)] text-[var(--text-color)] cursor-pointer text-[18px] font-bold"
-                onClick={handleTypeHorror}
+                onClick={(e) => filterProductsByType("Horror", e)}
               >
                 Horror
               </h3>
