@@ -12,17 +12,14 @@ import "./navigation.css";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useCartContext } from "@/provider/CartProvider";
+import { useWishContext } from "@/provider/WishProvider";
 
 export default function Navigate() {
   const { user } = useCustomContext();
+  const { cart, getCart } = useCartContext();
+  const { wish, getWish } = useWishContext();
 
-  const dat: any = [
-    {
-      title: "Dune",
-      price: "100",
-      discount: "40",
-    },
-  ];
   const router = useRouter();
 
   useEffect(() => {
@@ -99,6 +96,27 @@ export default function Navigate() {
         });
     } catch (error) {
       console.error("Error logging out:", error);
+    }
+  };
+
+  const handleDeleteItem = async (id: any) => {
+    try {
+      const response = await fetch("/api/cart/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: id,
+        }),
+      });
+      const result = await response.json();
+      if (result.status === 200) {
+        getCart();
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
     }
   };
 
@@ -248,7 +266,7 @@ export default function Navigate() {
                 </i>
               </Link>
               <span className="count-wish absolute bottom-[20px] left-[25px] bg-[var(--first-color)] text-[var(--white-color)] h-[18px] w-[18px] leading-[18px] rounded-[50%] text-center text-[10px]">
-                0
+                {wish?.listWish?.length || 0}
               </span>
             </li>
           )}
@@ -275,7 +293,7 @@ export default function Navigate() {
                 <PiHandbag />
               </i>
               <span className="count-cart absolute bottom-[20px] left-[25px] bg-[var(--first-color)] text-[var(--white-color)] h-[18px] w-[18px] leading-[18px] rounded-[50%] text-center text-[10px]">
-                0
+                {cart?.listItem?.length || 0}
               </span>
               <div
                 className="cart-dropdown absolute bg-[var(--BG)] right-0 w-[400px] h-[auto] shadow-[0_6px_12px_var(--text-color)] rounded-[5px] hidden"
@@ -288,19 +306,22 @@ export default function Navigate() {
                   </i>
                 </div>
                 <div className="cart-list mb-[15px] max-h-[249px] px-[12px] overflow-y-auto">
-                  {dat.length > 0 ? (
+                  {cart ? (
                     <>
-                      {dat.map((item: any, index: any) => {
+                      {cart.listItem.map((item: any, index: any) => {
                         return (
                           <Link
                             key={index}
-                            href="/productDetail"
+                            href={{
+                              pathname: "/productDetail",
+                              query: { id: item.productId._id },
+                            }}
                             className="book-widget mt-[10px] mb-[10px] flex hover:shadow-[0_0_5px_rgba(0,0,0,0.1)]"
                           >
                             <div className="book-img !relative">
                               <Image
                                 className="max-w-[100px] w-[100%] h-[auto] !relative"
-                                src="/images/biasach1.png"
+                                src={item.productId.image}
                                 alt="product"
                                 fill
                                 priority={true}
@@ -309,42 +330,25 @@ export default function Navigate() {
                             </div>
                             <div className="book-content ml-[30px] flex-[0_1_100%]">
                               <h3 className="book-name text-[16px] uppercase text-[var(--title-color)] font-bold">
-                                {item.title}
+                                {item.productId.name}
                               </h3>
-                              <div className="book-price flex">
-                                {item.discount > "0" && (
-                                  <h4
-                                    className="text-[16px] text-[var(--title-color)] font-normal"
-                                    style={{
-                                      textDecoration: "none",
-                                      color: "hsl(230, 70%, 16%)",
-                                      fontWeight: "bold",
-                                      marginRight: "8px",
-                                    }}
-                                  >
-                                    ${item.discount}
-                                  </h4>
-                                )}
-                                <h3
-                                  className="text-[var(--title-color)] text-[16px] font-bold"
-                                  style={
-                                    item.discount > "0"
-                                      ? {
-                                          textDecoration: "line-through",
-                                          color: "hsl(230, 16%, 45%)",
-                                          fontWeight: "400",
-                                        }
-                                      : { textDecoration: "none" }
-                                  }
-                                >
+                              <div className="book-price flex flex-col">
+                                <h3 className="text-[var(--title-color)] text-[16px] font-bold">
                                   ${item.price}
                                 </h3>
+                                <span className="cart-quanity text-[16px] text-[var(--text-color)]">
+                                  x{item.quantity}
+                                </span>
+                                <span className="cart-quanity text-[16px] text-[var(--text-color)]">
+                                  Total price: ${item.totalPrice}
+                                </span>
                               </div>
-                              <span className="cart-quanity text-[16px] text-[var(--text-color)]">
-                                x1
-                              </span>
                               <div className="book-delete flex justify-end text-[red] text-[15px]">
-                                <i>
+                                <i
+                                  onClick={() =>
+                                    handleDeleteItem(item.productId._id)
+                                  }
+                                >
                                   <FaRegTrashAlt />
                                 </i>
                               </div>
@@ -374,7 +378,7 @@ export default function Navigate() {
                     SubTotal
                   </div>
                   <div className="total-price flex justify-end text-[var(--title-color)] text-[18px] font-bold uppercase">
-                    $300
+                    ${cart?.total || 0}
                   </div>
                 </div>
                 <div className="cart-btn flex justify-between text-[18px] px-[12px] mb-[16px]">

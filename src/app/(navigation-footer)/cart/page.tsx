@@ -5,17 +5,33 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import "./cart.css";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useCartContext } from "@/provider/CartProvider";
 
 export default function Cart() {
   const { user } = useCustomContext();
-  // Giả sử bạn có một mảng chứa các mục trong giỏ hàng
-  const data: any = [
-    {
-      title: "Dune",
-      discount: "20",
-      price: "100",
-    },
-  ];
+  const { cart, getCart } = useCartContext();
+
+  // Delete item from cart
+  const handleDeleteItem = async (id: any) => {
+    try {
+      const response = await fetch("/api/cart/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: id,
+        }),
+      });
+      const result = await response.json();
+      if (result.status === 200) {
+        getCart();
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
 
   return (
     <>
@@ -42,7 +58,7 @@ export default function Cart() {
           </ul>
         </div>
         <div className="cart-container flex justify-center mt-[var(--margin-top-font)]">
-          {data.length > 0 ? (
+          {cart && cart.listItem.length > 0 ? (
             <div className="table-container flex max-w-[var(--width-home)] w-[100%] mt-[20px] justify-center">
               <table className="table-cart text-[var(--title-color)] w-[100%]">
                 <tbody>
@@ -51,17 +67,23 @@ export default function Cart() {
                     <th className="p-[8px] text-left">Categories</th>
                     <th className="p-[8px] text-left">Price</th>
                     <th className="p-[8px] text-left">Quantity</th>
-                    <th className="p-[8px] text-left">Subtotal</th>
+                    <th className="p-[8px] text-left">Total</th>
                     <th className="p-[8px] text-left">Remove</th>
                   </tr>
                   {/* Sử dụng map để lặp qua các mục trong giỏ hàng */}
-                  {data.map((item: any, index: any) => (
+                  {cart.listItem.map((item: any, index: any) => (
                     <tr key={index}>
                       <td className="p-[8px] flex items-center">
-                        <Link className="!relative" href="/productDetail">
+                        <Link
+                          className="!relative"
+                          href={{
+                            pathname: "/productDetail",
+                            query: { id: item.productId._id },
+                          }}
+                        >
                           <Image
                             className="max-w-[100px] w-[100%] h-[auto] !relative"
-                            src="/images/biasach1.png"
+                            src={item.productId.image}
                             alt="Main Image"
                             fill
                             priority={true}
@@ -69,26 +91,24 @@ export default function Cart() {
                           />
                         </Link>
                         <h3 className="table-title text-[20px] font-medium ml-[10px]">
-                          {item.title}
+                          {item.productId.name}
                         </h3>
                       </td>
                       <td className="p-[8px]">
-                        <h3 className="table-categories">Romance</h3>
+                        <h3 className="table-categories">
+                          {item.productId.genre}
+                        </h3>
                       </td>
                       <td className="p-[8px]">
-                        {item.discount > "0" && (
-                          <span className="table-price">${item.discount}</span>
-                        )}
-                        {item.discount == "0" && (
-                          <span className="table-price">${item.price}</span>
-                        )}
+                        <span className="table-price">${item.price}</span>
                       </td>
-                      <td className="p-[8px]">x1</td>
+                      <td className="p-[8px]">x{item.quantity}</td>
+                      <td className="p-[8px]">${item.totalPrice}</td>
                       <td className="p-[8px]">
-                        <span className="table-subtotal">$100</span>
-                      </td>
-                      <td className="p-[8px]">
-                        <i className="fa-trash cursor-pointer text-[red]">
+                        <i
+                          className="fa-trash cursor-pointer text-[red]"
+                          onClick={() => handleDeleteItem(item.productId._id)}
+                        >
                           <FaRegTrashAlt />
                         </i>
                       </td>

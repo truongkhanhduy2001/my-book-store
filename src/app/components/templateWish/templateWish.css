@@ -1,0 +1,51 @@
+/* Start */
+/* Icon heart */
+.template-card .template-tag .Icon-Container .HeartIcon.active {
+  fill: red;
+}
+/* End*/
+
+/* Responsive */
+/* 576px - 1px */
+@media (max-width: calc(576px - 1px)) {
+  .template-card .template-tag .Icon-Container {
+    display: flex;
+  }
+  .template-card .template-label {
+    left: 25%;
+  }
+}
+
+/* 768px - 1px */
+@media (min-width: 576px) and (max-width: calc(768px - 1px)) {
+  .template-card .template-tag .Icon-Container {
+    display: flex;
+  }
+}
+
+/* 992px - 1px */
+@media (min-width: 768px) and (max-width: calc(992px - 1px)) {
+  .template-card .template-tag .Icon-Container {
+    display: flex;
+  }
+}
+
+/* 1200px - 1px */
+@media (min-width: 992px) and (max-width: calc(1200px - 1px)) {
+  .template-card .template-tag .Icon-Container {
+    display: flex;
+  }
+  .template-card .template-label {
+    left: 33%;
+  }
+}
+
+/* 1300px */
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .template-card .template-tag .Icon-Container {
+    display: flex;
+  }
+  .template-card .template-label {
+    left: 23%;
+  }
+}

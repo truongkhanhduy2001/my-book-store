@@ -3,6 +3,8 @@ import Head from "next/head";
 import { Jost } from "next/font/google";
 import "./globals.css";
 import { CustomProvider } from "@/provider/CustomProvider";
+import { CartProvider } from "@/provider/CartProvider";
+import { WishProvider } from "@/provider/WishProvider";
 
 const jost = Jost({ subsets: ["latin"] });
 
@@ -22,7 +24,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={jost.className}>
-        <CustomProvider>{children}</CustomProvider>
+        <CustomProvider>
+          <CartProvider>
+            <WishProvider>{children}</WishProvider>
+          </CartProvider>
+        </CustomProvider>
       </body>
     </html>
   );

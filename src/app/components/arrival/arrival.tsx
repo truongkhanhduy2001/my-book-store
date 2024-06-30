@@ -8,6 +8,7 @@ import { FiHeart } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
+
 export default function Arrival() {
   const { user } = useCustomContext();
   const [products, setProducts] = useState(null) as any;
@@ -73,7 +74,10 @@ export default function Arrival() {
               return (
                 <Link
                   key={product._id}
-                  href="/productDetail"
+                  href={{
+                    pathname: "/productDetail",
+                    query: { id: product._id },
+                  }}
                   className="arrivals-card group/arrivals-card h-[100%] !flex relative p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                 >
                   {time == "new" && (
@@ -111,7 +115,6 @@ export default function Arrival() {
                             textDecoration: "none",
                             color: "hsl(230, 70%, 16%)",
                             fontWeight: "bold",
-                            marginRight: "8px",
                           }}
                         >
                           ${discount}

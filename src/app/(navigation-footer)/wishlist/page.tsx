@@ -3,21 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
-import CardBook from "@/app/components/cardBook/cardBook";
+import TemplateWish from "@/app/components/templateWish/templateWish";
 import { TiShoppingCart } from "react-icons/ti";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useWishContext } from "@/provider/WishProvider";
 
 export default function WishList() {
   const { user } = useCustomContext();
-
-  const data: any = [
-    {
-      title: "Dune",
-      price: "100",
-      discount: "95",
-      time: "new",
-    },
-  ];
+  const { wish, getWish } = useWishContext();
 
   return (
     <>
@@ -44,16 +37,23 @@ export default function WishList() {
           </ul>
         </div>
         <div className="wish-list-container flex justify-center mt-[var(--margin-top-font)]">
-          {data.length > 0 ? (
+          {wish && wish.listWish.length > 0 ? (
             <div className="wish-list max-w-[var(--width-home)] w-[100%]">
               <div className="wish-list-box grid grid-cols-4 gap-[15px]">
-                {data.map((item: any, index: any) => {
+                {wish.listWish.map((item: any, index: any) => {
                   const { discount: discount, price: price, time } = item;
                   const per = (
                     ((Number(discount) - Number(price)) / Number(price)) *
                     100
                   ).toFixed(0);
-                  return <CardBook key={index} item={item} per={per} />;
+                  return (
+                    <TemplateWish
+                      key={index}
+                      item={item}
+                      time={time}
+                      per={per}
+                    />
+                  );
                 })}
               </div>
               <Paginate />

@@ -3,22 +3,98 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./productDetail.css";
-export default function Detail() {
-  const [value, setValue] = useState("1");
+import { useCustomContext } from "@/provider/CustomProvider";
+import { useCartContext } from "@/provider/CartProvider";
+import { useWishContext } from "@/provider/WishProvider";
 
-  const handleChange = (event: any) => {
-    setValue(event.target.value);
-  };
+export default function Detail({ searchParams }: any) {
+  const { user } = useCustomContext();
+  const { getCart } = useCartContext();
+
+  const id = searchParams.id;
+
+  const [products, setProducts] = useState(null) as any;
+
+  useEffect(() => {
+    const fetchProductDetail = async () => {
+      try {
+        const response = await fetch(`/api/product/productDetail?id=${id}`);
+        const data = await response.json();
+        if (data.status === 200) {
+          setProducts(data.product);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+    if (!products) {
+      fetchProductDetail();
+    }
+  }, [products]);
 
   // Icon heart
-  const handleHeart = (e: any) => {
-    e.target.closest(".HeartIcon").classList.toggle("active");
+  const handleHeart = async (e: any) => {
     e.preventDefault();
+    e.target.closest(".HeartIcon").classList.toggle("active");
+
+    try {
+      fetch("/api/wish/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user._id,
+          productId: products._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  let data = "$20";
+  // validate
+  const validationSchema = Yup.object().shape({
+    quantity: Yup.number()
+      .min(1, "Minimum 1 product")
+      .max(products?.stock, `Maximum ${products?.stock} product`)
+      .required("Required"),
+  });
+
+  // Add Cart
+  const handlesubmit = (values: any, setSubmitting: any, resetForm: any) => {
+    setSubmitting(true);
+    try {
+      fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user._id,
+          productId: products._id,
+          quantity: values.quantity,
+          price: products.discount > 0 ? products.discount : products.price,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSubmitting(false);
+          resetForm();
+          getCart();
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -49,36 +125,50 @@ export default function Detail() {
             {/* Left */}
             <div className="product-imgs w-[50%] flex justify-center">
               <div className="img-display !relative w-[250px] h-[380px] cursor-pointer shadow-[0_0_8px_var(--title-color)]">
-                <Image
-                  className="!relative duration-[300ms]"
-                  src="/images/biasach1.png"
-                  alt="Main Image"
-                  fill
-                  priority={true}
-                  sizes="(max-width:768px)100vw"
-                />
+                {products && (
+                  <Image
+                    className="!relative duration-[300ms]"
+                    src={products?.image}
+                    alt="Main Image"
+                    fill
+                    priority={true}
+                    sizes="(max-width:768px) 100vw"
+                  />
+                )}
               </div>
             </div>
             {/* Right */}
             <div className="product-content w-[50%]">
               <div className="product-title flex justify-between">
                 <h2 className="text-[30px] text-[var(--title-color)] relative capitalize font-bold py-[10px] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[4px] after:w-[50px] after:bg-[var(--first-color)]">
-                  Dune
+                  {products?.name}
                 </h2>
                 <i className="flex text-[var(--first-color)] text-[20px] p-[8px] border-[1px] border-solid border-[var(--first-color)] h-[38px] rounded-[10px] mt-[15px] cursor-pointer">
-                  <FiHeart className="HeartIcon" onClick={handleHeart} />
+                  <FiHeart
+                    className="HeartIcon"
+                    onClick={(e) => handleHeart(e)}
+                  />
                 </i>
               </div>
               <div className="flex justify-between mt-[10px]">
-                <div className="product-price flex">
-                  {data && (
-                    <h3 className="text-[var(--title-color)] text-[25px] font-bold">
-                      $20
-                    </h3>
+                <div className="product-price flex items-center justify-center">
+                  {products?.discount > "0" && (
+                    <h4
+                      className="text-[25px] text-[var(--title-color)] font-normal"
+                      style={{
+                        textDecoration: "none",
+                        color: "hsl(230, 70%, 16%)",
+                        fontWeight: "bold",
+                        marginRight: "10px",
+                      }}
+                    >
+                      ${products?.discount}
+                    </h4>
                   )}
-                  <h4
+                  <h3
+                    className="flex items-center text-[var(--title-color)] text-[25px] font-bold"
                     style={
-                      data != ""
+                      products?.discount > "0"
                         ? {
                             textDecoration: "line-through",
                             color: "hsl(230, 16%, 45%)",
@@ -86,13 +176,12 @@ export default function Detail() {
                           }
                         : { textDecoration: "none" }
                     }
-                    className="text-[25px] text-[var(--text-color)] font-normal ml-[6px]"
                   >
-                    $100
-                  </h4>
+                    ${products?.price}
+                  </h3>
                 </div>
                 <div className="stock flex justify-center items-center text-[15px] text-[var(--title-color)] font-medium ml-[20px]">
-                  10 product available
+                  {products?.stock} product available
                 </div>
               </div>
 
@@ -101,28 +190,7 @@ export default function Detail() {
                   Description about content:
                 </h2>
                 <p className="text-[15px] text-[var(--title-color)] mb-[10px] overflow-hidden">
-                  Explore a mesmerizing and complex science fiction universe
-                  with Dune - one of Frank Herbert greatest masterpieces. From
-                  the award-winning author of Hugo and Nebula, this book takes
-                  you on an adventure through space, with a rich plot and
-                  multi-dimensional characters. Full Description: Dune is one of
-                  the seminal works of science fiction literature, immersing
-                  readers in a journey through a detailed and intricate
-                  fictional world. Set in a unique future setting, the book
-                  explores the planet Arrakis - a place where a rare and
-                  valuable resource known as Spice is found. Spice is not only a
-                  crucial source of income but also a determining factor in the
-                  struggle for power. In the narrative, you follow Paul
-                  Atreides, a young scion of a noble house, as he faces
-                  challenges and dangers on the golden desert planet of Arrakis.
-                  Paul rise from a talented young man to a skilled leader is the
-                  highlight of the story, while the resistance against the rule
-                  of the Harkonnen and Corrino houses creates dramatic and
-                  compelling situations. Dune is not just a standout adventure
-                  story but also a profound work of art with themes of power,
-                  religion, and destiny. With captivating language and dramatic
-                  plots, this book is sure to leave a strong impression on any
-                  science fiction enthusiast.
+                  {products?.description}
                 </p>
                 <ul className="text-[15px] text-[var(--title-color)] font-medium mb-[10px]">
                   <li className="flex items-center mt-[10px] mb-[10px]">
@@ -130,7 +198,9 @@ export default function Detail() {
                       <FaCheckCircle />
                     </i>
                     Writer:
-                    <span className="font-normal ml-[10px]">John Deo</span>
+                    <span className="font-normal ml-[10px]">
+                      {products?.author}
+                    </span>
                   </li>
                   <li className="flex items-center mt-[10px] mb-[10px]">
                     <i className="text-[var(--first-color)]">
@@ -138,30 +208,53 @@ export default function Detail() {
                     </i>
                     Categories:
                     <span className="font-normal ml-[10px]">
-                      Romance, Thriller
+                      {products?.genre}
                     </span>
                   </li>
                 </ul>
               </div>
               <div className="purchase-info mt-[10px] flex">
-                <input
-                  className="text-[12px] text-[var(--title-color)] text-center p-[5px] mr-[10px] border-[1px] border-solid border-[var(--title-color)] rounded-[20px] w-[60px]"
-                  type="number"
-                  min="1"
-                  value={value}
-                  onChange={handleChange}
-                />
-                <div className="purchase-btn group/purchase-btn text-[12px] inline-block text-center font-bold p-[5px] mr-[10px] border-[3px] border-solid border-[var(--first-color)] rounded-[20px] relative text-[var(--first-color)] z-[1] transition duration-[300ms] tracking-[2px] hover:cursor-pointer hover:bg-[var(--first-color)]">
-                  <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/purchase-btn:left-[50%] group-hover/purchase-btn:text-[var(--white-color)]">
-                    <FaShoppingCart />
-                  </i>
-                  <p className="add-cart text-[12px] text-[var(--first-color)] font-bold ml-[30px] duration-[250ms]">
-                    Add cart
-                  </p>
-                </div>
-                <span className="sold-count flex justify-center items-center text-[15px] text-[var(--title-color)] font-medium ml-[5px]">
-                  1 sold
-                </span>
+                <Formik
+                  initialValues={{
+                    quantity: "0",
+                  }}
+                  validationSchema={validationSchema}
+                  onSubmit={(values, { setSubmitting, resetForm }) => {
+                    handlesubmit(values, setSubmitting, resetForm);
+                  }}
+                >
+                  {({ isSubmitting }) => (
+                    <Form className="flex flex-col">
+                      <div className="flex items-center">
+                        <Field
+                          className="text-[12px] text-[var(--title-color)] text-center p-[5px] mr-[10px] border-[1px] border-solid border-[var(--title-color)] rounded-[20px] w-[60px]"
+                          type="number"
+                          name="quantity"
+                        />
+                        <button
+                          className="group/purchase-btn text-[12px] inline-block text-center font-bold p-[5px] mr-[10px] border-[3px] border-solid border-[var(--first-color)] rounded-[20px] relative text-[var(--first-color)] z-[1] transition duration-[300ms] tracking-[2px] hover:cursor-pointer hover:bg-[var(--first-color)]"
+                          type="submit"
+                          disabled={isSubmitting}
+                        >
+                          <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/purchase-btn:left-[50%] group-hover/purchase-btn:text-[var(--white-color)]">
+                            <FaShoppingCart />
+                          </i>
+                          <p className="add-cart text-[12px] text-[var(--first-color)] font-bold ml-[30px] duration-[250ms]">
+                            Add cart
+                          </p>
+                        </button>
+                        <span className="sold-count flex justify-center items-center text-[15px] text-[var(--title-color)] font-medium ml-[5px]">
+                          1 sold
+                        </span>
+                      </div>
+                      <ErrorMessage
+                        className="text-[red]"
+                        component="div"
+                        name="quantity"
+                      />
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </div>
@@ -183,7 +276,7 @@ export default function Detail() {
                       Author
                     </th>
                     <td className="data-writer text-[15px] border-none p-[5px]">
-                      John
+                      {products?.author}
                     </td>
                   </tr>
                   <tr>
@@ -191,7 +284,7 @@ export default function Detail() {
                       Categories
                     </th>
                     <td className="data-categories text-[15px] border-none p-[5px]">
-                      Thriller, Comedy
+                      {products?.genre}
                     </td>
                   </tr>
                   <tr>
@@ -199,7 +292,7 @@ export default function Detail() {
                       Publication year
                     </th>
                     <td className="data-year text-[15px] border-none p-[5px]">
-                      2023
+                      {products?.year}
                     </td>
                   </tr>
                   <tr>
@@ -207,7 +300,7 @@ export default function Detail() {
                       Languages
                     </th>
                     <td className="data-language text-[15px] border-none p-[5px]">
-                      English
+                      {products?.language}
                     </td>
                   </tr>
                   <tr>
@@ -231,7 +324,7 @@ export default function Detail() {
                       Page count
                     </th>
                     <td className="data-page text-[15px] border-none p-[5px]">
-                      316
+                      {products?.pageCount}
                     </td>
                   </tr>
                   <tr>
@@ -250,27 +343,7 @@ export default function Detail() {
                 Description
               </h1>
               <p className="text-[15px] text-[var(--title-color)] mt-[10px]">
-                Explore a mesmerizing and complex science fiction universe with
-                Dune - one of Frank Herbert greatest masterpieces. From the
-                award-winning author of Hugo and Nebula, this book takes you on
-                an adventure through space, with a rich plot and
-                multi-dimensional characters. Full Description: Dune is one of
-                the seminal works of science fiction literature, immersing
-                readers in a journey through a detailed and intricate fictional
-                world. Set in a unique future setting, the book explores the
-                planet Arrakis - a place where a rare and valuable resource
-                known as Spice is found. Spice is not only a crucial source of
-                income but also a determining factor in the struggle for power.
-                In the narrative, you follow Paul Atreides, a young scion of a
-                noble house, as he faces challenges and dangers on the golden
-                desert planet of Arrakis. Paul rise from a talented young man to
-                a skilled leader is the highlight of the story, while the
-                resistance against the rule of the Harkonnen and Corrino houses
-                creates dramatic and compelling situations. Dune is not just a
-                standout adventure story but also a profound work of art with
-                themes of power, religion, and destiny. With captivating
-                language and dramatic plots, this book is sure to leave a strong
-                impression on any science fiction enthusiast.
+                {products?.description}
               </p>
             </div>
           </div>

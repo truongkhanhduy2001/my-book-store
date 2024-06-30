@@ -12,6 +12,7 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
+
 export default function Discount() {
   const { user } = useCustomContext();
   const [products, setProducts] = useState(null) as any;
@@ -237,7 +238,10 @@ export default function Discount() {
                 return (
                   <Link
                     key={product._id}
-                    href="/productDetail"
+                    href={{
+                      pathname: "/productDetail",
+                      query: { id: product._id },
+                    }}
                     className="discount-card group/discount-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                   >
                     {time == "new" && (

@@ -8,22 +8,11 @@ import "./checkout.css";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useCartContext } from "@/provider/CartProvider";
 
 export default function CheckOut() {
   const { user } = useCustomContext();
-
-  const data: any = [
-    {
-      title: "Dune",
-      discount: "20",
-      price: "100",
-    },
-    {
-      title: "Dune",
-      discount: "20",
-      price: "100",
-    },
-  ];
+  const { cart, getCart } = useCartContext();
 
   const validationSchema = Yup.object().shape({
     address: Yup.string()
@@ -200,6 +189,28 @@ export default function CheckOut() {
     return setYear(yea.slice(0, 2));
   }
 
+  // Delete item form cart
+  const handleDeleteItem = async (id: any) => {
+    try {
+      const response = await fetch("/api/cart/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: id,
+        }),
+      });
+      const result = await response.json();
+      if (result.status === 200) {
+        getCart();
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
   return (
     <>
       {/* Check out */}
@@ -224,7 +235,7 @@ export default function CheckOut() {
             </li>
           </ul>
         </div>
-        {data.length > 0 ? (
+        {cart && cart.listItem.length > 0 ? (
           <Formik
             initialValues={{
               address: "",
@@ -360,13 +371,16 @@ export default function CheckOut() {
                                   PRODUCT
                                 </th>
                                 <th className="w-full text-start px-[10px]">
+                                  PRICE
+                                </th>
+                                <th className="w-full text-start px-[10px]">
                                   TOTAL
                                 </th>
                                 <th className="w-full text-start px-[10px]">
                                   REMOVE
                                 </th>
                               </tr>
-                              {data.map((item: any, index: any) => (
+                              {cart.listItem.map((item: any, index: any) => (
                                 <tr key={index} className="mt-[8px]">
                                   <td className="w-full inline-block px-[10px]">
                                     <div className="flex items-center mt-[8px]">
@@ -376,30 +390,36 @@ export default function CheckOut() {
                                       >
                                         <Image
                                           className="max-w-[100px] w-[100%] h-[auto] !relative"
-                                          src="/images/biasach1.png"
+                                          src={item.productId.image}
                                           alt="Main Image"
                                           fill
                                           priority={true}
                                           sizes="(max-with: 768px)100vw"
                                         />
                                       </Link>
-                                      <h1>1x {item.title}</h1>
+                                      <h1>
+                                        {item.productId.name} x{item.quantity}
+                                      </h1>
                                     </div>
                                   </td>
                                   <td className="w-full px-[10px]">
-                                    {item.discount > "0" && (
-                                      <span id="price-checkout">
-                                        ${item.discount}
-                                      </span>
-                                    )}
-                                    {item.discount == "0" && (
-                                      <span id="price-checkout">
-                                        ${item.price}
-                                      </span>
-                                    )}
+                                    <span id="price-checkout">
+                                      ${item.price}
+                                    </span>
                                   </td>
                                   <td className="w-full px-[10px]">
-                                    <div className="flex justify-center">
+                                    <span id="price-checkout">
+                                      ${item.totalPrice}
+                                    </span>
+                                  </td>
+
+                                  <td className="w-full px-[10px]">
+                                    <div
+                                      className="flex justify-center"
+                                      onClick={() =>
+                                        handleDeleteItem(item.productId._id)
+                                      }
+                                    >
                                       <FaRegTrashAlt className="cursor-pointer text-[red]" />
                                     </div>
                                   </td>
@@ -419,7 +439,7 @@ export default function CheckOut() {
                             </div>
                             <div>
                               <strong className="order-total text-[var(--first-color)] text-[24px]">
-                                $500
+                                ${cart?.total || 0}
                               </strong>
                             </div>
                           </div>
