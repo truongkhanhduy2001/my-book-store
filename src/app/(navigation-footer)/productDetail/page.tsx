@@ -22,7 +22,12 @@ export default function Detail({ searchParams }: any) {
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const response = await fetch(`/api/product/productDetail?id=${id}`);
+        const response = await fetch(`/api/product/productDetail?id=${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         if (data.status === 200) {
           setProducts(data.product);
