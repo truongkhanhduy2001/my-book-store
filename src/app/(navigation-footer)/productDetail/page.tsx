@@ -22,9 +22,10 @@ export default function Detail({ searchParams }: any) {
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const response = await fetch(`/api/product/productDetail?id=${id}`);
+        const response = await fetch(`/api/product/detail?id=${id}`);
         const data = await response.json();
         if (data.status === 200) {
+          console.log(data);
           setProducts(data.product);
         }
       } catch (error) {
