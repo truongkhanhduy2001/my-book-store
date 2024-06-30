@@ -11,7 +11,7 @@ import { useCustomContext } from "@/provider/CustomProvider";
 import { useCartContext } from "@/provider/CartProvider";
 import { useWishContext } from "@/provider/WishProvider";
 
-export default function Detail({ searchParams }: any) {
+export default function ProductDetail({ searchParams }: any) {
   const { user } = useCustomContext();
   const { getCart } = useCartContext();
 
