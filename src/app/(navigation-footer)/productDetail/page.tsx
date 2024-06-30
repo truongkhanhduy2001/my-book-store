@@ -39,7 +39,7 @@ export default function Detail({ searchParams }: any) {
     if (!products) {
       fetchProductDetail();
     }
-  }, [products]);
+  }, [products, id]);
 
   // Icon heart
   const handleHeart = async (e: any) => {
