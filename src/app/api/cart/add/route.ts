@@ -12,7 +12,6 @@ export async function POST(req: NextRequest) {
     const { userId, productId, quantity, price } = await req.json();
     const product = await Product.findById(productId);
     let cart = await Cart.findOne({ userId });
-    console.log("product", product);
     if (!cart) {
       cart = await new Cart({
         userId,

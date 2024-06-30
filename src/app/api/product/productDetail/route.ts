@@ -3,6 +3,7 @@ import Product from "@/app/models/Product";
 import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
 
+export const revalidate = 0;
 // Function to handle GET requests
 export async function GET(req: NextRequest) {
   await connectDB();
