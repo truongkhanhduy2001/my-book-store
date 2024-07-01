@@ -61,19 +61,6 @@
   color: var(--first-color);
 }
 
-/* Body */
-/* Icon heart */
-.section-p3
-  .discount-container
-  .discount
-  .discount-box
-  .discount-card
-  .discount-tag
-  .Icon-Container
-  .HeartIcon.active {
-  fill: red;
-}
-
 /* Responsive */
 /* 576px - 1px */
 @media (max-width: calc(576px - 1px)) {

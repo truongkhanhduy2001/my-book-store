@@ -12,10 +12,12 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useWishContext } from "@/provider/WishProvider";
 
 export default function Discount() {
   const { user } = useCustomContext();
   const [products, setProducts] = useState(null) as any;
+  const { wish, getWish } = useWishContext();
 
   useEffect(() => {
     const fetchDataDiscount = async () => {
@@ -88,10 +90,43 @@ export default function Discount() {
   }, [user]);
 
   // Icon heart
-  const handleHeart = (e: any) => {
-    e.target.closest(".HeartIcon").classList.toggle("active");
+  const handleHeart = async (e: any, productId: any) => {
+    if (!user) {
+      window.location.href = "/login";
+    }
     e.preventDefault();
+    try {
+      fetch("/api/wish/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user._id,
+          productId: productId,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          getWish();
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // Get wish
+  const [wishList, setWishList] = useState({}) as any;
+
+  useEffect(() => {
+    if (wish) {
+      const initialWishList: any = {};
+      wish.listWish.forEach((item: any) => {
+        initialWishList[item.productId._id] = true;
+      });
+      setWishList(initialWishList);
+    }
+  }, [wish]);
 
   // Slider
   function NextArrow(props: any) {
@@ -235,6 +270,8 @@ export default function Discount() {
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
                 ).toFixed(0);
+
+                const isWished = wishList[product._id];
                 return (
                   <Link
                     key={product._id}
@@ -325,8 +362,8 @@ export default function Discount() {
                         </i>
                         <i className="text-[20px] font-bold mb-[8px]">
                           <FiHeart
-                            className="HeartIcon"
-                            onClick={handleHeart}
+                            className={isWished ? "fill-[red]" : ""}
+                            onClick={(e) => handleHeart(e, product?._id)}
                           />
                         </i>
                       </div>
