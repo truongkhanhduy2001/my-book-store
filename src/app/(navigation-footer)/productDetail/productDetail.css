@@ -12,16 +12,6 @@
 }
 
 /* Body */
-/* Icon heart */
-.section-detail
-  .detail-container
-  .detail
-  .product-content
-  .product-title
-  .HeartIcon.active {
-  fill: red;
-}
-
 /* Description */
 
 .section-detail .detail-container .detail .product-content .product-detail p {

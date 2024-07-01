@@ -10,7 +10,6 @@ export async function POST(req: NextRequest) {
   try {
     const { userId, productId } = await req.json();
     let wish = await WishList.findOne({ userId });
-    console.log(wish);
     if (!wish) {
       wish = new WishList({
         userId,

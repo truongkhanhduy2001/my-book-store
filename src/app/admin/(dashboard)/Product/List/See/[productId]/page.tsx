@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 function ProductSee({ params }: { params: { productId: string } }) {
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState(null) as any;
 
   useLayoutEffect(() => {
     try {
@@ -22,9 +22,6 @@ function ProductSee({ params }: { params: { productId: string } }) {
     }
   }, [params.productId]);
 
-  if (!product || Object.keys(product).length === 0) {
-    return <div className="text-black text-[25px] text-center">Loading...</div>;
-  }
   return (
     <>
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -49,14 +46,16 @@ function ProductSee({ params }: { params: { productId: string } }) {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Image:
           </label>
-          <Image
-            className="max-w-[100px] w-[100%] h-[auto] !relative"
-            src={product.image}
-            alt="Main Image"
-            fill
-            priority={true}
-            sizes="(max-with: 768px)100vw"
-          />
+          {product && (
+            <Image
+              className="max-w-[100px] w-[100%] h-[auto] !relative"
+              src={product?.image}
+              alt="Main Image"
+              fill
+              priority={true}
+              sizes="(max-with: 768px)100vw"
+            />
+          )}
         </div>
         <div className="mb-6">
           <span className="block text-gray-700 text-sm font-bold mb-2">
@@ -64,7 +63,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.name}
+            value={product?.name ?? ""}
             name="name"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -76,7 +75,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.author}
+            value={product?.author ?? ""}
             name="author"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -88,7 +87,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.genre}
+            value={product?.genre ?? ""}
             name="genre"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -99,7 +98,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
             Description:
           </span>
           <textarea
-            value={product.description}
+            value={product?.description ?? ""}
             name="description"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -111,7 +110,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.time}
+            value={product?.time ?? ""}
             name="time"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -123,7 +122,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.price}
+            value={product?.price ?? ""}
             name="price"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -135,7 +134,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.discount}
+            value={product?.discount ?? ""}
             name="discount"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -147,7 +146,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.year}
+            value={product?.year ?? ""}
             name="year"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -159,7 +158,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.stock}
+            value={product?.stock ?? ""}
             name="stock"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -171,7 +170,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.language}
+            value={product?.language ?? ""}
             name="language"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly
@@ -183,7 +182,7 @@ function ProductSee({ params }: { params: { productId: string } }) {
           </span>
           <input
             type="text"
-            value={product.pageCount}
+            value={product?.pageCount ?? ""}
             name="pageCount"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-[black]"
             readOnly

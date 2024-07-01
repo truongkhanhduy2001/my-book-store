@@ -14,6 +14,7 @@ import { useWishContext } from "@/provider/WishProvider";
 export default function ProductDetail({ searchParams }: any) {
   const { user } = useCustomContext();
   const { getCart } = useCartContext();
+  const { wish, getWish } = useWishContext();
 
   const id = searchParams.id;
 
@@ -25,7 +26,6 @@ export default function ProductDetail({ searchParams }: any) {
         const response = await fetch(`/api/product/detail?id=${id}`);
         const data = await response.json();
         if (data.status === 200) {
-          console.log(data);
           setProducts(data.product);
         }
       } catch (error) {
@@ -36,31 +36,6 @@ export default function ProductDetail({ searchParams }: any) {
       fetchProductDetail();
     }
   }, [id, products]);
-
-  // Icon heart
-  const handleHeart = async (e: any) => {
-    e.preventDefault();
-    e.target.closest(".HeartIcon").classList.toggle("active");
-
-    try {
-      fetch("/api/wish/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: user._id,
-          productId: products._id,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   // validate
   const validationSchema = Yup.object().shape({
@@ -97,6 +72,43 @@ export default function ProductDetail({ searchParams }: any) {
     }
   };
 
+  // Icon heart
+  const handleHeart = async (e: any) => {
+    if (!user) {
+      window.location.href = "/login";
+    }
+    try {
+      fetch("/api/wish/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user._id,
+          productId: products._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          getWish();
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Get wish
+  const [wishs, setWishs] = useState(false);
+
+  useEffect(() => {
+    if (wish) {
+      const checkwish = wish.listWish.some(
+        (value: any) => value.productId._id === products?._id
+      );
+      setWishs(checkwish);
+    }
+  }, [wish, products]);
+
   return (
     <>
       {/* Detail */}
@@ -114,11 +126,21 @@ export default function ProductDetail({ searchParams }: any) {
             <li className="inline-block text-[12px] font-medium uppercase">
               <Link
                 className="text-[var(--title-color)] hover:text-[var(--first-color)]"
-                href="/productDeatil"
+                href={{
+                  pathname: "/productDetail",
+                  query: { id: products?._id },
+                }}
               >
                 Book detail
               </Link>
             </li>
+            {products && (
+              <li className="inline-block text-[12px] font-medium uppercase">
+                <span className="text-[var(--title-color)]">
+                  {products?.name}
+                </span>
+              </li>
+            )}
           </ul>
         </div>
         <div className="detail-container flex justify-center mt-[var(--margin-top-font)]">
@@ -146,7 +168,7 @@ export default function ProductDetail({ searchParams }: any) {
                 </h2>
                 <i className="flex text-[var(--first-color)] text-[20px] p-[8px] border-[1px] border-solid border-[var(--first-color)] h-[38px] rounded-[10px] mt-[15px] cursor-pointer">
                   <FiHeart
-                    className="HeartIcon"
+                    className={wishs ? "fill-[red]" : ""}
                     onClick={(e) => handleHeart(e)}
                   />
                 </i>

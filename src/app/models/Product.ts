@@ -49,6 +49,14 @@ const productSchema = new mongoose.Schema({
   image_Id: {
     type: String,
   },
+  sold: {
+    type: Number,
+    default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default mongoose.models.Product ||

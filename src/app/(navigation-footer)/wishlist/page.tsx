@@ -41,19 +41,13 @@ export default function WishList() {
             <div className="wish-list max-w-[var(--width-home)] w-[100%]">
               <div className="wish-list-box grid grid-cols-4 gap-[15px]">
                 {wish.listWish.map((item: any, index: any) => {
-                  const { discount: discount, price: price, time } = item;
+                  const price = item.productId.price;
+                  const discount = item.productId.discount;
                   const per = (
                     ((Number(discount) - Number(price)) / Number(price)) *
                     100
                   ).toFixed(0);
-                  return (
-                    <TemplateWish
-                      key={index}
-                      item={item}
-                      time={time}
-                      per={per}
-                    />
-                  );
+                  return <TemplateWish key={index} item={item} per={per} />;
                 })}
               </div>
               <Paginate />

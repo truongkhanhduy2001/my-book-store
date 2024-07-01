@@ -8,29 +8,82 @@ import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useWishContext } from "@/provider/WishProvider";
+import { useCartContext } from "@/provider/CartProvider";
 
 export default function TemplateWish(props: any) {
-  const { item, per, time } = props;
+  const { item, per } = props;
   const { user } = useCustomContext();
+  const { wish, getWish } = useWishContext();
+  const { cart, getCart } = useCartContext();
 
   // Button cart
-  useEffect(() => {
-    const btntocart = document.querySelectorAll(".template-btn");
-    btntocart.forEach((item, index) => {
-      item.addEventListener("click", (e) => {
-        if (!user) {
-          window.location.href = "/login";
-        }
-        e.preventDefault();
-      });
-    });
-  }, [user]);
+  const handleCart = async (e: any) => {
+    if (!user) {
+      window.location.href = "/login";
+    }
+    e.preventDefault();
+    try {
+      fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: item.productId._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            getCart();
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // Icon heart
-  const handleHeart = (e: any) => {
-    e.target.closest(".HeartIcon").classList.toggle("active");
+  const handleHeart = async (e: any) => {
+    if (!user) {
+      window.location.href = "/login";
+    }
     e.preventDefault();
+    try {
+      fetch("/api/wish/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: item.productId._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            getWish();
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // Get wish
+  const [wishs, setWishs] = useState(false);
+
+  useEffect(() => {
+    if (wish) {
+      const checkwish = wish.listWish.some(
+        (value: any) => value.productId._id === item.productId._id
+      );
+      setWishs(checkwish);
+    }
+  }, [wish, item.productId._id]);
 
   return (
     <>
@@ -41,7 +94,7 @@ export default function TemplateWish(props: any) {
         }}
         className="template-card group/template-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] border-solid border-[2px] border-[var(--border-color)] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
       >
-        {time == "new" && (
+        {item?.productId.time == "new" && (
           <div className="template-label absolute top-[10%] left-[27%] z-[1] bg-[var(--first-color)] rounded-[5px] translate-x-[-50%] translate-y-[-50%]">
             <span className="new text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
               NEW
@@ -106,7 +159,10 @@ export default function TemplateWish(props: any) {
               </span>
             )}
           </div>
-          <div className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
+          <div
+            className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]"
+            onClick={(e) => handleCart(e)}
+          >
             <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/template-btn:left-[50%] group-hover/template-btn:text-[var(--white-color)]">
               <FaShoppingCart />
             </i>
@@ -122,7 +178,10 @@ export default function TemplateWish(props: any) {
               <FaArrowRightArrowLeft />
             </i>
             <i className="text-[20px] font-bold mb-[8px]">
-              <FiHeart className="HeartIcon" onClick={handleHeart} />
+              <FiHeart
+                className={wishs ? "fill-[red]" : ""}
+                onClick={(e) => handleHeart(e)}
+              />
             </i>
           </div>
         </div>

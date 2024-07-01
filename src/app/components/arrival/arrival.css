@@ -1,17 +1,4 @@
 /* New Arrivals */
-/* Header */
-/* Icon heart */
-.section-p2
-  .arrivals-container
-  .arrivals
-  .arrivals-box
-  .arrivals-card
-  .arrivals-tag
-  .Icon-Container
-  .HeartIcon.active {
-  fill: red;
-}
-
 /* Responsive */
 /* 576px - 1px */
 @media (max-width: calc(576px - 1px)) {
