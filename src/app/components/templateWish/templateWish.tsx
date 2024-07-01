@@ -24,7 +24,7 @@ export default function TemplateWish(props: any) {
     }
     e.preventDefault();
     try {
-      fetch("/api/cart/add", {
+      const response = await fetch("/api/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,16 +32,23 @@ export default function TemplateWish(props: any) {
         body: JSON.stringify({
           userId: user?._id,
           productId: item.productId._id,
+          quantity: 1,
+          price:
+            item.productId.discount > 0
+              ? item.productId.discount
+              : item.productId.price,
+          totalPrice: item.productId.price * 1,
         }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === 200) {
-            getCart();
-          }
-        });
+      });
+
+      const data = await response.json();
+      if (data.status === 200) {
+        getCart();
+      } else {
+        console.error("Failed to add to cart:", data);
+      }
     } catch (err) {
-      console.log(err);
+      console.error("Error adding to cart:", err);
     }
   };
 

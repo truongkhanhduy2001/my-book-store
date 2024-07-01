@@ -9,11 +9,13 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
 import { useWishContext } from "@/provider/WishProvider";
+import { useCartContext } from "@/provider/CartProvider";
 
 export default function Arrival() {
   const { user } = useCustomContext();
   const [products, setProducts] = useState(null) as any;
   const { wish, getWish } = useWishContext();
+  const { cart, getCart } = useCartContext();
 
   useEffect(() => {
     const fetchDataArrival = async () => {
@@ -31,17 +33,36 @@ export default function Arrival() {
   }, [products]);
 
   // Button Cart
-  useEffect(() => {
-    const btntocart = document.querySelectorAll(".Arrivalcart-btn");
-    btntocart.forEach((item, index) => {
-      item.addEventListener("click", (e) => {
-        if (!user) {
-          window.location.href = "/login";
-        }
-        e.preventDefault();
+  const handleCart = async (e: any, productId: any) => {
+    if (!user) {
+      window.location.href = "/login";
+    }
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: productId._id,
+          quantity: 1,
+          price: productId.discount > 0 ? productId.discount : productId.price,
+          totalPrice: productId.price * 1,
+        }),
       });
-    });
-  }, [user]);
+
+      const data = await response.json();
+      if (data.status === 200) {
+        getCart();
+      } else {
+        console.error("Failed to add to cart:", data);
+      }
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+    }
+  };
 
   // Icon heart
   const handleHeart = async (e: any, productId: any) => {
@@ -178,7 +199,10 @@ export default function Arrival() {
                         </span>
                       )}
                     </div>
-                    <div className="Arrivalcart-btn group/Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] hover:bg-[var(--first-color)] transition duration-[300ms] tracking-[2px]">
+                    <div
+                      className="Arrivalcart-btn group/Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] hover:bg-[var(--first-color)] transition duration-[300ms] tracking-[2px]"
+                      onClick={(e) => handleCart(e, product)}
+                    >
                       <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/Arrivalcart-btn:left-[50%] group-hover/Arrivalcart-btn:text-[var(--white-color)]">
                         <FaShoppingCart />
                       </i>

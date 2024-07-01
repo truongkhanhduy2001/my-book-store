@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   try {
     const products = await Product.find();
     const arrivalProducts = products.filter(
-      (products) => products.time === "new"
+      (products) => products.time === "new" && products.discount === 0
     );
     if (arrivalProducts.length > 0) {
       return NextResponse.json({

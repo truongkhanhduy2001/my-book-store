@@ -99,7 +99,8 @@ export default function Navigate() {
     }
   };
 
-  const handleDeleteItem = async (id: any) => {
+  const handleDeleteItem = async (e: any, id: any) => {
+    e.preventDefault();
     try {
       const response = await fetch("/api/cart/delete", {
         method: "DELETE",
@@ -343,10 +344,10 @@ export default function Navigate() {
                                   Total price: ${item.totalPrice}
                                 </span>
                               </div>
-                              <div className="book-delete flex justify-end text-[red] text-[15px]">
+                              <div className="book-delete flex justify-end text-[red] text-[18px]">
                                 <i
-                                  onClick={() =>
-                                    handleDeleteItem(item.productId._id)
+                                  onClick={(e) =>
+                                    handleDeleteItem(e, item.productId._id)
                                   }
                                 >
                                   <FaRegTrashAlt />

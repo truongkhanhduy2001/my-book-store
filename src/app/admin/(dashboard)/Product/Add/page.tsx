@@ -25,8 +25,6 @@ export default function AddProduct() {
     formdata.append("stock", values.stock.toString());
     formdata.append("language", values.language);
     formdata.append("pageCount", values.pageCount.toString());
-    formdata.append("isNewArrival", values.isNewArrival ? "true" : "false");
-    formdata.append("isDiscount", values.isDiscount ? "true" : "false");
     try {
       fetch("/api/admin/productAdmin", {
         method: "POST",
@@ -38,6 +36,7 @@ export default function AddProduct() {
           if (data.status === 201) {
             resetForm();
             filesRef.current.value = "";
+            console.log("Product added:", data.product);
           } else {
             setError(data.message);
           }
@@ -74,8 +73,6 @@ export default function AddProduct() {
     pageCount: Yup.number()
       .required("Please enter Page Count")
       .min(1, "Page Count must be at least 1"),
-    isNewArrival: Yup.boolean(),
-    isDiscount: Yup.boolean(),
   });
 
   // Upload
@@ -104,8 +101,6 @@ export default function AddProduct() {
             stock: "",
             language: "",
             pageCount: "",
-            isNewArrival: false,
-            isDiscount: false,
           }}
           validationSchema={productSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {

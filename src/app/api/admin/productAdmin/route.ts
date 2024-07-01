@@ -68,6 +68,8 @@ export async function POST(req: NextRequest) {
       stock,
       language,
       pageCount,
+      sold: 0,
+      createdAt: new Date(),
     });
 
     const savedProduct = await product.save();
@@ -176,6 +178,7 @@ export async function PUT(req: NextRequest) {
       "stock",
       "language",
       "pageCount",
+      "sold",
     ];
 
     fields.forEach((field) => {
