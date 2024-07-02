@@ -310,6 +310,7 @@ export default function Navigate() {
                   {cart && cart.listItem.length > 0 ? (
                     <>
                       {cart.listItem.map((item: any, index: any) => {
+                        console.log(item);
                         return (
                           <Link
                             key={index}

@@ -10,19 +10,20 @@ export default function useCart() {
 
   const getCart = async () => setGetCartAgain(true);
   useEffect(() => {
-    const getCart = async () => {
+    const fetchCart = async () => {
       const response = await fetch(`/api/cart/get?id=${user?._id}`);
 
       const result = await response.json();
+      console.log(result);
       if (result.status === 200) {
         setCart(result.cart);
       }
     };
     if (!cart) {
-      getCart();
+      fetchCart();
     }
     if (getCartAgain && cart) {
-      getCart();
+      fetchCart();
       setGetCartAgain(false);
     }
   }, [pathName, cart, user?._id, getCartAgain]);

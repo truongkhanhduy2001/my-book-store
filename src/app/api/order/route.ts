@@ -19,25 +19,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: 404, error: "Cart not found." });
     }
 
-    // for (let i = 0; i < cart.listItem.length; i++) {
-    //   const product = await Product.findOne({
-    //     _id: cart.listItem[i].productId,
-    //   });
+    for (let i = 0; i < cart.listItem.length; i++) {
+      const product = await Product.findOne({
+        _id: cart.listItem[i].productId,
+      });
 
-    //   if (!product) {
-    //     return NextResponse.json({ status: 404, error: "Product not found." });
-    //   }
+      if (!product) {
+        return NextResponse.json({ status: 404, error: "Product not found." });
+      }
 
-    //   if (product.stock > cart.listItem[i].quantity) {
-    //     product.stock -= cart.listItem[i].quantity;
-    //     await product.save();
-    //   } else {
-    //     return NextResponse.json({
-    //       status: 400,
-    //       error: "Product out of stock.",
-    //     });
-    //   }
-    // }
+      if (product.stock > cart.listItem[i].quantity) {
+        product.stock -= cart.listItem[i].quantity;
+        await product.save();
+      } else {
+        return NextResponse.json({
+          status: 400,
+          error: "Product out of stock.",
+        });
+      }
+    }
 
     await Cart.deleteOne({ userId });
 
