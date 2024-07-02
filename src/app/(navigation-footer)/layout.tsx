@@ -11,8 +11,8 @@ interface LayoutProps {
 }
 
 export default function LayOut({ children }: LayoutProps) {
-  const { cart } = useCartContext();
-  const { wish } = useWishContext();
+  // const { cart } = useCartContext();
+  // const { wish } = useWishContext();
   return (
     <main>
       {/* Navbar */}
