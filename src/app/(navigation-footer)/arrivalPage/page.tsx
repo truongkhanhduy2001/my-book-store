@@ -50,15 +50,13 @@ export default function ArrivalsView() {
         <div className="arrivals-container-view flex justify-center mt-[var(--margin-top-font)]">
           <div className="arrivals-view max-w-[var(--width-home)] w-[100%]">
             <div className="arrivals-box-view grid grid-cols-4 gap-[15px]">
-              {products?.map((product: any) => {
+              {products?.map((product: any, index: any) => {
                 const { discount: discount, price: price } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
                 ).toFixed(0);
-                return (
-                  <CardBook key={product._id} product={product} per={per} />
-                );
+                return <CardBook key={index} product={product} per={per} />;
               })}
             </div>
             <Paginate />
