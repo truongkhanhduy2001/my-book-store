@@ -8,91 +8,91 @@ import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { useCustomContext } from "@/provider/CustomProvider";
-import { useWishContext } from "@/provider/WishProvider";
-import { useCartContext } from "@/provider/CartProvider";
+// import { useWishContext } from "@/provider/WishProvider";
+// import { useCartContext } from "@/provider/CartProvider";
 
 export default function CardBook(props: any) {
   const { product, per } = props;
   const { user } = useCustomContext();
-  const { wish, getWish } = useWishContext();
-  const { cart, getCart } = useCartContext();
+  // const { wish, getWish } = useWishContext();
+  // const { cart, getCart } = useCartContext();
 
   // Button cart
-  const handleCart = async (e: any) => {
-    if (!user) {
-      window.location.href = "/login";
-      return;
-    }
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: user?._id,
-          productId: product?._id,
-          quantity: 1,
-          price: product.discount > 0 ? product.discount : product.price,
-          totalPrice: product.price * 1,
-        }),
-      });
+  // const handleCart = async (e: any) => {
+  //   if (!user) {
+  //     window.location.href = "/login";
+  //     return;
+  //   }
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("/api/cart/add", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: user?._id,
+  //         productId: product?._id,
+  //         quantity: 1,
+  //         price: product.discount > 0 ? product.discount : product.price,
+  //         totalPrice: product.price * 1,
+  //       }),
+  //     });
 
-      const data = await response.json();
-      if (data.status === 200) {
-        getCart();
-      } else {
-        console.error("Failed to add to cart:", data);
-      }
-    } catch (err) {
-      console.error("Error adding to cart:", err);
-    }
-  };
+  //     const data = await response.json();
+  //     if (data.status === 200) {
+  //       getCart();
+  //     } else {
+  //       console.error("Failed to add to cart:", data);
+  //     }
+  //   } catch (err) {
+  //     console.error("Error adding to cart:", err);
+  //   }
+  // };
 
   // Icon heart
-  const handleHeart = async (e: any) => {
-    if (!user) {
-      window.location.href = "/login";
-      return;
-    }
-    e.preventDefault();
-    try {
-      fetch("/api/wish/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: user?._id,
-          productId: product?._id,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === 200) {
-            getWish();
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleHeart = async (e: any) => {
+  //   if (!user) {
+  //     window.location.href = "/login";
+  //     return;
+  //   }
+  //   e.preventDefault();
+  //   try {
+  //     fetch("/api/wish/add", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: user?._id,
+  //         productId: product?._id,
+  //       }),
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         if (data.status === 200) {
+  //           getWish();
+  //         }
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   // Get wish
-  const [wishList, setWishList] = useState({}) as any;
+  // const [wishList, setWishList] = useState({}) as any;
 
-  useEffect(() => {
-    if (wish) {
-      const initialWishList: any = {};
-      wish.listWish.forEach((item: any) => {
-        initialWishList[item.productId?._id] = true;
-      });
-      setWishList(initialWishList);
-    }
-  }, [wish]);
+  // useEffect(() => {
+  //   if (wish) {
+  //     const initialWishList: any = {};
+  //     wish.listWish.forEach((item: any) => {
+  //       initialWishList[item.productId?._id] = true;
+  //     });
+  //     setWishList(initialWishList);
+  //   }
+  // }, [wish]);
 
-  const isWished = wishList[product?._id];
+  // const isWished = wishList[product?._id];
 
   return (
     <>
@@ -170,7 +170,7 @@ export default function CardBook(props: any) {
           </div>
           <div
             className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]"
-            onClick={(e) => handleCart(e)}
+            // onClick={(e) => handleCart(e)}
           >
             <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/template-btn:left-[50%] group-hover/template-btn:text-[var(--white-color)]">
               <FaShoppingCart />
@@ -188,8 +188,8 @@ export default function CardBook(props: any) {
             </i>
             <i className="text-[20px] font-bold mb-[8px]">
               <FiHeart
-                className={isWished ? "fill-[red]" : ""}
-                onClick={(e) => handleHeart(e)}
+              // className={isWished ? "fill-[red]" : ""}
+              // onClick={(e) => handleHeart(e)}
               />
             </i>
           </div>
