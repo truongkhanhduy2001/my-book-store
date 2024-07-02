@@ -47,6 +47,10 @@ export default function ProductDetail({ searchParams }: any) {
 
   // Add Cart
   const handlesubmit = (values: any, setSubmitting: any, resetForm: any) => {
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
     setSubmitting(true);
     try {
       fetch("/api/cart/add", {
@@ -268,7 +272,7 @@ export default function ProductDetail({ searchParams }: any) {
                           </p>
                         </button>
                         <span className="sold-count flex justify-center items-center text-[15px] text-[var(--title-color)] font-medium ml-[5px]">
-                          1 sold
+                          {products?.sold} sold
                         </span>
                       </div>
                       <ErrorMessage

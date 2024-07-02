@@ -3,11 +3,13 @@ import Order from "@/app/models/Order";
 import Cart from "@/app/models/Cart";
 import { NextResponse, NextRequest } from "next/server";
 import Product from "@/app/models/Product";
+import { startSession } from "mongoose";
 
 export const revalidate = 0;
 
 export async function POST(req: NextRequest) {
   await connectDB();
+  const session = await startSession();
 
   try {
     const { userId, name, address, city, district, ward, telephone } =
@@ -19,27 +21,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: 404, error: "Cart not found." });
     }
 
+    // bat dau mot phien giao dich
+    session.startTransaction();
+
     for (let i = 0; i < cart.listItem.length; i++) {
       const product = await Product.findOne({
         _id: cart.listItem[i].productId,
-      });
+      }).session(session);
 
       if (!product) {
         return NextResponse.json({ status: 404, error: "Product not found." });
       }
 
-      if (product.stock > cart.listItem[i].quantity) {
+      if (product.stock >= cart.listItem[i].quantity) {
         product.stock -= cart.listItem[i].quantity;
-        await product.save();
+        product.sold += cart.listItem[i].quantity;
+        await product.save({ session });
       } else {
-        return NextResponse.json({
-          status: 400,
-          error: "Product out of stock.",
-        });
+        throw new Error("Product out of stock.");
       }
     }
 
-    await Cart.deleteOne({ userId });
+    await Cart.deleteOne({ userId }).session(session);
 
     const order = new Order({
       userId,
@@ -54,11 +57,15 @@ export async function POST(req: NextRequest) {
       createdAt: new Date(),
     });
 
-    await order.save();
+    await order.save({ session });
+
+    await session.commitTransaction();
+    session.endSession();
 
     return NextResponse.json({ status: 200, message: "Order added." });
   } catch (err: any) {
-    console.error("Error processing order:", err);
+    await session.abortTransaction();
+    session.endSession();
     return NextResponse.json({ status: 500, error: err.message });
   }
 }

@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -77,8 +79,23 @@ export default function CheckOut() {
       });
       const data = await response.json();
       if (data.status === 200) {
+        Toastify({
+          text: "Order successfully!",
+          offset: {
+            x: 50,
+            y: 10,
+          },
+        }).showToast();
         setSubmitting(false);
         getCart();
+      } else {
+        Toastify({
+          text: "Product out of stock!",
+          offset: {
+            x: 50,
+            y: 10,
+          },
+        }).showToast();
       }
     } catch (error) {
       console.error("Error:", error);
@@ -340,7 +357,10 @@ export default function CheckOut() {
                                     <div className="flex items-center mt-[8px]">
                                       <Link
                                         className="link-prod mr-[10px] !relative"
-                                        href="/productDetail"
+                                        href={{
+                                          pathname: "/productDetail",
+                                          query: { id: item.productId._id },
+                                        }}
                                       >
                                         <Image
                                           className="max-w-[100px] w-[100%] h-[auto] !relative"

@@ -14,7 +14,6 @@ export default function useCart() {
       const response = await fetch(`/api/cart/get?id=${user?._id}`);
 
       const result = await response.json();
-      console.log(result);
       if (result.status === 200) {
         setCart(result.cart);
       }
