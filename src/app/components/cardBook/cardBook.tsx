@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./cardBook.css";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -86,7 +86,7 @@ export default function CardBook(props: any) {
     if (wish) {
       const initialWishList: any = {};
       wish.listWish.forEach((item: any) => {
-        initialWishList[item.productId._id] = true;
+        initialWishList[item._id] = true;
       });
       setWishList(initialWishList);
     }
