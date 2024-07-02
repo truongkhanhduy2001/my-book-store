@@ -307,7 +307,7 @@ export default function Navigate() {
                   </i>
                 </div>
                 <div className="cart-list mb-[15px] max-h-[249px] px-[12px] overflow-y-auto">
-                  {cart ? (
+                  {cart && cart.listItem.length > 0 ? (
                     <>
                       {cart.listItem.map((item: any, index: any) => {
                         return (

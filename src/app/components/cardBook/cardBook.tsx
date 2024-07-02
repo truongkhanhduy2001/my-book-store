@@ -8,37 +8,102 @@ import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { useCustomContext } from "@/provider/CustomProvider";
+import { useWishContext } from "@/provider/WishProvider";
+import { useCartContext } from "@/provider/CartProvider";
 
 export default function CardBook(props: any) {
-  const { product, per, time } = props;
+  const { product, per } = props;
   const { user } = useCustomContext();
+  const { wish, getWish } = useWishContext();
+  const { cart, getCart } = useCartContext();
 
   // Button cart
-  useEffect(() => {
-    const btntocart = document.querySelectorAll(".template-btn");
-    btntocart.forEach((item, index) => {
-      item.addEventListener("click", (e) => {
-        if (!user) {
-          window.location.href = "/login";
-        }
-        e.preventDefault();
+  const handleCart = async (e: any) => {
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: product._id,
+          quantity: 1,
+          price: product.discount > 0 ? product.discount : product.price,
+          totalPrice: product.price * 1,
+        }),
       });
-    });
-  }, [user]);
+
+      const data = await response.json();
+      if (data.status === 200) {
+        getCart();
+      } else {
+        console.error("Failed to add to cart:", data);
+      }
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+    }
+  };
 
   // Icon heart
-  const handleHeart = (e: any) => {
-    e.target.closest(".HeartIcon").classList.toggle("active");
+  const handleHeart = async (e: any) => {
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
     e.preventDefault();
+    try {
+      fetch("/api/wish/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: product._id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            getWish();
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // Get wish
+  const [wishList, setWishList] = useState({}) as any;
+
+  useEffect(() => {
+    if (wish) {
+      const initialWishList: any = {};
+      wish.listWish.forEach((item: any) => {
+        initialWishList[item.productId._id] = true;
+      });
+      setWishList(initialWishList);
+    }
+  }, [wish]);
+
+  const isWished = wishList[product._id];
 
   return (
     <>
       <Link
-        href="/productDetail"
+        href={{
+          pathname: "/productDetail",
+          query: { id: product._id },
+        }}
         className="template-card group/template-card relative text-center p-[10px] mt-[16px] bg-[var(--card-color)] rounded-[5px] border-solid border-[2px] border-[var(--border-color)] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
       >
-        {time == "new" && (
+        {product?.time == "new" && (
           <div className="template-label absolute top-[10%] left-[27%] z-[1] bg-[var(--first-color)] rounded-[5px] translate-x-[-50%] translate-y-[-50%]">
             <span className="new text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
               NEW
@@ -49,7 +114,7 @@ export default function CardBook(props: any) {
         <div className="template-img !relative w-[150px] h-[220px] mt-0 mb-0 ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
           <Image
             className="!relative duration-[300ms] group-hover/template-card:scale-110"
-            src={product?.image || "/images/biasach1.png"}
+            src={product?.image}
             alt="Main Image"
             fill
             priority={true}
@@ -61,7 +126,7 @@ export default function CardBook(props: any) {
             {product?.name}
           </h2>
           <div className="template-writer text-[var(--text-color)] text-[16px]">
-            {product?.author}
+            {product?.writer}
           </div>
           <div className="template-categories text-[var(--second-color)] text-[16px] mt-[8px]">
             {product?.genre}
@@ -103,7 +168,10 @@ export default function CardBook(props: any) {
               </span>
             )}
           </div>
-          <div className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]">
+          <div
+            className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]"
+            onClick={(e) => handleCart(e)}
+          >
             <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/template-btn:left-[50%] group-hover/template-btn:text-[var(--white-color)]">
               <FaShoppingCart />
             </i>
@@ -119,7 +187,10 @@ export default function CardBook(props: any) {
               <FaArrowRightArrowLeft />
             </i>
             <i className="text-[20px] font-bold mb-[8px]">
-              <FiHeart className="HeartIcon" onClick={handleHeart} />
+              <FiHeart
+                className={isWished ? "fill-[red]" : ""}
+                onClick={(e) => handleHeart(e)}
+              />
             </i>
           </div>
         </div>

@@ -82,6 +82,7 @@ export default function Discount() {
   const handleCart = async (e: any, productId: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     e.preventDefault();
     try {
@@ -114,6 +115,7 @@ export default function Discount() {
   const handleHeart = async (e: any, productId: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     e.preventDefault();
     try {

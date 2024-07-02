@@ -76,6 +76,7 @@ export default function ProductDetail({ searchParams }: any) {
   const handleHeart = async (e: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     try {
       fetch("/api/wish/add", {

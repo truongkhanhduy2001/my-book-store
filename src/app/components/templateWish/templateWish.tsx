@@ -21,6 +21,7 @@ export default function TemplateWish(props: any) {
   const handleCart = async (e: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     e.preventDefault();
     try {
@@ -56,6 +57,7 @@ export default function TemplateWish(props: any) {
   const handleHeart = async (e: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     e.preventDefault();
     try {

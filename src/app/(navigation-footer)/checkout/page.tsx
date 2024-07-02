@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./checkout.css";
@@ -15,6 +15,7 @@ export default function CheckOut() {
   const { cart, getCart } = useCartContext();
 
   const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Please enter your Name"),
     address: Yup.string()
       .required("Please enter your Address")
       .min(5, "Address must be at least 5 characters"),
@@ -26,168 +27,64 @@ export default function CheckOut() {
       .matches(/^\d+$/, "Telephone must be only digits")
       .min(10, "Telephone must be at least 10 digits")
       .max(15, "Telephone must be at most 15 digits"),
+    payment: Yup.string().required("Please select a payment method"),
+    terms: Yup.boolean()
+      .required("You must accept the terms and conditions.")
+      .oneOf([true], "You must accept the terms and conditions."),
   });
 
-  const [Notes, setNotes] = useState("");
-  const [Card, setCard] = useState("");
-  const [NameCard, setNameCard] = useState("");
-  const [CVV, setCVV] = useState("");
-  const [Month, setMonth] = useState("");
-  const [Year, setYear] = useState("");
+  const [city, setCity] = useState(null) as any;
+  const [district, setDistrict] = useState(null) as any;
+  const [ward, setWard] = useState(null) as any;
 
-  const handleNotes = (e: any) => {
-    setNotes(e.target.value);
+  const fetchArea = async () => {
+    try {
+      const res = await fetch(
+        "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"
+      );
+      const result = await res.json();
+      setCity(result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
-
-  const handleCard = (e: any) => {
-    setCard(e.target.value);
-  };
-
-  const handleNameCard = (e: any) => {
-    setNameCard(e.target.value);
-  };
-
-  const handleCVV = (e: any) => {
-    setCVV(e.target.value);
-  };
-
-  const handleMonth = (e: any) => {
-    setMonth(e.target.value);
-  };
-
-  const handleYear = (e: any) => {
-    setYear(e.target.value);
-  };
-
   // Option select
   useEffect(() => {
-    const citis: any = document.querySelector("#city");
-    const districts: any = document.querySelector("#district");
-    const wards: any = document.querySelector("#ward");
-
-    if (citis && districts && wards) {
-      fetch(
-        "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          for (const x of data) {
-            citis.options[citis.options.length] = new Option(x.Name, x.Id);
-          }
-          citis.onchange = function () {
-            districts.length = 1;
-            wards.length = 1;
-            if (this.value != "") {
-              const result = data.filter((n: any) => n.Id === this.value);
-
-              for (const k of result[0].Districts) {
-                districts.options[districts.options.length] = new Option(
-                  k.Name,
-                  k.Id
-                );
-              }
-            }
-          };
-          districts.onchange = function () {
-            wards.length = 1;
-            const dataCity = data.filter((n: any) => n.Id === citis.value);
-            if (this.value != "") {
-              const dataWards = dataCity[0].Districts.filter(
-                (n: any) => n.Id === this.value
-              )[0].Wards;
-
-              for (const w of dataWards) {
-                wards.options[wards.options.length] = new Option(w.Name, w.Id);
-              }
-            }
-          };
-        });
+    if (!city) {
+      fetchArea();
     }
   }, []);
 
-  //Radio
-  const [radio, setradio] = useState(0);
-
-  useEffect(() => {
-    const payment: any = document.querySelector("#payment-1");
-    if (payment) {
-      payment.addEventListener("change", (e: any) => {
-        console.log(e.target.value);
+  // Submit form
+  const handleSubmit = async (values: any, setSubmitting: any) => {
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          name: values.name,
+          address: values.address,
+          city: values.city,
+          district: values.district,
+          ward: values.ward,
+          telephone: values.telephone,
+          payment: values.payment,
+        }),
       });
+      const data = await response.json();
+      if (data.status === 200) {
+        setSubmitting(false);
+        getCart();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setSubmitting(false);
     }
-  }, []);
-
-  useEffect(() => {
-    credit_card_format(Card);
-  }, [Card]);
-
-  useEffect(() => {
-    formatCardName(NameCard);
-  }, [NameCard]);
-
-  useEffect(() => {
-    CVV_number(CVV);
-  }, [CVV]);
-
-  useEffect(() => {
-    Expired_month(Month);
-  }, [Month]);
-
-  useEffect(() => {
-    Expired_year(Year);
-  }, [Year]);
-
-  // Credit card number
-  function credit_card_format(value: any) {
-    const val = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-    const matches = val.match(/\d{4,16}/g);
-    const match = (matches && matches[0]) || "";
-    const parts = [];
-
-    for (let i = 0, len = match.length; i < len; i += 4) {
-      parts.push(match.substring(i, i + 4));
-    }
-
-    if (parts.length) {
-      return setCard(parts.join(" "));
-    } else {
-      return setCard(val);
-    }
-  }
-
-  // Name card
-  function formatCardName(value: any) {
-    const uppercaseName = value
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toUpperCase();
-
-    return setNameCard(uppercaseName);
-  }
-
-  // CVV number
-  function CVV_number(value: any) {
-    const cvvRegex = value.replace(/[^0-9]/gi, "");
-    // Giới hạn độ dài của chuỗi CVV thành 3 ký tự
-    return setCVV(cvvRegex.slice(0, 3));
-  }
-
-  // Expired month
-  function Expired_month(value: any) {
-    const mon = value
-      .replace(/[^0-9]/gi, "")
-      .replace(/^([2-9])$/gi, "0$1")
-      .replace(/^0{1,}/gi, "0");
-    return setMonth(mon.slice(0, 2));
-  }
-
-  // Expired year
-  function Expired_year(value: any) {
-    const yea = value.replace(/[^0-9]/gi, "");
-    return setYear(yea.slice(0, 2));
-  }
+  };
 
   // Delete item form cart
   const handleDeleteItem = async (id: any) => {
@@ -238,18 +135,21 @@ export default function CheckOut() {
         {cart && cart.listItem.length > 0 ? (
           <Formik
             initialValues={{
+              name: "",
               address: "",
               city: "",
               district: "",
               ward: "",
               telephone: "",
+              payment: "Direct Payment",
+              terms: false,
             }}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              setSubmitting(false);
-            }}
+            onSubmit={(values, { setSubmitting }) =>
+              handleSubmit(values, setSubmitting)
+            }
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, values, setFieldValue }) => (
               <Form>
                 <div className="section pt-[30px] pd-[30px]">
                   <div className="container max-w-[var(--width-home)] w-[100%] m-[auto]">
@@ -262,6 +162,20 @@ export default function CheckOut() {
                             </h3>
                           </div>
                           <div id="bill-form">
+                            <div className="form-group mb-[15px]">
+                              <Field
+                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Name"
+                              />
+                              <ErrorMessage
+                                name="name"
+                                component="div"
+                                className="text-[red]"
+                              />
+                            </div>
                             <div className="form-group mb-[15px]">
                               <Field
                                 className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
@@ -283,10 +197,29 @@ export default function CheckOut() {
                                   className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                                   name="city"
                                   id="city"
+                                  value={values.city}
+                                  onChange={(e: any) => {
+                                    const filterCity =
+                                      city &&
+                                      city.filter(
+                                        (item: any) =>
+                                          item.Name === e.target.value
+                                      );
+                                    setDistrict(filterCity[0].Districts);
+                                    setFieldValue("city", e.target.value);
+                                  }}
                                 >
                                   <option disabled value="">
                                     Choose province
                                   </option>
+                                  {city &&
+                                    city.map((item: any, index: any) => {
+                                      return (
+                                        <option key={index} value={item.Name}>
+                                          {item.Name}
+                                        </option>
+                                      );
+                                    })}
                                 </Field>
                                 <ErrorMessage
                                   name="city"
@@ -300,10 +233,29 @@ export default function CheckOut() {
                                   className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                                   name="district"
                                   id="district"
+                                  value={values.district}
+                                  onChange={(e: any) => {
+                                    const filterDistrict =
+                                      district &&
+                                      district.filter(
+                                        (item: any) =>
+                                          item.Name === e.target.value
+                                      );
+                                    setWard(filterDistrict[0].Wards);
+                                    setFieldValue("district", e.target.value);
+                                  }}
                                 >
                                   <option disabled value="">
                                     Choose district
                                   </option>
+                                  {district &&
+                                    district.map((value: any, index: any) => {
+                                      return (
+                                        <option key={index} value={value.Name}>
+                                          {value.Name}
+                                        </option>
+                                      );
+                                    })}
                                 </Field>
                                 <ErrorMessage
                                   name="district"
@@ -317,10 +269,22 @@ export default function CheckOut() {
                                   className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
                                   name="ward"
                                   id="ward"
+                                  value={values.ward}
+                                  onChange={(e: any) =>
+                                    setFieldValue("ward", e.target.value)
+                                  }
                                 >
                                   <option disabled value="">
                                     Choose ward
                                   </option>
+                                  {ward &&
+                                    ward.map((value: any, index: any) => {
+                                      return (
+                                        <option key={index} value={value.Name}>
+                                          {value.Name}
+                                        </option>
+                                      );
+                                    })}
                                 </Field>
                                 <ErrorMessage
                                   name="ward"
@@ -343,16 +307,6 @@ export default function CheckOut() {
                                 component="div"
                                 className="text-[red]"
                               />
-                            </div>
-                            <div className="form-group mb-[15px]">
-                              <textarea
-                                className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] min-h-[100px] p-[15px] rounded-[5px] border-solid border border-[var(--text-color)]"
-                                id="notesBill"
-                                name="notesBill"
-                                placeholder="Order Notes"
-                                value={Notes}
-                                onChange={handleNotes}
-                              ></textarea>
                             </div>
                           </div>
                         </div>
@@ -446,116 +400,40 @@ export default function CheckOut() {
                         </div>
                         <div className="payment-method px-[10px] text-[var(--title-color)] mt-[30px] mb-[30px]">
                           <div className="input-radio flex">
-                            <input
+                            <Field
                               type="radio"
                               name="payment"
-                              className="payment"
-                              id="payment-1"
-                              value={radio}
-                              defaultChecked={radio == 1 ? true : false}
-                              onChange={() => {
-                                setradio(1);
-                              }}
+                              value="Direct Payment"
+                              checked
+                              disabled
                             />
-                            <label
-                              className="cursor-pointer font-normal min-h-[20px] pl-[10px]"
-                              htmlFor="payment-1"
-                            >
+                            <span className="cursor-pointer font-normal min-h-[20px] pl-[10px]">
                               Direct Payment
-                            </label>
+                            </span>
                           </div>
-                          <div className="input-radio">
-                            <input
-                              type="radio"
-                              name="payment"
-                              className="payment"
-                              id="payment-2"
-                              value={radio}
-                              defaultChecked={radio == 2 ? true : false}
-                              onChange={() => {
-                                setradio(2);
-                              }}
-                            />
-                            <label
-                              className="cursor-pointer font-normal mb-[5px] min-h-[20px] pl-[10px]"
-                              htmlFor="payment-2"
-                            >
-                              Paypal System
-                            </label>
-                            {radio == 2 && (
-                              <div className="caption mt-[5px] max-h-[800px]">
-                                <input
-                                  form="bill-form"
-                                  className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] mb-[10px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                                  type="text"
-                                  name="creditCardBill"
-                                  id="creditCardBill"
-                                  placeholder="Enter your credit card number"
-                                  onChange={handleCard}
-                                  value={Card}
-                                />
-                                <input
-                                  form="bill-form"
-                                  className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
-                                  type="text"
-                                  name="nameBill"
-                                  id="nameBill"
-                                  placeholder="Enter your name card"
-                                  onChange={handleNameCard}
-                                  value={NameCard}
-                                />
-                                <div
-                                  style={{ display: "flex", marginTop: "10px" }}
-                                >
-                                  <input
-                                    className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-r-none border-solid border border-[var(--text-color)]"
-                                    type="text"
-                                    name="cvvBill"
-                                    id="cvvBill"
-                                    placeholder="Enter your cvv"
-                                    onChange={handleCVV}
-                                    value={CVV}
-                                  />
-                                  <div style={{ display: "flex" }}>
-                                    <input
-                                      form="bill-form"
-                                      className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] border-solid border border-[var(--text-color)]"
-                                      type="text"
-                                      name="monthCreditBill"
-                                      id="monthCreditBill"
-                                      placeholder="Month"
-                                      onChange={handleMonth}
-                                      value={Month}
-                                    />
-                                    <input
-                                      form="bill-form"
-                                      className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] rounded-l-none border-solid border border-[var(--text-color)]"
-                                      type="text"
-                                      name="yearCreditBill"
-                                      id="yearCreditBill"
-                                      placeholder="Year"
-                                      onChange={handleYear}
-                                      value={Year}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                        <div className="input-checkbox px-[10px] flex">
-                          <input
-                            type="checkbox"
-                            id="terms"
-                            className="terms-checkout"
+                          <ErrorMessage
+                            name="payment"
+                            component="div"
+                            className="text-[red]"
                           />
-                          <label
-                            className="cursor-pointer font-normal min-h-[20px] pl-[10px] text-[var(--title-color)]"
-                            htmlFor="terms"
-                          >
-                            <span></span>I have read and accept the terms &
-                            conditions
-                          </label>
+                        </div>
+                        <div className="input-checkbox px-[10px] flex flex-col">
+                          <div className="flex items-center">
+                            <Field
+                              type="checkbox"
+                              name="terms"
+                              id="terms"
+                              className="terms-checkout"
+                            />
+                            <span className="cursor-pointer font-normal min-h-[20px] pl-[10px] text-[var(--title-color)]">
+                              I have read and accept the terms & conditions
+                            </span>
+                          </div>
+                          <ErrorMessage
+                            name="terms"
+                            component="div"
+                            className="text-[red]"
+                          />
                         </div>
                         <button
                           type="submit"

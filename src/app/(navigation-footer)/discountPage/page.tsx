@@ -52,18 +52,13 @@ export default function DiscountView() {
           <div className="discount-view max-w-[var(--width-home)] w-[100%]">
             <div className="discount-box-view grid grid-cols-4 gap-[15px]">
               {products?.map((product: any) => {
-                const { discount: discount, price: price, time } = product;
+                const { discount: discount, price: price } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
                 ).toFixed(0);
                 return (
-                  <CardBook
-                    key={product._id}
-                    product={product}
-                    per={per}
-                    time={time}
-                  />
+                  <CardBook key={product._id} product={product} per={per} />
                 );
               })}
             </div>

@@ -36,6 +36,7 @@ export default function Arrival() {
   const handleCart = async (e: any, productId: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     e.preventDefault();
     try {
@@ -68,6 +69,7 @@ export default function Arrival() {
   const handleHeart = async (e: any, productId: any) => {
     if (!user) {
       window.location.href = "/login";
+      return;
     }
     e.preventDefault();
     try {
@@ -139,13 +141,13 @@ export default function Arrival() {
                   className="arrivals-card group/arrivals-card h-[100%] !flex relative p-[10px] mt-[16px] bg-[var(--card-color)] border-[2px] border-solid border-[var(--border-color)] rounded-[5px] cursor-pointer transition-transform duration-[100ms] ease hover:border-[var(--first-color)] hover:transition hover:duration-[100ms] hover:ease"
                 >
                   {time == "new" && (
-                    <div className="arrivals-label absolute top-[15%] left-[13%] translate-x-[-50%] translate-y-[-50%] z-[1] bg-[var(--first-color)] rounded-[5px]">
+                    <div className="arrivals-label absolute top-[15%] left-[10%] translate-x-[-50%] translate-y-[-50%] z-[1] bg-[var(--first-color)] rounded-[5px]">
                       <span className="new text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
                         NEW
                       </span>
                     </div>
                   )}
-                  <div className="arrivals-img !relative w-[150px] h-[220px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
+                  <div className="arrivals-img !relative w-[150px] h-[220px] mr-[20px] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
                     <Image
                       className="!relative duration-[300ms] group-hover/arrivals-card:scale-110"
                       src={product?.image}

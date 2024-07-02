@@ -6,32 +6,22 @@ import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 
 export default function ArrivalsView() {
-  const data = [
-    {
-      title: "Dune",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "Anime",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "Naruto",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-    {
-      title: "Drama",
-      price: "100",
-      discount: "0",
-      time: "new",
-    },
-  ];
+  const [products, setProducts] = useState(null) as any;
+
+  useEffect(() => {
+    const fetchDataArrival = async () => {
+      try {
+        const res = await fetch("/api/product/arrival");
+        const data = await res.json();
+        setProducts(data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (!products) {
+      fetchDataArrival();
+    }
+  }, [products]);
 
   return (
     <>
@@ -60,13 +50,15 @@ export default function ArrivalsView() {
         <div className="arrivals-container-view flex justify-center mt-[var(--margin-top-font)]">
           <div className="arrivals-view max-w-[var(--width-home)] w-[100%]">
             <div className="arrivals-box-view grid grid-cols-4 gap-[15px]">
-              {data.map((item, index) => {
-                const { discount: discount, price: price, time } = item;
+              {products?.map((product: any) => {
+                const { discount: discount, price: price } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
                 ).toFixed(0);
-                return <CardBook key={index} item={item} per={per} />;
+                return (
+                  <CardBook key={product._id} product={product} per={per} />
+                );
               })}
             </div>
             <Paginate />

@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import "./wishlist.css";
 import Paginate from "@/app/components/paginate/paginate";
 import TemplateWish from "@/app/components/templateWish/templateWish";
