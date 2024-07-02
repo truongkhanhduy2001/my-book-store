@@ -32,7 +32,7 @@ export default function CardBook(props: any) {
         },
         body: JSON.stringify({
           userId: user?._id,
-          productId: product._id,
+          productId: product?._id,
           quantity: 1,
           price: product.discount > 0 ? product.discount : product.price,
           totalPrice: product.price * 1,
@@ -65,7 +65,7 @@ export default function CardBook(props: any) {
         },
         body: JSON.stringify({
           userId: user?._id,
-          productId: product._id,
+          productId: product?._id,
         }),
       })
         .then((res) => res.json())
@@ -86,13 +86,13 @@ export default function CardBook(props: any) {
     if (wish) {
       const initialWishList: any = {};
       wish.listWish.forEach((item: any) => {
-        initialWishList[item._id] = true;
+        initialWishList[item.productId?._id] = true;
       });
       setWishList(initialWishList);
     }
   }, [wish]);
 
-  const isWished = wishList[product._id];
+  const isWished = wishList[product?._id];
 
   return (
     <>
