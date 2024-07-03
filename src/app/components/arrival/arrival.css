@@ -39,19 +39,8 @@
     .arrivals
     .arrivals-box
     .arrivals-card
-    .arrivals-img {
-    width: 100px;
-    height: 150px;
-    margin-top: 40px;
-  }
-  .section-p2
-    .arrivals-container
-    .arrivals
-    .arrivals-box
-    .arrivals-card
     .arrivals-label {
-    top: 30%;
-    left: 9%;
+    left: 24%;
   }
 }
 
@@ -94,19 +83,8 @@
     .arrivals
     .arrivals-box
     .arrivals-card
-    .arrivals-img {
-    width: 100px;
-    height: 150px;
-    margin-top: 40px;
-  }
-  .section-p2
-    .arrivals-container
-    .arrivals
-    .arrivals-box
-    .arrivals-card
     .arrivals-label {
-    top: 30%;
-    left: 9%;
+    left: 24%;
   }
 }
 
@@ -149,19 +127,8 @@
     .arrivals
     .arrivals-box
     .arrivals-card
-    .arrivals-img {
-    width: 100px;
-    height: 150px;
-    margin-top: 40px;
-  }
-  .section-p2
-    .arrivals-container
-    .arrivals
-    .arrivals-box
-    .arrivals-card
     .arrivals-label {
-    top: 30%;
-    left: 9%;
+    left: 27%;
   }
 }
 
@@ -204,19 +171,8 @@
     .arrivals
     .arrivals-box
     .arrivals-card
-    .arrivals-img {
-    width: 100px;
-    height: 150px;
-    margin-top: 40px;
-  }
-  .section-p2
-    .arrivals-container
-    .arrivals
-    .arrivals-box
-    .arrivals-card
     .arrivals-label {
-    top: 30%;
-    left: 20%;
+    left: 32%;
   }
 }
 
@@ -236,5 +192,13 @@
     .arrivals-tag
     .Icon-Container {
     display: flex;
+  }
+  .section-p2
+    .arrivals-container
+    .arrivals
+    .arrivals-box
+    .arrivals-card
+    .arrivals-label {
+    left: 23%;
   }
 }

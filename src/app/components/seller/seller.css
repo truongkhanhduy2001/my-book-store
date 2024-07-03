@@ -46,18 +46,6 @@
   clip-path: circle(0px at 125px 27.5px);
 }
 
-/* Icon heart */
-.section-p1
-  .best-seller-container
-  .best-seller
-  .best-seller-box
-  .best-seller-card
-  .best-seller-tag
-  .Icon-Container
-  .HeartIcon.active {
-  fill: red;
-}
-
 /* Responsive */
 /* 576px - 1px */
 @media (max-width: calc(576px - 1px)) {
