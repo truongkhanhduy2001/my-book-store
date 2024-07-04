@@ -7,15 +7,36 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   await connectDB();
   try {
-    const products = await Product.find();
-    const scienceProducts = products.filter((products) =>
-      products.genre.includes("Science")
-    );
+    // Nhận tham số phân trang từ yêu cầu
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+    const skip = (page - 1) * limit;
+
+    // Tổng số sản phẩm
+    const total = await Product.countDocuments({
+      genre: { $regex: "Science", $options: "i" },
+    });
+
+    // Truy vấn sản phẩm với điều kiện có chứa "Science" trong genre và phân trang
+    const scienceProducts = await Product.find({
+      genre: { $regex: "Science", $options: "i" },
+    })
+      .skip(skip)
+      .limit(limit);
+
+    // Tính tổng số trang
+    const totalPages = Math.ceil(total / limit);
+
     if (scienceProducts.length > 0) {
       return NextResponse.json({
         status: 200,
         message: "Science products found.",
         data: scienceProducts,
+        pagination: {
+          currentPage: page,
+          totalPages: totalPages,
+          totalItems: total,
+        },
       });
     } else {
       return NextResponse.json({

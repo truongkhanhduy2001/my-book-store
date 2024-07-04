@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
 import "./discountView.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
-import { useEffect } from "react";
 
 export default function DiscountView() {
   const [products, setProducts] = useState(null) as any;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
 
   useEffect(() => {
     const fetchDataDiscount = async () => {
@@ -23,6 +24,21 @@ export default function DiscountView() {
       fetchDataDiscount();
     }
   }, [products]);
+
+  // Calculate total pages
+  const totalPages = products ? Math.ceil(products.length / itemsPerPage) : 0;
+
+  // Calculate the index of the last and first item on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Slice products for the current page
+  const currentItems = products
+    ? products.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
+
+  const totalProducts = products ? products.length : 0;
+  const limit = itemsPerPage;
 
   return (
     <>
@@ -51,8 +67,8 @@ export default function DiscountView() {
         <div className="discount-container-view flex justify-center mt-[var(--margin-top-font)]">
           <div className="discount-view max-w-[var(--width-home)] w-[100%]">
             <div className="discount-box-view grid grid-cols-4 gap-[15px]">
-              {products?.map((product: any, index: any) => {
-                const { discount: discount, price: price } = product;
+              {currentItems.map((product: any, index: any) => {
+                const { discount, price } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
@@ -60,7 +76,13 @@ export default function DiscountView() {
                 return <CardBook key={index} product={product} per={per} />;
               })}
             </div>
-            <Paginate />
+            {totalProducts > limit && (
+              <Paginate
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            )}
           </div>
         </div>
       </section>

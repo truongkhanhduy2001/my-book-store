@@ -1,4 +1,10 @@
-/* HTML: <div class="loader"></div> */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .loader {
   height: 4px;
   width: 130px;

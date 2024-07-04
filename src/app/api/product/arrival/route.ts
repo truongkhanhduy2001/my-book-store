@@ -7,15 +7,32 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   await connectDB();
   try {
-    const products = await Product.find();
+    // Nhận tham số phân trang từ yêu cầu
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+    const skip = (page - 1) * limit;
+
+    // Tính tổng số sản phẩm để xác định tổng số trang
+    const totalProducts = await Product.countDocuments();
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    // Truy vấn sản phẩm với phân trang
+    const products = await Product.find().skip(skip).limit(limit);
     const arrivalProducts = products.filter(
-      (products) => products.time === "new" && products.discount === 0
+      (product) => product.time === "new" && product.discount === 0
     );
+
     if (arrivalProducts.length > 0) {
       return NextResponse.json({
         status: 200,
         message: "Arrival products found.",
         data: arrivalProducts,
+        pagination: {
+          totalProducts,
+          totalPages,
+          currentPage: page,
+          limit,
+        },
       });
     } else {
       return NextResponse.json({

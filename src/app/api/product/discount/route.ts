@@ -7,15 +7,33 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   await connectDB();
   try {
-    const products = await Product.find();
-    const discountedProducts = products.filter(
-      (products) => products.discount > 0
-    );
+    // Nhận tham số phân trang từ yêu cầu
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+    const skip = (page - 1) * limit;
+
+    // Tính tổng số sản phẩm để xác định tổng số trang
+    const totalProducts = await Product.countDocuments({
+      discount: { $gt: 0 },
+    });
+
+    // Truy vấn sản phẩm với phân trang
+    const discountedProducts = await Product.find({ discount: { $gt: 0 } })
+      .skip(skip)
+      .limit(limit);
+
+    const totalPages = Math.ceil(totalProducts / limit);
+
     if (discountedProducts.length > 0) {
       return NextResponse.json({
         status: 200,
         message: "Discounted products found.",
         data: discountedProducts,
+        pagination: {
+          currentPage: page,
+          totalPages: totalPages,
+          totalProducts: totalProducts,
+        },
       });
     } else {
       return NextResponse.json({

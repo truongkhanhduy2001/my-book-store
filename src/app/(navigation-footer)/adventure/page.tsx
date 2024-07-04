@@ -7,6 +7,8 @@ import CardBook from "@/app/components/cardBook/cardBook";
 
 export default function Adventure() {
   const [products, setProducts] = useState(null) as any;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
 
   useEffect(() => {
     const fetchDataAdventure = async () => {
@@ -22,6 +24,21 @@ export default function Adventure() {
       fetchDataAdventure();
     }
   }, [products]);
+
+  // Calculate total pages
+  const totalPages = products ? Math.ceil(products.length / itemsPerPage) : 0;
+
+  // Calculate the index of the last and first item on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Slice products for the current page
+  const currentItems = products
+    ? products.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
+
+  const totalProducts = products ? products.length : 0;
+  const limit = itemsPerPage;
 
   return (
     <>
@@ -50,8 +67,8 @@ export default function Adventure() {
         <div className="books-container flex justify-center mt-[var(--margin-top-font)]">
           <div className="books max-w-[var(--width-home)] w-[100%]">
             <div className="books-box grid grid-cols-4 gap-[15px]">
-              {products?.map((product: any, index: any) => {
-                const { discount: discount, price: price } = product;
+              {currentItems.map((product: any, index: any) => {
+                const { discount, price } = product;
                 const per = (
                   ((Number(discount) - Number(price)) / Number(price)) *
                   100
@@ -59,7 +76,13 @@ export default function Adventure() {
                 return <CardBook key={index} product={product} per={per} />;
               })}
             </div>
-            <Paginate />
+            {totalProducts > limit && (
+              <Paginate
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            )}
           </div>
         </div>
       </section>
