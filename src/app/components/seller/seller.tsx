@@ -28,7 +28,7 @@ export default function Seller() {
       try {
         const res = await fetch("/api/product/bestSeller");
         const data = await res.json();
-        setProducts(data);
+        setProducts(data.data);
         setLoading(false);
       } catch (err) {
         console.log(err);
