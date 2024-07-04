@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import "./wishlist.css";
+import { useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import TemplateWish from "@/app/components/templateWish/templateWish";
 import { TiShoppingCart } from "react-icons/ti";
@@ -10,6 +11,23 @@ import { useWishContext } from "@/provider/WishProvider";
 export default function WishList() {
   const { user } = useCustomContext();
   const { wish, getWish } = useWishContext();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+
+  // Calculate total pages
+  const totalPages = wish ? Math.ceil(wish.listWish.length / itemsPerPage) : 0;
+
+  // Calculate the index of the last and first item on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Slice products for the current page
+  const currentItems = wish
+    ? wish.listWish.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
+
+  const totalProducts = wish ? wish.listWish.length : 0;
+  const limit = itemsPerPage;
 
   return (
     <>
@@ -39,7 +57,7 @@ export default function WishList() {
           {wish && wish.listWish.length > 0 ? (
             <div className="wish-list max-w-[var(--width-home)] w-[100%]">
               <div className="wish-list-box grid grid-cols-4 gap-[15px]">
-                {wish.listWish.map((item: any, index: any) => {
+                {currentItems.map((item: any, index: any) => {
                   const price = item.productId.price;
                   const discount = item.productId.discount;
                   const per = (
@@ -49,7 +67,13 @@ export default function WishList() {
                   return <TemplateWish key={index} item={item} per={per} />;
                 })}
               </div>
-              <Paginate />
+              {totalProducts > limit && (
+                <Paginate
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              )}
             </div>
           ) : (
             <div className="wrapper text-[var(--title-color)] text-[15px]">

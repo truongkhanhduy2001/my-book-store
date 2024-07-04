@@ -15,7 +15,7 @@ export default function useWish() {
 
       const result = await response.json();
       if (result.status === 200) {
-        setWish(result.wish);
+        setWish(result.data);
       }
     };
     if (!wish) {
