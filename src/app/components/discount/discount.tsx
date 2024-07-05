@@ -14,7 +14,6 @@ import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
 import { useWishContext } from "@/provider/WishProvider";
 import { useCartContext } from "@/provider/CartProvider";
-import LoadData from "../loadData/loadData";
 import SkeletonLoad from "../SkeletonLoad/Skeleton";
 
 export default function Discount() {
