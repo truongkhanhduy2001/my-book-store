@@ -110,6 +110,13 @@ export default function TemplateWish(props: any) {
             </span>
           </div>
         )}
+        {item?.productId.stock == 0 && (
+          <div className="arrivals-label absolute top-[20%] left-[26%] translate-x-[-50%] translate-y-[-50%] z-[1] bg-[red] rounded-[5px]">
+            <span className="sold-out text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
+              SOLD OUT
+            </span>
+          </div>
+        )}
 
         <div className="template-img !relative w-[150px] h-[220px] mt-0 mb-0 ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
           <Image

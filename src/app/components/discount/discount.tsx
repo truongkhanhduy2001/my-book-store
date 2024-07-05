@@ -15,6 +15,7 @@ import { useCustomContext } from "@/provider/CustomProvider";
 import { useWishContext } from "@/provider/WishProvider";
 import { useCartContext } from "@/provider/CartProvider";
 import LoadData from "../loadData/loadData";
+import SkeletonLoad from "../SkeletonLoad/Skeleton";
 
 export default function Discount() {
   const { user } = useCustomContext();
@@ -288,8 +289,12 @@ export default function Discount() {
       </div>
       <div className="discount-container flex justify-center mt-[var(--margin-top-font)]">
         {Loading && (
-          <div className="loader-data">
-            <LoadData />
+          <div className="arrivals max-w-[var(--width-home)] w-[100%]">
+            <div className="arrivals-box grid grid-cols-4 gap-[15px]">
+              {[...Array(4)].map((_, index) => (
+                <SkeletonLoad key={index} />
+              ))}
+            </div>
           </div>
         )}
         {!Loading && products && products.length > 0 && (
@@ -297,7 +302,7 @@ export default function Discount() {
             <div className="discount-box slider-container">
               <Slider {...settings}>
                 {products?.slice(-4).map((product: any) => {
-                  const { discount: discount, price: price, time } = product;
+                  const { discount, price, time, stock } = product;
                   const per = (
                     ((Number(discount) - Number(price)) / Number(price)) *
                     100
@@ -317,6 +322,13 @@ export default function Discount() {
                         <div className="discount-label absolute top-[10%] left-[27%] z-[1] translate-x-[-50%] translate-y-[-50%] bg-[var(--first-color)] rounded-[5px]">
                           <span className="new text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
                             NEW
+                          </span>
+                        </div>
+                      )}
+                      {stock == 0 && (
+                        <div className="arrivals-label absolute top-[20%] left-[26%] translate-x-[-50%] translate-y-[-50%] z-[1] bg-[red] rounded-[5px]">
+                          <span className="sold-out text-[12px] pt-[2px] pb-[2px] pl-[10px] pr-[10px]">
+                            SOLD OUT
                           </span>
                         </div>
                       )}
