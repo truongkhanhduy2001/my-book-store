@@ -18,34 +18,35 @@ import { useWishContext } from "@/provider/WishProvider";
 export default function Navigate() {
   const { user } = useCustomContext();
   const { cart, getCart } = useCartContext();
-  const { wish, getWish } = useWishContext();
+  const { wish } = useWishContext();
 
   const router = useRouter();
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]) as any;
+
   useEffect(() => {
-    // Cart Dropdown
     const cartDropdown = document.querySelector(".cart-dropdown");
-    const bookCart: any = document.querySelector(".book-cart-icon");
-    const cartIconClose: any = document.querySelector(".cart-icon-close");
+    const bookCart = document.querySelector(".book-cart-icon");
+    const cartIconClose = document.querySelector(".cart-icon-close");
+
     function handleShowCart(e: any) {
       cartDropdown?.classList.add("active");
       e.stopPropagation();
     }
-    function handleHideCart(e: any) {
+    function handleHideCart() {
       cartDropdown?.classList.remove("active");
     }
-    user && bookCart.addEventListener("click", handleShowCart);
-    user && cartIconClose.addEventListener("click", handleHideCart);
+    if (user) {
+      bookCart?.addEventListener("click", handleShowCart);
+      cartIconClose?.addEventListener("click", handleHideCart);
+    }
 
-    // Scroll
     const handleScroll = () => {
-      const navigation = document.querySelector("nav") as HTMLElement;
+      const navigation = document.querySelector("nav");
       if (navigation) {
-        if (window.scrollY > 5) {
-          navigation.style.boxShadow = "0 2px 4px rgba(0, 122, 255, 0.5)";
-        } else {
-          navigation.style.boxShadow = "none";
-        }
+        navigation.style.boxShadow =
+          window.scrollY > 5 ? "0 2px 4px rgba(0, 122, 255, 0.5)" : "none";
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -54,31 +55,25 @@ export default function Navigate() {
     };
   }, [user]);
 
-  // Active Page
   const pathname = usePathname();
-  const url: any = ["/", "/horror", "/comedy", "/science", "/adventure"];
 
   useEffect(() => {
     const cartDropdown = document.querySelector(".cart-dropdown");
     const navLinks = document.querySelectorAll(".nav-link");
-    // Remove modal
     function handleShowCart() {
       cartDropdown?.classList.remove("active");
     }
     handleShowCart();
-    // Loại bỏ lớp 'active' từ tất cả các phần tử .nav-link
     navLinks.forEach((navLink) => {
       navLink.classList.remove("active");
     });
-    // Chọn phần tử hiện tại và thêm lớp 'active'
-    const currentNavLink: any = document.querySelector(
+    const currentNavLink = document.querySelector(
       `.nav-link[href='${pathname}']`
     );
     if (currentNavLink) {
       currentNavLink.classList.add("active");
     }
     return () => {
-      // Loại bỏ lớp 'active' từ phần tử hiện tại (nếu có)
       if (currentNavLink) {
         currentNavLink.classList.remove("active");
       }
@@ -119,6 +114,35 @@ export default function Navigate() {
     } catch (error) {
       console.error("Error deleting item:", error);
     }
+  };
+
+  const handleSearchSubmit = (e: any) => {
+    e.preventDefault();
+    router.push(`/search?query=${searchQuery}`);
+    setSearchQuery("");
+  };
+
+  const handleInputChange = async (e: any) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.length > 2) {
+      try {
+        const response = await fetch(`/api/search?query=${query}`);
+        const data = await response.json();
+        setSuggestions(data);
+      } catch (error) {
+        console.error("Error fetching search suggestions:", error);
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion: any) => {
+    router.push(`/productDetail?id=${suggestion._id}`);
+    setSearchQuery(""); // Reset the search input field
+    setSuggestions([]); // Clear suggestions
   };
 
   return (
@@ -188,7 +212,6 @@ export default function Navigate() {
             </li>
           </ul>
         </div>
-        {/* Icon */}
         <ul className="icons-list text-[25px] text-[var(--title-color)] grid grid-flow-col auto-cols-auto gap-[15px]">
           {!user ? (
             <li className="book-accounts flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
@@ -232,22 +255,55 @@ export default function Navigate() {
               </div>
             </li>
           )}
-          {/* Search */}
           <li className="book-search group/book-search flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
             <i className="search hover:text-[var(--first-color)]">
               <PiMagnifyingGlass />
             </i>
             <div className="search-container absolute bg-[var(--card-color)] flex flex-col right-0 min-w-[400px] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] z-[10] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent group-hover/book-search:duration-[300ms] group-hover/book-search:scale-100 group-hover/book-search:opacity-100 group-hover/book-search:visible">
-              <form action="#" className="search-form">
+              <form
+                action="#"
+                className="search-form"
+                onSubmit={handleSearchSubmit}
+              >
                 <input
                   className="min-w-[400px] py-[10px] pl-[36px] pr-[10px] rounded-[5px] bg-[var(--card-color)] text-[18px] text-[var(--text-color)] outline-none border-[1px] border-solid border-[var(--border-color)]"
                   type="search"
                   placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleInputChange}
                 />
               </form>
+              <div className="search-suggestions max-h-[500px] overflow-y-auto">
+                {suggestions.map((suggestion: any, index: any) => (
+                  <div
+                    key={index}
+                    className="suggestion-item p-[10px] cursor-pointer hover:bg-[var(--hover-color)] flex items-center gap-3"
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    <div className="search-img !relative">
+                      <Image
+                        className="max-w-[100px] w-[100%] h-[auto] !relative"
+                        src={suggestion.image}
+                        alt="search-product"
+                        fill
+                        priority={true}
+                        sizes="(max-with: 768px)100vw"
+                      />
+                    </div>
+                    <div>
+                      <div>{suggestion.name}</div>
+                      <div className="text-sm text-gray-500">
+                        Genre: {suggestion.genre}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        Author: {suggestion.author}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </li>
-          {/* Heart */}
           {!user ? (
             <li className="book-heart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">
@@ -271,7 +327,6 @@ export default function Navigate() {
               </span>
             </li>
           )}
-          {/* Cart */}
           {!user ? (
             <li className="book-cart flex items-center justify-center px-[10px] py-[7px] cursor-pointer relative rounded-[8px]">
               <Link href="/login">

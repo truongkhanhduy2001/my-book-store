@@ -18,7 +18,8 @@ import SkeletonLoad from "../SkeletonLoad/Skeleton";
 
 export default function Discount() {
   const { user } = useCustomContext();
-  const [products, setProducts] = useState(null) as any;
+  const [products, setProducts] = useState([]);
+  const [originalProducts, setOriginalProducts] = useState([]);
   const { wish, getWish } = useWishContext();
   const { cart, getCart } = useCartContext();
   const [Loading, setLoading] = useState(true);
@@ -29,15 +30,14 @@ export default function Discount() {
         const res = await fetch("/api/product/discount");
         const data = await res.json();
         setProducts(data.data);
+        setOriginalProducts(data.data);
         setLoading(false);
       } catch (err) {
         console.log(err);
       }
     };
-    if (!products) {
-      fetchDataDiscount();
-    }
-  }, [products]);
+    fetchDataDiscount();
+  }, []);
 
   function changePositionNav(e: any) {
     document.querySelector(".nav-discount.active")?.classList.remove("active");
@@ -45,41 +45,23 @@ export default function Discount() {
   }
 
   const handleAllBooks = (e: any) => {
-    setProducts(products);
+    setProducts(originalProducts);
     changePositionNav(e.target.closest(".nav-discount"));
   };
 
-  const handleTypeAdventure = (e: any) => {
-    const item = products.filter((product: any) => {
-      return product.genre.includes("Adventure");
-    });
-    setProducts(item);
+  const handleType = (genre: string, e: any) => {
+    const filteredProducts = originalProducts.filter((product: any) =>
+      product.genre.includes(genre)
+    );
+    setProducts(filteredProducts);
     changePositionNav(e.target.closest(".nav-discount"));
   };
 
-  const handleTypeComedy = (e: any) => {
-    const item = products.filter((product: any) => {
-      return product.genre.includes("Comedy");
-    });
-    setProducts(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-
-  const handleTypeScience = (e: any) => {
-    const item = products.filter((product: any) => {
-      return product.genre.includes("Science");
-    });
-    setProducts(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
-
-  const handleTypeHorror = (e: any) => {
-    const item = products.filter((product: any) => {
-      return product.genre.includes("Horror");
-    });
-    setProducts(item);
-    changePositionNav(e.target.closest(".nav-discount"));
-  };
+  // Specific genre handlers
+  const handleTypeAdventure = (e: any) => handleType("Adventure", e);
+  const handleTypeComedy = (e: any) => handleType("Comedy", e);
+  const handleTypeScience = (e: any) => handleType("Science", e);
+  const handleTypeHorror = (e: any) => handleType("Horror", e);
 
   // Button Cart
   const handleCart = async (e: any, productId: any) => {
