@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "./seller.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,6 +20,7 @@ import { useCartContext } from "@/provider/CartProvider";
 import SkeletonLoad from "../SkeletonLoad/Skeleton";
 
 export default function Seller() {
+  const router = useRouter();
   const { user } = useCustomContext();
   const [products, setProducts] = useState(null) as any;
   const { wish, getWish } = useWishContext();
@@ -41,11 +45,26 @@ export default function Seller() {
 
   // Button Cart
   const handleCart = async (e: any, productId: any) => {
+    e.preventDefault();
     if (!user) {
-      window.location.href = "/login";
+      router.push("/login");
       return;
     }
-    e.preventDefault();
+    if (productId?.stock === 0) {
+      Toastify({
+        text: "This product is out of stock!",
+        offset: {
+          x: 50,
+          y: 10,
+        },
+        gravity: "top",
+        position: "right",
+        className: "info",
+        stopOnFocus: true,
+        duration: 5000,
+      }).showToast();
+      return;
+    }
     try {
       const response = await fetch("/api/cart/add", {
         method: "POST",
@@ -74,11 +93,11 @@ export default function Seller() {
 
   // Icon heart
   const handleHeart = async (e: any, productId: any) => {
+    e.preventDefault();
     if (!user) {
-      window.location.href = "/login";
+      router.push("/login");
       return;
     }
-    e.preventDefault();
     try {
       fetch("/api/wish/add", {
         method: "POST",

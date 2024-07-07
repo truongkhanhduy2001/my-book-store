@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./productDetail.css";
@@ -17,6 +18,7 @@ export default function ProductDetail({ searchParams }: any) {
   const { getCart } = useCartContext();
   const { wish, getWish } = useWishContext();
   const [Loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const id = searchParams.id;
 
@@ -51,7 +53,7 @@ export default function ProductDetail({ searchParams }: any) {
   // Add Cart
   const handlesubmit = (values: any, setSubmitting: any, resetForm: any) => {
     if (!user) {
-      window.location.href = "/login";
+      router.push("/login");
       return;
     }
     setSubmitting(true);
@@ -82,7 +84,7 @@ export default function ProductDetail({ searchParams }: any) {
   // Icon heart
   const handleHeart = async (e: any) => {
     if (!user) {
-      window.location.href = "/login";
+      router.push("/login");
       return;
     }
     try {

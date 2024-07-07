@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./cardBook.css";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -12,6 +15,7 @@ import { useWishContext } from "@/provider/WishProvider";
 import { useCartContext } from "@/provider/CartProvider";
 
 export default function CardBook(props: any) {
+  const router = useRouter();
   const { product, per } = props;
   const { user } = useCustomContext();
   const { wish, getWish } = useWishContext();
@@ -19,11 +23,26 @@ export default function CardBook(props: any) {
 
   // Button cart
   const handleCart = async (e: any) => {
+    e.preventDefault();
     if (!user) {
-      window.location.href = "/login";
+      router.push("/login");
       return;
     }
-    e.preventDefault();
+    if (product.stock === 0) {
+      Toastify({
+        text: "This product is out of stock!",
+        offset: {
+          x: 50,
+          y: 10,
+        },
+        gravity: "top",
+        position: "right",
+        className: "info",
+        stopOnFocus: true,
+        duration: 5000,
+      }).showToast();
+      return;
+    }
     try {
       const response = await fetch("/api/cart/add", {
         method: "POST",
@@ -52,11 +71,11 @@ export default function CardBook(props: any) {
 
   // Icon heart
   const handleHeart = async (e: any) => {
+    e.preventDefault();
     if (!user) {
-      window.location.href = "/login";
+      router.push("/login");
       return;
     }
-    e.preventDefault();
     try {
       fetch("/api/wish/add", {
         method: "POST",

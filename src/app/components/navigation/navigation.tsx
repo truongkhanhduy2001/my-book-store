@@ -9,8 +9,7 @@ import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { TiShoppingCart } from "react-icons/ti";
 import "./navigation.css";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useCustomContext } from "@/provider/CustomProvider";
 import { useCartContext } from "@/provider/CartProvider";
 import { useWishContext } from "@/provider/WishProvider";
@@ -21,6 +20,7 @@ export default function Navigate() {
   const { wish } = useWishContext();
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]) as any;
@@ -54,8 +54,6 @@ export default function Navigate() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [user]);
-
-  const pathname = usePathname();
 
   useEffect(() => {
     const cartDropdown = document.querySelector(".cart-dropdown");
@@ -116,12 +114,6 @@ export default function Navigate() {
     }
   };
 
-  const handleSearchSubmit = (e: any) => {
-    e.preventDefault();
-    router.push(`/search?query=${searchQuery}`);
-    setSearchQuery("");
-  };
-
   const handleInputChange = async (e: any) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -141,8 +133,8 @@ export default function Navigate() {
 
   const handleSuggestionClick = (suggestion: any) => {
     router.push(`/productDetail?id=${suggestion._id}`);
-    setSearchQuery(""); // Reset the search input field
-    setSuggestions([]); // Clear suggestions
+    setSearchQuery("");
+    setSuggestions([]);
   };
 
   return (
@@ -261,9 +253,8 @@ export default function Navigate() {
             </i>
             <div className="search-container absolute bg-[var(--card-color)] flex flex-col right-0 min-w-[400px] shadow-[0_6px_12px_var(--text-color)] duration-[300ms] opacity-0 rounded-[5px] invisible origin-top-[90%] z-[10] scale-0 before:absolute before:z-0 before:content-[''] before:w-[100%] before:h-[40px] before:top-[-30px] before:bg-transparent group-hover/book-search:duration-[300ms] group-hover/book-search:scale-100 group-hover/book-search:opacity-100 group-hover/book-search:visible">
               <form
-                action="#"
                 className="search-form"
-                onSubmit={handleSearchSubmit}
+                onSubmit={(e) => e.preventDefault()}
               >
                 <input
                   className="min-w-[400px] py-[10px] pl-[36px] pr-[10px] rounded-[5px] bg-[var(--card-color)] text-[18px] text-[var(--text-color)] outline-none border-[1px] border-solid border-[var(--border-color)]"
