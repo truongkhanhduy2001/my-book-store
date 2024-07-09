@@ -55,7 +55,7 @@ export default function CheckOut() {
     if (!city) {
       fetchArea();
     }
-  }, []);
+  }, [city]);
 
   // Submit form
   const handleSubmit = async (values: any, setSubmitting: any) => {

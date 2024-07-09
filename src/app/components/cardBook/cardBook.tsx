@@ -220,6 +220,9 @@ export default function CardBook(props: any) {
             </i>
           </div>
         </div>
+        <div className="sold flex justify-end items-center text-[15px] text-[var(--title-color)] font-medium ml-[5px]">
+          {product?.stock} sold
+        </div>
       </Link>
     </>
   );
