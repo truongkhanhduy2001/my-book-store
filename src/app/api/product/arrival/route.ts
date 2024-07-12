@@ -8,8 +8,8 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     // Nhận tham số phân trang từ yêu cầu
-    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
-    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1");
+    const limit = Number.MAX_SAFE_INTEGER;
     const skip = (page - 1) * limit;
 
     // Tính tổng số sản phẩm để xác định tổng số trang

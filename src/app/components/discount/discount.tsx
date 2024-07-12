@@ -301,7 +301,7 @@ export default function Discount() {
           <div className="discount max-w-[var(--width-home)] w-[100%]">
             <div className="discount-box slider-container">
               <Slider {...settings}>
-                {products?.slice(-4).map((product: any) => {
+                {products?.slice(-16).map((product: any) => {
                   const { discount, price, time, stock } = product;
                   const per = (
                     ((Number(discount) - Number(price)) / Number(price)) *
