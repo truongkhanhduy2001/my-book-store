@@ -194,7 +194,7 @@ export default function Arrival() {
                           alt="Main Image"
                           fill
                           priority={true}
-                          sizes="(max-with: 768px)100vw"
+                          sizes="(max-with: 768px) 100vw"
                         />
                       </div>
                       <div className="arrivals-tag">
@@ -268,7 +268,7 @@ export default function Arrival() {
                         </div>
                       </div>
                       <div className="sold flex justify-end items-center text-[15px] text-[var(--title-color)] font-medium ml-[5px]">
-                        {product?.stock} sold
+                        {product?.sold} sold
                       </div>
                     </Link>
                   );
