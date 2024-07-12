@@ -152,7 +152,7 @@ export default function TemplateWish(props: any) {
             {item?.productId.name}
           </h2>
           <div className="template-writer text-[var(--text-color)] text-[16px]">
-            {item?.productId.writer}
+            {item?.productId.author}
           </div>
           <div className="template-categories text-[var(--second-color)] text-[16px] mt-[8px]">
             {item?.productId.genre}
