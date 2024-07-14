@@ -271,14 +271,14 @@ export default function Navigate() {
                     className="suggestion-item p-[10px] cursor-pointer hover:bg-[var(--hover-color)] flex items-center gap-3"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
-                    <div className="search-img !relative">
+                    <div className="search-img !relative w-[100px] h-[150px] cursor-pointer overflow-hidden">
                       <Image
-                        className="max-w-[100px] w-[100%] h-[auto] !relative"
+                        className="object-cover w-[100%] h-[100%]"
                         src={suggestion.image}
                         alt="search-product"
                         fill
                         priority={true}
-                        sizes="(max-with: 768px)100vw"
+                        sizes="(max-with: 768px) 100vw"
                       />
                     </div>
                     <div>

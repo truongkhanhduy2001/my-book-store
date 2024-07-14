@@ -61,12 +61,10 @@
     .row
     .order-details
     .order-summary
-    .order-products
-    .order-col
-    div
     .link-prod {
     display: inline-block;
     max-width: 64px;
+    max-height: 100px;
   }
 }
 

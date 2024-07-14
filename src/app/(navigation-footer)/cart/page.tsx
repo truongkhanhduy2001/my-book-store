@@ -146,20 +146,21 @@ export default function Cart() {
                         <tr key={index}>
                           <td className="p-[8px] flex items-center">
                             <Link
-                              className="!relative w-[80px] h-[110px]"
                               href={{
                                 pathname: "/productDetail",
                                 query: { id: item.productId._id },
                               }}
                             >
-                              <Image
-                                className="max-w-[100px] w-[100%] h-[auto] !relative"
-                                src={item.productId.image}
-                                alt="Main Image"
-                                fill
-                                priority={true}
-                                sizes="(max-width: 768px) 100vw"
-                              />
+                              <div className="cart-img !relative w-[100px] h-[150px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
+                                <Image
+                                  className="object-cover w-[100%] h-[100%]"
+                                  src={item.productId.image}
+                                  alt="Main Image"
+                                  fill
+                                  priority={true}
+                                  sizes="(max-width: 768px) 100vw"
+                                />
+                              </div>
                             </Link>
                             <h3 className="table-title text-[20px] font-medium ml-[10px]">
                               {item.productId.name}
@@ -209,20 +210,21 @@ export default function Cart() {
                             <tr key={index}>
                               <td className="p-[8px] flex items-center">
                                 <Link
-                                  className="!relative"
                                   href={{
                                     pathname: "/productDetail",
                                     query: { id: product._id },
                                   }}
                                 >
-                                  <Image
-                                    className="max-w-[100px] w-[100%] h-[auto] !relative"
-                                    src={product.image}
-                                    alt="Recommended Product"
-                                    fill
-                                    priority={true}
-                                    sizes="(max-width: 768px) 100vw"
-                                  />
+                                  <div className="!relative w-[100px] h-[150px] ml-[auto] mr-[auto] cursor-pointer overflow-hidden shadow-[0_0_8px_var(--title-color)]">
+                                    <Image
+                                      className="object-cover w-[100%] h-[100%]"
+                                      src={product.image}
+                                      alt="Recommended Product"
+                                      fill
+                                      priority={true}
+                                      sizes="(max-width: 768px) 100vw"
+                                    />
+                                  </div>
                                 </Link>
                                 <h3 className="table-title text-[20px] font-medium ml-[10px]">
                                   {product.name}
