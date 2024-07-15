@@ -114,6 +114,23 @@ export default function Navigate() {
     }
   };
 
+  useEffect(() => {
+    const handleEnter = (event: any) => {
+      if (event.key === "Enter" && suggestions.length === 1) {
+        // Nếu chỉ có một gợi ý và người dùng nhấn Enter, chuyển hướng đến trang chi tiết sản phẩm
+        router.push(`/productDetail?id=${suggestions[0]._id}`);
+        setSearchQuery("");
+        setSuggestions([]);
+      }
+    };
+
+    window.addEventListener("keydown", handleEnter);
+
+    return () => {
+      window.removeEventListener("keydown", handleEnter);
+    };
+  }, [suggestions, router]);
+
   const handleInputChange = async (e: any) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -258,16 +275,16 @@ export default function Navigate() {
               >
                 <input
                   className="min-w-[400px] py-[10px] pl-[36px] pr-[10px] rounded-[5px] bg-[var(--card-color)] text-[18px] text-[var(--text-color)] outline-none border-[1px] border-solid border-[var(--border-color)]"
-                  type="search"
+                  type="text"
                   placeholder="Search"
                   value={searchQuery}
                   onChange={handleInputChange}
                 />
               </form>
               <div className="search-suggestions max-h-[500px] overflow-y-auto">
-                {suggestions.map((suggestion: any, index: any) => (
+                {suggestions.map((suggestion: any) => (
                   <div
-                    key={index}
+                    key={suggestion._id}
                     className="suggestion-item p-[10px] cursor-pointer hover:bg-[var(--hover-color)] flex items-center gap-3"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
