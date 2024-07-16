@@ -20,7 +20,8 @@ export default function Cart() {
     const getDataFetch = async () => {
       console.log("fetching data");
       const getData = await fetch(
-        `https://my-django-recommendation.vercel.app/recommendate/?userId=${user._id}`
+        `https://my-django-recommendation.vercel.app/recommendate/?userId=${user._id}`,
+        { mode: "no-cors" }
       );
       const data = await getData.json();
       setProductId(data.productId);
