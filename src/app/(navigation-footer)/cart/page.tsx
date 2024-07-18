@@ -138,7 +138,7 @@ export default function Cart() {
                         <th className="p-[8px] text-left">Price</th>
                         <th className="p-[8px] text-left">Quantity</th>
                         <th className="p-[8px] text-left">Total</th>
-                        <th className="p-[8px] text-left">Remove</th>
+                        <th className="p-[8px] text-left">Action</th>
                       </tr>
                       {cart.listItem.map((item: any, index: any) => (
                         <tr key={index}>

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     const id = url.searchParams.get("id");
     const cart = await Cart.findOne({ userId: id }).populate(
       "listItem.productId",
-      "name image genre"
+      "name author image genre"
     );
     return NextResponse.json({ status: 200, cart });
   } catch (err: any) {

@@ -19,10 +19,10 @@
 
 .section-cart .cart-container .table-container .table-cart tr th:nth-child(2),
 .section-cart .cart-container .table-container .table-cart tr td:nth-child(2) {
-  width: 400px;
+  width: 200px;
 }
 
-.section-cart .cart-container .table-container .table-cart tr th:nth-child(2),
-.section-cart .cart-container .table-container .table-cart tr td:nth-child(2) {
-  width: 400px;
+.section-cart .cart-container .table-container .table-cart tr th:nth-child(3),
+.section-cart .cart-container .table-container .table-cart tr td:nth-child(3) {
+  width: 300px;
 }
