@@ -78,7 +78,7 @@ export default function CheckOut() {
         }),
       });
       const data = await response.json();
-      if (data.status === 200) {
+      if (response.status === 200) {
         Toastify({
           text: "Order successfully!",
           offset: {
@@ -86,6 +86,28 @@ export default function CheckOut() {
             y: 10,
           },
         }).showToast();
+        // Gửi email
+        await fetch("/api/sendMail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: user?.email,
+            subject: "Order Confirmation",
+            body: `<p>Thank you for your purchase, ${values.name}!</p>
+                  <p>Your order details:</p>
+                  <ul>
+                    ${cart.listItem
+                      .map(
+                        (item: any) =>
+                          `<li>${item.productId.name} x${item.quantity} - $${item.totalPrice}</li>`
+                      )
+                      .join("")}
+                  </ul>
+                  <p>Total: $${cart.total}</p>`,
+          }),
+        });
         setSubmitting(false);
         getCart();
       } else {
@@ -96,6 +118,7 @@ export default function CheckOut() {
             y: 10,
           },
         }).showToast();
+        setSubmitting(false);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -103,7 +126,7 @@ export default function CheckOut() {
     }
   };
 
-  // Delete item form cart
+  // Delete item from cart
   const handleDeleteItem = async (id: any) => {
     try {
       const response = await fetch("/api/cart/delete", {
@@ -117,7 +140,7 @@ export default function CheckOut() {
         }),
       });
       const result = await response.json();
-      if (result.status === 200) {
+      if (response.status === 200) {
         getCart();
       }
     } catch (error) {
@@ -127,7 +150,6 @@ export default function CheckOut() {
 
   return (
     <>
-      {/* Check out */}
       <section className="section-check flex flex-col mt-[var(--margin-top-view)]">
         <div className="section-check-container max-w-[var(--width-home)] w-[100%] m-[auto] flex">
           <ul className="page-link inline-block">
@@ -481,7 +503,6 @@ export default function CheckOut() {
           </div>
         )}
       </section>
-      {/* End Checkout */}
     </>
   );
 }

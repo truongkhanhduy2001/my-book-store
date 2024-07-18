@@ -29,6 +29,10 @@ export default function ArrivalsView() {
     }
   }, [products]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
   // Calculate total pages
   const totalPages = products ? Math.ceil(products.length / itemsPerPage) : 0;
 

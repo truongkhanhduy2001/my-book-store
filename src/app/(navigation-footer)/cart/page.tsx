@@ -18,7 +18,6 @@ export default function Cart() {
 
   useEffect(() => {
     const getDataFetch = async () => {
-      console.log("fetching data");
       const getData = await fetch(
         `https://my-django-recommendation.vercel.app/recommendate/?userId=${user._id}`
       );
@@ -32,13 +31,11 @@ export default function Cart() {
 
   useEffect(() => {
     const getRecommendation = async () => {
-      console.log("fetching recommendation");
       const getData = await fetch("/api/product/recommend", {
         method: "POST",
         body: JSON.stringify({ productId }),
       });
       const data = await getData.json();
-      console.log(data);
       setRecommendation(data.products);
     };
     if (productId) {
@@ -136,6 +133,7 @@ export default function Cart() {
                     <tbody>
                       <tr>
                         <th className="p-[8px] text-left">Product</th>
+                        <th className="p-[8px] text-left">Author</th>
                         <th className="p-[8px] text-left">Categories</th>
                         <th className="p-[8px] text-left">Price</th>
                         <th className="p-[8px] text-left">Quantity</th>
@@ -164,6 +162,11 @@ export default function Cart() {
                             </Link>
                             <h3 className="table-title text-[20px] font-medium ml-[10px]">
                               {item.productId.name}
+                            </h3>
+                          </td>
+                          <td className="p-[8px]">
+                            <h3 className="table-author">
+                              {item.productId.author}
                             </h3>
                           </td>
                           <td className="p-[8px]">
@@ -202,6 +205,7 @@ export default function Cart() {
                         <tbody>
                           <tr>
                             <th className="p-[8px] text-left">Product</th>
+                            <th className="p-[8px] text-left">Author</th>
                             <th className="p-[8px] text-left">Categories</th>
                             <th className="p-[8px] text-left">Price</th>
                             <th className="p-[8px] text-left">Quantity</th>
@@ -228,6 +232,11 @@ export default function Cart() {
                                 </Link>
                                 <h3 className="table-title text-[20px] font-medium ml-[10px]">
                                   {product.name}
+                                </h3>
+                              </td>
+                              <td className="p-[8px]">
+                                <h3 className="table-author">
+                                  {product.author}
                                 </h3>
                               </td>
                               <td className="p-[8px]">

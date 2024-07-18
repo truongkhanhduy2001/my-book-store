@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
@@ -13,7 +13,7 @@ export default function Register() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  // validate
+  // Validation schema
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required("Please enter your Name")
@@ -21,49 +21,61 @@ export default function Register() {
     email: Yup.string()
       .email("Invalid email")
       .required("Please enter your Email"),
-    // .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"),
     password: Yup.string()
       .required("Please enter your Password")
       .min(6, "Password must be at least 6 characters"),
-    // .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    // .matches(
-    //   /[^a-zA-Z0-9]/,
-    //   "Password must contain at least one special character"
-    // ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("Please enter your Confirm Password"),
   });
 
-  const handleSubmit = (values: any, setSubmitting: any) => {
+  // Handle form submission
+  const handleSubmit = async (values: any, { setSubmitting }: any) => {
     setError(null);
+    setSubmitting(true);
+
     try {
-      fetch("/api/users/registerUser", {
+      // Register user
+      const res = await fetch("/api/users/registerUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setSubmitting(false);
-          if (data.status === 200) {
-            Cookie.set("TOKEN-USER", data.token, {
-              sameSite: "strict",
-              secure: true,
-              path: "/",
-              expires: 7,
-            });
-            // Check for success flag
-            router.push("/");
-          } else {
-            // Handle registration failure
-            setError(data.message);
-          }
+      });
+
+      const data = await res.json();
+      setSubmitting(false);
+
+      if (res.status === 200) {
+        Cookie.set("TOKEN-USER", data.token, {
+          sameSite: "strict",
+          secure: true,
+          path: "/",
+          expires: 7,
         });
+
+        // Send confirmation email
+        await fetch("/api/sendMail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: values.email,
+            subject: "Registration Confirmation",
+            body: `<p>Hi ${values.name},</p><p>Thank you for registering. Welcome to our platform!</p>`,
+          }),
+        });
+
+        router.push("/");
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
       console.error(error);
+      setError("An unexpected error occurred");
+      setSubmitting(false);
     }
   };
 
@@ -102,9 +114,7 @@ export default function Register() {
                   confirmPassword: "",
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) =>
-                  handleSubmit(values, setSubmitting)
-                }
+                onSubmit={handleSubmit}
               >
                 {({ isSubmitting }) => (
                   <Form>
@@ -170,7 +180,7 @@ export default function Register() {
                         className="w-[100%] p-[10px] border-[1px] border-solid border-[var(--text-color)] rounded-[5px] bg-[var(--white-color)] text-[var(--title-color)] transition-colors duration-[300ms] ease"
                         type="password"
                         name="confirmPassword"
-                        placeholder="Comfirm Password"
+                        placeholder="Confirm Password"
                         autoComplete="new-password"
                       />
                       <ErrorMessage
