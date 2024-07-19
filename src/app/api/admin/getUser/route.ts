@@ -9,8 +9,8 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     const _id = req.nextUrl.searchParams.get("_id");
-    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
-    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10); // Default to 10 for admin pages
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1");
+    const limit = Number.MAX_SAFE_INTEGER;
 
     if (_id) {
       // Fetch single user by _id
@@ -50,11 +50,11 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// Function to handle DELETE requests to delete a user by _id
-export async function DELETE(req: NextRequest) {
+// Function to handle POST requests to lock a user account
+export async function POST(req: NextRequest) {
   await connectDB();
   try {
-    const { _id } = await req.json();
+    const { _id, action } = await req.json();
 
     if (!_id || !ObjectId.isValid(_id)) {
       return NextResponse.json({
@@ -63,9 +63,25 @@ export async function DELETE(req: NextRequest) {
       });
     }
 
-    const deletedUser = await User.findByIdAndDelete(new ObjectId(_id));
+    let update;
+    if (action === "lock") {
+      update = { locked: true };
+    } else if (action === "unlock") {
+      update = { locked: false };
+    } else {
+      return NextResponse.json({
+        status: 400,
+        message: "Invalid action.",
+      });
+    }
 
-    if (!deletedUser) {
+    const updatedUser = await User.findByIdAndUpdate(
+      new ObjectId(_id),
+      update,
+      { new: true }
+    );
+
+    if (!updatedUser) {
       return NextResponse.json({
         status: 400,
         message: "User not found.",
@@ -74,8 +90,8 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({
       status: 200,
-      message: "User deleted successfully",
-      user: deletedUser,
+      message: `User ${action}ed successfully`,
+      user: updatedUser,
     });
   } catch (err: any) {
     return NextResponse.json({ status: 500, error: err.message });

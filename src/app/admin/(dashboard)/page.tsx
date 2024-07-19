@@ -1,6 +1,6 @@
 "use client";
 import Breadcrumb from "@/app/components/Breadcrumbs/Breadcrumb";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaLock, FaUnlock } from "react-icons/fa";
 import Paginate from "@/app/components/paginate/paginate";
 import { useState, useLayoutEffect } from "react";
 
@@ -9,7 +9,7 @@ export default function UserTab() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalUsers, setTotalUsers] = useState(0);
-  const limit = 2; // Limit for admin page
+  const limit = 7; // Limit for admin page
 
   const fetchUsers = async () => {
     try {
@@ -35,24 +35,47 @@ export default function UserTab() {
     fetchUsers();
   }, [currentPage]);
 
-  const handleDelete = async (id: string) => {
+  const handleLock = async (id: any) => {
     try {
       const response = await fetch("/api/admin/getUser", {
-        method: "DELETE",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ _id: id }),
+        body: JSON.stringify({ _id: id, action: "lock" }),
       });
       const data = await response.json();
       if (data.status === 200) {
         setUsers((prevUsers: any) =>
-          prevUsers.filter((user: any) => user._id !== id)
+          prevUsers.map((user: any) =>
+            user._id === id ? { ...user, locked: true } : user
+          )
         );
-        fetchUsers();
       }
     } catch (error) {
-      console.error("Failed to delete user:", error);
+      console.error("Failed to lock user:", error);
+    }
+  };
+
+  const handleUnlock = async (id: any) => {
+    try {
+      const response = await fetch("/api/admin/getUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id, action: "unlock" }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        setUsers((prevUsers: any) =>
+          prevUsers.map((user: any) =>
+            user._id === id ? { ...user, locked: false } : user
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Failed to unlock user:", error);
     }
   };
 
@@ -77,12 +100,21 @@ export default function UserTab() {
                     <td className="p-4">{user.email}</td>
                     <td className="p-4">
                       <div>
-                        <button
-                          onClick={() => handleDelete(user._id)}
-                          className="text-red-500 hover:underline text-[17px] mt-[2px]"
-                        >
-                          <FaTrashAlt />
-                        </button>
+                        {user.locked ? (
+                          <button
+                            onClick={() => handleUnlock(user._id)}
+                            className="text-yellow-500 hover:underline text-[17px] mt-[2px]"
+                          >
+                            <FaLock />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleLock(user._id)}
+                            className="text-green-500 hover:underline text-[17px] mt-[2px]"
+                          >
+                            <FaUnlock />
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>

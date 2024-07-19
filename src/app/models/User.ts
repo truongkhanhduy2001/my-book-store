@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  locked: {
+    type: Boolean,
+    default: false,
+  },
   role: {
     type: String,
     enum: ["user", "admin"],
