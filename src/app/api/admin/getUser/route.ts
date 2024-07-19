@@ -9,8 +9,8 @@ export async function GET(req: NextRequest) {
   await connectDB();
   try {
     const _id = req.nextUrl.searchParams.get("_id");
-    const page = parseInt(req.nextUrl.searchParams.get("page") || "1");
-    const limit = Number.MAX_SAFE_INTEGER;
+    const page = parseInt(req.nextUrl.searchParams.get("page") || "1", 10);
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
 
     if (_id) {
       // Fetch single user by _id
