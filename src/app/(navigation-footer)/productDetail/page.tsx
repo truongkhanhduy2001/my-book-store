@@ -19,6 +19,10 @@ export default function ProductDetail({ searchParams }: any) {
   const { wish, getWish } = useWishContext();
   const [Loading, setLoading] = useState(true);
   const router = useRouter();
+  const [reviews, setReviews] = useState([]) as any;
+  const [averageRating, setAverageRating] = useState(0);
+  const [userRating, setUserRating] = useState(0);
+  const [userComment, setUserComment] = useState("");
 
   const id = searchParams.id;
 
@@ -119,6 +123,68 @@ export default function ProductDetail({ searchParams }: any) {
     }
   }, [wish, products]);
 
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`/api/review/get?id=${products._id}`);
+        const data = await response.json();
+        if (data.status === 200) {
+          setReviews(data.reviews);
+          setAverageRating(
+            data.reviews.reduce(
+              (acc: any, review: any) => acc + review.rating,
+              0
+            ) / data.reviews.length
+          );
+        }
+      } catch (error) {
+        console.error("Failed to fetch reviews:", error);
+      }
+    };
+
+    if (products) {
+      fetchReviews();
+    }
+  }, [id, products]);
+
+  const handleRatingChange = (newRating: any) => {
+    setUserRating(newRating);
+  };
+
+  const handleCommentSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+    try {
+      const response = await fetch("/api/review/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user._id,
+          productId: products._id,
+          rating: userRating,
+          comment: userComment,
+        }),
+      });
+      const data = await response.json();
+      if (data.status === 201) {
+        const newReview = data.review;
+        setReviews([...reviews, newReview]);
+        setUserRating(0);
+        setUserComment("");
+        const newAverageRating =
+          (averageRating * reviews.length + userRating) / (reviews.length + 1);
+        setAverageRating(newAverageRating);
+      }
+    } catch (error) {
+      console.error("Failed to submit review:", error);
+    }
+  };
+
   return (
     <>
       {/* Detail */}
@@ -186,6 +252,34 @@ export default function ProductDetail({ searchParams }: any) {
                       />
                     </i>
                   </div>
+                  <div className="product-rating mt-[10px] text-[var(--title-color)]">
+                    <div className="average-rating flex items-center">
+                      <span className="text-[18px] font-bold mr-[10px]">
+                        {typeof averageRating === "number" &&
+                        !isNaN(averageRating)
+                          ? averageRating.toFixed(1)
+                          : "0.0"}
+                      </span>
+                      <div className="stars flex">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <span
+                            key={star}
+                            className={`text-[20px] ${
+                              star <= Math.round(averageRating || 0)
+                                ? "text-[#ffc107]"
+                                : "text-[#e4e5e9]"
+                            }`}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                      <span className="ml-[10px] text-[14px]">
+                        ({reviews.length} đánh giá)
+                      </span>
+                    </div>
+                  </div>
+
                   <div className="flex justify-between mt-[10px]">
                     <div className="product-price flex items-center justify-center">
                       {products?.discount > "0" && (
@@ -389,6 +483,87 @@ export default function ProductDetail({ searchParams }: any) {
                     {products?.description}
                   </p>
                 </div>
+              </div>
+            </div>
+
+            <div className="product-reviews mt-[30px] text-[var(--title-color)] max-w-[var(--width-home)] w-[100%] m-[auto]">
+              <h2 className="text-[20px] font-bold text-[var(--title-color)] mb-[15px]">
+                Reviews and Comments
+              </h2>
+
+              <div
+                className={`comments-list ${
+                  reviews.length > 3 ? "max-h-[180px] overflow-y-auto" : ""
+                }`}
+              >
+                {reviews.map((review: any, index: any) => (
+                  <div
+                    key={index}
+                    className="comment border-b pb-[15px] mb-[15px]"
+                  >
+                    <div className="flex items-center mb-[10px]">
+                      <span className="font-bold mr-[10px]">
+                        {review.userId.name}
+                      </span>
+                      <div className="stars flex">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <span
+                            key={star}
+                            className={`text-[16px] ${
+                              star <= review.rating
+                                ? "text-[#ffc107]"
+                                : "text-[#e4e5e9]"
+                            }`}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-[14px]">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="add-comment mt-[20px]">
+                <h3 className="text-[18px] font-bold mb-[10px]">
+                  Add comments
+                </h3>
+                <form onSubmit={handleCommentSubmit}>
+                  <div className="mb-[10px]">
+                    <label className="block mb-[5px]">Reviews:</label>
+                    <div className="stars flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                          key={star}
+                          className={`text-[24px] cursor-pointer ${
+                            star <= userRating
+                              ? "text-[#ffc107]"
+                              : "text-[#e4e5e9]"
+                          }`}
+                          onClick={() => handleRatingChange(star)}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mb-[10px]">
+                    <label className="block mb-[5px]">Comment:</label>
+                    <textarea
+                      className="w-full p-[5px] border rounded"
+                      rows={4}
+                      value={userComment}
+                      onChange={(e) => setUserComment(e.target.value)}
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-[var(--first-color)] text-white py-[5px] px-[10px] rounded"
+                  >
+                    Submit review
+                  </button>
+                </form>
               </div>
             </div>
           </div>
