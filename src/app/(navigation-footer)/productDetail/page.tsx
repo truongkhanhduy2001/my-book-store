@@ -172,12 +172,18 @@ export default function ProductDetail({ searchParams }: any) {
       });
       const data = await response.json();
       if (data.status === 201) {
-        const newReview = data.review;
-        setReviews([...reviews, newReview]);
+        const newReview = {
+          ...data.review,
+          userId: { name: user.name },
+        };
+        setReviews((prevReviews: any) => [...prevReviews, newReview]);
         setUserRating(0);
         setUserComment("");
-        const newAverageRating =
-          (averageRating * reviews.length + userRating) / (reviews.length + 1);
+
+        const newTotalRating =
+          reviews.reduce((acc: any, review: any) => acc + review.rating, 0) +
+          userRating;
+        const newAverageRating = newTotalRating / (reviews.length + 1);
         setAverageRating(newAverageRating);
       }
     } catch (error) {
@@ -255,17 +261,15 @@ export default function ProductDetail({ searchParams }: any) {
                   <div className="product-rating mt-[10px] text-[var(--title-color)]">
                     <div className="average-rating flex items-center">
                       <span className="text-[18px] font-bold mr-[10px]">
-                        {typeof averageRating === "number" &&
-                        !isNaN(averageRating)
-                          ? averageRating.toFixed(1)
-                          : "0.0"}
+                        {reviews.length > 0 ? averageRating.toFixed(1) : "0.0"}
                       </span>
                       <div className="stars flex">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <span
                             key={star}
                             className={`text-[20px] ${
-                              star <= Math.round(averageRating || 0)
+                              reviews.length > 0 &&
+                              star <= Math.round(averageRating)
                                 ? "text-[#ffc107]"
                                 : "text-[#e4e5e9]"
                             }`}
