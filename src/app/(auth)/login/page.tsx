@@ -8,8 +8,10 @@ import Link from "next/link";
 import { FaBookOpen } from "react-icons/fa";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useCustomContext } from "@/provider/CustomProvider";
 
 export default function Login() {
+  const { setUser } = useCustomContext();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
@@ -35,6 +37,7 @@ export default function Login() {
               expires: 7,
             });
             // Check for success flag
+            setUser(data.user);
             router.push("/");
           } else {
             // Handle login failure

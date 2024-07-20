@@ -6,30 +6,40 @@ import Cookie from "js-cookie";
 export default function useAuthentication() {
   const [user, setUser] = useState(null);
   const pathName = usePathname();
+
   useEffect(() => {
     const validateToken = async () => {
       const token = Cookie.get("TOKEN-USER");
-      const response = await fetch("/api/users/validation_user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token }),
-      });
+      if (!token) {
+        setUser(null);
+        return;
+      }
 
-      const result = await response.json();
-      if (result.status === 200) {
-        setUser(result.data);
-      } else {
-        // Nếu status không phải là 200, coi như người dùng không hợp lệ và chuyển hướng họ đến trang đăng nhập
-        // Cookie.remove("TOKEN-USER");
-        // router.push("/login");
+      try {
+        const response = await fetch("/api/users/validation_user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        const result = await response.json();
+        if (result.status === 200) {
+          setUser(result.data);
+        } else {
+          setUser(null);
+          Cookie.remove("TOKEN-USER");
+        }
+      } catch (error) {
+        console.error("Error validating token:", error);
+        setUser(null);
+        Cookie.remove("TOKEN-USER");
       }
     };
-    if (!user) {
-      validateToken();
-    }
-  }, [pathName, user]);
 
-  return { user };
+    validateToken();
+  }, [pathName]);
+
+  return { user, setUser };
 }

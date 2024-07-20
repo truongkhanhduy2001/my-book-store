@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const { token } = await req.json();
 
   if (!token) {
-    return NextResponse.json({ error: "No token provided" });
+    return NextResponse.json({ error: "No token provided", status: 401 });
   }
 
   try {
@@ -21,6 +21,6 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json({ data: user, status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: "Invalid token" });
+    return NextResponse.json({ error: "Invalid token", status: 401 });
   }
 }

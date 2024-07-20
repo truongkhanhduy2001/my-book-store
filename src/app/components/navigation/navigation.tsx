@@ -15,7 +15,7 @@ import { useCartContext } from "@/provider/CartProvider";
 import { useWishContext } from "@/provider/WishProvider";
 
 export default function Navigate() {
-  const { user } = useCustomContext();
+  const { user, setUser } = useCustomContext();
   const { cart, getCart } = useCartContext();
   const { wish } = useWishContext();
 
@@ -84,6 +84,7 @@ export default function Navigate() {
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 200) {
+            setUser(null);
             router.push("/login");
           }
         });
