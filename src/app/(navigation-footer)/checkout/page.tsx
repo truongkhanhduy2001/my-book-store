@@ -15,6 +15,8 @@ import { useCartContext } from "@/provider/CartProvider";
 export default function CheckOut() {
   const { user } = useCustomContext();
   const { cart, getCart } = useCartContext();
+  const [productId, setProductId] = useState(null) as any;
+  const [recommendations, setRecommendation] = useState(null) as any;
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Please enter your Name"),
@@ -148,6 +150,66 @@ export default function CheckOut() {
     }
   };
 
+  useEffect(() => {
+    const getDataFetch = async () => {
+      const getData = await fetch(
+        `https://my-django-recommendation.vercel.app/recommendate/?userId=${user._id}`
+      );
+      const data = await getData.json();
+      setProductId(data.productId);
+    };
+    if (user) {
+      getDataFetch();
+    }
+  }, [user, cart]);
+
+  useEffect(() => {
+    const getRecommendation = async () => {
+      const getData = await fetch("/api/product/recommend", {
+        method: "POST",
+        body: JSON.stringify({ productId }),
+      });
+      const data = await getData.json();
+      setRecommendation(data.products);
+    };
+    if (productId) {
+      getRecommendation();
+    }
+  }, [productId]);
+
+  const handleAddToCart = async (productId: any) => {
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?._id,
+          productId: recommendations[0]._id,
+          quantity: 1,
+          price:
+            recommendations[0].discount > 0
+              ? recommendations[0].discount
+              : recommendations[0].price,
+        }),
+      });
+      const result = await response.json();
+      if (result.status === 200) {
+        getCart();
+        Toastify({
+          text: "Product added to cart!",
+          offset: {
+            x: 50,
+            y: 10,
+          },
+        }).showToast();
+      }
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
+  };
+
   return (
     <>
       <section className="section-check flex flex-col mt-[var(--margin-top-view)]">
@@ -230,7 +292,7 @@ export default function CheckOut() {
                               />
                             </div>
                             <div className="form-group mb-[15px] flex flex-wrap">
-                              <div className="field-container w-[33.33%] pr-[5px]">
+                              <div className="field-container">
                                 <Field
                                   as="select"
                                   className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
@@ -266,7 +328,7 @@ export default function CheckOut() {
                                   className="text-[red]"
                                 />
                               </div>
-                              <div className="field-container w-[33.33%] pr-[5px]">
+                              <div className="field-container">
                                 <Field
                                   as="select"
                                   className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
@@ -302,7 +364,7 @@ export default function CheckOut() {
                                   className="text-[red]"
                                 />
                               </div>
-                              <div className="field-container w-[33.33%]">
+                              <div className="field-container">
                                 <Field
                                   as="select"
                                   className="input bg-[var(--white-color)] h-[40px] pl-[15px] pr-[15px] w-[100%] text-[var(--title-color)] rounded-[5px] border-solid border border-[var(--text-color)]"
@@ -502,6 +564,63 @@ export default function CheckOut() {
             </div>
           </div>
         )}
+        {/* Phần recommend cho màn hình nhỏ */}
+        <div className="md:hidden mt-8">
+          {recommendations?.length > 0 && (
+            <div className="recommendations w-full px-4">
+              <h2 className="text-[20px] font-medium text-[var(--title-color)] mb-4">
+                Recommended for you
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {recommendations.map((product: any, index: any) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-lg shadow-md overflow-hidden"
+                  >
+                    <Link
+                      href={{
+                        pathname: "/productDetail",
+                        query: { id: product._id },
+                      }}
+                    >
+                      <div className="relative h-48 w-full">
+                        <Image
+                          className="object-cover w-full h-full"
+                          src={product.image}
+                          alt="Recommended Product"
+                          layout="fill"
+                          priority={true}
+                        />
+                      </div>
+                    </Link>
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold mb-2 truncate">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {product.author}
+                      </p>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {product.genre}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold text-[var(--first-color)]">
+                          ${product.price}
+                        </span>
+                        <button
+                          className="bg-[var(--first-color)] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 transition duration-300"
+                          onClick={() => handleAddToCart(product)}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </section>
     </>
   );
