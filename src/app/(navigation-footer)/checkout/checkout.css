@@ -174,6 +174,10 @@
     .field-container:last-child {
     width: 100%;
   }
+  .recommendations {
+    max-width: 500px;
+    display: block !important;
+  }
 }
 
 /* 992px - 1px */
@@ -220,6 +224,11 @@
     .field-container {
     width: 100%;
   }
+  .recommendations {
+    max-width: 700px;
+    display: block !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* 1200px - 1px */
@@ -240,6 +249,11 @@
   .section-check .section .container .row .col-md-5 {
     margin-top: 20px;
     width: 100%;
+  }
+  .recommendations {
+    max-width: 900px;
+    display: block !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
