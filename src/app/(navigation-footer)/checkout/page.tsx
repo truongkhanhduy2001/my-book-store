@@ -541,6 +541,64 @@ export default function CheckOut() {
                     </div>
                   </div>
                 </div>
+
+                {/* Phần recommend cho màn hình nhỏ */}
+                <div className="xl:hidden mt-8">
+                  {recommendations?.length > 0 && (
+                    <div className="recommendations m-[auto] px-4">
+                      <h2 className="text-[20px] font-medium text-[var(--title-color)] mb-4">
+                        Recommended for you
+                      </h2>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {recommendations.map((product: any, index: any) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded-lg shadow-md overflow-hidden"
+                          >
+                            <Link
+                              href={{
+                                pathname: "/productDetail",
+                                query: { id: product._id },
+                              }}
+                            >
+                              <div className="relative h-48 w-full">
+                                <Image
+                                  className="object-cover w-full h-full"
+                                  src={product.image}
+                                  alt="Recommended Product"
+                                  layout="fill"
+                                  priority={true}
+                                />
+                              </div>
+                            </Link>
+                            <div className="p-4">
+                              <h3 className="text-lg font-semibold mb-2 text-gray-600">
+                                {product.name}
+                              </h3>
+                              <p className="text-sm text-gray-600 mb-2">
+                                {product.author}
+                              </p>
+                              <p className="text-sm text-gray-600 mb-2">
+                                {product.genre}
+                              </p>
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold text-[var(--first-color)]">
+                                  ${product.price}
+                                </span>
+                                <button
+                                  className="bg-[var(--first-color)] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 transition duration-300"
+                                  onClick={() => handleAddToCart(product)}
+                                >
+                                  Add to Cart
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </Form>
             )}
           </Formik>
@@ -564,63 +622,6 @@ export default function CheckOut() {
             </div>
           </div>
         )}
-        {/* Phần recommend cho màn hình nhỏ */}
-        <div className="xl:hidden mt-8">
-          {recommendations?.length > 0 && (
-            <div className="recommendations m-[auto] px-4">
-              <h2 className="text-[20px] font-medium text-[var(--title-color)] mb-4">
-                Recommended for you
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {recommendations.map((product: any, index: any) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md overflow-hidden"
-                  >
-                    <Link
-                      href={{
-                        pathname: "/productDetail",
-                        query: { id: product._id },
-                      }}
-                    >
-                      <div className="relative h-48 w-full">
-                        <Image
-                          className="object-cover w-full h-full"
-                          src={product.image}
-                          alt="Recommended Product"
-                          layout="fill"
-                          priority={true}
-                        />
-                      </div>
-                    </Link>
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold mb-2 text-gray-600">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 mb-2">
-                        {product.author}
-                      </p>
-                      <p className="text-sm text-gray-600 mb-2">
-                        {product.genre}
-                      </p>
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold text-[var(--first-color)]">
-                          ${product.price}
-                        </span>
-                        <button
-                          className="bg-[var(--first-color)] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 transition duration-300"
-                          onClick={() => handleAddToCart(product)}
-                        >
-                          Add to Cart
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
       </section>
     </>
   );
