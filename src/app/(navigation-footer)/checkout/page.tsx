@@ -565,7 +565,7 @@ export default function CheckOut() {
           </div>
         )}
         {/* Phần recommend cho màn hình nhỏ */}
-        <div className="md:hidden mt-8">
+        <div className="xl:hidden mt-8">
           {recommendations?.length > 0 && (
             <div className="recommendations m-[auto] px-4">
               <h2 className="text-[20px] font-medium text-[var(--title-color)] mb-4">
