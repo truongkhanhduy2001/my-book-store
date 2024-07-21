@@ -103,6 +103,7 @@
     width: 100%;
   }
   .recommendations {
+    max-width: 300px;
     display: block !important;
   }
 }
