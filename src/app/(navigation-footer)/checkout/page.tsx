@@ -567,7 +567,7 @@ export default function CheckOut() {
         {/* Phần recommend cho màn hình nhỏ */}
         <div className="md:hidden mt-8">
           {recommendations?.length > 0 && (
-            <div className="recommendations w-full px-4">
+            <div className="recommendations flex justify-center items-center px-4">
               <h2 className="text-[20px] font-medium text-[var(--title-color)] mb-4">
                 Recommended for you
               </h2>
