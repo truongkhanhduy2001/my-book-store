@@ -5,12 +5,24 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 import SkeletonLoad from "@/app/components/SkeletonLoad/Skeleton";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Science() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [products, setProducts] = useState(null) as any;
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [Loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const page = searchParams.get("page");
+    if (!page) {
+      router.replace("/science?page=1");
+    } else {
+      setCurrentPage(Number(page));
+    }
+  }, [searchParams, router]);
 
   useEffect(() => {
     const fetchDataScience = async () => {
@@ -46,6 +58,10 @@ export default function Science() {
 
   const totalProducts = products ? products.length : 0;
   const limit = itemsPerPage;
+
+  const handlePageChange = (newPage: number) => {
+    router.push(`/science?page=${newPage}`);
+  };
 
   return (
     <>
@@ -97,7 +113,7 @@ export default function Science() {
                 <Paginate
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                 />
               )}
             </div>

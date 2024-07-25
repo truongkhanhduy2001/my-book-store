@@ -1,7 +1,7 @@
 "use client";
 import "../book.css";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 import SkeletonLoad from "@/app/components/SkeletonLoad/Skeleton";
@@ -14,7 +14,6 @@ export default function Adventure() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [Loading, setLoading] = useState(true);
-  const prevPage = useRef(currentPage);
 
   useEffect(() => {
     const page = searchParams.get("page");
