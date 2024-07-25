@@ -1,16 +1,29 @@
 "use client";
 import "../book.css";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Paginate from "@/app/components/paginate/paginate";
 import CardBook from "@/app/components/cardBook/cardBook";
 import SkeletonLoad from "@/app/components/SkeletonLoad/Skeleton";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Adventure() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [products, setProducts] = useState(null) as any;
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [Loading, setLoading] = useState(true);
+  const prevPage = useRef(currentPage);
+
+  useEffect(() => {
+    const page = searchParams.get("page");
+    if (!page) {
+      router.replace("/adventure?page=1");
+    } else {
+      setCurrentPage(Number(page));
+    }
+  }, [searchParams, router]);
 
   useEffect(() => {
     const fetchDataAdventure = async () => {
@@ -29,7 +42,10 @@ export default function Adventure() {
   }, [products]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (prevPage.current !== currentPage) {
+      window.scrollTo(0, 0);
+    }
+    prevPage.current = currentPage;
   }, [currentPage]);
 
   // Calculate total pages
@@ -46,6 +62,10 @@ export default function Adventure() {
 
   const totalProducts = products ? products.length : 0;
   const limit = itemsPerPage;
+
+  const handlePageChange = (newPage: number) => {
+    router.push(`/adventure?page=${newPage}`);
+  };
 
   return (
     <>
@@ -97,7 +117,7 @@ export default function Adventure() {
                 <Paginate
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                 />
               )}
             </div>
