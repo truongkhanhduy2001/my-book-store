@@ -42,10 +42,7 @@ export default function Adventure() {
   }, [products]);
 
   useEffect(() => {
-    if (prevPage.current !== currentPage) {
-      window.scrollTo(0, 0);
-    }
-    prevPage.current = currentPage;
+    window.scrollTo(0, 0);
   }, [currentPage]);
 
   // Calculate total pages
