@@ -194,17 +194,25 @@ export default function CardBook(props: any) {
               </span>
             )}
           </div>
-          <div
-            className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]"
-            onClick={(e) => handleCart(e)}
-          >
-            <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/template-btn:left-[50%] group-hover/template-btn:text-[var(--white-color)]">
-              <FaShoppingCart />
-            </i>
-            <p className="add-cart font-bold text-[12px] text-[var(--first-color)] ml-[30px] duration-[250ms]">
-              Add cart
-            </p>
-          </div>
+          {product?.stock > 0 ? (
+            <div
+              className="template-btn group/template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] tracking-[2px] transition duration-[300ms] hover:bg-[var(--first-color)]"
+              onClick={(e) => handleCart(e)}
+            >
+              <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/template-btn:left-[50%] group-hover/template-btn:text-[var(--white-color)]">
+                <FaShoppingCart />
+              </i>
+              <p className="add-cart font-bold text-[12px] text-[var(--first-color)] ml-[30px] duration-[250ms]">
+                Add cart
+              </p>
+            </div>
+          ) : (
+            <div className="template-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[red] rounded-[5px] relative text-[red] z-[1] cursor-not-allowed">
+              <p className="sold-out text-[12px] font-bold px-[20px]">
+                Sold Out
+              </p>
+            </div>
+          )}
           <div className="Icon-Container group-hover/template-card:!inline-flex hidden flex-col absolute text-[var(--first-color)] top-[20px] right-[20px]">
             <i className="text-[20px] font-bold mb-[8px]">
               <LuEye />

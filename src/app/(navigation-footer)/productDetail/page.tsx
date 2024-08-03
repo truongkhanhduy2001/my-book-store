@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -23,6 +24,7 @@ export default function ProductDetail({ searchParams }: any) {
   const [averageRating, setAverageRating] = useState(0);
   const [userRating, setUserRating] = useState(0);
   const [userComment, setUserComment] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const id = searchParams.id;
 
@@ -185,10 +187,28 @@ export default function ProductDetail({ searchParams }: any) {
           userRating;
         const newAverageRating = newTotalRating / (reviews.length + 1);
         setAverageRating(newAverageRating);
+        setIsModalOpen(false);
       }
     } catch (error) {
       console.error("Failed to submit review:", error);
     }
+  };
+
+  const totalReviews = reviews.length;
+
+  const getPercentage = (rating: any) => {
+    const count = reviews.filter(
+      (review: any) => review.rating === rating
+    ).length;
+    return Math.round((count / totalReviews) * 100);
+  };
+
+  const percentages: any = {
+    5: getPercentage(5),
+    4: getPercentage(4),
+    3: getPercentage(3),
+    2: getPercentage(2),
+    1: getPercentage(1),
   };
 
   return (
@@ -279,7 +299,7 @@ export default function ProductDetail({ searchParams }: any) {
                         ))}
                       </div>
                       <span className="ml-[10px] text-[14px]">
-                        ({reviews.length} đánh giá)
+                        ({reviews.length} reviews)
                       </span>
                     </div>
                   </div>
@@ -495,6 +515,121 @@ export default function ProductDetail({ searchParams }: any) {
                 Reviews and Comments
               </h2>
 
+              {/* Đánh giá */}
+              <div className="review-list flex justify-between items-start space-x-4">
+                <div className="review-item w-1/2 rating-summary flex ml-[20px] mb-[20px] items-center">
+                  <div className="review flex flex-col mr-[20px] justify-center items-center">
+                    <span className="review-title text-[25px] font-bold">
+                      {reviews.length > 0 ? averageRating.toFixed(1) : "0.0"}
+                      /5.0
+                    </span>
+                    <div className="stars flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                          key={star}
+                          className={`text-[30px] ${
+                            reviews.length > 0 &&
+                            star <= Math.round(averageRating)
+                              ? "text-[#ffc107]"
+                              : "text-[#e4e5e9]"
+                          }`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <span className="text-[14px]">
+                      ({reviews.length} reviews)
+                    </span>
+                  </div>
+
+                  <div className="rating-details mt-[10px]">
+                    {[5, 4, 3, 2, 1].map((rating: any) => {
+                      const percentage =
+                        reviews.length > 0 ? percentages[rating] : 0;
+                      return (
+                        <div className="flex items-center" key={rating}>
+                          <span>{rating} sao</span>
+                          <div className="w-[250px] bg-gray-300 mx-[5px] h-[5px] relative">
+                            <div
+                              className="bg-[#ffc107] h-[5px]"
+                              style={{ width: `${percentage}%` }}
+                            ></div>
+                          </div>
+                          <span>{percentage}%</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="add-comment w-1/2 flex justify-center items-center">
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="btn-review flex items-center justify-center bg-[white] text-[var(--first-color)] text-[18px] font-medium py-[6px] px-[10px] mt-[50px] w-[400px] rounded-lg border-[2px] border-solid border-[var(--first-color)] hover:bg-[var(--first-color)] hover:text-white"
+                  >
+                    <MdEdit className="text-[18px] mr-[5px]" />
+                    Write review
+                  </button>
+
+                  {isModalOpen && (
+                    <div className="modal-comment fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                      <div className="modal-item bg-white p-[20px] rounded w-[50%] relative">
+                        <button
+                          onClick={() => setIsModalOpen(false)}
+                          className="absolute top-[10px] right-[10px] text-[24px] cursor-pointer"
+                        >
+                          &times;
+                        </button>
+                        <div className="w-full add-comment flex flex-col items-center">
+                          <form
+                            onSubmit={handleCommentSubmit}
+                            className="w-full"
+                          >
+                            <div className="mb-[10px]">
+                              <label className="flex justify-center mb-[5px] text-[20px] font-normal">
+                                Write book reviews
+                              </label>
+                              <div className="stars flex justify-center">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <span
+                                    key={star}
+                                    className={`text-[30px] cursor-pointer ${
+                                      star <= userRating
+                                        ? "text-[#ffc107]"
+                                        : "text-[#e4e5e9]"
+                                    }`}
+                                    onClick={() => handleRatingChange(star)}
+                                  >
+                                    ★
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="mb-[10px]">
+                              <label className="block mb-[5px]">Comment</label>
+                              <textarea
+                                className="w-full p-[5px] border rounded"
+                                rows={6}
+                                value={userComment}
+                                onChange={(e) => setUserComment(e.target.value)}
+                              ></textarea>
+                            </div>
+                            <button
+                              type="submit"
+                              className="flex float-end bg-[var(--first-color)] text-white py-[5px] px-[10px] rounded"
+                            >
+                              Submit review
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Kết quả */}
               <div
                 className={`comments-list ${
                   reviews.length > 3 ? "max-h-[180px] overflow-y-auto" : ""
@@ -523,51 +658,13 @@ export default function ProductDetail({ searchParams }: any) {
                           </span>
                         ))}
                       </div>
+                      <span className="text-[12px] text-gray-500 ml-[10px]">
+                        {new Date(review.createdAt).toLocaleString()}
+                      </span>
                     </div>
                     <p className="text-[14px]">{review.comment}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="add-comment mt-[20px]">
-                <h3 className="text-[18px] font-bold mb-[10px]">
-                  Add comments
-                </h3>
-                <form onSubmit={handleCommentSubmit}>
-                  <div className="mb-[10px]">
-                    <label className="block mb-[5px]">Reviews:</label>
-                    <div className="stars flex">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <span
-                          key={star}
-                          className={`text-[24px] cursor-pointer ${
-                            star <= userRating
-                              ? "text-[#ffc107]"
-                              : "text-[#e4e5e9]"
-                          }`}
-                          onClick={() => handleRatingChange(star)}
-                        >
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mb-[10px]">
-                    <label className="block mb-[5px]">Comment:</label>
-                    <textarea
-                      className="w-full p-[5px] border rounded"
-                      rows={4}
-                      value={userComment}
-                      onChange={(e) => setUserComment(e.target.value)}
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="bg-[var(--first-color)] text-white py-[5px] px-[10px] rounded"
-                  >
-                    Submit review
-                  </button>
-                </form>
               </div>
             </div>
           </div>

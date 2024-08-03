@@ -52,6 +52,88 @@
   .section-detail .product-reviews {
     max-width: 300px;
   }
+  .section-detail .product-reviews .review-list {
+    flex-direction: column;
+  }
+  .section-detail .product-reviews .review-list .review-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .section-detail .product-reviews .review-list .review-item .review {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .section-detail .product-reviews .review-list .review-item .rating-details {
+    width: 100%;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > span:first-child {
+    width: 50px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > div {
+    flex-grow: 1;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > span:last-child {
+    width: 50px;
+    text-align: left;
+    margin-left: 10px;
+  }
+  .section-detail .product-reviews .review-list .add-comment {
+    width: 100%;
+    margin: 0 0 40px 0;
+  }
+  .section-detail .product-reviews .review-list .add-comment .btn-review {
+    margin: 5px;
+  }
+  .section-detail
+    .product-reviews
+    .review-list
+    .add-comment
+    .modal-comment
+    .modal-item {
+    width: 90%;
+  }
   .section-detail
     .product-view-info
     .product-view-tab-content-ad
@@ -81,6 +163,88 @@
   }
   .section-detail .product-reviews {
     max-width: 500px;
+  }
+  .section-detail .product-reviews .review-list {
+    flex-direction: column;
+  }
+  .section-detail .product-reviews .review-list .review-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .section-detail .product-reviews .review-list .review-item .review {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .section-detail .product-reviews .review-list .review-item .rating-details {
+    width: 100%;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > span:first-child {
+    width: 50px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > div {
+    flex-grow: 1;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > span:last-child {
+    width: 50px;
+    text-align: left;
+    margin-left: 10px;
+  }
+  .section-detail .product-reviews .review-list .add-comment {
+    width: 100%;
+    margin: 0 0 40px 0;
+  }
+  .section-detail .product-reviews .review-list .add-comment .btn-review {
+    margin: 5px;
+  }
+  .section-detail
+    .product-reviews
+    .review-list
+    .add-comment
+    .modal-comment
+    .modal-item {
+    width: 100%;
   }
   .section-detail
     .product-view-info
@@ -112,6 +276,79 @@
   .section-detail .product-reviews {
     max-width: 700px;
   }
+  .section-detail .product-reviews .review-list {
+    margin-bottom: 15px;
+  }
+  .section-detail .product-reviews .review-list .review-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .section-detail .product-reviews .review-list .review-item .review {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .section-detail .product-reviews .review-list .review-item .rating-details {
+    width: 100%;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > span:first-child {
+    width: 50px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > div {
+    flex-grow: 1;
+  }
+
+  .section-detail
+    .product-reviews
+    .review-list
+    .review-item
+    .rating-details
+    > div
+    > span:last-child {
+    width: 50px;
+    text-align: left;
+    margin-left: 10px;
+  }
+
+  .section-detail .product-reviews .review-list .add-comment .btn-review {
+    width: 100%;
+    margin: 5px 0;
+  }
+
   .section-detail
     .product-view-info
     .product-view-tab-content-ad

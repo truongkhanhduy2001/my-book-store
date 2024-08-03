@@ -241,17 +241,25 @@ export default function Arrival() {
                             </span>
                           )}
                         </div>
-                        <div
-                          className="Arrivalcart-btn group/Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] hover:bg-[var(--first-color)] transition duration-[300ms] tracking-[2px]"
-                          onClick={(e) => handleCart(e, product)}
-                        >
-                          <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/Arrivalcart-btn:left-[50%] group-hover/Arrivalcart-btn:text-[var(--white-color)]">
-                            <FaShoppingCart />
-                          </i>
-                          <p className="add-cart font-bold text-[12px] ml-[30px] text-[var(--first-color)] duration-[250ms]">
-                            Add cart
-                          </p>
-                        </div>
+                        {stock > 0 ? (
+                          <div
+                            className="Arrivalcart-btn group/Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[var(--first-color)] rounded-[5px] relative text-[var(--first-color)] z-[1] hover:bg-[var(--first-color)] transition duration-[300ms] tracking-[2px]"
+                            onClick={(e) => handleCart(e, product)}
+                          >
+                            <i className="text-[12px] absolute top-[48.5%] left-[15%] translate-x-[-50%] translate-y-[-50%] duration-[250ms] group-hover/Arrivalcart-btn:left-[50%] group-hover/Arrivalcart-btn:text-[var(--white-color)]">
+                              <FaShoppingCart />
+                            </i>
+                            <p className="add-cart font-bold text-[12px] ml-[30px] text-[var(--first-color)] duration-[250ms]">
+                              Add to Cart
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="Arrivalcart-btn text-[12px] inline-block text-center font-bold p-[5px] border-[3px] border-solid border-[red] rounded-[5px] relative text-[red] z-[1] cursor-not-allowed">
+                            <p className="sold-out font-bold text-[12px] px-[20px]">
+                              Sold Out
+                            </p>
+                          </div>
+                        )}
                         <div className="Icon-Container group-hover/arrivals-card:!inline-flex text-[var(--first-color)] hidden flex-col absolute top-[20px] right-[20px]">
                           <i className="text-[20px] font-bold mb-[8px]">
                             <LuEye />
