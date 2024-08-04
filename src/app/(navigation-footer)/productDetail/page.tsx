@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
-import { BiSolidLike } from "react-icons/bi";
+import { BiSolidLike, BiCommentDetail } from "react-icons/bi";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -15,7 +15,6 @@ import { useCartContext } from "@/provider/CartProvider";
 import { useWishContext } from "@/provider/WishProvider";
 import Loader from "@/app/components/loader/loader";
 import Paginate from "@/app/components/paginate/paginate";
-import { set } from "mongoose";
 
 export default function ProductDetail({ searchParams }: any) {
   const { user } = useCustomContext();
@@ -32,6 +31,13 @@ export default function ProductDetail({ searchParams }: any) {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 6;
   const [hoverRating, setHoverRating] = useState(0);
+
+  const [likedComments, setLikedComments] = useState<string[]>([]);
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const [replyContent, setReplyContent] = useState("");
+  const [showReplies, setShowReplies] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const id = searchParams.id;
 
@@ -276,6 +282,120 @@ export default function ProductDetail({ searchParams }: any) {
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
   const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+
+  const handleLike = async (reviewId: string) => {
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    // Optimistically update the UI
+    setReviews((prevReviews: any) =>
+      prevReviews.map((review: any) =>
+        review._id === reviewId
+          ? {
+              ...review,
+              likes: review.likes.includes(user._id)
+                ? review.likes.filter((id: string) => id !== user._id)
+                : [...review.likes, user._id],
+            }
+          : review
+      )
+    );
+
+    setLikedComments((prevLikedComments) =>
+      prevLikedComments.includes(reviewId)
+        ? prevLikedComments.filter((id) => id !== reviewId)
+        : [...prevLikedComments, reviewId]
+    );
+
+    try {
+      const response = await fetch("/api/review/like", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          reviewId,
+          userId: user._id,
+        }),
+      });
+      const data = await response.json();
+      if (data.status !== 200) {
+        // Revert the optimistic update if the request fails
+        setReviews((prevReviews: any) =>
+          prevReviews.map((review: any) =>
+            review._id === reviewId ? { ...review, likes: data.likes } : review
+          )
+        );
+        setLikedComments((prevLikedComments) =>
+          data.isLiked
+            ? [...prevLikedComments, reviewId]
+            : prevLikedComments.filter((id) => id !== reviewId)
+        );
+      }
+    } catch (error) {
+      console.error("Failed to like review:", error);
+      // Revert the optimistic update if the request fails
+      setReviews((prevReviews: any) =>
+        prevReviews.map((review: any) =>
+          review._id === reviewId
+            ? {
+                ...review,
+                likes: review.likes.includes(user._id)
+                  ? review.likes.filter((id: string) => id !== user._id)
+                  : [...review.likes, user._id],
+              }
+            : review
+        )
+      );
+      setLikedComments((prevLikedComments) =>
+        prevLikedComments.includes(reviewId)
+          ? prevLikedComments.filter((id) => id !== reviewId)
+          : [...prevLikedComments, reviewId]
+      );
+    }
+  };
+
+  const handleReplySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user || !replyingTo) return;
+
+    try {
+      const response = await fetch("/api/review/reply", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          reviewId: replyingTo,
+          userId: user._id,
+          content: replyContent,
+        }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        setReviews(
+          reviews.map((review: any) =>
+            review._id === replyingTo
+              ? { ...review, replies: data.replies }
+              : review
+          )
+        );
+        setReplyingTo(null);
+        setReplyContent("");
+      }
+    } catch (error) {
+      console.error("Failed to submit reply:", error);
+    }
+  };
+
+  const toggleShowReplies = (reviewId: string) => {
+    setShowReplies((prevShowReplies) => ({
+      ...prevShowReplies,
+      [reviewId]: !prevShowReplies[reviewId],
+    }));
+  };
 
   return (
     <>
@@ -769,6 +889,97 @@ export default function ProductDetail({ searchParams }: any) {
                           ))}
                         </div>
                         <p className="text-[15px]">{review.comment}</p>
+                        <div className="mt-[10px] flex items-center">
+                          <button
+                            onClick={() => handleLike(review._id)}
+                            className={`mr-[10px] flex items-center justify-center text-[16px] ${
+                              likedComments.includes(review._id) ? "" : ""
+                            }`}
+                          >
+                            <BiSolidLike className="mr-[2px] text-[#A0A3B1]" />
+                            {review.likes?.length || 0}
+                          </button>
+                          <button
+                            onClick={() => {
+                              setReplyingTo(review._id);
+                              setReplyContent("");
+                            }}
+                          >
+                            <BiCommentDetail className="mr-[3px]" />
+                          </button>
+                        </div>
+                        {replyingTo === review._id && (
+                          <div className="mt-[10px]">
+                            <form onSubmit={handleReplySubmit}>
+                              <textarea
+                                className="w-full p-[10px] border rounded resize-none"
+                                rows={1}
+                                value={replyContent}
+                                onChange={(e) =>
+                                  setReplyContent(e.target.value)
+                                }
+                                placeholder="Add a public reply..."
+                              ></textarea>
+                              <div className="mt-[10px] flex justify-end">
+                                <button
+                                  type="button"
+                                  onClick={() => setReplyingTo(null)}
+                                  className="mr-[10px] bg-gray-300 text-black py-[5px] px-[10px] rounded"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  type="submit"
+                                  className="bg-blue-500 text-white py-[5px] px-[10px] rounded"
+                                >
+                                  Reply
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        )}
+                        {review.replies && review.replies.length > 0 && (
+                          <div className="ml-[8px]">
+                            {review.replies
+                              .slice(
+                                0,
+                                showReplies[review._id]
+                                  ? review.replies.length
+                                  : 0
+                              )
+                              .map((reply: any, replyIndex: number) => (
+                                <div key={replyIndex} className="mt-[5px]">
+                                  <span className="font-bold">
+                                    {reply.userId.name}
+                                  </span>
+                                  <span className="text-[12px] text-gray-500 ml-[10px]">
+                                    {new Date(
+                                      reply.createdAt
+                                    ).toLocaleDateString("en-GB", {
+                                      day: "2-digit",
+                                      month: "2-digit",
+                                      year: "numeric",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    })}
+                                  </span>
+                                  <div className="mt-[5px]">
+                                    {reply.content}
+                                  </div>
+                                </div>
+                              ))}
+                            {review.replies.length > 0 && (
+                              <button
+                                onClick={() => toggleShowReplies(review._id)}
+                                className="mt-[10px] text-blue-500 hover:underline"
+                              >
+                                {showReplies[review._id]
+                                  ? "Show less"
+                                  : `Show more (${review.replies.length - 0})`}
+                              </button>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
