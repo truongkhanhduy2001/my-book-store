@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
+import { BiSolidLike } from "react-icons/bi";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -13,6 +14,7 @@ import { useCustomContext } from "@/provider/CustomProvider";
 import { useCartContext } from "@/provider/CartProvider";
 import { useWishContext } from "@/provider/WishProvider";
 import Loader from "@/app/components/loader/loader";
+import Paginate from "@/app/components/paginate/paginate";
 
 export default function ProductDetail({ searchParams }: any) {
   const { user } = useCustomContext();
@@ -25,6 +27,9 @@ export default function ProductDetail({ searchParams }: any) {
   const [userRating, setUserRating] = useState(0);
   const [userComment, setUserComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sortOption, setSortOption] = useState("newest");
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 6;
 
   const id = searchParams.id;
 
@@ -210,6 +215,43 @@ export default function ProductDetail({ searchParams }: any) {
     2: getPercentage(2),
     1: getPercentage(1),
   };
+
+  // Kết quả
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(
+          `/api/review/get?id=${products._id}&sort=${sortOption}`
+        );
+        const data = await response.json();
+        if (data.status === 200) {
+          setReviews(data.reviews);
+          setAverageRating(
+            data.reviews.reduce(
+              (acc: any, review: any) => acc + review.rating,
+              0
+            ) / data.reviews.length
+          );
+        }
+      } catch (error) {
+        console.error("Failed to fetch reviews:", error);
+      }
+    };
+
+    if (products) {
+      fetchReviews();
+    }
+  }, [products, sortOption]);
+
+  const handleSortChange = (newSort: string) => {
+    setSortOption(newSort);
+    setCurrentPage(1);
+  };
+
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
 
   return (
     <>
@@ -629,17 +671,34 @@ export default function ProductDetail({ searchParams }: any) {
                 </div>
               </div>
 
-              {/* Kết quả */}
-              <div
-                className={`comments-list ${
-                  reviews.length > 3 ? "max-h-[180px] overflow-y-auto" : ""
-                }`}
-              >
-                {reviews.map((review: any, index: any) => (
-                  <div
-                    key={index}
-                    className="comment border-b pb-[15px] mb-[15px]"
+              {reviews.length > 0 && (
+                <div className="review-sort-options flex justify-end mb-4">
+                  <button
+                    className={`px-4 py-2 mr-2 rounded ${
+                      sortOption === "newest"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 text-gray-700"
+                    }`}
+                    onClick={() => handleSortChange("newest")}
                   >
+                    Newest
+                  </button>
+                  <button
+                    className={`px-4 py-2 rounded ${
+                      sortOption === "oldest"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 text-gray-700"
+                    }`}
+                    onClick={() => handleSortChange("oldest")}
+                  >
+                    Oldest
+                  </button>
+                </div>
+              )}
+              {/* Kết quả */}
+              <div className="comments-list mt-[20px] pt-[20px]">
+                {currentReviews.map((review: any, index: any) => (
+                  <div key={index} className="comment pb-[15px] mb-[15px]">
                     <div className="flex items-center mb-[10px]">
                       <span className="font-bold mr-[10px]">
                         {review.userId.name}
@@ -666,6 +725,13 @@ export default function ProductDetail({ searchParams }: any) {
                   </div>
                 ))}
               </div>
+              {reviews.length > reviewsPerPage && (
+                <Paginate
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              )}
             </div>
           </div>
         )}

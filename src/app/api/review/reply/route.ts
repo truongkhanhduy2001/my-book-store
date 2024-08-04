@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     review.replies.push({ userId, content, createdAt: new Date() });
     await review.save();
 
-    const populatedReview = await Review.findById(reviewId).populate({
+    const populatedReview = await Review.findById(reviewId._id).populate({
       path: "replies.userId",
       select: "name",
     });
