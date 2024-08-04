@@ -15,6 +15,7 @@ import { useCartContext } from "@/provider/CartProvider";
 import { useWishContext } from "@/provider/WishProvider";
 import Loader from "@/app/components/loader/loader";
 import Paginate from "@/app/components/paginate/paginate";
+import { set } from "mongoose";
 
 export default function ProductDetail({ searchParams }: any) {
   const { user } = useCustomContext();
@@ -30,6 +31,7 @@ export default function ProductDetail({ searchParams }: any) {
   const [sortOption, setSortOption] = useState("newest");
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 6;
+  const [hoverRating, setHoverRating] = useState(0);
 
   const id = searchParams.id;
 
@@ -183,7 +185,14 @@ export default function ProductDetail({ searchParams }: any) {
           ...data.review,
           userId: { name: user.name },
         };
-        setReviews((prevReviews: any) => [...prevReviews, newReview]);
+        setReviews((prevReviews: any) => {
+          const updatedReviews = [newReview, ...prevReviews];
+          return updatedReviews.sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        });
+        setSortOption("newest");
         setUserRating(0);
         setUserComment("");
 
@@ -243,9 +252,24 @@ export default function ProductDetail({ searchParams }: any) {
     }
   }, [products, sortOption]);
 
-  const handleSortChange = (newSort: string) => {
-    setSortOption(newSort);
+  const handleSortChange = (option: string) => {
+    setSortOption(option);
     setCurrentPage(1);
+    if (option === "newest") {
+      setReviews(
+        [...reviews].sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+      );
+    } else if (option === "oldest") {
+      setReviews(
+        [...reviews].sort(
+          (a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        )
+      );
+    }
   };
 
   const indexOfLastReview = currentPage * reviewsPerPage;
@@ -333,7 +357,7 @@ export default function ProductDetail({ searchParams }: any) {
                               reviews.length > 0 &&
                               star <= Math.round(averageRating)
                                 ? "text-[#ffc107]"
-                                : "text-[#e4e5e9]"
+                                : "text-[#A0A3B1]"
                             }`}
                           >
                             ★
@@ -573,7 +597,7 @@ export default function ProductDetail({ searchParams }: any) {
                             reviews.length > 0 &&
                             star <= Math.round(averageRating)
                               ? "text-[#ffc107]"
-                              : "text-[#e4e5e9]"
+                              : "text-[#A0A3B1]"
                           }`}
                         >
                           ★
@@ -637,11 +661,15 @@ export default function ProductDetail({ searchParams }: any) {
                                   <span
                                     key={star}
                                     className={`text-[30px] cursor-pointer ${
-                                      star <= userRating
+                                      star <= (hoverRating || userRating)
                                         ? "text-[#ffc107]"
-                                        : "text-[#e4e5e9]"
+                                        : "text-[#A0A3B1]"
                                     }`}
-                                    onClick={() => handleRatingChange(star)}
+                                    onMouseEnter={() => {
+                                      setHoverRating(star);
+                                      handleRatingChange(star);
+                                    }}
+                                    onMouseLeave={() => setHoverRating(0)}
                                   >
                                     ★
                                   </span>
@@ -671,57 +699,78 @@ export default function ProductDetail({ searchParams }: any) {
                 </div>
               </div>
 
+              {/* Sắp xếp */}
               {reviews.length > 0 && (
-                <div className="review-sort-options flex justify-end mb-4">
+                <div className="review-sort-options flex justify-start mb-4 border-b border-gray-300">
                   <button
-                    className={`px-4 py-2 mr-2 rounded ${
+                    className={`relative px-4 py-2 mr-2 text-[15px] rounded transition-colors duration-300 ${
                       sortOption === "newest"
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-700"
+                        ? "text-blue-500"
+                        : "text-gray-700 hover:text-blue-500"
                     }`}
                     onClick={() => handleSortChange("newest")}
                   >
                     Newest
+                    <span
+                      className={`absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 transition-transform duration-300 ${
+                        sortOption === "newest" ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    ></span>
                   </button>
                   <button
-                    className={`px-4 py-2 rounded ${
+                    className={`relative px-4 py-2 text-[15px] rounded transition-colors duration-300 ${
                       sortOption === "oldest"
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-700"
+                        ? "text-blue-500"
+                        : "text-gray-700 hover:text-blue-500"
                     }`}
                     onClick={() => handleSortChange("oldest")}
                   >
                     Oldest
+                    <span
+                      className={`absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 transition-transform duration-300 ${
+                        sortOption === "oldest" ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    ></span>
                   </button>
                 </div>
               )}
+
               {/* Kết quả */}
               <div className="comments-list mt-[20px] pt-[20px]">
                 {currentReviews.map((review: any, index: any) => (
                   <div key={index} className="comment pb-[15px] mb-[15px]">
-                    <div className="flex items-center mb-[10px]">
-                      <span className="font-bold mr-[10px]">
-                        {review.userId.name}
-                      </span>
-                      <div className="stars flex">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <span
-                            key={star}
-                            className={`text-[16px] ${
-                              star <= review.rating
-                                ? "text-[#ffc107]"
-                                : "text-[#e4e5e9]"
-                            }`}
-                          >
-                            ★
-                          </span>
-                        ))}
+                    <div className="flex mb-[10px]">
+                      <div className="flex flex-col">
+                        <span className="font-bold">{review.userId.name}</span>
+                        <span className="text-[15px] text-gray-500">
+                          {new Date(review.createdAt).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                            }
+                          )}
+                        </span>
                       </div>
-                      <span className="text-[12px] text-gray-500 ml-[10px]">
-                        {new Date(review.createdAt).toLocaleString()}
-                      </span>
+                      <div className="flex flex-col ml-[50px]">
+                        <div className="stars flex">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <span
+                              key={star}
+                              className={`text-[20px] ${
+                                star <= review.rating
+                                  ? "text-[#ffc107]"
+                                  : "text-[#A0A3B1]"
+                              }`}
+                            >
+                              ★
+                            </span>
+                          ))}
+                        </div>
+                        <p className="text-[15px]">{review.comment}</p>
+                      </div>
                     </div>
-                    <p className="text-[14px]">{review.comment}</p>
                   </div>
                 ))}
               </div>
