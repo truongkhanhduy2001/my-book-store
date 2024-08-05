@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { FaShoppingCart, FaCheckCircle } from "react-icons/fa";
+import { FaShoppingCart, FaCheckCircle, FaUser } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
 import { BiSolidLike, BiCommentDetail } from "react-icons/bi";
@@ -32,12 +32,11 @@ export default function ProductDetail({ searchParams }: any) {
   const reviewsPerPage = 6;
   const [hoverRating, setHoverRating] = useState(0);
 
+  const [replies, setReplies] = useState<{ [key: string]: any[] }>({});
+  const [newReply, setNewReply] = useState("");
+  const [currentReviewId, setCurrentReviewId] = useState<string | null>(null);
+
   const [likedComments, setLikedComments] = useState<string[]>([]);
-  const [replyingTo, setReplyingTo] = useState<string | null>(null);
-  const [replyContent, setReplyContent] = useState("");
-  const [showReplies, setShowReplies] = useState<{ [key: string]: boolean }>(
-    {}
-  );
 
   const id = searchParams.id;
 
@@ -283,6 +282,7 @@ export default function ProductDetail({ searchParams }: any) {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
   const totalPages = Math.ceil(reviews.length / reviewsPerPage);
 
+  // Like
   const handleLike = async (reviewId: string) => {
     if (!user) {
       router.push("/login");
@@ -357,44 +357,53 @@ export default function ProductDetail({ searchParams }: any) {
     }
   };
 
-  const handleReplySubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!user || !replyingTo) return;
+  const fetchReplies = async (reviewId: string) => {
+    try {
+      const response = await fetch(
+        `/api/review/reply/get?reviewId=${reviewId}`
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        setReplies((prevReplies) => ({
+          ...prevReplies,
+          [reviewId]: data.replies,
+        }));
+      } else {
+        console.error(data.error);
+      }
+    } catch (error) {
+      console.error("Failed to fetch replies:", error);
+    }
+  };
+
+  // Reply
+  const handleReplySubmit = async (reviewId: string) => {
+    if (!newReply.trim()) return;
 
     try {
-      const response = await fetch("/api/review/reply", {
+      const response = await fetch("/api/review/reply/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          reviewId: replyingTo,
+          reviewId,
           userId: user._id,
-          content: replyContent,
+          content: newReply,
         }),
       });
-      const data = await response.json();
-      if (data.status === 200) {
-        setReviews(
-          reviews.map((review: any) =>
-            review._id === replyingTo
-              ? { ...review, replies: data.replies }
-              : review
-          )
-        );
-        setReplyingTo(null);
-        setReplyContent("");
+
+      if (response.ok) {
+        setNewReply("");
+        fetchReplies(reviewId);
+      } else {
+        const data = await response.json();
+        console.error(data.error);
       }
     } catch (error) {
       console.error("Failed to submit reply:", error);
     }
-  };
-
-  const toggleShowReplies = (reviewId: string) => {
-    setShowReplies((prevShowReplies) => ({
-      ...prevShowReplies,
-      [reviewId]: !prevShowReplies[reviewId],
-    }));
   };
 
   return (
@@ -873,7 +882,7 @@ export default function ProductDetail({ searchParams }: any) {
                           )}
                         </span>
                       </div>
-                      <div className="flex flex-col ml-[50px]">
+                      <div className="flex flex-col ml-[50px] w-[600px]">
                         <div className="stars flex">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <span
@@ -899,85 +908,77 @@ export default function ProductDetail({ searchParams }: any) {
                             <BiSolidLike className="mr-[2px] text-[#A0A3B1]" />
                             {review.likes?.length || 0}
                           </button>
-                          <button
-                            onClick={() => {
-                              setReplyingTo(review._id);
-                              setReplyContent("");
-                            }}
-                          >
-                            <BiCommentDetail className="mr-[3px]" />
-                          </button>
-                        </div>
-                        {replyingTo === review._id && (
-                          <div className="mt-[10px]">
-                            <form onSubmit={handleReplySubmit}>
-                              <textarea
-                                className="w-full p-[10px] border rounded resize-none"
-                                rows={1}
-                                value={replyContent}
-                                onChange={(e) =>
-                                  setReplyContent(e.target.value)
+                          <div className="flex items-center justify-center text-[16px] text-gray-500">
+                            <BiCommentDetail
+                              className="mr-[2px] cursor-pointer"
+                              onClick={() => {
+                                if (currentReviewId !== review._id) {
+                                  setCurrentReviewId(review._id);
+                                  fetchReplies(review._id);
+                                } else {
+                                  setCurrentReviewId(null);
                                 }
-                                placeholder="Add a public reply..."
-                              ></textarea>
-                              <div className="mt-[10px] flex justify-end">
+                              }}
+                            />
+                            {review.replies?.length || 0}
+                          </div>
+                        </div>
+                        {currentReviewId === review._id && (
+                          <div className="mt-[10px]">
+                            <div className="mt-4">
+                              <textarea
+                                value={newReply}
+                                rows={1}
+                                onChange={(e) => setNewReply(e.target.value)}
+                                placeholder="Write a reply..."
+                                className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
+                              <div className="flex mt-2 justify-end">
                                 <button
-                                  type="button"
-                                  onClick={() => setReplyingTo(null)}
-                                  className="mr-[10px] bg-gray-300 text-black py-[5px] px-[10px] rounded"
+                                  onClick={() => setCurrentReviewId(null)}
+                                  className="bg-gray-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-gray-600 transition duration-200"
                                 >
                                   Cancel
                                 </button>
                                 <button
-                                  type="submit"
-                                  className="bg-blue-500 text-white py-[5px] px-[10px] rounded"
+                                  onClick={() => handleReplySubmit(review._id)}
+                                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
                                 >
-                                  Reply
+                                  Submit
                                 </button>
                               </div>
-                            </form>
-                          </div>
-                        )}
-                        {review.replies && review.replies.length > 0 && (
-                          <div className="ml-[8px]">
-                            {review.replies
-                              .slice(
-                                0,
-                                showReplies[review._id]
-                                  ? review.replies.length
-                                  : 0
-                              )
-                              .map((reply: any, replyIndex: number) => (
-                                <div key={replyIndex} className="mt-[5px]">
-                                  <span className="font-bold">
-                                    {reply.userId.name}
-                                  </span>
-                                  <span className="text-[12px] text-gray-500 ml-[10px]">
-                                    {new Date(
-                                      reply.createdAt
-                                    ).toLocaleDateString("en-GB", {
-                                      day: "2-digit",
-                                      month: "2-digit",
-                                      year: "numeric",
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                    })}
-                                  </span>
-                                  <div className="mt-[5px]">
+                            </div>
+                            {replies[review._id]?.map((reply, replyIndex) => (
+                              <div
+                                key={replyIndex}
+                                className="ml-2 mt-5 flex items-start space-x-3"
+                              >
+                                <div className="w-10 h-10 rounded-full bg-gray-300 flex-shrink-0 flex items-center justify-center">
+                                  <FaUser className="text-black text-lg" />
+                                </div>
+                                <div className="flex-grow">
+                                  <div className="flex items-center space-x-2">
+                                    <span className="font-bold text-base text-gray-900">
+                                      {reply.userId.name}
+                                    </span>
+                                    <span className="text-xs text-gray-500">
+                                      {new Date(
+                                        reply.createdAt
+                                      ).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "2-digit",
+                                        year: "numeric",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                      })}
+                                    </span>
+                                  </div>
+                                  <div className="mt-1 text-sm text-gray-800">
                                     {reply.content}
                                   </div>
                                 </div>
-                              ))}
-                            {review.replies.length > 0 && (
-                              <button
-                                onClick={() => toggleShowReplies(review._id)}
-                                className="mt-[10px] text-blue-500 hover:underline"
-                              >
-                                {showReplies[review._id]
-                                  ? "Show less"
-                                  : `Show more (${review.replies.length - 0})`}
-                              </button>
-                            )}
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
