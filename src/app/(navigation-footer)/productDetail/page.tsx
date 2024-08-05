@@ -239,12 +239,25 @@ export default function ProductDetail({ searchParams }: any) {
         );
         const data = await response.json();
         if (data.status === 200) {
-          setReviews(data.reviews);
+          let sortedReviews = data.reviews;
+          if (sortOption === "newest") {
+            sortedReviews.sort(
+              (a: any, b: any) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            );
+          } else if (sortOption === "mostLiked") {
+            sortedReviews.sort(
+              (a: any, b: any) =>
+                (b.likes?.length || 0) - (a.likes?.length || 0)
+            );
+          }
+          setReviews(sortedReviews);
           setAverageRating(
-            data.reviews.reduce(
+            sortedReviews.reduce(
               (acc: any, review: any) => acc + review.rating,
               0
-            ) / data.reviews.length
+            ) / sortedReviews.length
           );
         }
       } catch (error) {
@@ -267,11 +280,10 @@ export default function ProductDetail({ searchParams }: any) {
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         )
       );
-    } else if (option === "oldest") {
+    } else if (option === "mostLiked") {
       setReviews(
         [...reviews].sort(
-          (a, b) =>
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
         )
       );
     }
@@ -848,22 +860,21 @@ export default function ProductDetail({ searchParams }: any) {
                   </button>
                   <button
                     className={`relative px-4 py-2 text-[15px] rounded transition-colors duration-300 ${
-                      sortOption === "oldest"
+                      sortOption === "mostLiked"
                         ? "text-blue-500"
                         : "text-gray-700 hover:text-blue-500"
                     }`}
-                    onClick={() => handleSortChange("oldest")}
+                    onClick={() => handleSortChange("mostLiked")}
                   >
-                    Oldest
+                    Most Liked
                     <span
                       className={`absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 transition-transform duration-300 ${
-                        sortOption === "oldest" ? "scale-x-100" : "scale-x-0"
+                        sortOption === "mostLiked" ? "scale-x-100" : "scale-x-0"
                       }`}
                     ></span>
                   </button>
                 </div>
               )}
-
               {/* Kết quả */}
               <div className="comments-list mt-[20px] pt-[20px]">
                 {currentReviews.map((review: any, index: any) => (
