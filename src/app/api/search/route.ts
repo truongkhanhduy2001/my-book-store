@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
       $or: [
         { name: regexQuery },
         { genre: regexQuery }, // This will match if the genre contains the query
-        { author: regexQuery }
+        { author: regexQuery },
       ],
     });
 

@@ -12,7 +12,7 @@ import Slider from "react-slick";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
 import { useWishContext } from "@/provider/WishProvider";
@@ -22,8 +22,8 @@ import SkeletonLoad from "../SkeletonLoad/Skeleton";
 export default function Discount() {
   const router = useRouter();
   const { user } = useCustomContext();
-  const [products, setProducts] = useState([]);
-  const [originalProducts, setOriginalProducts] = useState([]);
+  const [products, setProducts] = useState([]) as any;
+  const [originalProducts, setOriginalProducts] = useState([]) as any;
   const { wish, getWish } = useWishContext();
   const { cart, getCart } = useCartContext();
   const [Loading, setLoading] = useState(true);
@@ -33,8 +33,18 @@ export default function Discount() {
       try {
         const res = await fetch("/api/product/discount");
         const data = await res.json();
-        setProducts(data.data);
-        setOriginalProducts(data.data);
+        const productsWithReviews = await Promise.all(
+          data.data.map(async (product: any) => {
+            const reviewRes = await fetch(`/api/review/get?id=${product._id}`);
+            const reviewData = await reviewRes.json();
+            return {
+              ...product,
+              reviews: reviewData.reviews,
+            };
+          })
+        );
+        setProducts(productsWithReviews);
+        setOriginalProducts(productsWithReviews);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -42,6 +52,15 @@ export default function Discount() {
     };
     fetchDataDiscount();
   }, []);
+
+  const calculateAverageRating = (reviews: any) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const sum = reviews.reduce(
+      (acc: any, review: any) => acc + review.rating,
+      0
+    );
+    return (sum / reviews.length).toFixed(1);
+  };
 
   function changePositionNav(e: any) {
     document.querySelector(".nav-discount.active")?.classList.remove("active");
@@ -309,6 +328,7 @@ export default function Discount() {
                   ).toFixed(0);
 
                   const isWished = wishList[product._id];
+                  const averageRating = calculateAverageRating(product.reviews);
                   return (
                     <Link
                       key={product._id}
@@ -346,6 +366,26 @@ export default function Discount() {
                         <h2 className="mt-[12px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
                           {product.name}
                         </h2>
+                        <div className="average-rating flex items-center justify-center mb-[8px]">
+                          <div className="stars flex">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <span
+                                key={star}
+                                className={`text-[16px] ${
+                                  star <= Math.round(Number(averageRating))
+                                    ? "text-[#ffc107]"
+                                    : "text-[#A0A3B1]"
+                                }`}
+                              >
+                                <FaStar />
+                              </span>
+                            ))}
+                          </div>
+                          <span className="ml-[5px] text-[12px] text-gray-500">
+                            ({product.reviews ? product.reviews.length : 0}{" "}
+                            reviews)
+                          </span>
+                        </div>
                         <div className="Discountwriter text-[var(--text-color)] text-[16px]">
                           {product.author}
                         </div>

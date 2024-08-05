@@ -14,6 +14,15 @@ export default function WishList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
 
+  const calculateAverageRating = (reviews: any) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const sum = reviews.reduce(
+      (acc: any, review: any) => acc + review.rating,
+      0
+    );
+    return (sum / reviews.length).toFixed(1);
+  };
+
   // Calculate total pages
   const totalPages = wish ? Math.ceil(wish.listWish.length / itemsPerPage) : 0;
 
@@ -64,7 +73,17 @@ export default function WishList() {
                     ((Number(discount) - Number(price)) / Number(price)) *
                     100
                   ).toFixed(0);
-                  return <TemplateWish key={index} item={item} per={per} />;
+                  const averageRating = calculateAverageRating(
+                    item.productId.reviews
+                  );
+                  return (
+                    <TemplateWish
+                      key={index}
+                      item={item}
+                      per={per}
+                      averageRating={averageRating}
+                    />
+                  );
                 })}
               </div>
               {totalProducts > limit && (

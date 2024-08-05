@@ -9,14 +9,14 @@ import { useRouter } from "next/navigation";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { useCustomContext } from "@/provider/CustomProvider";
 import { useWishContext } from "@/provider/WishProvider";
 import { useCartContext } from "@/provider/CartProvider";
 
 export default function CardBook(props: any) {
   const router = useRouter();
-  const { product, per } = props;
+  const { product, per, averageRating } = props;
   const { user } = useCustomContext();
   const { wish, getWish } = useWishContext();
   const { cart, getCart } = useCartContext();
@@ -151,6 +151,25 @@ export default function CardBook(props: any) {
           <h2 className="mt-[12px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
             {product?.name}
           </h2>
+          <div className="average-rating flex items-center justify-center mb-[8px]">
+            <div className="stars flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`text-[16px] ${
+                    star <= Math.round(Number(averageRating))
+                      ? "text-[#ffc107]"
+                      : "text-[#A0A3B1]"
+                  }`}
+                >
+                  <FaStar />
+                </span>
+              ))}
+            </div>
+            <span className="ml-[5px] text-[12px] text-gray-500">
+              ({product.reviews ? product.reviews.length : 0} reviews)
+            </span>
+          </div>
           <div className="template-writer text-[var(--text-color)] text-[16px]">
             {product?.author}
           </div>

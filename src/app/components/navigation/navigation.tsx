@@ -78,6 +78,20 @@ export default function Navigate() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const cartDropdown = document.querySelector(".cart-dropdown");
+      if (cartDropdown && !cartDropdown.contains(event.target as Node)) {
+        cartDropdown.classList.remove("active");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleLogOut = () => {
     try {
       fetch("/api/users/logout", { method: "POST" })

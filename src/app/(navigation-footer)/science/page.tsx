@@ -29,7 +29,17 @@ export default function Science() {
       try {
         const res = await fetch("/api/product/science");
         const data = await res.json();
-        setProducts(data.data);
+        const productsWithReviews = await Promise.all(
+          data.data.map(async (product: any) => {
+            const reviewRes = await fetch(`/api/review/get?id=${product._id}`);
+            const reviewData = await reviewRes.json();
+            return {
+              ...product,
+              reviews: reviewData.reviews,
+            };
+          })
+        );
+        setProducts(productsWithReviews);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -39,6 +49,15 @@ export default function Science() {
       fetchDataScience();
     }
   }, [products]);
+
+  const calculateAverageRating = (reviews: any) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const sum = reviews.reduce(
+      (acc: any, review: any) => acc + review.rating,
+      0
+    );
+    return (sum / reviews.length).toFixed(1);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -106,7 +125,15 @@ export default function Science() {
                     ((Number(discount) - Number(price)) / Number(price)) *
                     100
                   ).toFixed(0);
-                  return <CardBook key={index} product={product} per={per} />;
+                  const averageRating = calculateAverageRating(product.reviews);
+                  return (
+                    <CardBook
+                      key={index}
+                      product={product}
+                      per={per}
+                      averageRating={averageRating}
+                    />
+                  );
                 })}
               </div>
               {totalProducts > limit && (

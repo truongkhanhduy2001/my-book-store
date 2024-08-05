@@ -9,20 +9,46 @@ export default function useWish() {
   const [getWishAgain, setGetWishAgain] = useState(false);
 
   const getWish = async () => setGetWishAgain(true);
-  useEffect(() => {
-    const getWish = async () => {
-      const response = await fetch(`/api/wish/get?userId=${user?._id}`);
 
-      const result = await response.json();
-      if (result.status === 200) {
-        setWish(result.data);
+  useEffect(() => {
+    const fetchWishWithReviews = async () => {
+      if (!user?._id) return;
+
+      try {
+        const response = await fetch(`/api/wish/get?userId=${user._id}`);
+        const result = await response.json();
+
+        if (result.status === 200) {
+          // Fetch reviews for each product in the wish list
+          const wishWithReviews = await Promise.all(
+            result.data.listWish.map(async (item: any) => {
+              const reviewResponse = await fetch(
+                `/api/review/get?id=${item.productId._id}`
+              );
+              const reviewData = await reviewResponse.json();
+
+              return {
+                ...item,
+                productId: {
+                  ...item.productId,
+                  reviews: reviewData.reviews,
+                },
+              };
+            })
+          );
+
+          setWish({
+            ...result.data,
+            listWish: wishWithReviews,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching wish list with reviews:", error);
       }
     };
-    if (!wish) {
-      getWish();
-    }
-    if (getWishAgain && wish) {
-      getWish();
+
+    if (!wish || getWishAgain) {
+      fetchWishWithReviews();
       setGetWishAgain(false);
     }
   }, [pathName, wish, user?._id, getWishAgain]);

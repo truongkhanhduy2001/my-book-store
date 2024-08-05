@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { FaShoppingCart, FaCheckCircle, FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaCheckCircle, FaUser, FaStar } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { FiHeart } from "react-icons/fi";
 import { BiSolidLike, BiCommentDetail } from "react-icons/bi";
@@ -501,7 +501,7 @@ export default function ProductDetail({ searchParams }: any) {
                                 : "text-[#A0A3B1]"
                             }`}
                           >
-                            ★
+                            <FaStar />
                           </span>
                         ))}
                       </div>
@@ -741,7 +741,7 @@ export default function ProductDetail({ searchParams }: any) {
                               : "text-[#A0A3B1]"
                           }`}
                         >
-                          ★
+                          <FaStar />
                         </span>
                       ))}
                     </div>
@@ -812,7 +812,7 @@ export default function ProductDetail({ searchParams }: any) {
                                     }}
                                     onMouseLeave={() => setHoverRating(0)}
                                   >
-                                    ★
+                                    <FaStar />
                                   </span>
                                 ))}
                               </div>
@@ -904,7 +904,7 @@ export default function ProductDetail({ searchParams }: any) {
                                   : "text-[#A0A3B1]"
                               }`}
                             >
-                              ★
+                              <FaStar />
                             </span>
                           ))}
                         </div>

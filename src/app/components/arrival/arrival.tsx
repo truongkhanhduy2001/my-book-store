@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { LuEye } from "react-icons/lu";
 import { FiHeart } from "react-icons/fi";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { useCustomContext } from "@/provider/CustomProvider";
 import { useWishContext } from "@/provider/WishProvider";
@@ -28,7 +28,17 @@ export default function Arrival() {
       try {
         const res = await fetch("/api/product/arrival");
         const data = await res.json();
-        setProducts(data.data);
+        const productsWithReviews = await Promise.all(
+          data.data.map(async (product: any) => {
+            const reviewRes = await fetch(`/api/review/get?id=${product._id}`);
+            const reviewData = await reviewRes.json();
+            return {
+              ...product,
+              reviews: reviewData.reviews,
+            };
+          })
+        );
+        setProducts(productsWithReviews);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -127,6 +137,15 @@ export default function Arrival() {
     }
   }, [wish]);
 
+  const calculateAverageRating = (reviews: any) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const sum = reviews.reduce(
+      (acc: any, review: any) => acc + review.rating,
+      0
+    );
+    return (sum / reviews.length).toFixed(1);
+  };
+
   return (
     <>
       <section
@@ -164,6 +183,7 @@ export default function Arrival() {
                   ).toFixed(0);
 
                   const isWished = wishList[product._id];
+                  const averageRating = calculateAverageRating(product.reviews);
                   return (
                     <Link
                       key={product?._id}
@@ -198,9 +218,29 @@ export default function Arrival() {
                         />
                       </div>
                       <div className="arrivals-tag">
-                        <h2 className="mt-[20px] mb-[12px] text-[var(--title-color)] font-bold text-[16px]">
+                        <h2 className="mt-[20px] mb-[8px] text-[var(--title-color)] font-bold text-[16px]">
                           {product?.name}
                         </h2>
+                        <div className="average-rating flex items-center justify-center mb-[8px]">
+                          <div className="stars flex">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <span
+                                key={star}
+                                className={`text-[16px] ${
+                                  star <= Math.round(Number(averageRating))
+                                    ? "text-[#ffc107]"
+                                    : "text-[#A0A3B1]"
+                                }`}
+                              >
+                                <FaStar />
+                              </span>
+                            ))}
+                          </div>
+                          <span className="ml-[5px] text-[12px] text-gray-500">
+                            ({product.reviews ? product.reviews.length : 0}{" "}
+                            reviews)
+                          </span>
+                        </div>
                         <div className="Arrivalwriter text-[var(--text-color)] text-[16px]">
                           {product?.author}
                         </div>
