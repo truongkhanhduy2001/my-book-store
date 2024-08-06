@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import "./arrival.css";
-import "../../models/User";
 import Image from "next/image";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
