@@ -18,22 +18,20 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    let query = Review.find({ productId: id }).populate("userId", "name");
+    let reviews = await Review.find({ productId: id }).populate(
+      "userId",
+      "name"
+    );
 
     if (sort === "newest") {
-      query = query.sort({ createdAt: -1 });
+      reviews.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     } else if (sort === "mostLiked") {
-      query = query.sort({ "likes.length": -1 });
+      reviews.sort((a, b) => b.likes.length - a.likes.length);
     }
 
-    const reviews = await query.lean().exec();
     return NextResponse.json({ status: 200, reviews });
   } catch (error: any) {
-    console.error("Error fetching reviews:", error);
-    return NextResponse.json({
-      status: 500,
-      error: "Internal server error",
-      message: error.message,
-    });
+    console.error("Error fetching reviews:", error.message);
+    return NextResponse.json({ status: 500, error: "Internal server error" });
   }
 }
