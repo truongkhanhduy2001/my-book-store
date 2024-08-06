@@ -18,7 +18,7 @@ import SkeletonLoad from "../SkeletonLoad/Skeleton";
 export default function Arrival() {
   const router = useRouter();
   const { user } = useCustomContext();
-  const [products, setProducts] = useState(null) as any;
+  const [products, setProducts] = useState<any[]>([]); // Initialize as an empty array
   const { wish, getWish } = useWishContext();
   const { cart, getCart } = useCartContext();
   const [Loading, setLoading] = useState(true);
@@ -36,52 +36,72 @@ export default function Arrival() {
         if (!Array.isArray(data.data)) {
           throw new Error("Invalid data format");
         }
-
-        const productsWithReviews = await Promise.all(
-          data.data.map(async (product: any) => {
-            console.log(`Fetching reviews for product ${product._id}...`);
-            try {
-              const reviewRes = await fetch(
-                `/api/review/get?id=${product._id}`
-              );
-              if (!reviewRes.ok)
-                throw new Error(
-                  `Failed to fetch reviews: ${reviewRes.statusText}`
-                );
-
-              const reviewData = await reviewRes.json();
-              console.log(
-                `Reviews received for product ${product._id}:`,
-                reviewData
-              );
-              return {
-                ...product,
-                reviews: reviewData.reviews || [],
-              };
-            } catch (reviewErr) {
-              console.error(
-                `Error fetching reviews for product ${product._id}:`,
-                reviewErr
-              );
-              return {
-                ...product,
-                reviews: [],
-              };
-            }
-          })
-        );
-
-        console.log("All products with reviews:", productsWithReviews);
-        setProducts(productsWithReviews);
+        setProducts(data.data);
       } catch (err) {
         console.error("Error fetching arrival data:", err);
-        setProducts([]);
+        setProducts([]); // Fallback to an empty array on error
       } finally {
         setLoading(false);
       }
     };
     fetchDataArrival();
   }, []);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      return;
+    }
+
+    const fetchProductReviews = async () => {
+      try {
+        const updatedProducts = await Promise.all(
+          products.map(async (product: any) => {
+            console.log(`Fetching reviews for product ${product._id}...`);
+            try {
+              const reviewRes = await fetch(
+                `/api/review/get?id=${product._id}`
+              );
+              if (!reviewRes.ok) {
+                throw new Error(
+                  `Failed to fetch reviews: ${reviewRes.statusText}`
+                );
+              }
+
+              const reviewData = await reviewRes.json();
+              console.log(
+                `Reviews received for product ${product._id}:`,
+                reviewData
+              );
+
+              // Return the product with the reviews added
+              return {
+                ...product,
+                reviews: reviewData.reviews || [], // Add reviews to the product
+              };
+            } catch (reviewErr) {
+              console.error(
+                `Error fetching reviews for product ${product._id}:`,
+                reviewErr
+              );
+
+              // Return the product without reviews if an error occurs
+              return {
+                ...product,
+                reviews: [], // Default to an empty array on error
+              };
+            }
+          })
+        );
+
+        // Update the products state with reviews
+        setProducts(updatedProducts);
+      } catch (err) {
+        console.error("Error processing product reviews:", err);
+      }
+    };
+
+    fetchProductReviews();
+  }, [products?.length]);
 
   // Button Cart
   const handleCart = async (e: any, productId: any) => {
@@ -218,7 +238,9 @@ export default function Arrival() {
                   ).toFixed(0);
 
                   const isWished = wishList[product._id];
-                  const averageRating = calculateAverageRating(product.reviews);
+                  const averageRating = calculateAverageRating(
+                    product?.reviews
+                  );
                   return (
                     <Link
                       key={product?._id}
@@ -272,7 +294,7 @@ export default function Arrival() {
                             ))}
                           </div>
                           <span className="ml-[5px] text-[12px] text-gray-500">
-                            ({product.reviews ? product.reviews.length : 0}{" "}
+                            ({product?.reviews ? product?.reviews.length : 0}{" "}
                             reviews)
                           </span>
                         </div>
