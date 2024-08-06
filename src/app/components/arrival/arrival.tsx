@@ -37,24 +37,39 @@ export default function Arrival() {
           throw new Error("Invalid data format");
         }
 
-        // Lấy tất cả ID sản phẩm
-        const productIds = data.data.map((product: any) => product._id);
+        const productsWithReviews = await Promise.all(
+          data.data.map(async (product: any) => {
+            console.log(`Fetching reviews for product ${product._id}...`);
+            try {
+              const reviewRes = await fetch(
+                `/api/review/get?id=${product._id}`
+              );
+              if (!reviewRes.ok)
+                throw new Error(
+                  `Failed to fetch reviews: ${reviewRes.statusText}`
+                );
 
-        // Fetch reviews cho tất cả sản phẩm cùng một lúc
-        const reviewsRes = await fetch(
-          `/api/review/get?ids=${productIds.join(",")}`
+              const reviewData = await reviewRes.json();
+              console.log(
+                `Reviews received for product ${product._id}:`,
+                reviewData
+              );
+              return {
+                ...product,
+                reviews: reviewData.reviews || [],
+              };
+            } catch (reviewErr) {
+              console.error(
+                `Error fetching reviews for product ${product._id}:`,
+                reviewErr
+              );
+              return {
+                ...product,
+                reviews: [],
+              };
+            }
+          })
         );
-        if (!reviewsRes.ok)
-          throw new Error(`Failed to fetch reviews: ${reviewsRes.statusText}`);
-
-        const reviewsData = await reviewsRes.json();
-        const reviewsByProduct = reviewsData.reviews;
-
-        // Kết hợp sản phẩm với reviews tương ứng
-        const productsWithReviews = data.data.map((product: any) => ({
-          ...product,
-          reviews: reviewsByProduct[product._id] || [],
-        }));
 
         console.log("All products with reviews:", productsWithReviews);
         setProducts(productsWithReviews);
