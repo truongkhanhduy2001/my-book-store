@@ -487,10 +487,10 @@ export default function ProductDetail({ searchParams }: any) {
                   </div>
                   <div className="product-rating mt-[10px] text-[var(--title-color)]">
                     <div className="average-rating flex items-center">
-                      <span className="text-[18px] font-bold mr-[10px]">
+                      <span className="text-[18px] font-bold mr-[10px] leading-none">
                         {reviews.length > 0 ? averageRating.toFixed(1) : "0.0"}
                       </span>
-                      <div className="stars flex">
+                      <div className="stars flex items-center">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <span
                             key={star}
