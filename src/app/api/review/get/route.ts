@@ -8,27 +8,30 @@ export async function GET(req: NextRequest) {
   try {
     await connectDB();
     const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-    const sort = searchParams.get("sort") || "newest";
+    const ids = searchParams.get("ids")?.split(",") || [];
 
-    if (!id) {
+    if (ids.length === 0) {
       return NextResponse.json({
         status: 400,
-        error: "Product ID is required",
+        error: "Product IDs are required",
       });
     }
 
-    let query = Review.find({ productId: id }).populate("userId", "name");
+    const reviews = await Review.find({ productId: { $in: ids } })
+      .populate("userId", "name")
+      .lean()
+      .exec();
 
-    if (sort === "newest") {
-      query = query.sort({ createdAt: -1 });
-    } else if (sort === "mostLiked") {
-      query = query.sort({ "likes.length": -1 });
-    }
+    // Nhóm reviews theo productId
+    const reviewsByProduct = reviews.reduce((acc: any, review: any) => {
+      if (!acc[review.productId]) {
+        acc[review.productId] = [];
+      }
+      acc[review.productId].push(review);
+      return acc;
+    }, {});
 
-    const reviews = await query.lean().exec();
-
-    return NextResponse.json({ status: 200, reviews });
+    return NextResponse.json({ status: 200, reviews: reviewsByProduct });
   } catch (error: any) {
     console.error("Error fetching reviews:", error);
     return NextResponse.json({

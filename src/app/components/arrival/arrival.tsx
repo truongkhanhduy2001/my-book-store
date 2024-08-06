@@ -23,26 +23,6 @@ export default function Arrival() {
   const { cart, getCart } = useCartContext();
   const [Loading, setLoading] = useState(true);
 
-  const fetchReviews = async (productId: any) => {
-    try {
-      const reviewRes = await fetch(`/api/review/get?id=${productId}`);
-      if (!reviewRes.ok) {
-        const errorData = await reviewRes.json();
-        throw new Error(
-          errorData.message || `HTTP error! status: ${reviewRes.status}`
-        );
-      }
-      const reviewData = await reviewRes.json();
-      return reviewData.reviews || [];
-    } catch (reviewErr) {
-      console.error(
-        `Error fetching reviews for product ${productId}:`,
-        reviewErr
-      );
-      return [];
-    }
-  };
-
   useEffect(() => {
     const fetchDataArrival = async () => {
       console.log("Fetching arrival data...");
@@ -57,15 +37,24 @@ export default function Arrival() {
           throw new Error("Invalid data format");
         }
 
-        const productsWithReviews = await Promise.all(
-          data.data.map(async (product: any) => {
-            const reviews = await fetchReviews(product._id);
-            return {
-              ...product,
-              reviews,
-            };
-          })
+        // Lấy tất cả ID sản phẩm
+        const productIds = data.data.map((product: any) => product._id);
+
+        // Fetch reviews cho tất cả sản phẩm cùng một lúc
+        const reviewsRes = await fetch(
+          `/api/review/get?ids=${productIds.join(",")}`
         );
+        if (!reviewsRes.ok)
+          throw new Error(`Failed to fetch reviews: ${reviewsRes.statusText}`);
+
+        const reviewsData = await reviewsRes.json();
+        const reviewsByProduct = reviewsData.reviews;
+
+        // Kết hợp sản phẩm với reviews tương ứng
+        const productsWithReviews = data.data.map((product: any) => ({
+          ...product,
+          reviews: reviewsByProduct[product._id] || [],
+        }));
 
         console.log("All products with reviews:", productsWithReviews);
         setProducts(productsWithReviews);
