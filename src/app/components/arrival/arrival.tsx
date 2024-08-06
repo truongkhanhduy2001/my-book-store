@@ -25,29 +25,56 @@ export default function Arrival() {
 
   useEffect(() => {
     const fetchDataArrival = async () => {
+      console.log("Fetching arrival data...");
       try {
         const res = await fetch("/api/product/arrival");
         const data = await res.json();
+        console.log("Arrival data received:", data);
+
+        if (!Array.isArray(data.data)) {
+          throw new Error("Invalid data format");
+        }
+
         const productsWithReviews = await Promise.all(
           data.data.map(async (product: any) => {
-            const reviewRes = await fetch(`/api/review/get?id=${product._id}`);
-            const reviewData = await reviewRes.json();
-            return {
-              ...product,
-              reviews: reviewData.reviews,
-            };
+            console.log(`Fetching reviews for product ${product._id}...`);
+            try {
+              const reviewRes = await fetch(
+                `/api/review/get?id=${product._id}`
+              );
+              const reviewData = await reviewRes.json();
+              console.log(
+                `Reviews received for product ${product._id}:`,
+                reviewData
+              );
+              return {
+                ...product,
+                reviews: reviewData.reviews || [],
+              };
+            } catch (reviewErr) {
+              console.error(
+                `Error fetching reviews for product ${product._id}:`,
+                reviewErr
+              );
+              return {
+                ...product,
+                reviews: [],
+              };
+            }
           })
         );
+
+        console.log("All products with reviews:", productsWithReviews);
         setProducts(productsWithReviews);
-        setLoading(false);
       } catch (err) {
-        console.log(err);
+        console.error("Error fetching arrival data:", err);
+        setProducts([]);
+      } finally {
+        setLoading(false);
       }
     };
-    if (!products) {
-      fetchDataArrival();
-    }
-  }, [products]);
+    fetchDataArrival();
+  }, []);
 
   // Button Cart
   const handleCart = async (e: any, productId: any) => {
