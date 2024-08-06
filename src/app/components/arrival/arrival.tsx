@@ -23,6 +23,26 @@ export default function Arrival() {
   const { cart, getCart } = useCartContext();
   const [Loading, setLoading] = useState(true);
 
+  const fetchReviews = async (productId: any) => {
+    try {
+      const reviewRes = await fetch(`/api/review/get?id=${productId}`);
+      if (!reviewRes.ok) {
+        const errorData = await reviewRes.json();
+        throw new Error(
+          errorData.message || `HTTP error! status: ${reviewRes.status}`
+        );
+      }
+      const reviewData = await reviewRes.json();
+      return reviewData.reviews || [];
+    } catch (reviewErr) {
+      console.error(
+        `Error fetching reviews for product ${productId}:`,
+        reviewErr
+      );
+      return [];
+    }
+  };
+
   useEffect(() => {
     const fetchDataArrival = async () => {
       console.log("Fetching arrival data...");
@@ -39,35 +59,11 @@ export default function Arrival() {
 
         const productsWithReviews = await Promise.all(
           data.data.map(async (product: any) => {
-            console.log(`Fetching reviews for product ${product._id}...`);
-            try {
-              const reviewRes = await fetch(
-                `/api/review/get?id=${product._id}`
-              );
-              if (!reviewRes.ok)
-                throw new Error(
-                  `Failed to fetch reviews: ${reviewRes.statusText}`
-                );
-
-              const reviewData = await reviewRes.json();
-              console.log(
-                `Reviews received for product ${product._id}:`,
-                reviewData
-              );
-              return {
-                ...product,
-                reviews: reviewData.reviews || [],
-              };
-            } catch (reviewErr) {
-              console.error(
-                `Error fetching reviews for product ${product._id}:`,
-                reviewErr
-              );
-              return {
-                ...product,
-                reviews: [],
-              };
-            }
+            const reviews = await fetchReviews(product._id);
+            return {
+              ...product,
+              reviews,
+            };
           })
         );
 
