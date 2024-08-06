@@ -723,7 +723,7 @@ export default function ProductDetail({ searchParams }: any) {
               </h2>
 
               {/* Đánh giá */}
-              <div className="review-list flex justify-between items-start space-x-4">
+              <div className="review-list flex justify-between items-center space-x-4">
                 <div className="review-item w-1/2 rating-summary flex ml-[20px] mb-[20px] items-center">
                   <div className="review flex flex-col mr-[20px] justify-center items-center">
                     <span className="review-title text-[25px] font-bold">
@@ -750,30 +750,34 @@ export default function ProductDetail({ searchParams }: any) {
                     </span>
                   </div>
 
-                  <div className="rating-details mt-[10px]">
+                  <div className="rating-details mt-[10px] space-y-2">
                     {[5, 4, 3, 2, 1].map((rating: any) => {
                       const percentage =
                         reviews.length > 0 ? percentages[rating] : 0;
                       return (
                         <div className="flex items-center" key={rating}>
-                          <span>{rating} sao</span>
-                          <div className="w-[250px] bg-gray-300 mx-[5px] h-[5px] relative">
+                          <span className="w-12 text-sm font-medium">
+                            {rating} sao
+                          </span>
+                          <div className="w-[200px] bg-gray-300 rounded-full h-2.5 mx-2">
                             <div
-                              className="bg-[#ffc107] h-[5px]"
+                              className="bg-yellow-400 h-2.5 rounded-full transition-all duration-300 ease-in-out"
                               style={{ width: `${percentage}%` }}
                             ></div>
                           </div>
-                          <span>{percentage}%</span>
+                          <span className="text-sm font-medium text-gray-500 w-12 text-right">
+                            {percentage}%
+                          </span>
                         </div>
                       );
                     })}
                   </div>
                 </div>
 
-                <div className="add-comment w-1/2 flex justify-center items-center">
+                <div className="add-comment w-1/2 flex items-center justify-center">
                   <button
                     onClick={() => setIsModalOpen(true)}
-                    className="btn-review flex items-center justify-center bg-[white] text-[var(--first-color)] text-[18px] font-medium py-[6px] px-[10px] mt-[50px] w-[400px] rounded-lg border-[2px] border-solid border-[var(--first-color)] hover:bg-[var(--first-color)] hover:text-white"
+                    className="btn-review flex items-center justify-center bg-[white] text-[var(--first-color)] text-[18px] font-medium py-[6px] px-[10px] w-[400px] rounded-lg border-[2px] border-solid border-[var(--first-color)] hover:bg-[var(--first-color)] hover:text-white"
                   >
                     <MdEdit className="text-[18px] mr-[5px]" />
                     Write review
