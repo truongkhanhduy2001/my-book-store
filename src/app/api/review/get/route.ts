@@ -24,14 +24,14 @@ export async function GET(req: NextRequest) {
     );
 
     if (sort === "newest") {
-      reviews.sort((a, b) => b.createdAt - a.createdAt);
+      reviews.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
     } else if (sort === "mostLiked") {
       reviews.sort((a, b) => b.likes.length - a.likes.length);
     }
 
     return NextResponse.json({ status: 200, reviews });
-  } catch (error) {
-    console.error("Error fetching reviews:", error);
+  } catch (error: any) {
+    console.error("Error fetching reviews:", error.message);
     return NextResponse.json({ status: 500, error: "Internal server error" });
   }
 }

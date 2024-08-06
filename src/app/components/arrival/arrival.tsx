@@ -28,6 +28,8 @@ export default function Arrival() {
       console.log("Fetching arrival data...");
       try {
         const res = await fetch("/api/product/arrival");
+        if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
+
         const data = await res.json();
         console.log("Arrival data received:", data);
 
@@ -42,6 +44,11 @@ export default function Arrival() {
               const reviewRes = await fetch(
                 `/api/review/get?id=${product._id}`
               );
+              if (!reviewRes.ok)
+                throw new Error(
+                  `Failed to fetch reviews: ${reviewRes.statusText}`
+                );
+
               const reviewData = await reviewRes.json();
               console.log(
                 `Reviews received for product ${product._id}:`,
@@ -132,7 +139,7 @@ export default function Arrival() {
       return;
     }
     try {
-      fetch("/api/wish/add", {
+      const res = await fetch("/api/wish/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -141,13 +148,14 @@ export default function Arrival() {
           userId: user._id,
           productId: productId,
         }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          getWish();
-        });
+      });
+      if (!res.ok)
+        throw new Error(`Failed to add to wishlist: ${res.statusText}`);
+
+      await res.json();
+      getWish();
     } catch (err) {
-      console.log(err);
+      console.log("Error adding to wishlist:", err);
     }
   };
 
