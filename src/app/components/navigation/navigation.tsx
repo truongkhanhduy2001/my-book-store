@@ -132,7 +132,6 @@ export default function Navigate() {
   useEffect(() => {
     const handleEnter = (event: any) => {
       if (event.key === "Enter" && suggestions.length === 1) {
-        // Nếu chỉ có một gợi ý và người dùng nhấn Enter, chuyển hướng đến trang chi tiết sản phẩm
         router.push(`/productDetail?id=${suggestions[0]._id}`);
         setSearchQuery("");
         setSuggestions([]);

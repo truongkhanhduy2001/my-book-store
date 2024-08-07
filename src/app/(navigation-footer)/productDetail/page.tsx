@@ -31,19 +31,15 @@ export default function ProductDetail({ searchParams }: any) {
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 6;
   const [hoverRating, setHoverRating] = useState(0);
-
   const [replies, setReplies] = useState<{ [key: string]: any[] }>({});
   const [newReply, setNewReply] = useState("");
   const [currentReviewId, setCurrentReviewId] = useState<string | null>(null);
-
   const [likedComments, setLikedComments] = useState<string[]>([]);
-
   const id = searchParams.id;
-
   const [products, setProducts] = useState(null) as any;
 
   useEffect(() => {
-    const fetchProductDetail = async () => {
+    const fetchProductDetail = async (id: string) => {
       try {
         const response = await fetch(`/api/product/detail?id=${id}`);
         const data = await response.json();
@@ -55,10 +51,10 @@ export default function ProductDetail({ searchParams }: any) {
         console.error("Failed to fetch products:", error);
       }
     };
-    if (!products) {
-      fetchProductDetail();
+    if (id) {
+      fetchProductDetail(id as string);
     }
-  }, [id, products]);
+  }, [id]);
 
   // validate
   const validationSchema = Yup.object().shape({
