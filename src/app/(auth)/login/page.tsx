@@ -15,6 +15,16 @@ export default function Login() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
+  const handleSuccessfulAuth = () => {
+    const previousUrl = localStorage.getItem("previousUrl");
+    if (previousUrl) {
+      localStorage.removeItem("previousUrl");
+      router.push(previousUrl);
+    } else {
+      router.push("/");
+    }
+  };
+
   const handleSubmit = (values: any, setSubmitting: any) => {
     setError(null);
     setSubmitting(true);
@@ -38,7 +48,7 @@ export default function Login() {
             });
             // Check for success flag
             setUser(data.user);
-            router.push("/");
+            handleSuccessfulAuth();
           } else {
             // Handle login failure
             setError(data.message);

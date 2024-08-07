@@ -414,6 +414,15 @@ export default function ProductDetail({ searchParams }: any) {
     }
   };
 
+  const saveCurrentUrl = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        "previousUrl",
+        window.location.pathname + window.location.search
+      );
+    }
+  };
+
   return (
     <>
       {/* Detail */}
@@ -771,13 +780,37 @@ export default function ProductDetail({ searchParams }: any) {
                 </div>
 
                 <div className="add-comment w-1/2 flex items-center justify-center">
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="btn-review flex items-center justify-center bg-[white] text-[var(--first-color)] text-[18px] font-medium py-[6px] px-[10px] w-[400px] rounded-lg border-[2px] border-solid border-[var(--first-color)] hover:bg-[var(--first-color)] hover:text-white"
-                  >
-                    <MdEdit className="text-[18px] mr-[5px]" />
-                    Write review
-                  </button>
+                  {user ? (
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="btn-review flex items-center justify-center bg-[white] text-[var(--first-color)] text-[18px] font-medium py-[6px] px-[10px] w-[400px] rounded-lg border-[2px] border-solid border-[var(--first-color)] hover:bg-[var(--first-color)] hover:text-white"
+                    >
+                      <MdEdit className="text-[18px] mr-[5px]" />
+                      Write review
+                    </button>
+                  ) : (
+                    <div className="flex flex-col items-center">
+                      <button
+                        onClick={() => {
+                          saveCurrentUrl();
+                          router.push("/login");
+                        }}
+                        className="btn-review flex items-center justify-center bg-[white] text-[var(--first-color)] text-[18px] font-medium py-[6px] px-[10px] w-[400px] rounded-lg border-[2px] border-solid border-[var(--first-color)] hover:bg-[var(--first-color)] hover:text-white mb-2"
+                      >
+                        Please log in to write a review
+                      </button>
+                      <p className="text-sm text-gray-600">
+                        Dont have an account?{" "}
+                        <Link
+                          href="/register"
+                          onClick={saveCurrentUrl}
+                          className="text-[var(--first-color)] hover:underline"
+                        >
+                          Register here
+                        </Link>
+                      </p>
+                    </div>
+                  )}
 
                   {isModalOpen && (
                     <div className="modal-comment fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

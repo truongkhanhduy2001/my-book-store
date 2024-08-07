@@ -29,6 +29,16 @@ export default function Register() {
       .required("Please enter your Confirm Password"),
   });
 
+  const handleSuccessfulAuth = () => {
+    const previousUrl = localStorage.getItem("previousUrl");
+    if (previousUrl) {
+      localStorage.removeItem("previousUrl");
+      router.push(previousUrl);
+    } else {
+      router.push("/");
+    }
+  };
+
   // Handle form submission
   const handleSubmit = async (values: any, { setSubmitting }: any) => {
     setError(null);
@@ -68,7 +78,7 @@ export default function Register() {
           }),
         });
 
-        router.push("/");
+        handleSuccessfulAuth();
       } else {
         setError(data.message);
       }

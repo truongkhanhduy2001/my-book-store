@@ -18,10 +18,8 @@ export default function Navigate() {
   const { user, setUser } = useCustomContext();
   const { cart, getCart } = useCartContext();
   const { wish } = useWishContext();
-
   const router = useRouter();
   const pathname = usePathname();
-
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]) as any;
 
