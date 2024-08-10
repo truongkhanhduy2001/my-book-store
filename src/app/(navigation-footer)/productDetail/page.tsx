@@ -32,6 +32,9 @@ export default function ProductDetail({ searchParams }: any) {
   const reviewsPerPage = 6;
   const [hoverRating, setHoverRating] = useState(0);
   const [replies, setReplies] = useState<{ [key: string]: any[] }>({});
+  const [replyCountsMap, setReplyCountsMap] = useState<{
+    [key: string]: number;
+  }>({});
   const [newReply, setNewReply] = useState("");
   const [currentReviewId, setCurrentReviewId] = useState<string | null>(null);
   const [likedComments, setLikedComments] = useState<string[]>([]);
@@ -377,6 +380,10 @@ export default function ProductDetail({ searchParams }: any) {
           ...prevReplies,
           [reviewId]: data.replies,
         }));
+        setReplyCountsMap((prevCounts) => ({
+          ...prevCounts,
+          [reviewId]: data.replies.length,
+        }));
       } else {
         console.error(data.error);
       }
@@ -405,6 +412,10 @@ export default function ProductDetail({ searchParams }: any) {
       if (response.ok) {
         setNewReply("");
         fetchReplies(reviewId);
+        setReplyCountsMap((prevCounts) => ({
+          ...prevCounts,
+          [reviewId]: (prevCounts[reviewId] || 0) + 1,
+        }));
       } else {
         const data = await response.json();
         console.error(data.error);
@@ -964,7 +975,9 @@ export default function ProductDetail({ searchParams }: any) {
                                 }
                               }}
                             />
-                            {review.replies?.length || 0}
+                            {replyCountsMap[review._id] ||
+                              review.replies?.length ||
+                              0}
                           </div>
                         </div>
                         {currentReviewId === review._id && (
