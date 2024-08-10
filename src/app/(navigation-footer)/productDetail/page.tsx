@@ -402,11 +402,14 @@ export default function ProductDetail({ searchParams }: any) {
         }),
       });
 
+      const data = await response.json();
       if (response.ok) {
+        setReplies((prevReplies) => ({
+          ...prevReplies,
+          [reviewId]: [...(prevReplies[reviewId] || []), data.reply],
+        }));
         setNewReply("");
-        fetchReplies(reviewId);
       } else {
-        const data = await response.json();
         console.error(data.error);
       }
     } catch (error) {
